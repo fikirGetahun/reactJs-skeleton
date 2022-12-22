@@ -1,21 +1,30 @@
 import axios from "axios";
-// import apiUrl from './apiUrl.js';
+// import Category from "../model/category";
+//  import Convert from "../model/helperClass";
+import apiUrl from './apiUrl';
+// import Category from '../model/category';
 
-const api = new apiUrl() // this is url objects
+
+const api = new apiUrl(); // this is url objects
 
 class GetHandler{
  
 
-     getCategory   = async   (): Promise<Category>=> {
+     getCategory   = async ( )=> {
      return  await axios
-            .get(api.baseUrl)
+            .get('http://localhost:3001/cat/')
             .then((res) => {
                 if (res.status == 200) {
-                    var cat = new Category();
-                    cat = res.data;
-                    return  cat;
+                    // var cat   = new Category(); 
+                    // cat = res.data;
+                    // return  cat;
+                    // var jj = new Convert()
+                
+                //   var x =      Convert.toCategory(res.data)
+                var x: any = res.data;
+                  return x;
                 } else{
-                    return new Category();
+                    return 'error'
                 }
             });
     }
@@ -23,3 +32,5 @@ class GetHandler{
 }
 
 export default GetHandler
+
+ 
