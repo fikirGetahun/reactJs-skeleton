@@ -2,7 +2,7 @@ import axios from "axios";
 // import Category from "../model/category";
 //  import Convert from "../model/helperClass";
 import apiUrl from './apiUrl';
-// import Category from '../model/category';
+import Category from '../model/category';
 
 
 const api = new apiUrl(); // this is url objects
@@ -12,10 +12,10 @@ class GetHandler{
 
      getCategory   = async ( )=> {
      return  await axios
-            .get('http://localhost:3001/cat/')
+            .get(api.joinUrl(api.endPoints.catagory))
             .then((res) => {
                 if (res.status == 200) {
-                    // var cat   = new Category(); 
+                    //   cat:Array   = new Category(); 
                     // cat = res.data;
                     // return  cat;
                     // var jj = new Convert()

@@ -1,0 +1,12 @@
+error: 20/12/2022 11:38:28 unhandledRejection: connect ECONNREFUSED 0.0.0.0:27017
+MongooseServerSelectionError: connect ECONNREFUSED 0.0.0.0:27017
+    at NativeConnection.Connection.openUri (F:\Node demo\node_modules\mongoose\lib\connection.js:825:32)
+    at F:\Node demo\node_modules\mongoose\lib\index.js:417:10
+    at F:\Node demo\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (F:\Node demo\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (F:\Node demo\node_modules\mongoose\lib\index.js:1270:10)
+    at Mongoose.connect (F:\Node demo\node_modules\mongoose\lib\index.js:416:20)
+    at module.exports (F:\Node demo\startup\db.js:10:19)
+    at Object.<anonymous> (F:\Node demo\index.js:6:24)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)

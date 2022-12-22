@@ -8,6 +8,7 @@ import FoodLister from './components/foodLister';
 import InnerDashboard from './components/adminComponent/innerDashboard';
 import AddFood from './components/adminComponent/addFood';
 import CategoryLister from './components/categoryLister';
+import LoginPage from './admin/adminPages/loginPage';
 
 function App() {
   return (
@@ -41,8 +42,11 @@ function App() {
           </Route>
 
           <Route path='/'  element={<HomePage/>} > 
-          <Route index element={ <CategoryLister />} />
+              <Route index element={ <CategoryLister />} />
               <Route path="food" element={<FoodLister/>} />
+          </Route>
+          <Route path='/login' element={<LoginPage />}>
+            
           </Route>
       
         </Routes>
