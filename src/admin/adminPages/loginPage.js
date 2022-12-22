@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import '../css/styleLogin.css';
 import akkoPhoto from '../../file/img/akko.food.PNG'
 
 
-const bgCss ={
-  backgroundImage:  `url('${akkoPhoto}')`
-}
 
 
 const LoginPage = () =>{
+  const bgCss ={
+    backgroundImage:  `url('${akkoPhoto}')`
+  }
+  
+  const [userName, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  
+  
+  const loginHandler = ()=>{
+  
+  }
 return(
   <html>
   <head>
@@ -27,14 +35,14 @@ return(
           <div className="col-md-7">
             <h3>Login to <strong>Colorlib</strong></h3>
             <p className="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
-            <form action="#" method="post">
+            <form action="#" onSubmit={loginHandler} method="post">
               <div className="form-group first">
                 <label  >Username</label>
-                <input type="text" className="form-control" placeholder="your-email@gmail.com" id="username"/>
+                <input type="text" onChange={(e)=>setUsername(e.target.value)} className="form-control" placeholder="your-email@gmail.com" id="username"/>
               </div>
               <div className="form-group last mb-3">
                 <label  >Password</label>
-                <input type="password" className="form-control" placeholder="Your Password" id="password"/>
+                <input type="password" onChange={(e)=>setPassword(e.target.value)} className="form-control" placeholder="Your Password" id="password"/>
               </div>
               
               <div className="d-flex mb-5 align-items-center">

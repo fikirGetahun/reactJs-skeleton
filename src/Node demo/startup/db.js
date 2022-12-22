@@ -4,7 +4,7 @@ const logger = require('./logging');
 
 module.exports= async function(){
 
-    const url='mongodb://0.0.0.0:27017/Customer';
+    const url='mongodb://localhost:27017/akkoMenu';  
     mongoose.set('strictQuery', true);
    
   await  mongoose.connect(url,{
