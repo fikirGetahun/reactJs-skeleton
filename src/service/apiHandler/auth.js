@@ -50,6 +50,28 @@ class Auth{
         }
    return rrr
     }
+
+    Login = async (body) =>{
+        var result;
+        try{
+            await axios.post(api.joinUrl(api.endPoints.login), body)
+            .then(res=>{
+                localStorage.setItem('token', res.data)
+                
+                result = true
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message
+            }
+        }
+        return result;
+    }
+
 }
 
 export default Auth;

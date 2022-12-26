@@ -4,8 +4,8 @@ class apiUrl {
         this.endPoints = {
             food: 'test',
             catagory: 'cat',
-            login: 'login',
-            register: 'api/users'
+            login: 'api/auth',
+            register: 'api/users',
         }
 
 

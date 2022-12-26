@@ -229,7 +229,7 @@ const drowdownHandler = (id)=>{
                 </div>
             </nav>
            
-            <div style={{height:"85vh", overflow:"scroll", overflowX:"hidden"}} >
+            <div style={{height:"85vh", overflow:"scroll", overflowX:"hidden" }} >
                     <Outlet />
             <div className="container-fluid pt-4 px-4">
                 <div className="bg-secondary rounded-top p-4">

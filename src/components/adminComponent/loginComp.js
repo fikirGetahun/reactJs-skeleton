@@ -1,27 +1,27 @@
 import React from "react";
 import Auth from "../../service/apiHandler/auth";
 import { useState } from "react";
+import {  useNavigate } from "react-router-dom";
 
 
 const LoginComp = () =>{
 
-  
+  const navigate = useNavigate();
   const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const [response, setResponse] = useState('');
 
-  const loginHandler = (e)=>{
-    e.preventdefault();
-  var auth = new Auth()
+  const loginHandler = ()=>{
+   var auth = new Auth()
   var body = {
     email: userName,
     password: password
   }
-  auth.LoginAuth(body).then(res=>{
-    if(res.data){
-      alert('successfull!!')
-    }else{
-      alert('it dont work')
+  auth.Login(body).then(res=>{
+    setResponse(res)
+    if(res === true){
+      navigate('/admin')
     }
   })
 
@@ -30,7 +30,7 @@ const LoginComp = () =>{
         <div>
                         <h3>Login to <strong>Colorlib</strong></h3>
             <p className="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
-            <form action="#" onSubmit={(e)=>loginHandler(e)} method="post">
+           
               <div className="form-group first">
                 <label  >Username</label>
                 <input type="text" onChange={(e)=>setUsername(e.target.value)} className="form-control" placeholder="your-email@gmail.com" id="username"/>
@@ -49,8 +49,8 @@ const LoginComp = () =>{
                 <span className="ml-auto"><a href="#" className="forgot-pass">Forgot Password</a></span> 
               </div>
 
-              <input type="submit"  onClick={()=>loginHandler} value="Log In" className="btn btn-block btn-primary"/>
-             </form>
+              <input    onClick={loginHandler} value="Log In" className="btn btn-block btn-primary"/>
+              <label className="text text-danger">{response}</label>
         </div>
     )
 }
