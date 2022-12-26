@@ -1,8 +1,8 @@
  class Category {
-    public  name:string ;
-    public parent:string;
-    public image: string;
-    public order:number;
+    public  name:string = '';
+    public parent:string = '';
+    public image: string = '';
+    public order:number = 0;
   //  public name:string ='';
   //  public parent:string ='';
   //  public image:BinaryData;
@@ -14,16 +14,16 @@
   //   image:  string;
   //   order:  string;
 
-      nameSetter(name ): void{
+      nameSetter(name:string ): void{
         this.name = name;
       }
-      parentSetter(name ){
+      parentSetter(name:string ){
         this.parent = name;
       }
-      imageSetter(name ){
+      imageSetter(name:string ){
         this.image = name;
       }
-      orderSetter(name ){
+      orderSetter(name :number){
         this.order = name;
       }
 

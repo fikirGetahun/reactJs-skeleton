@@ -10,3 +10,12 @@ MongooseServerSelectionError: connect ECONNREFUSED 0.0.0.0:27017
     at module.exports (F:\Node demo\startup\db.js:10:19)
     at Object.<anonymous> (F:\Node demo\index.js:6:24)
     at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 24/12/2022 12:25:26 uncaughtException: loginRoute is not defined
+ReferenceError: loginRoute is not defined
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\Node demo\index.js:11:20)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47

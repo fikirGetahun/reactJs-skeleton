@@ -1,10 +1,12 @@
-import React from "react";
-import axios from "axios";
+ import axios from "axios";
+ import apiUrl from "./apiUrl";
+
+ const api = new apiUrl()
 
 class Auth{
     LoginAuth = async (body)=>{
         await axios
-        .post('', body)
+        .post('http://localhost:3002/login2', body)
         .then(res=>{
             if(res.status == 201){
                 return true
@@ -12,7 +14,42 @@ class Auth{
                 return false
             }
         })
-
-
     }   
+
+    registerAuth = async (body)=>{
+        var rrr;
+        try{
+            await axios 
+            .post(api.joinUrl(api.endPoints.register), body)
+            .then(function (res){
+                rrr = res.statusText
+            })
+        }catch(error){
+           
+                if (error.response) {
+ 
+                    var x= error.response.data
+                     
+                     return error.response.data
+                //   console.log(error.response.status);
+                //   console.log(error.response.headers);
+                  
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                  // http.ClientRequest in node.js
+                //   console.log(error.request);
+                return error.request
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                  return error.message
+                }
+                // console.log(error.config);
+              
+        }
+   return rrr
+    }
 }
+
+export default Auth;

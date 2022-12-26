@@ -16,7 +16,10 @@ export interface Category {
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
-export   class Convert {
+export  default class Convert {
+
+    
+
     public static toCategory(json: string): Category[] {
         return cast(JSON.parse(json), a(r("Category")));
     }

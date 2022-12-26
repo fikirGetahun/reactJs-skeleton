@@ -2,7 +2,7 @@ import axios from "axios";
 // import Category from "../model/category";
 //  import Convert from "../model/helperClass";
 import apiUrl from './apiUrl';
-import Category from '../model/category';
+// import Category from '../model/category';
 
 
 const api = new apiUrl(); // this is url objects
@@ -20,7 +20,7 @@ class GetHandler{
                     // return  cat;
                     // var jj = new Convert()
                 
-                //   var x =      Convert.toCategory(res.data)
+                  // var x =      Convert.toCategory(res.data)
                 var x: any = res.data;
                   return x;
                 } else{

@@ -9,6 +9,8 @@ import InnerDashboard from './components/adminComponent/innerDashboard';
 import AddFood from './components/adminComponent/addFood';
 import CategoryLister from './components/categoryLister';
 import LoginPage from './admin/adminPages/loginPage';
+import LoginComp from './components/adminComponent/loginComp';
+import Register from './components/adminComponent/registerComp';
 
 function App() {
   return (
@@ -46,7 +48,8 @@ function App() {
               <Route path="food" element={<FoodLister/>} />
           </Route>
           <Route path='/login' element={<LoginPage />}>
-            
+            <Route index element={<LoginComp />}/>
+            <Route path='reg' element={<Register />} />
           </Route>
       
         </Routes>

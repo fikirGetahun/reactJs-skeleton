@@ -1,9 +1,11 @@
 class apiUrl {
     constructor(){
-        this.baseUrl = "http://localhost:3001";
+        this.baseUrl = "http://localhost:3002";
         this.endPoints = {
             food: 'test',
-            catagory: 'cat'
+            catagory: 'cat',
+            login: 'login',
+            register: 'api/users'
         }
 
 
