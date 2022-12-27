@@ -1,8 +1,9 @@
 import React from "react";
 import DragDropFile from "../helpComponents/photoUpload";
 import TextFieldComp from "../helpComponents/textField";
-import { useState } from "react";
-
+ import { useState } from "react";
+import PostHandler from "../../service/apiHandler/postHandler";
+import { TextField } from "@mui/joy";
 
 
  const AddCategory =()=>{
@@ -26,6 +27,20 @@ const FormHandler=(value, dbName)=>{ // value and dbName are passed from the chi
     }
 }
 
+const submitHandler = ()=>{
+    const sender = new PostHandler()
+    var body = {
+        name:catName,
+        image:'test image',
+        order: 2
+    }
+    sender.CategoryAdder(body)
+    .then(res=>{
+        console.log(res)
+    })
+}
+
+
 //
 //input form handler
         return(
@@ -36,11 +51,24 @@ const FormHandler=(value, dbName)=>{ // value and dbName are passed from the chi
                     <div className="row d-flex justify-content-center">
                     <h3>Add Menu Category</h3>
                         <div className="col-6">
-                            <TextFieldComp label="Food Category" onChange={FormHandler}  type="text" placeholder="Type here..." dbName="catName"      />
+ 
 
-                            <TextFieldComp label="Order Of Appearance" onChange={FormHandler} type="number" placeholder="Type here..."  dbName="catOrder" />
+                        <div className="textField p-2">
+                        <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Category</label>
+                            <TextField className="" type="text"    id="standard-basic" placeholder="Category"   onChange={(e)=>setCatName(e.target.value)} name="catName" />
+                            <label></label>
+                        </div>
+
+                       
+
+                        <div className="textField p-2">
+                        <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Category</label>
+                            <TextField className="" type="text"    id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
+                            <label></label>
+                        </div>
                             
                            <DragDropFile onChange={()=>FormHandler}  dbName="catImage" />
+                           <button onClick={submitHandler} className="btn btn-warning">Add Category</button>
                         </div>
                     </div>
                 </div>

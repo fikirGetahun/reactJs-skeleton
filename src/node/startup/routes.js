@@ -6,12 +6,14 @@ const customers=require('../routes/customers');
 const home=require('../routes/home');
 const users=require('../routes/users');
 const auth=require('../routes/auth');
+const category = require('../routes/category')
 
 module.exports=function(app){
 app.use(express.json());
 app.use('/api/courses',courses);
 app.use('/',home);
 app.use('/api/customers',customers);
+app.use('/api/category', category)
 app.use('/api/users',users);
 app.use('/api/auth',auth);
 
