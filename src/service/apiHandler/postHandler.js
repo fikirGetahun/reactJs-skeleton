@@ -1,6 +1,39 @@
-// class PostHandler{
-    
+import axios from "axios";
+import apiUrl from "./apiUrl";
+const api =new apiUrl()
+class PostHandler{
 
-// }
+    CategoryAdder = async(body)=>{
+        var result;
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        alert(localStorage.getItem('token'))
+        try{
+            await axios(
+                {
+                    url: api.joinUrl(api.endPoints.addCategory),
+                    method:"post",
+                    headers:headers,
+                    data:body,
+                    
+                }
+            ).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
 
-// export default PostHandler;
+}
+
+export default PostHandler;

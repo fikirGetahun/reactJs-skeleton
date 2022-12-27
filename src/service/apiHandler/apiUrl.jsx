@@ -6,6 +6,7 @@ class apiUrl {
             catagory: 'cat',
             login: 'api/auth',
             register: 'api/users',
+            addCategory: 'api/category'
         }
 
 

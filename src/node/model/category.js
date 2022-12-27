@@ -1,38 +1,94 @@
-const mongoose= require('mongoose');
-const Joi = require('joi');
+// const mongoose= require('mongoose');
+// const Joi = require('joi');
+ 
 
 
+// const  Category=mongoose.model('Category',new mongoose.Schema({
+//     name:{type:String, required:true,
+//         minlength:5,
+//         maxlength:50
+//     },
+ 
+//     image:{type:String, required: true,
+//         minlength:10,
+//         maxlength:200, 
+//     },
+//     order:{
+//         type:Number, required:true,
+//         minlength:1,
+//         maxlength:3,
+//     }
+// }))
 
-const customer=mongoose.model('Customer',new mongoose.Schema({
-    name:{type:String, required:true,
-        minlength:5,
+// function Validate(customer){
+//     const schema = Joi.object({
+//         name: Joi.string()
+//                  .required()
+//                 .min(5)
+//             .max(50),
+//             image: Joi.string()
+//             .required()
+//            .min(5)
+//        .max(50),
+//        order: Joi.number()
+//        .required()
+//        .min(1)
+//        .max(3)
+    
+        
+        
+//         });
+//            return   schema.validate(customer);
+// }
+
+// exports.customer=Category;
+// exports.Validate=Validate;
+
+
+const mongoose = require('mongoose')
+const Joi = require('joi')
+  
+
+const Category = mongoose.model('Category', new mongoose.Schema({
+    name:{
+        type: String,
+        required: true,
+        minlength:4,
         maxlength:50
     },
-    isGold:Boolean,
-    phone:{type:String, required: function(){
-        return this.isGold;
-    } ,
-    minlength:5,
-        maxlength:50
-}
+    image:{
+        type:String,
+        required: true,
+        minlength:1,
+        maxlength:200
+    },
+    order:{
+        type:Number,
+        required:true,
+        minlength:1,
+        maxlength:2
+    }
 }))
 
-function Validate(customer){
+const Validate = (Category) =>{
     const schema = Joi.object({
-        name: Joi.string()
-                 .required()
-                .min(5)
-            .max(50),
-            phone: Joi.string()
+        name:Joi.string()
             .required()
-           .min(5)
-       .max(50),
-       isGold:Joi.boolean()
-        
-        
-        });
-           return   schema.validate(customer);
-}
+            .min(4)
+            .max(50),
+        image: Joi.string()
+            .required()
+            .min(5)
+            .max(200),
+        order: Joi.number()
+            .required()
+            .min(1)
+            .max(2)
+    })
+    return schema.validate(Category)
+ }
 
-exports.customer=customer;
-exports.Validate=Validate;
+
+ exports.Validate= Validate
+ exports.Category= Category
+

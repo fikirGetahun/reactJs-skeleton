@@ -19,3 +19,83 @@ ReferenceError: loginRoute is not defined
     at Function.Module._load (node:internal/modules/cjs/loader:839:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
     at node:internal/main/run_main_module:17:47
+error: 27/12/2022 11:01:52 uncaughtException: Cannot use import statement outside a module
+C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\category.js:1
+import auth from '../middleware/auth'
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:9:18)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 27/12/2022 11:02:53 uncaughtException: Cannot use import statement outside a module
+C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\category.js:1
+import auth from '../middleware/auth'
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:9:18)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 27/12/2022 11:06:17 uncaughtException: Cannot use import statement outside a module
+C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\category.js:2
+import { Category, Validate } from '../model/category'
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:9:18)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 27/12/2022 11:06:39 uncaughtException: Cannot use import statement outside a module
+C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\category.js:4
+import { Category, Validate } from '../model/category'
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:9:18)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 27/12/2022 11:06:59 uncaughtException: Missing initializer in destructuring declaration
+C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\category.js:4
+const{ Category, Validate } from '../model/category'
+     ^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Missing initializer in destructuring declaration
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:9:18)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
