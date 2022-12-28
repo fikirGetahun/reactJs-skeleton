@@ -138,8 +138,12 @@ const drowdownHandler = (id)=>{
                     <NavLink    to="addFood" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                     <i className="fa fa-tachometer-alt me-2"></i>Add Food
                     </NavLink>
+
+                    <NavLink    to="listCategory" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                    <i className="fa fa-tachometer-alt me-2"></i>Edit Category
+                    </NavLink>
             
-                    <a href="table.html" className="nav-item nav-link d-flex justify-content-start align-items-center"><i className="fa fa-table me-2"></i>Edit Food</a>
+                    {/* <a href="table.html" className="nav-item nav-link d-flex justify-content-start align-items-center"><i className="fa fa-table me-2"></i>Edit Food</a>
                     <a href="index.html" className="nav-item nav-link  d-flex justify-content-start align-items-center dropdown  " data-bs-toggle="dropdown"><i className="fa fa-tachometer-alt me-2"></i>Edit Category</a>
                     <div  onClick={()=>drowdownHandler("test")} className="nav-item   ">
                         <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Edit Category</a>
@@ -156,7 +160,7 @@ const drowdownHandler = (id)=>{
                             <a href="typography.html" className="dropdown-item">Typography</a>
                             <a href="element.html" className="dropdown-item">Other Elements</a>
                         </div>
-                    </div>
+                    </div> */}
                     
                     {/* <div className="nav-item dropdown">
                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Elements</a>

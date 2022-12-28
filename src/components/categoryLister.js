@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import akkoFood from '../file/img/akko.food.PNG';
  import  '../css/allCss.css';
-import GetHandler from "../service/apiHandler/getHandler.ts";
+import GetHandler from "../service/apiHandler/getHandler.js";
  
 const CategoryLister = ()=>{
     const bgCss ={
@@ -18,10 +18,14 @@ const what = async ()=>{
     await  cat.getCategory()
       .then((res)=>{
         //   test.push(res.data)
-        test = res.data
-        //   alert(res)
-        setCatagoryData(test)
+        if(res.statusText == 'OK'){
+            test = res.data
+            setCatagoryData(test)
+        }else{
+            alert('ERROR: 404 Page not found!')
+        }
        
+        
       }) 
       // alert(categoryData)
    }
@@ -42,8 +46,8 @@ return(
             categoryData.map(data=>{
                 // alert(data.catagoryName)
                 return(
-                    <div className="d-flex justify-content-center category" key={data.id} style={bgCss} >
-                    <span   className="categoryText" >{data.catagoryName}</span>
+                    <div className="d-flex justify-content-center category" key={data.id} style={{ backgroundImage:  `url('${data.image}')`}} >
+                    <span   className="categoryText" >{data.name}</span>
                 </div>
                 )
             })

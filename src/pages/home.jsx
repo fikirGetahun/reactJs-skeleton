@@ -11,9 +11,9 @@ import { Outlet } from "react-router-dom";
  
 export default function HomePage() {
  
-    const test=(name, db)=>{
-        alert( name +""+db )
-    } 
+    // const test=(name, db)=>{
+    //     alert( name +""+db )
+    // } 
 
 
     return(
@@ -70,7 +70,7 @@ export default function HomePage() {
               }}
                />
 
-               <TextFieldComp label={"test"} onChange={test} dbname={"dbName"}  />
+            
             </div>
             <div className="categoryHome"   >
               

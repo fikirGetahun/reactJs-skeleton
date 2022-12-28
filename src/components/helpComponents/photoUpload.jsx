@@ -11,6 +11,7 @@ const DragDropFile = ( props ) => {
   // drag state
   const [dragActive, setDragActive] = useState(false);
   const [photo, setPhoto] = useState();
+  const [buffer, setBuffer] = useState();
   // ref
   const [se, setSe] = useState();
   const inputRef = useRef(null);
@@ -39,14 +40,29 @@ const DragDropFile = ( props ) => {
 
   // triggers when file is dro pped
   const handleDrop = function (e) {
-    alert('handleDrop')
-    e.preventDefault();
+     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       // handleFiles(e.dataTransfer.files);
       setPhoto(e.dataTransfer.files[0]);
-      props.onChange(photo, props.dbName)
+   
+        var file = e.dataTransfer.files[0];
+        
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          //  setPhoto(reader.result)
+          // console.log('RESULT', reader.result)
+          props.onChange(photo, props.dbName, reader.result  )
+        }
+       
+         reader.readAsDataURL(file);
+        //  setPhoto(reader.result)
+        setBuffer(reader.result)
+
+        // console.log(photo)
+      //  alert(photo)
+      
         //dbName is the database name of the photo inputer
 
 
@@ -66,8 +82,26 @@ const DragDropFile = ( props ) => {
     if (e.target.files && e.target.files[0]) {
       // handleFiles(e.target.files);
       setPhoto(e.target.files[0]);
-      props.onChange(photo, props.dbName)
+      
+      var file = e.target.files[0];
+      var q;
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        //  setPhoto(reader.result)
+        // console.log('RESULT', reader.result)
+         props.onChange(photo, props.dbName, reader.result  )
+          
+      }
+     
+       reader.readAsDataURL(file);
 
+       //  setPhoto(reader.result)
+       setBuffer(q)
+
+      // console.log(photo)
+    //  alert(photo)
+
+     
 
     //   if (props == "albumInput") {
     //     setSe("albumInput");

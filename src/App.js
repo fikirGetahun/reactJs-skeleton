@@ -11,6 +11,8 @@ import CategoryLister from './components/categoryLister';
 import LoginPage from './admin/adminPages/loginPage';
 import LoginComp from './components/adminComponent/loginComp';
 import Register from './components/adminComponent/registerComp';
+import EditCategory from './components/adminComponent/editCategory';
+import ListCategory from './components/adminComponent/listCategory';
 
 function App() {
   return (
@@ -40,6 +42,11 @@ function App() {
               <Route path='dashboard' element={<InnerDashboard />}/>
 
               <Route path='addCategory' element={<AddCategory />} />
+              <Route  path='listCategory' element={<ListCategory />} />  
+               <Route path='editCategory'>
+                <Route path=':id'  element={<EditCategory />} />
+               </Route>
+               
               <Route path='addFood' element={<AddFood />}/> 
           </Route>
 
