@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DragDropFile from "../helpComponents/photoUpload";
-import TextFieldComp from "../helpComponents/textField";
+import  '../../css/allCss.css';
  import { useState } from "react";
 import PostHandler from "../../service/apiHandler/postHandler";
 import { TextField } from "@mui/joy";
+import GetHandler from "../../service/apiHandler/getHandler";
+import { useParams } from "react-router-dom";
 
 
- const AddCategory =()=>{
+ const EditCategory =()=>{
+
+     const {id} = useParams()
+
+
+const getDataToEdit = async () =>{
+    let data = new GetHandler()
+    let response = data.getOneCategory(id)
+    .then(res=>{
+        if(res.statusText == 'OK'){
+            setCatName(res.data.name)
+            setCatOrder(res.data.order)
+            setCatPhoto(res.data.image)
+        }else{
+            alert('not found err:404')
+        }
+    })
+}
 
 
     //input form handler
@@ -62,7 +81,9 @@ const submitHandler = async()=>{
         }
     })
 }
-
+useEffect(()=>{
+    getDataToEdit()
+},[])
 
 //
 //input form handler
@@ -78,17 +99,25 @@ const submitHandler = async()=>{
 
                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Category</label>
-                            <TextField className="" type="text"    id="standard-basic" placeholder="Category"   onChange={(e)=>setCatName(e.target.value)} name="catName" />
-                            <label></label>
+                            <TextField className="" type="text" value={catName}   id="standard-basic" placeholder="Category"   onChange={(e)=>setCatName(e.target.value)} name="catName" />
+                            <label>  </label>
                         </div>
 
                        
 
                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Category Order</label> 
-                            <TextField className="" type="text"    id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
+                            <TextField className="" type="text" value={catOrder}   id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
                         </div>
+                            <div className="vstack gap-2">
+                                <div>
+                                    <button className="btn btn-outline-danger">X</button>
+                                </div>
+                                <div className="d-flex justify-content-center category">
+
+                                </div>
+                            </div>
                             
                            <DragDropFile onChange={FormHandler}  dbName="catImage" />
                            <button onClick={submitHandler} className="btn btn-warning">Add Category</button>
@@ -101,4 +130,4 @@ const submitHandler = async()=>{
         )
  }
 
- export default AddCategory;
+ export default EditCategory;

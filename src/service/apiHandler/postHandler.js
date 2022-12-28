@@ -9,8 +9,8 @@ class PostHandler{
             "Content-Type": "application/json",
             "x-auth-token": localStorage.getItem('token')
         }
-        alert(localStorage.getItem('token'))
-        try{
+        
+         try{
             await axios(
                 {
                     url: api.joinUrl(api.endPoints.addCategory),
@@ -20,7 +20,7 @@ class PostHandler{
                     
                 }
             ).then(res=>{
-                result = res
+                result = res.statusText
             })
         }catch(err){
             if(err.response){
