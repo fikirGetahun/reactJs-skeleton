@@ -1,1 +1,14 @@
 get http://localhost:3002/api/customers
+
+
+###
+
+post http://localhost:3002/api/food
+
+content-type: application/json
+    {
+        "name": "req.body.name",
+        "categoryId":"req.body.categoryId",
+        "info": "req.body.info",
+        "order": 2
+    }

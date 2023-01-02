@@ -31,4 +31,23 @@ router.get('/:id', async(req, res)=>{
      return res.send(data)
 })
 
+
+router.put('/:id',auth, async (req, res)=>{
+    const {error} = Validate(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+    const data = await Category.findByIdAndUpdate(req.params.id,{
+        name:req.body.name,
+        order:req.body.order,
+        image:req.body.image
+    })
+
+    if(!data) return res.status(404).send('id Not found')
+    res.send('Edited!')
+
+
+})
+
+
+
+
 module.exports=router;
