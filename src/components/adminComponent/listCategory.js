@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import  '../../css/allCss.css';
 // import   from '../../service/apiHandler/getHandler.ts';
 import GetHandler from "../../service/apiHandler/getHandler";
+import AddCategory from "./addCategory";
 const ListCategory = ()=>{
 
     const [categoryData, setCatagoryData] = useState([])
@@ -54,6 +55,7 @@ const ListCategory = ()=>{
                         <Link to={"/admin/editCategory/"+selected._id}>
                         <button className="btn btn-warning container">Edit</button>
                         </Link>
+                        
                         <br></br>
                       
                     </div>

@@ -73,6 +73,52 @@ class GetHandler{
       return result;
     }
 
+
+
+    getProductOnCategory = async (catId)=>{
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addFood)+catId,
+          method:'get',
+        }).then(res=>{
+          result = res;
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result;
+    }
+
+
+
+    getProductPrice = async (foodId)=>{
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.getPrice)+foodId,
+          method:'get',
+        }).then(res=>{
+          result = res;
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result;
+    }
+
 }
 
 export default GetHandler

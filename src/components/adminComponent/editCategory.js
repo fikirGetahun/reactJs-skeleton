@@ -6,6 +6,7 @@ import PostHandler from "../../service/apiHandler/postHandler";
 import { TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import { useParams } from "react-router-dom";
+import PutHandler from "../../service/apiHandler/putHandler";
 
 
  const EditCategory =()=>{
@@ -36,6 +37,8 @@ const [catPhoto, setCatPhoto] = useState();
  
 const [response, setResponse] = useState({class: 'text', resp: ' '})
 
+const [photoEdited, setPhotoEdited] = useState(false)
+
 const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
     if(dbName == "catName"){
         setCatName(value)
@@ -51,7 +54,7 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
 }
 
 const submitHandler = async()=>{
-    const sender = new PostHandler()
+    const sender = new PutHandler()
     // var x = new Buffer.from(catPhoto, 'base64')
     
     var body = {
@@ -60,14 +63,14 @@ const submitHandler = async()=>{
         order: catOrder,
      
     }
-   await sender.CategoryAdder(body)
+   await sender.updateCategory(body, id)
     .then(resx=>{
-        if(resx == 'OK'){
+        if(resx.statusText == 'OK'){
              setResponse(old=>(
                 {
                     ...old,
                     class: 'text text-success',
-                    resp: 'Added Successfully!'
+                    resp: 'Edited Successfully!'
                 }
             ))
         }else{
@@ -110,17 +113,35 @@ useEffect(()=>{
                             <TextField className="" type="text" value={catOrder}   id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
                         </div>
-                            <div className="vstack gap-2">
+                            {/* <div className="vstack gap-2">
                                 <div>
                                     <button className="btn btn-outline-danger">X</button>
                                 </div>
                                 <div className="d-flex justify-content-center category">
 
                                 </div>
-                            </div>
+                            </div> */}
                             
-                           <DragDropFile onChange={FormHandler}  dbName="catImage" />
-                           <button onClick={submitHandler} className="btn btn-warning">Add Category</button>
+
+                            {
+                            photoEdited ? 
+                                  <DragDropFile onChange={FormHandler}  dbName="catImage" />  
+                           :  
+                       
+                            <div className="vstack gap-2">
+                               <div>
+                                   <button onClick={()=>setPhotoEdited(true)} className="btn btn-outline-danger">X</button>
+                               </div>
+                               <div className="d-flex justify-content-center category" style={{backgroundImage: `url('${catPhoto}')`}} >
+
+                               </div>
+                           </div>
+                            
+                                 
+                            }
+                            
+                        
+                           <button onClick={submitHandler} className="btn btn-warning">Edit Category</button>
                            <br></br>
                             <label className={response.class}>{  response.resp} </label>
                         </div>

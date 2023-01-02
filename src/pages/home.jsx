@@ -30,19 +30,14 @@ export default function HomePage() {
 
             <div className="vstack ">
                
-                <div className="row" style={{ marginLeft:"4.6%",
+                <div className="row" style={{ marginLeft:"4.6%", maxWidth:'35%'
 }}>
                      
-                    <div className="col text-nowrap d-flex align-items-center d-flex justify-content-center menu"   >
+                    <div className="col mainMenu text-nowrap d-flex align-items-center d-flex justify-content-center menu"    >
                         Main Menu
                     </div >
-                    <div className="col text-nowrap d-flex align-items-center d-flex justify-content-center menu"  >
-                        Main Menu
-                    </div >
+               
                     
-                    <div  className="col text-nowrap d-flex align-items-center d-flex justify-content-center menu"  >
-                    Bar
-                    </div>
                     <div className="col"></div>
 
                 </div>

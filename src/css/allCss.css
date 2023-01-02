@@ -15,6 +15,18 @@
     
     }
 
+    .mainMenu{
+      cursor: pointer;
+    background: var(--color-white);
+    border: 3px solid var(--color-primary);
+    border-radius: 32px;
+    padding: 5px 10px 4px;
+    color: var(--color-primary);
+    font-weight: 600;
+    white-space: nowrap;
+     display: flex;
+    }
+
     
       .categoryText{
     color:red ;
@@ -24,7 +36,7 @@
     .foodImage{
       width: 100%;
       /* height: 30%; */
-   
+      
       border-radius:30px;
       margin-Left:1%;
       margin-Right:1%;
@@ -37,15 +49,17 @@
     .foodTitle{
       font-size: larger;
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     .foodDisc{
-      max-height: 120px;
+      /* max-height: 120px; */
+      white-space:nowrap;
       position: relative;
       overflow:hidden;
-      white-space: normal;
-    text-overflow: clip;
+     text-overflow: clip;
     
-      background-image: linear-gradient(0deg, #dbd0d0,transparent );
+      /* background-image: linear-gradient(0deg, #dbd0d0,transparent ); */
       /* background-image: -webkit-gradient(linear; left top; left bottom; from(rgba(255; 255; 255; 1)); to(rgba(0; 0; 0; 0)));; */
     }
     .foodDiscRead{
@@ -104,9 +118,10 @@
 
   .menu{
      border:1px solid coral;
-     border-radius: 18px;
+     /* border-radius: 18px; */
      color: white;
-     padding:5px;
+     
+     /* padding:5px; */
      background: coral;
      margin:9px;
 

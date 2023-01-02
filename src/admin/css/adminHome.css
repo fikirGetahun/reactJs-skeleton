@@ -16,7 +16,8 @@
     position: fixed;
     top: 15px;
     left: 250px;
-     height: 95vh;
+     height: 90vh;
+     overflow: hidden;
     width: 80%;
     transition: 0.5s;
 }

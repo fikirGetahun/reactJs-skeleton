@@ -40,7 +40,7 @@ router.put('/:id', async(req,res)=>{
     if(error){
        return    res.status(400).send(error.details[0].message)
     }
-let cust =await   customers.findByIdAndUpdate(req.params.id, {
+let cust =await   customer.findByIdAndUpdate(req.params.id, {
      name:req.body.name,
     phone:req.body.phone,
     isGold:req.body.isGold},{

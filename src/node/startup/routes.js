@@ -7,6 +7,8 @@ const home=require('../routes/home');
 const users=require('../routes/users');
 const auth=require('../routes/auth');
 const category = require('../routes/category')
+const food = require('../routes/food')
+const price = require("../routes/price")
 
 module.exports=function(app){
 app.use(express.json());
@@ -16,6 +18,8 @@ app.use('/api/customers',customers);
 app.use('/api/category', category)
 app.use('/api/users',users);
 app.use('/api/auth',auth);
+app.use('/api/food', food )
+app.use('/api/price', price )
 
 app.use(error);
 }

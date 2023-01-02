@@ -6,7 +6,9 @@ class apiUrl {
             catagory: 'cat',
             login: 'api/auth',
             register: 'api/users',
-            addCategory: 'api/category'
+            addCategory: 'api/category',
+            addFood:'api/food',
+            getPrice:'api/price'
         }
 
 

@@ -5,7 +5,7 @@ import { Outlet, Link, NavLink, useParams} from "react-router-dom";
 
  
 // import '../css/bootstrap.min2.css';
-import '../css/style.css';
+import '../css/adminHome.css';
  
 
 const AdminHome = ()=> {
@@ -140,7 +140,7 @@ const drowdownHandler = (id)=>{
                     </NavLink>
 
                     <NavLink    to="listCategory" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                    <i className="fa fa-tachometer-alt me-2"></i>Edit Category
+                    <i className="fa fa-tachometer-alt me-2"></i>List Category
                     </NavLink>
             
                     {/* <a href="table.html" className="nav-item nav-link d-flex justify-content-start align-items-center"><i className="fa fa-table me-2"></i>Edit Food</a>
