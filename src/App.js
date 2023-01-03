@@ -12,6 +12,8 @@ import LoginComp from './components/adminComponent/loginComp';
 import Register from './components/adminComponent/registerComp';
 import EditCategory from './components/adminComponent/editCategory';
 import ListCategory from './components/adminComponent/listCategory';
+import ListProducts from './components/adminComponent/listProduct';
+import EditProduct from './components/adminComponent/editProduct';
 
 function App() {
   return (
@@ -26,6 +28,10 @@ function App() {
 
               <Route path='addCategory' element={<AddCategory />} />
               <Route  path='listCategory' element={<ListCategory />} />  
+              <Route  path='listProducts' element={<ListProducts /> } />  
+              <Route path='editProduct' >
+                <Route path=':id' element={<EditProduct />} />
+              </Route>
                <Route path='editCategory'>
                 <Route path=':id'  element={<EditCategory />} />
                </Route>

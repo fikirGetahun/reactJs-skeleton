@@ -590,3 +590,13 @@ error: 30/12/2022 15:25:15 unhandledRejection: error is not defined
 ReferenceError: error is not defined
     at C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\food.js:83:5
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/01/2023 15:26:20 unhandledRejection: Cast to ObjectId failed for value "63b2942a6171bb1d27927d30d" (type string) at path "_id" for model "Food"
+CastError: Cast to ObjectId failed for value "63b2942a6171bb1d27927d30d" (type string) at path "_id" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/01/2023 15:39:18 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

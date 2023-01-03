@@ -87,4 +87,14 @@ router.get('/:catId',  async (req, res)=>{
 })
 
 
+router.get('/product/:id', async (req,res)=>{
+    var result;
+    
+    let data = await Food.findById(req.params.id)
+
+    if(!data) return res.status(404).send('error: product not found')
+
+    res.send(data)
+})
+
 module.exports=router;

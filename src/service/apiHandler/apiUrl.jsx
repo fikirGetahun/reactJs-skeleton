@@ -8,7 +8,8 @@ class apiUrl {
             register: 'api/users',
             addCategory: 'api/category',
             addFood:'api/food',
-            getPrice:'api/price'
+            getPrice:'api/price',
+            product: 'api/food/product'
         }
 
 
