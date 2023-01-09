@@ -9,7 +9,10 @@ class apiUrl {
             addCategory: 'api/category',
             addFood:'api/food',
             getPrice:'api/price',
-            product: 'api/food/product'
+            product: 'api/food/product',
+            getOneUser: 'api/users/byemail',
+            getAllUsers: 'api/users/allUsers',
+            
         }
 
 

@@ -14,6 +14,43 @@ router.get('/me',auth,async(req,res)=>{
     res.send(u);
 })
 
+
+router.get('/byemail/:email', async (req,res)=>{
+    const u = await User.findOne({email: req.params.email})
+
+    if(!u) return res.status(400).send('invalid user to fetch')
+
+    res.send(u)
+})
+
+router.get('/allUsers', async (req,res)=>{
+    const u = await User.find()
+
+    if(!u) return res.status(400).send('invalid user to fetch')
+
+    res.send(u)
+})
+
+router.patch('/', async (req,res)=>{
+    let {tobeEdited} = req.body.tobe
+   let u
+    if(req.body.tobe == 'name'){
+          u = await User.findByIdAndUpdate(req.body.id,{name: req.body.data})
+          res.send("Name Changed!")
+    }else if(req.body.tobe == 'email'){
+         u = await User.findByIdAndUpdate(req.body.id,{email: req.body.data})
+         res.send("Email Changed!")
+    }else{
+        const salt= await  bcrypt.genSalt(10);
+        let password= await bcrypt.hash(req.body.data,salt);
+       u = await User.findByIdAndUpdate(req.body.id,{password: password})
+       res.send("Password Changed!")
+    }
+    if(!u) return res.status(400).send('invalid user to fetch')
+
+
+})
+
 router.post('/',async(req,res)=>{
 
     ///--Validation using Joi

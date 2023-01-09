@@ -141,6 +141,51 @@ class GetHandler{
       return result
     }
     
+
+    getOneUser = async (email)=>{
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.getOneUser)+email,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getAllUsers = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.getAllUsers),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
 }
 
 export default GetHandler

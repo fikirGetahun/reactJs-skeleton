@@ -600,3 +600,37 @@ CastError: Cast to ObjectId failed for value "undefined" (type string) at path "
     at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
     at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/01/2023 16:30:27 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Price"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Price"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 11:44:05 unhandledRejection: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 12:00:24 unhandledRejection: Cast to ObjectId failed for value "{ name: 'fikir ' }" (type Object) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "{ name: 'fikir ' }" (type Object) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 12:01:40 unhandledRejection: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 12:03:07 unhandledRejection: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 12:03:39 unhandledRejection: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "{ name: '' }" (type Object) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 09/01/2023 12:06:47 unhandledRejection: u is not defined
+ReferenceError: u is not defined
+    at C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\users.js:43:5
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

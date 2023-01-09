@@ -1,6 +1,7 @@
 import { Box } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import { Outlet, Link, NavLink, useParams} from "react-router-dom";
+import GetHandler from "../../service/apiHandler/getHandler";
 
 
  
@@ -60,8 +61,21 @@ const drowdownHandler = (id)=>{
 //  style css functions 
 
 
-
-
+const [logedUser, setLogedUser] = useState([])
+const getLogedUser = async ()=>{
+    let data = new GetHandler()
+    let email = localStorage.getItem('email')
+    let x = await data.getOneUser(email).then(res=>{
+        if(res.statusText == 'OK'){
+            setLogedUser(res.data)
+        }else{
+            alert('no user name')
+        }
+    })
+}
+useEffect(()=>{
+getLogedUser()
+},[])
 
 
 
@@ -123,7 +137,7 @@ const drowdownHandler = (id)=>{
                     </div>
 
                     <div className="ms-3">
-                        <h6 className="mb-0">Jhon Doe</h6>
+                        <h6 className="mb-0">{logedUser.name}</h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -132,6 +146,7 @@ const drowdownHandler = (id)=>{
                     <NavLink    to="dashboard" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                     <i className="fa fa-tachometer-alt me-2"></i>Dashboard
                     </NavLink>
+                
                     <NavLink    to="addCategory" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                     <i className="fa fa-tachometer-alt me-2"></i>Add Category
                     </NavLink>
@@ -142,6 +157,26 @@ const drowdownHandler = (id)=>{
                     <NavLink    to="listCategory" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                     <i className="fa fa-tachometer-alt me-2"></i>List Category
                     </NavLink>
+
+                    <NavLink    to="listProducts" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                    <i className="fa fa-tachometer-alt me-2"></i>List Products
+                    </NavLink>
+                    <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
+                        <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
+                        <div id="test2"  className="dropdown-menu  bg-transparent border-0">
+                        <NavLink    to="/login/reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a href="button.html" className="dropdown-item">Add User</a>
+                            </NavLink>
+                            <NavLink    to="reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a href="typography.html" className="dropdown-item">List User</a>
+                            </NavLink>
+                            <NavLink    to="editUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a href="typography.html" className="dropdown-item">Edit Profile</a>
+                            </NavLink>
+                            {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
+                        </div>
+                    </div>
+                    
             
                     {/* <a href="table.html" className="nav-item nav-link d-flex justify-content-start align-items-center"><i className="fa fa-table me-2"></i>Edit Food</a>
                     <a href="index.html" className="nav-item nav-link  d-flex justify-content-start align-items-center dropdown  " data-bs-toggle="dropdown"><i className="fa fa-tachometer-alt me-2"></i>Edit Category</a>
@@ -205,30 +240,32 @@ const drowdownHandler = (id)=>{
                     <input className="form-control bgColor border-0" type="search" placeholder="Search"/>
                 </form>
                 <div className="navbar-nav align-items-center ms-auto">
-                    <div className="nav-item dropdown">
+                    {/* <div className="nav-item dropdown">
                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i className="fa fa-envelope me-lg-2"></i>
                             <span className="d-none d-lg-inline-flex">Message</span>
                         </a>
                  
-                    </div>
-                    <div className="nav-item dropdown">
+                    </div> */}
+                    {/* <div className="nav-item dropdown">
                         <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i className="fa fa-bell me-lg-2"></i>
                             <span className="d-none d-lg-inline-flex">Notificatin</span>
                         </a>
  
-                    </div>
+                    </div> */}
                     <div className="nav-item dropdown">
-                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="#" className="nav-link  hstack gap-2 " data-bs-toggle="dropdown">
                             {/* <img className="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"/> */}
-                            <span className="d-none d-lg-inline-flex">John Doe</span>
+                          <span>Loged User :</span>  <span className="d-none d-lg-inline-flex">{logedUser.name}</span>
+                          <button className="btn btn-warning">Log Out</button>
+
                         </a>
-                        <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        {/* <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" className="dropdown-item">My Profile</a>
                             <a href="#" className="dropdown-item">Settings</a>
                             <a href="#" className="dropdown-item">Log Out</a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </nav>

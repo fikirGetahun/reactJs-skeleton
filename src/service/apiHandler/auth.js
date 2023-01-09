@@ -57,14 +57,14 @@ class Auth{
             await axios.post(api.joinUrl(api.endPoints.login), body)
             .then(res=>{
                 localStorage.setItem('token', res.data)
-                
-                result = true
+                localStorage.setItem('email',body.email)
+                 result = true
             })
         }catch(err){
             if(err.response){
                 return err.response.data
             }else if(err.request){
-                return err.request
+                return err.request+"sdf"
             }else{
                 return err.message
             }

@@ -32,6 +32,52 @@ class PutHandler{
         return result
     }
 
+    updateProduct = async (body, fid, pid)=>{
+        var result;
+        try{
+            await axios({
+                url: api.joinUrl(api.endPoints.addFood )+fid+"/"+pid,
+                method: 'put',
+                data: body,
+                headers:this.headers
+            }).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result
+    }
+
+    updateUserData = async (body )=>{
+        var result;
+        try{
+            await axios({
+                url: api.joinUrl(api.endPoints.register ) ,
+                method: 'patch',
+                data: body,
+                headers:this.headers
+            }).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result
+    }
+
 }
 
 export default PutHandler

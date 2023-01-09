@@ -2,19 +2,21 @@ import React from "react";
  
 import TextField from '@mui/joy/TextField';
 import { Box } from "@mui/joy";
-import { color } from "@mui/system";
-import CategoryLister from "../components/categoryLister";
-import FoodLister from "../components/foodLister";
+
 import '../css/allCss.css';
-import TextFieldComp from "../components/helpComponents/textField";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
  
 export default function HomePage() {
  
     // const test=(name, db)=>{
     //     alert( name +""+db )
     // } 
+    const navigate = useNavigate()
 
+    const backToHome = ()=>{
+        
+        navigate("/")
+    }
 
     return(
         <div   className="container p-0  mainBG" >
@@ -33,7 +35,7 @@ export default function HomePage() {
                 <div className="row" style={{ marginLeft:"4.6%", maxWidth:'35%'
 }}>
                      
-                    <div className="col mainMenu text-nowrap d-flex align-items-center d-flex justify-content-center menu"    >
+                    <div onClick={backToHome} className="col mainMenu text-nowrap d-flex align-items-center d-flex justify-content-center menu"    >
                         Main Menu
                     </div >
                

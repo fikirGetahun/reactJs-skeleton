@@ -131,7 +131,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                         <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
         
                         </div>
-                        <Link to={"/admin/editCategory/"+selected._id}>
+                        <Link to={"/admin/editProduct/"+selected._id}>
                         <button className="btn btn-warning container">Edit</button>
                         </Link>
                         

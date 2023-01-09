@@ -6,6 +6,7 @@ import { TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
 import { useParams } from "react-router-dom";
+import PutHandler from "../../service/apiHandler/putHandler";
 
  const EditProduct=()=>{
     const {id} = useParams()
@@ -20,6 +21,11 @@ const [foodFullPrice, setFoodFullPrice] = useState();
 const [foodHalfPrice, setFoodHalfPrice] = useState('');
 const [foodInfo, setFoodInfo] = useState('');
 const [categoryList, setCategoryList] = useState([])
+const [foodId, setFoodId] = useState()
+const [priceId, setPriceId] = useState()
+
+
+const [photoEdited, setPhotoEdited] = useState(false)
 
 const [halfFull, setHalfFull] = useState(false);
 const [resResult, setResResult] = useState()
@@ -53,26 +59,26 @@ const submitHandler = async () =>{
             categoryId:foodCategory,
             info: foodInfo,
             order: foodOrder,
-            image:foodPhoto
-        },
+            image:foodPhoto,
+         },
         price:{
             price:foodFullPrice,
             halfPrice:foodHalfPrice,
             halfFull: halfFull,
             oldPrice:foodOrder,
-         }
+          }
     }
 
-    let product = new PostHandler()
+    let product = new PutHandler()
     console.log(body)
-    product.FoodAdder(body)
+    product.updateProduct(body, foodId, priceId)
         .then(res=>{
             if(res.statusText == 'OK'){
                 setResponse(old=>(
                     {
                         ...old,
                         class: 'text text-success',
-                        resp: 'Product Added Successfully!'
+                        resp: 'Product Updated Successfully!'
                     }
                 ))
             }else{
@@ -102,12 +108,13 @@ const oldDataGetter = async (id)=>{
             setFoodOrder(res.data.order)
             setFoodPhoto(res.data.image)
             setFoodInfo(res.data.info)
-            
+            setFoodId(res.data._id)
         }else{
             alert('product is unkown')
         }
     })
     await getCategoryName(test.categoryId)
+    await getPrice(test._id)
 
 }
 
@@ -116,7 +123,22 @@ const getCategoryName = async (id)=>{
     let data = new GetHandler()
     let catName = await data.getOneCategory(id).then(res=>{
         if(res.statusText == 'OK'){
-            setCategoryNme(res.data.name)
+            setCategoryNme(res.data)
+            setFoodCategory(res.data._id)
+           
+        }else{
+            alert('no category')
+        }
+    })
+}
+
+const getPrice = async (foodId)=>{
+    let data = new GetHandler()
+    let catName = await data.getProductPrice(foodId) .then(res=>{
+        if(res.statusText == 'OK'){
+            setFoodFullPrice(res.data.price)
+            setFoodHalfPrice(res.data.halfPrice)
+            setPriceId(res.data._id)
         }else{
             alert('no category')
         }
@@ -138,10 +160,9 @@ useEffect(()=>{
                     
                     <hr/>
                     <div className="row d-flex justify-content-center">
-                    <h3>Add Food In Category</h3>
+                    <h3>Edit Product</h3>
                         <div className="col-6">
-                        {console.log(foodName)}
-                        <div className="textField p-2">
+                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Name</label>
                             <input className="form-control" type="text" value={foodName}   id="standard-basic" placeholder="Food Name"   onChange={(e)=>setFoodName(e.target.value)} name="catName" />
                             <label></label>
@@ -167,7 +188,7 @@ useEffect(()=>{
                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Select Category</label>
                          <select  className="form-control"  onChange={(e)=>setFoodCategory(e.target.value)} >
-                            <option >{categoryName}</option>
+                            <option value={categoryName._id} >{categoryName.name}</option>
                             {
                                 categoryList.map(sel=>{
                                    return ( <option value={sel._id} >{sel.name} </option>)
@@ -181,14 +202,14 @@ useEffect(()=>{
                         <div className="row">
                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Full Price</label>
-                            <input className="form-control" type="text"    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodFullPrice(e.target.value)} name="catName" />
+                            <input className="form-control" type="text" value={foodFullPrice}   id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodFullPrice(e.target.value)} name="catName" />
                             <label></label>
                         </div>
                          
                             
                                 <div className="textField p-2">
                                 <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Half Price</label>
-                                    <input className="form-control" type="text"    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
+                                    <input className="form-control" type="text" value={foodHalfPrice}    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
                                     <label></label>
                                 </div>
                              
@@ -203,10 +224,27 @@ useEffect(()=>{
 
                             
  
-                           <DragDropFile onChange={FormHandler}  dbName="foodImage" />
+                           {/* <DragDropFile onChange={FormHandler}  dbName="foodImage" /> */}
+                           {
+                            photoEdited ? 
+                                  <DragDropFile onChange={FormHandler}  dbName="foodImage" />  
+                           :  
+                       
+                            <div className="vstack gap-2">
+                               <div>
+                                   <button onClick={()=>setPhotoEdited(true)} className="btn btn-outline-danger">X</button>
+                               </div>
+                               <div className="d-flex justify-content-center category" style={{backgroundImage: `url('${foodPhoto}')`}} >
+
+                               </div>
+                           </div>
+                            
+                                 
+                            }
+                            
 
                            <div>
-                            <button onClick={submitHandler} className="btn btn-warning">Add Product</button>
+                            <button onClick={submitHandler} className="btn btn-warning">Edit Product</button>
                            </div>
                            <label className={response.class}>{  response.resp} </label>
                         </div>

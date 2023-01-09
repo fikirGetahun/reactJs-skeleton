@@ -14,6 +14,9 @@ import EditCategory from './components/adminComponent/editCategory';
 import ListCategory from './components/adminComponent/listCategory';
 import ListProducts from './components/adminComponent/listProduct';
 import EditProduct from './components/adminComponent/editProduct';
+import NoDataPage from './components/noData';
+import ListUser from './components/adminComponent/listUser';
+import EditUser from './components/adminComponent/editUser';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
               <Route path='addCategory' element={<AddCategory />} />
               <Route  path='listCategory' element={<ListCategory />} />  
               <Route  path='listProducts' element={<ListProducts /> } />  
+              <Route  path='listUsers' element={ <ListUser /> } />  
+              <Route  path='editUser' element={ <EditUser />} />  
+
               <Route path='editProduct' >
                 <Route path=':id' element={<EditProduct />} />
               </Route>
@@ -42,6 +48,8 @@ function App() {
           <Route path='/'  element={<HomePage/>} > 
               <Route index element={ <CategoryLister />} />
               <Route path=":catId" element={<FoodLister/>} />
+              <Route path=":catId/nodata" element={<NoDataPage /> } />
+
           </Route>
           <Route path='/login' element={<LoginPage />}>
             <Route index element={<LoginComp />}/>
