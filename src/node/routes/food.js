@@ -51,6 +51,53 @@ router.post('/' , async (req, res)=>{
     // res.send(priceUploadedData)
 })
 
+router.put('/:fid/:pid' , async (req, res)=>{
+
+ 
+    let {error} = Validation(req.body.food)
+   
+    if(error) return res.status(400).send(error.details[0].message)
+    console.log('this is from express  ',req.body)
+    const data = await Food.findByIdAndUpdate(req.params.fid,{
+        name: req.body.food.name,
+        categoryId:req.body.food.categoryId,
+        info: req.body.food.info,
+        order: req.body.food.order,
+        image:req.body.food.image
+    })
+
+    // let foodUploadedData = await data.save()
+
+    const pdata = await Price.findByIdAndUpdate(req.params.pid,{
+        price:req.body.price.price,
+    	halfPrice:req.body.price.halfPrice,
+        halfFull:req.body.price.halfFull,
+    	oldPrice:req.body.price.oldPrice,
+    	 
+    })
+    
+    // let priceUploadedData = await pdata.save()
+
+    if(!pdata) return res.status(400).send('error on price update')
+
+      if(!data) return res.status(400).send('error on product update')
+
+    
+     
+    
+    // .exec(function (err, res){
+    //     console.log("this is output ",JSON.stringify(err))
+    //     console.log("this is output ",JSON.stringify(res))
+    //     ff = res
+    //     return res
+    // })
+    // console.log(datax)
+    // res.send({priceUploadedData, foodUploadedData})
+    res.send("successfull")
+
+    // res.send(priceUploadedData)
+})
+
 
 router.get('/:catId',  async (req, res)=>{
     

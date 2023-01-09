@@ -3,10 +3,12 @@ import akkoFood from '../file/img/akko.food.PNG';
 import GetHandler from "../service/apiHandler/getHandler";
 
 import  "../css/allCss.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
  const FoodLister = () =>{
 
     const {catId} = useParams()
+    let navigate =   useNavigate()
 
     const bgCsss ={
         backgroundImage:  `url('${akkoFood}')`
@@ -55,7 +57,12 @@ import { useParams } from "react-router-dom";
    
         if(res.statusText == 'OK'){
                 test = res.data
-                setProducts(test)
+                if(test.length > 0){
+                    setProducts(test)
+                }else{
+                    navigate("/nodata")
+                }
+                
                 
             }else{
                 alert(res)
