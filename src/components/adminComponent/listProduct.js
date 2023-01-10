@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Await, Link, useNavigate } from "react-router-dom";
 import  '../../css/allCss.css';
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
 // import   from '../../service/apiHandler/getHandler.ts';
 import GetHandler from "../../service/apiHandler/getHandler";
  const ListProducts = ()=>{
@@ -21,6 +22,38 @@ import GetHandler from "../../service/apiHandler/getHandler";
             }
         })
     }
+
+
+    const deleteHandler = async (id, arrayId)=>{
+        let data = new DeleteHandler()
+         if (window.confirm("Are you sure you want to delete this?") == true) {
+            let handler = await data.deleteProduct(id).then(res=>{
+                if(res.statusText == 'OK'){
+                    let arr = []
+                    setFoodData([
+                        ...foodData.slice(0, arrayId),
+                        ...foodData.slice(arrayId + 1)
+                      ]);
+
+                      setProductsPrice([
+                        ...productPrice.slice(0, arrayId),
+                        ...productPrice.slice(arrayId + 1)
+                      ]);
+                    // console.log('zzzddddd----',arrayId, 'iddd', foodData.splice(arrayId, 1))
+                 
+                    //  productPrice.splice(arrayId, 1)
+                    window.alert("Deleted!") 
+                }else{
+                    alert("error")
+                }
+            })   
+        } else {
+         alert('error not deleted!')
+        }
+
+    }
+
+
     const [categorySelected, setCategorySelected] =useState({id:'', name:''})
     const [category, setCategory] = useState([])
     const categoryLister = async ()=>{
@@ -134,6 +167,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                         <Link to={"/admin/editProduct/"+selected._id}>
                         <button className="btn btn-warning container">Edit</button>
                         </Link>
+                        <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
                         
                         <br></br>
                       

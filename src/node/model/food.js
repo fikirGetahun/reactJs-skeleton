@@ -29,7 +29,8 @@ const Food =   mongoose.model('Food', new mongoose.Schema({
     image:{
         type:String,
         required: true
-    }
+    },
+    isActive: Boolean
 
 }))
 

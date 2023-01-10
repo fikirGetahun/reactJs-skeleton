@@ -77,4 +77,14 @@ const token=user.generateAuthToken();
 
 })
 
+
+router.delete('/:id', auth, async (req,res)=>{
+    let data = await User.findByIdAndRemove(req.params.id)
+    if(!data) return res.status(404).send('error: Cant delete unkown product')
+
+    res.send('Deleted!')
+})
+
+
+
 module.exports=router;
