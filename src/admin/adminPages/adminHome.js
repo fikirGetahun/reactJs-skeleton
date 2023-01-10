@@ -167,7 +167,7 @@ getLogedUser()
                         <NavLink    to="/login/reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                             <a href="button.html" className="dropdown-item">Add User</a>
                             </NavLink>
-                            <NavLink    to="reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <NavLink    to="listUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                             <a href="typography.html" className="dropdown-item">List User</a>
                             </NavLink>
                             <NavLink    to="editUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >

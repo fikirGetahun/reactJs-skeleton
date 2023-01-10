@@ -6,6 +6,7 @@ const {Food , Validation   } = require('../model/food')
  const {Price  } = require('../model/price')
  const Category = require('../model/category')
 const { compareSync } = require('bcrypt')
+const auth = require( '../middleware/auth')
 
 
 router.post('/' , async (req, res)=>{
@@ -142,6 +143,18 @@ router.get('/product/:id', async (req,res)=>{
     if(!data) return res.status(404).send('error: product not found')
 
     res.send(data)
+})
+
+
+router.delete('/:id', auth, async (req,res)=>{
+    let data = await Food.findByIdAndRemove(req.params.id)
+    if(!data) return res.status(404).send('error: Cant delete unkown product')
+
+
+    let price = await Price.findOneAndDelete({foodId: req.params.id})
+    if(!price) return res.status(404).send('error: Cant delete unkown product')
+
+    res.send('Deleted!')
 })
 
 module.exports=router;

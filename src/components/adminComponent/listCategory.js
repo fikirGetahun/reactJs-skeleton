@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  '../../css/allCss.css';
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
 // import   from '../../service/apiHandler/getHandler.ts';
 import GetHandler from "../../service/apiHandler/getHandler";
 import AddCategory from "./addCategory";
@@ -21,6 +22,32 @@ const ListCategory = ()=>{
                 alert('error:404 Page not found')
             }
         })
+    }
+
+
+    const deleteHandler = async (id, arrayId)=>{
+        let data = new DeleteHandler()
+         if (window.confirm("Are you sure you want to delete this?") == true) {
+            let handler = await data.deleteCategory(id).then(res=>{
+                if(res.statusText == 'OK'){
+                    let arr = []
+                    setCatagoryData([
+                        ...categoryData.slice(0, arrayId),
+                        ...categoryData.slice(arrayId + 1)
+                      ]);
+ 
+                    // console.log('zzzddddd----',arrayId, 'iddd', foodData.splice(arrayId, 1))
+                 
+                    //  productPrice.splice(arrayId, 1)
+                    window.alert("Deleted!")
+                }else{
+                    alert("error")
+                }
+            })   
+        } else {
+         alert('error not deleted!')
+        }
+
     }
 
     useEffect(()=>{
@@ -44,7 +71,7 @@ const ListCategory = ()=>{
             <div className="row m-5">
              {
                 
-                categoryData.map(selected=>{
+                categoryData.map((selected,i)=>{
                     return(
                     <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
                         <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
@@ -55,7 +82,7 @@ const ListCategory = ()=>{
                         <Link to={"/admin/editCategory/"+selected._id}>
                         <button className="btn btn-warning container">Edit</button>
                         </Link>
-                        
+                        <button onClick={()=>deleteHandler(selected._id,i )} className="btn btn-danger container">Delete</button>
                         <br></br>
                       
                     </div>

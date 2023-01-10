@@ -67,7 +67,8 @@ const Category = mongoose.model('Category', new mongoose.Schema({
         required:true,
         minlength:1,
         maxlength:2
-    }
+    },
+    isActive: Boolean
 }))
 
 const Validate = (Category) =>{

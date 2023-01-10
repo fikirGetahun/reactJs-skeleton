@@ -3,7 +3,7 @@
 import React from "react";
 import { useState } from "react";
 
-const NoDataPage =( props)=>{
+const NoDataPage =(  )=>{
 
     const [value, setValue] = useState('');
 
@@ -11,7 +11,7 @@ const NoDataPage =( props)=>{
         setValue(e.target.value)
         // here, the onchange prop is given from the parrent component and when the child component is clicked it will triger the 
         // the onchange event in the child then the onchange handler will pass the value, props.dbname
-        props.onChange(value, props.dbName)
+        
     }
 
 

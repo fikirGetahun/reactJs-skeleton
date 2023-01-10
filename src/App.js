@@ -48,7 +48,7 @@ function App() {
           <Route path='/'  element={<HomePage/>} > 
               <Route index element={ <CategoryLister />} />
               <Route path=":catId" element={<FoodLister/>} />
-              <Route path=":catId/nodata" element={<NoDataPage /> } />
+              <Route path="/nodata" element={<NoDataPage /> } />
 
           </Route>
           <Route path='/login' element={<LoginPage />}>
