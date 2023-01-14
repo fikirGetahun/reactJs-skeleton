@@ -110,6 +110,40 @@ import { useNavigate, useParams } from "react-router-dom";
         // console.log(x)
     },[])
 
+
+    const modalImage = (id,image)=>{
+        var modal = document.getElementById("myModal"+id);
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg",id);
+var modalImg = document.getElementById("img01",id);
+var captionText = document.getElementById("caption");
+// img.onclick = function(){
+//   modal.style.display = "block";
+//   modalImg.src = this.src;
+//   captionText.innerHTML = this.alt;
+// }
+
+ 
+    modal.style.display = "block";
+    modalImg.src = image
+    captionText.innerHTML = this.alt;
+  
+
+    }
+
+    const modalImageClose = (id)=>{
+       
+        var modal = document.getElementById("myModal"+id);
+        // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close" )[0];
+// When the user clicks on <span> (x), close the modal
+ 
+    modal.style.display = "none" 
+
+    // alert('in')
+    }
+
     let i = 0;
     return( 
         <div>
@@ -158,13 +192,23 @@ import { useNavigate, useParams } from "react-router-dom";
                         
                         <div className="vstack" >
                             
-                             <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div>
+                             {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
+                             <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
+                             {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
+
+                        {/* this is th */}
+                        <div id={"myModal"+i} class="modal">
+                        <span  className="close" onClick={()=>modalImageClose(i)}>&times;</span>
+                        <img class="modal-content" src={data.image} id={"img01"+i} />
+                        <div id="caption"></div>
+                        </div>
+
                         <h3 className="foodTitle d-flex justify-content-start" >{data.name }</h3>
                         <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
         textOverflow:"ellipsis"}}   >
                                 { data.info}  
                              </p>
-                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end" > Read More...</span>
+                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" > Read More...</span>
      
                         <div className="row" >
                             <div className="price hstack gap-3">

@@ -68,6 +68,8 @@ class PutHandler{
             })
         }catch(err){
             if(err.response){
+                // this is the ultimate error response handler 
+                // i was straglling with this for a long time 
                 return err.response.data
             }else if(err.request){
                 return err.request
