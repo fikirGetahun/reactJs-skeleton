@@ -23,7 +23,24 @@ router.get('/', async (req,res)=>{
     res.send(data)
 })
 
+router.get('/active', async (req,res)=>{
+    const data = await Category.findOne({isActive:true})
+    if(!data) return res.status(404).send('page not found')
+    res.send(data)
+})
 
+
+router.post('/makeActive',auth, async (req,res)=>{
+    // const {error} = Validate(req.body)
+    // if(error) return res.status(400).send(error.details[0].message)
+    // if(error) return res.status(400).send("this is errrrrorr")
+
+ 
+        const data = await Category.findOneAndUpdate({isActive: req.body.isActive})
+        
+        return res.send(data);
+   
+})
 
 router.get('/:id', async(req, res)=>{
     const data = await Category.findById(req.params.id)
@@ -48,8 +65,8 @@ router.put('/:id',auth, async (req, res)=>{
 })
 
 router.delete('/:id', auth, async (req,res)=>{
-    let data = await Category.findByIdAndRemove(req.params.id)
-    // let data = await Category.findByIdAndUpdate(req.params.id)
+    // let data = await Category.findByIdAndRemove(req.params.id)
+    let data = await Category.findByIdAndUpdate(req.params.id)
     if(!data) return res.status(404).send('error: Cant delete unkown product')
 
     res.send('Deleted!')

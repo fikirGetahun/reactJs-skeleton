@@ -11,6 +11,8 @@ class apiUrl {
             login: 'api/auth',
             register: 'api/users',
             addCategory: 'api/category',
+            listActiveCategory: 'api/category/active',
+            makeCategoryActive: 'api/category/makeActive',
             addFood:'api/food',
             getPrice:'api/price',
             product: 'api/food/product',

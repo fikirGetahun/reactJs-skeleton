@@ -35,6 +35,39 @@ class PostHandler{
     }
 
 
+    
+    CategoryActiveMaker = async(body)=>{
+        var result;
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        
+         try{
+            await axios(
+                {
+                    url: api.joinUrl(api.endPoints.makeCategoryActive),
+                    method:"post",
+                    headers:headers,
+                    data:body,
+                    
+                }
+            ).then(res=>{
+                result = res.statusText
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+
     FoodAdder = async (body)=>{
         var result;
         var headers = {

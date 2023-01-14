@@ -50,6 +50,26 @@ class GetHandler{
       return result;
     }
 
+    getActiveCategory = async () =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.listActiveCategory))
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
 
     getOneCategory = async (id)=>{
       var result;
