@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
  
 import TextField from '@mui/joy/TextField';
 import { Box } from "@mui/joy";
 
 import '../css/allCss.css';
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Link } from "react-router-dom";
+
+import search2 from '../file/img/search.png'
+import GetHandler from "../service/apiHandler/getHandler";
+import FoodLister from "../components/foodLister";
  
 export default function HomePage() {
  
@@ -12,6 +16,16 @@ export default function HomePage() {
     //     alert( name +""+db )
     // } 
     const navigate = useNavigate()
+
+    const [searchData, setSearchData] = useState('')
+    const [searchActive, setSearchActive] = useState(false)
+
+    const handleSearch = () =>{
+       
+        // navigate("/search/"+searchData)
+        setSearchActive(!searchActive)
+
+    }
 
     const backToHome = ()=>{
         
@@ -43,8 +57,10 @@ export default function HomePage() {
                     <div className="col"></div>
 
                 </div>
-                <div style={{width:"100%", marginBottom:15}}>
+                <div className="hstack  P-0" style={{width:"100%", marginBottom:15, marginLeft:0}}>
             <TextField  
+
+                onChange ={(e)=>setSearchData(e.target.value)}
               placeholder="Type in here…"
                 size="sm"
 
@@ -58,26 +74,39 @@ export default function HomePage() {
                 }
               style={{
                 borderRadius: 10,
-              width:"90%",
+              width:"80%",
               marginLeft:"5%",
-              marginRight:"5%",
+              marginRight:"2%",
               background:"#F3F7FA",
               boarder:0,
                 
               }}
                />
+              
+               <img  onClick={handleSearch}  className="m-0 p-1 border" src={require('../file/img/search copy.png')} style={{ borderRadius:5, borderColor:"black", height:"5vh"}} />
+{/* 
+              <Link to={"search/"+searchData}>
+              <img     className="m-0 p-1 border" src={require('../file/img/search copy.png')} style={{ borderRadius:5, borderColor:"black", height:"5vh"}} />
 
+              </Link> */}
+          
             
             </div>
             <div className="categoryHome"   >
               
               {/* <CategoryLister/> */}
                  {/* <FoodLister /> */}
-                 <Outlet />
+                 {
+                    searchActive ? 
+                        <FoodLister  search={searchData} />
+                    :
+                    <Outlet />
+                 }
+            
             </div>
             </div>
 
-            </div>
+            </div> 
             </div>
         </div>
      
