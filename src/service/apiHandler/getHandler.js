@@ -116,7 +116,26 @@ class GetHandler{
       return result;
     }
 
-
+    getCategoryInOrder = async ()=>{
+      var result
+      try{
+       await  axios({
+          url:api.joinUrl(api.endPoints.getCategoryInOrder),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result;
+    }
 
     getProductPrice = async (foodId)=>{
       var result;

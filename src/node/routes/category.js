@@ -29,6 +29,20 @@ router.get('/active', async (req,res)=>{
     res.send(data)
 })
 
+router.get('/order', async (req,res)=>{
+    const data = await Category.find( ).sort("order")
+    if(!data) return res.status(404).send('error on db')
+
+    res.send(data)
+})
+
+router.patch('/order/:id', async (req,res)=>{
+    const data = await Category.findByIdAndUpdate(req.params.id,{order: req.body.order})
+    if(!data) return res.status(404).send('error on db')
+
+    res.send(data)
+})
+
 
 router.post('/makeActive',auth, async (req,res)=>{
     // const {error} = Validate(req.body)

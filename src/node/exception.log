@@ -658,3 +658,18 @@ MongooseServerSelectionError: connect ECONNREFUSED 192.168.1.2:27017
     at module.exports (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\db.js:12:19)
     at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\index.js:12:24)
     at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 24/01/2023 15:15:06 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 24/01/2023 15:16:15 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 24/01/2023 15:17:59 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Category"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

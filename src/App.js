@@ -17,6 +17,7 @@ import EditProduct from './components/adminComponent/editProduct';
 import NoDataPage from './components/noData';
 import ListUser from './components/adminComponent/listUser';
 import EditUser from './components/adminComponent/editUser';
+import OrderManage from './components/adminComponent/orderManage';
 
 function App() {
   return (
@@ -34,13 +35,14 @@ function App() {
               <Route  path='listProducts' element={<ListProducts /> } />  
               <Route  path='listUsers' element={ <ListUser /> } />  
               <Route  path='editUser' element={ <EditUser />} />  
-
+              <Route path='catOrder' element={<OrderManage />} />
               <Route path='editProduct' >
                 <Route path=':id' element={<EditProduct />} />
               </Route>
                <Route path='editCategory'>
                 <Route path=':id'  element={<EditCategory />} />
                </Route>
+             
                
               <Route path='addFood' element={<AddFood />}/> 
           </Route>
