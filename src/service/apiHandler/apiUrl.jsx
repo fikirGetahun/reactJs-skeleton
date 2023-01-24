@@ -20,7 +20,8 @@ class apiUrl {
             getOneUser: 'api/users/byemail',
             getAllUsers: 'api/users/allUsers',
             getSearch: 'api/food/search',
-            getCategoryInOrder:'api/category/order'
+            getCategoryInOrder:'api/category/order',
+            getProductInOrder:'api/food/order'
         }
 
 

@@ -35,7 +35,10 @@ function App() {
               <Route  path='listProducts' element={<ListProducts /> } />  
               <Route  path='listUsers' element={ <ListUser /> } />  
               <Route  path='editUser' element={ <EditUser />} />  
-              <Route path='catOrder' element={<OrderManage />} />
+
+              <Route path='catOrder/:type' element={<OrderManage />} />
+
+
               <Route path='editProduct' >
                 <Route path=':id' element={<EditProduct />} />
               </Route>

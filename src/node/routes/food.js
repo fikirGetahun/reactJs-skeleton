@@ -144,6 +144,22 @@ router.get('/search/:product', async (req,res)=>{
 })
 
 
+
+router.get('/order', async (req,res)=>{
+    const data = await Food.find( ).sort("order")
+    if(!data) return res.status(404).send('error on db')
+
+    res.send(data)
+})
+
+router.patch('/order/:id', async (req,res)=>{
+    const data = await Food.findByIdAndUpdate(req.params.id,{order: req.body.order})
+    if(!data) return res.status(404).send('error on db')
+
+    res.send(data)
+})
+
+
 router.get('/product/:id', async (req,res)=>{
     var result;
     

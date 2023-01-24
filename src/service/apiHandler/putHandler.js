@@ -105,6 +105,32 @@ class PutHandler{
         return result
     }
 
+
+    updateProductOrder = async (body, id )=>{
+        var result;
+        try{
+            await axios({
+                url: api.joinUrl(api.endPoints.getProductInOrder )+id ,
+                method: 'patch',
+                data: body,
+                headers:this.headers
+            }).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                // this is the ultimate error response handler 
+                // i was straglling with this for a long time 
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result
+    }
+
 }
 
 export default PutHandler
