@@ -1,4 +1,7 @@
-get http://localhost:3002/api/customers
+get http://localhost:3002/api/category/order 
+
+
+
 
 
 ###
