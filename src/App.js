@@ -45,9 +45,10 @@ function App() {
               <Route path='addFood' element={<AddFood />}/> 
           </Route>
 
-          <Route path='/'  element={<HomePage/>} > 
+          <Route  path='/'  element={<HomePage/>} > 
               <Route index element={ <CategoryLister />} />
-              <Route path=":catId" element={<FoodLister/>} />
+              <Route path="/product/:catId" element={<FoodLister />} />
+              <Route   path="/search/:search" element={<FoodLister />} />
               <Route path="/nodata" element={<NoDataPage /> } />
 
           </Route>

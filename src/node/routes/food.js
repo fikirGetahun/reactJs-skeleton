@@ -134,6 +134,15 @@ router.get('/:catId',  async (req, res)=>{
     
 })
 
+router.get('/search/:product', async (req,res)=>{
+    let data = await Food.find({name:  req.params.product  })
+
+ 
+    if(!data) return res.status(404).send('error on search')
+
+    res.send(data)
+})
+
 
 router.get('/product/:id', async (req,res)=>{
     var result;

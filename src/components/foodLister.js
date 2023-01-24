@@ -5,9 +5,9 @@ import GetHandler from "../service/apiHandler/getHandler";
 import  "../css/allCss.css";
 import { useNavigate, useParams } from "react-router-dom";
 
- const FoodLister = () =>{
-
+ const FoodLister = ( props ) =>{
     const {catId} = useParams()
+    const {search} = useParams()
     let navigate =   useNavigate()
 
     const bgCsss ={
@@ -47,7 +47,26 @@ import { useNavigate, useParams } from "react-router-dom";
         }
     }
 
-    
+    const productSearch = async (s)=>{
+        const datax = new GetHandler()
+        var test
+      await  datax.getSearchResult(s).then((res)=>{
+   
+        if(res.statusText == 'OK'){
+                test = res.data
+                console.log('search........'+test)
+                if(test.length > 0){
+                    setProducts(test)
+                }else{
+                    navigate("/nodata")
+                }
+                
+                
+            }else{
+                alert(res)
+            }
+        })
+    }
  
 
     const productGetter = async ()=>{
@@ -105,7 +124,15 @@ import { useNavigate, useParams } from "react-router-dom";
     }
 
     useEffect(()=>{
-        productGetter()
+        
+        if(props.search){
+            productSearch(props.search)
+       
+        }else{
+            productGetter()
+           
+        }
+       
         // let x = priceGetter("63ae8a0163731ed525b5a81b")
         // console.log(x)
     },[])

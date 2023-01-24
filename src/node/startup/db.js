@@ -5,6 +5,8 @@ const logger = require('./logging');
 module.exports= async function(){
 
     const url='mongodb://localhost:27017/akkoMenu';  
+    // const url='mongodb://192.168.1.2:27017/akkoMenu';  
+
     mongoose.set('strictQuery', true);
    
   await  mongoose.connect(url,{

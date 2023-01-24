@@ -646,3 +646,15 @@ ReferenceError: auth is not defined
     at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\routes.js:10:14)
     at Module._compile (node:internal/modules/cjs/loader:1126:14)
     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+error: 16/01/2023 11:00:02 unhandledRejection: connect ECONNREFUSED 192.168.1.2:27017
+MongooseServerSelectionError: connect ECONNREFUSED 192.168.1.2:27017
+    at NativeConnection.Connection.openUri (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\connection.js:825:32)
+    at C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\index.js:419:10
+    at C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\index.js:1272:10)
+    at Mongoose.connect (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\index.js:418:20)
+    at module.exports (C:\Users\Fetun\Documents\akko\akko-menu\src\node\startup\db.js:12:19)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\src\node\index.js:12:24)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)

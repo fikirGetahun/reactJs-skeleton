@@ -44,7 +44,7 @@ return(
             categoryData.map(data=>{
                 // alert(data.catagoryName)
                 return(
-                  <Link to={data._id} >
+                  <Link to={"/product/"+data._id} >
                       <div className="d-flex justify-content-center category" key={data.id} style={{ backgroundImage:  `url('${data.image}')`}} >
                     <span   className= "categoryText" >{data.name}</span>
                 </div>
