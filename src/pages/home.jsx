@@ -22,8 +22,9 @@ export default function HomePage() {
 
     const handleSearch = () =>{
        
-        // navigate("/search/"+searchData)
-        setSearchActive(!searchActive)
+        navigate("/search/"+searchData)
+        console.log(searchData,'this is seartchdata')
+        // setSearchActive(!searchActive)
 
     }
 
@@ -84,8 +85,8 @@ export default function HomePage() {
                />
               
                <img  onClick={handleSearch}  className="m-0 p-1 border" src={require('../file/img/search copy.png')} style={{ borderRadius:5, borderColor:"black", height:"5vh"}} />
-{/* 
-              <Link to={"search/"+searchData}>
+
+              {/* <Link to={"search/"+searchData}>
               <img     className="m-0 p-1 border" src={require('../file/img/search copy.png')} style={{ borderRadius:5, borderColor:"black", height:"5vh"}} />
 
               </Link> */}
@@ -96,12 +97,10 @@ export default function HomePage() {
               
               {/* <CategoryLister/> */}
                  {/* <FoodLister /> */}
-                 {
-                    searchActive ? 
-                        <FoodLister  search={searchData} />
-                    :
+                
+                     
                     <Outlet />
-                 }
+                 
             
             </div>
             </div>

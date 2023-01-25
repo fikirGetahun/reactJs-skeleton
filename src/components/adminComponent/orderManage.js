@@ -20,6 +20,10 @@ import { useParams } from "react-router-dom";
    
   },[])
 
+  useEffect(()=>{
+    categoryGetter ()
+  },[type])
+
  const [catList, setCategoryList] = useState([])
  const [selectedCat, setSelectedCat] = useState()
 
@@ -275,16 +279,22 @@ items.map((cat, i)=>{
                 
 return(
 <div className="row">
-    <li className="list-group-item col">{cat.name} </li>    {cat.order}<div className="col" >
+<li className="list-group-item col">  <div className="hstack gap-3" ><h6 className=" " >{i+1}</h6> <h5>{cat.name}</h5> </div></li>   <div className="col" >
 
+    <div className="row">
+        <div className="col-4">
         {/* // to hide the up arrow if at begginng  */}
         {
             i != 0 ?  <span className="btn btn-warning" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
         }
+      </div>
+      <div className="col-4">
         {
             // this means the last row. length of array and i are equal
             items.length != (i+1) ? <span className="btn btn-warning" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
         }
+        </div>
+        </div>
          </div>
 </div>
 )

@@ -125,17 +125,21 @@ import { useNavigate, useParams } from "react-router-dom";
 
     useEffect(()=>{
         
-        if(props.search){
-            productSearch(props.search)
-       
-        }else{
+        if(search != null){
+            productSearch( search)
+         }else{
             productGetter()
-           
-        }
-       
+         }
+      
         // let x = priceGetter("63ae8a0163731ed525b5a81b")
         // console.log(x)
-    },[])
+    },[ ])
+
+    useEffect(()=>{
+        if(search != null){
+            productSearch( search)
+         }
+     },[ search])
 
 
     const modalImage = (id,image)=>{
