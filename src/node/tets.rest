@@ -1,4 +1,4 @@
-get http://localhost:3002/api/category/order 
+get http://localhost:3002/api/food/order/testx
 
 
 
