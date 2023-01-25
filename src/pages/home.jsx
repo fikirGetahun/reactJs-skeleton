@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
  
 import TextField from '@mui/joy/TextField';
 import { Box } from "@mui/joy";
@@ -22,11 +22,16 @@ export default function HomePage() {
 
     const handleSearch = () =>{
        
-        navigate("/search/"+searchData)
-        console.log(searchData,'this is seartchdata')
+        if(searchData != ''){
+            navigate("/search/"+searchData)
+        }
+        // console.log(searchData,'this is seartchdata')
         // setSearchActive(!searchActive)
 
     }
+    useEffect(()=>{
+        handleSearch()
+    },[searchData])
 
     const backToHome = ()=>{
         
