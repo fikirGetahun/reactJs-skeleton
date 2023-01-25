@@ -165,14 +165,27 @@ getLogedUser()
                         <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
                         <div id="test2"  className="dropdown-menu  bg-transparent border-0">
                         <NavLink    to="/login/reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                            <a href="button.html" className="dropdown-item">Add User</a>
+                            <a  className="dropdown-item">Add User</a>
                             </NavLink>
                             <NavLink    to="listUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                            <a href="typography.html" className="dropdown-item">List User</a>
+                            <a   className="dropdown-item">List User</a>
                             </NavLink>
                             <NavLink    to="editUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                             <a href="typography.html" className="dropdown-item">Edit Profile</a>
                             </NavLink>
+                            {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
+                        </div>
+                    </div>
+                    <div  onClick={()=>drowdownHandler("test3")} className="nav-item   ">
+                        <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Order Managment</a>
+                        <div id="test3"  className="dropdown-menu  bg-transparent border-0">
+                        <NavLink    to="order/category" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a   className="dropdown-item">Category Order Modifay</a>
+                            </NavLink>
+                            <NavLink    to="order/product" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a   className="dropdown-item">Product Order Modify</a>
+                            </NavLink>
+                
                             {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
                         </div>
                     </div>

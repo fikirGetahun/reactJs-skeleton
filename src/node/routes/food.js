@@ -102,7 +102,7 @@ router.put('/:fid/:pid' , async (req, res)=>{
 
 router.get('/:catId',  async (req, res)=>{
     
-    const data = await Food.find({categoryId: req.params.catId})
+    const data = await Food.find({categoryId: req.params.catId}).sort('order')
  
 
 
@@ -145,12 +145,14 @@ router.get('/search/:product', async (req,res)=>{
 
 
 
-router.get('/order', async (req,res)=>{
-    const data = await Food.find( ).sort("order")
+router.get('/', async (req,res)=>{
+    const data = await Food.find()
     if(!data) return res.status(404).send('error on db')
 
     res.send(data)
 })
+
+ 
 
 router.patch('/order/:id', async (req,res)=>{
     const data = await Food.findByIdAndUpdate(req.params.id,{order: req.body.order})

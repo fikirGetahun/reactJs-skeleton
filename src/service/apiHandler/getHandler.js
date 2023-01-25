@@ -142,7 +142,7 @@ class GetHandler{
       var result
       try{
        await  axios({
-          url:api.joinUrl(api.endPoints.getProductInOrder),
+          url:api.joinUrl(api.endPoints.addFood),
           method:'get'
         }).then(res=>{
           result =res

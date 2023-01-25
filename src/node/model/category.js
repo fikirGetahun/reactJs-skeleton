@@ -64,7 +64,7 @@ const Category = mongoose.model('Category', new mongoose.Schema({
   
     order:{
         type:Number,
-        required:true,
+        
         minlength:1,
         maxlength:2
     },
@@ -81,7 +81,7 @@ const Validate = (Category) =>{
             .required()
             ,
         order: Joi.number()
-            .required()
+            
             .min(1)
             .max(200)
     })

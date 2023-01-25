@@ -22,7 +22,7 @@ const Food =   mongoose.model('Food', new mongoose.Schema({
     },
     order:{
         type:Number,
-        required:true,
+       
         minlength:2,
         maxlength:100
     },
@@ -40,7 +40,7 @@ const Validation = (Food)=>{
         name: Joi.string().required().max(100),
         categoryId: Joi.string().required().max(100),
         info: Joi.string().required().max(1000),
-        order: Joi.number().required().max(100),
+        order: Joi.number().max(100),
         image: Joi.string().required()
     })
 

@@ -6,21 +6,45 @@ import { TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
 import PutHandler from "../../service/apiHandler/putHandler";
+import { useParams } from "react-router-dom";
 
  const OrderManage=()=>{
-
+ const {type} = useParams()
 
  useEffect(()=>{
-    getCategoryOrder()
+    if(type == 'category'){
+        getCategoryOrder()
+    }else if (type == 'product'){
+        categoryGetter ()
+    }
+   
   },[])
 
- 
+ const [catList, setCategoryList] = useState([])
+ const [selectedCat, setSelectedCat] = useState()
+
+useEffect(()=>{
+     getProductOrder(selectedCat)
+},[selectedCat])
+
+  const categoryGetter = async ()=>{
+    let catGetter = new GetHandler()
+    let cat = catGetter.getCategory()
+        .then(res=>{
+            if(res.statusText == 'OK'){
+                setCategoryList(res.data)
+            }else{
+                alert('db not connected')
+            }
+        })
+}
 
  
-
+ 
+// all to be fetched data
 const [items, setItems] = useState([])
 
-
+// category order data featcher
 const getCategoryOrder = async()=>{
     let data = new GetHandler()
     let x =data.getCategoryInOrder().then(res=>{
@@ -33,13 +57,41 @@ const getCategoryOrder = async()=>{
 }
 
 
-const orderUpdater = async (body, id)=>{
+
+// category order updater
+const categoryOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
     await data.updateCategoryOrder(body,id).then(res=>{
         if(res.statusText == 'OK'){
         //    alert('ok') 
         }else{
             alert('db error')
+        }
+    })
+}
+
+// PRODUCT UPDATER
+const productOrderUpdater = async (body, id)=>{
+    let data = new PutHandler()
+    await data.updateProductOrder(body,id).then(res=>{
+        if(res.statusText == 'OK'){
+        //    alert('ok') 
+        }else{
+            alert('db error')
+        }
+    })
+}
+
+
+
+// product data fetcher 
+const getProductOrder = async(cid)=>{
+    let data = new GetHandler()
+    let x =data.getProductOnCategory(cid).then(res=>{
+        if(res.statusText == 'OK'){
+            setItems(res.data)
+        }else{
+            alert('db connect error')
         }
     })
 }
@@ -82,11 +134,20 @@ const upMoveHandler = (i, objId)=>{
             order: pOrder
         }
         setItems(old)
+        if(type =='category'){
         // current order updater
-        orderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+        categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
 
         // prev order updater
-        orderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+        categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+        }else if(type == 'product'){
+                    // current order updater
+        productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+
+        // prev order updater
+        productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+        }
+
        
 }
 
@@ -130,12 +191,19 @@ const downMoveHandler = (i, objId)=>{
             order: pOrder
         }
         setItems(old)
-        // current order updater
-        orderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
-
-        // prev order updater
-        orderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
-        // console.log('prev ', pOrder)
+        if(type =='category'){
+            // current order updater
+            categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+    
+            // prev order updater
+            categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+            }else if(type == 'product'){
+                        // current order updater
+            productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+    
+            // prev order updater
+            productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+            }
 }
 
 
@@ -147,9 +215,58 @@ const downMoveHandler = (i, objId)=>{
 //     // alert('changed')
 //  },[items])   
 
-const itemsDisplay = ()=>{
+const catDisplay = ()=>{
     return(            <div>
         <h2>Category Order Manager</h2>
+        <div className=" d-flex justify-content-center align-itmes-center">
+        <div className="card " style={{width: "18rem"}}>
+        <ul className="list-group list-group-flush">
+             {
+items.map((cat, i)=>{
+                
+return(
+<div className="row">
+<li className="list-group-item col">  <div className="hstack gap-3" ><h6 className=" " >{i+1}</h6> <h5>{cat.name}</h5> </div></li>   <div className="col" >
+        <div className="row">
+        <div className="col-4">
+        {/* // to hide the up arrow if at begginng  */}
+        {
+            i != 0 ?  <span className="btn btn-warning" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
+        }
+      </div>
+      <div className="col-4">
+        {
+            // this means the last row. length of array and i are equal
+            items.length != (i+1) ? <span className="btn btn-warning" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
+        }
+        </div>
+        </div>
+         </div>
+</div>
+)
+
+})                    }
+          
+          
+        </ul>
+        </div>
+        </div>
+    </div>)
+}
+const productDisplay = ()=>{
+    return(            <div>
+        <h2>Product Order Manager</h2>
+        <select onChange={(e)=>setSelectedCat(e.target.value)} className="form-control">
+            <option  >Select Category</option>
+            {
+                catList.map(sel=>{
+                    return (
+                        <option  value={sel._id} >{sel.name}  {sel._id}</option>
+                    )
+                })
+            }
+        </select>
+
         <div className=" d-flex justify-content-center align-itmes-center">
         <div className="card " style={{width: "18rem"}}>
         <ul className="list-group list-group-flush">
@@ -181,9 +298,16 @@ return(
     </div>)
 }
 
-        return(
-            itemsDisplay()
-        )
+if(type == 'category'){
+    return(
+        catDisplay()
+    )
+}else if ( type == 'product'){
+    return(
+        productDisplay()
+    )
+}
+        
  }
 
  export default OrderManage;

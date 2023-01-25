@@ -673,3 +673,15 @@ CastError: Cast to ObjectId failed for value "undefined" (type string) at path "
     at model.Query.exec (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:4913:21)
     at model.Query.Query.then (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongoose\lib\query.js:5012:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 24/01/2023 17:28:04 unhandledRejection: Cannot read properties of undefined (reading 'name')
+TypeError: Cannot read properties of undefined (reading 'name')
+    at C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\food.js:20:29
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:47:12)

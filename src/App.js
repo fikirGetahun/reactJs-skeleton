@@ -36,7 +36,7 @@ function App() {
               <Route  path='listUsers' element={ <ListUser /> } />  
               <Route  path='editUser' element={ <EditUser />} />  
 
-              <Route path='catOrder/:type' element={<OrderManage />} />
+              <Route path='order/:type' element={<OrderManage />} />
 
 
               <Route path='editProduct' >

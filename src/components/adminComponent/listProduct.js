@@ -70,7 +70,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
             })
     }
 
-
+    // to get the selected value from select tag html
     const categoryName = (e)=>{
         let i = e.target.selectedIndex
         let updated = {id:e.target.value, name: e.nativeEvent.target[i].text}
