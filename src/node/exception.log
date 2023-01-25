@@ -685,3 +685,15 @@ TypeError: Cannot read properties of undefined (reading 'name')
     at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:280:10)
     at Function.handle (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:175:3)
     at router (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:47:12)
+error: 25/01/2023 14:14:51 unhandledRejection: escapeStringRegexp is not defined
+ReferenceError: escapeStringRegexp is not defined
+    at C:\Users\Fetun\Documents\akko\akko-menu\src\node\routes\food.js:140:20
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:421:3)
+    at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:280:10)
