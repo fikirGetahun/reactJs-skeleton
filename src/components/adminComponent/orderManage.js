@@ -222,7 +222,10 @@ const downMoveHandler = (i, objId)=>{
 const catDisplay = ()=>{
     return(            <div>
         <h2>Category Order Manager</h2>
-        <div className=" d-flex justify-content-center align-itmes-center">
+        <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
+        <div className=" d-flex justify-content-center align-itmes-center  ">
+      
+     
         <div className="card " style={{width: "18rem"}}>
         <ul className="list-group list-group-flush">
              {
@@ -235,13 +238,13 @@ return(
         <div className="col-4">
         {/* // to hide the up arrow if at begginng  */}
         {
-            i != 0 ?  <span className="btn btn-warning" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
+            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
         }
       </div>
       <div className="col-4">
         {
             // this means the last row. length of array and i are equal
-            items.length != (i+1) ? <span className="btn btn-warning" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
+            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
         }
         </div>
         </div>
@@ -260,16 +263,21 @@ return(
 const productDisplay = ()=>{
     return(            <div>
         <h2>Product Order Manager</h2>
+        <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
+
+        <div className="container d-flex justify-content-center">
         <select onChange={(e)=>setSelectedCat(e.target.value)} className="form-control">
             <option  >Select Category</option>
             {
                 catList.map(sel=>{
                     return (
-                        <option  value={sel._id} >{sel.name}  {sel._id}</option>
+                        <option  value={sel._id} >{sel.name}   </option>
                     )
                 })
             }
         </select>
+        </div>
+        <hr></hr>
 
         <div className=" d-flex justify-content-center align-itmes-center">
         <div className="card " style={{width: "18rem"}}>
@@ -285,13 +293,13 @@ return(
         <div className="col-4">
         {/* // to hide the up arrow if at begginng  */}
         {
-            i != 0 ?  <span className="btn btn-warning" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
+            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
         }
       </div>
       <div className="col-4">
         {
             // this means the last row. length of array and i are equal
-            items.length != (i+1) ? <span className="btn btn-warning" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
+            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
         }
         </div>
         </div>
