@@ -1,6 +1,6 @@
 class apiUrl {
     constructor(){
-        this.baseUrl = "http://localhost:3002";
+        this.baseUrl = "https://akko-menu-server.vercel.app/";
         // this.baseUrl = "http://192.168.1.2:3002";
         this.headers = {
             "Content-Type": "application/json",

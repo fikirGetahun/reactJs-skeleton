@@ -697,3 +697,15 @@ ReferenceError: escapeStringRegexp is not defined
     at param (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:376:14)
     at Function.process_params (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:421:3)
     at next (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\express\lib\router\index.js:280:10)
+error: 31/01/2023 12:06:00 unhandledRejection: bad auth : authentication failed
+MongoServerError: bad auth : authentication failed
+    at Connection.onMessage (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongodb\lib\cmap\connection.js:230:30)
+    at MessageStream.<anonymous> (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (C:\Users\Fetun\Documents\akko\akko-menu\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
