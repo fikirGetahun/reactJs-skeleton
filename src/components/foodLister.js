@@ -52,7 +52,7 @@ import { useNavigate, useParams } from "react-router-dom";
         var test
       await  datax.getSearchResult(s).then((res)=>{
    
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
                 test = res.data
                 console.log('search........'+test)
                 if(test.length > 0){
