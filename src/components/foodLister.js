@@ -74,7 +74,7 @@ import { useNavigate, useParams } from "react-router-dom";
         var test
       await  datax.getProductOnCategory(catId).then((res)=>{
    
-        if(res.statusText == 'OK'){
+       if(res.status == 200){
                 test = res.data
                 if(test.length > 0){
                     setProducts(test)
