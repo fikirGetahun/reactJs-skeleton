@@ -17,7 +17,7 @@ const what = async ()=>{
     await  cat.getCategory()
       .then((res)=>{
         //   test.push(res.data)
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             test = res.data
             setCatagoryData(test)
         }else{
