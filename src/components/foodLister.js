@@ -112,7 +112,7 @@ import { useNavigate, useParams } from "react-router-dom";
         let x;
         const datax = new GetHandler()
        await datax.getProductPrice(foodId).then((res)=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 x= res.data
               
                 return x;
