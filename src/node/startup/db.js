@@ -4,7 +4,7 @@ const logger = require('./logging');
 
 module.exports= async function(){
 
-    const url='mongodb://localhost:27017/akkoMenu';  
+    const url='mongodb://localhost:27017/akkoMenu';   
     // const url='mongodb://192.168.1.2:27017/akkoMenu'; 
      
     // const url='mongodb+srv://vercel-admin-user:Qwe%40123@cluster0.syzc5vp.mongodb.net/?retryWrites=true&w=majority';  

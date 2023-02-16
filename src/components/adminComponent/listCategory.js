@@ -14,7 +14,7 @@ const ListCategory = ()=>{
         let data = new GetHandler()
         let response = await data.getCategory()
          .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
  
                 test = res.data
                 setCatagoryData(test)
