@@ -1039,3 +1039,21 @@ CastError: Cast to ObjectId failed for value "undefined" (type string) at path "
     at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
     at runMicrotasks (<anonymous>)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 16/02/2023 17:58:58 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 16/02/2023 17:59:59 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 16/02/2023 18:00:36 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)

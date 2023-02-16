@@ -63,7 +63,7 @@ function App() {
               <Route path="/product/:catId" element={<FoodLister />} />
               <Route   path="/search/:search" element={<FoodLister />} />
               <Route path="/nodata" element={<NoDataPage /> } />
-              <Route path='/feedback' element={<FeedBackPage />} />
+              <Route path='/feedback/:foodId' element={<FeedBackPage />} />
 
           </Route>
           <Route path='/login' element={<LoginPage />}>
