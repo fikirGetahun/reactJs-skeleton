@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import GetHandler from "../service/apiHandler/getHandler";
+import PostHandler from "../service/apiHandler/postHandler";
 
 
 
@@ -7,17 +9,48 @@ import GetHandler from "../service/apiHandler/getHandler";
 const FeedBackPage = ()=>{
 
 
-    const [questionConstructor, setQuetionConstructor] = useState([]);
+const [questionConstructor, setQuetionConstructor] = useState([]);
 const [allQuestions, setAllQuestions] = useState([])
 const [allChoices, setAllChoices] = useState([])
 const [selectedChoice, setSelectedChoice] = useState(null)
 const [selectedQuestion, setSelectedQuestion] = useState(null);
 
-
+const {foodId} = useParams();
+const sendAnswer = async(selChoice, selQ)=>{
+    const data = new PostHandler();
+    let body = {
+        food_id: foodId,
+        question_id: selQ,
+        choose_id:selChoice
+    }
+    await data.addAnswerFeedback(body).then(res=>{
+        if(res.status !=200){
+            alert('couldnot submit feedback!')
+        }else{
+            alert('submited')
+        }
+    })
+}
+let x =[]
 const manageSelectedQuestion = (selectedChoice, selectedQustion)=>{
-    setSelectedChoice(selectedChoice);
-    setSelectedQuestion(selectedQustion);
+    
+    let xx = {
+        q:selectedQustion,
+        c:selectedChoice
+    }
+ 
+    x.forEach(s=>{
+        if(s.q ==selectedQustion ){
+            x.push(xx)
+        }
+    })
+    // setSelectedChoice(selectedChoice);
+    // setSelectedQuestion(selectedQustion);
+    sendAnswer(selectedChoice,selectedQustion)
  }
+//  useEffect(()=>{
+//     sendAnswer()
+//  },[selectedChoice])
 
 const getQuestionsAndChoice = async ()=>{
     const data = new GetHandler();
@@ -79,13 +112,15 @@ useEffect(()=>{
     cons()
 },[allQuestions])
 
+//// ------------- post answer and rating ---------//
+
+
+
 
     return (
         <div>
         <div  className="category" >
-{
-        //   cons()
-}
+ 
             {
              questionConstructor
             }
