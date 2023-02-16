@@ -1,0 +1,100 @@
+import React, { useEffect, useState } from "react";
+import GetHandler from "../service/apiHandler/getHandler";
+
+
+
+
+const FeedBackPage = ()=>{
+
+
+    const [questionConstructor, setQuetionConstructor] = useState([]);
+const [allQuestions, setAllQuestions] = useState([])
+const [allChoices, setAllChoices] = useState([])
+const [selectedChoice, setSelectedChoice] = useState(null)
+const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+
+const manageSelectedQuestion = (selectedChoice, selectedQustion)=>{
+    setSelectedChoice(selectedChoice);
+    setSelectedQuestion(selectedQustion);
+ }
+
+const getQuestionsAndChoice = async ()=>{
+    const data = new GetHandler();
+    await data.getQuestions().then(res=>{
+        if(res.status == 200){
+      
+            setAllQuestions(res.data)
+        }else{
+            alert('no questions')
+        }
+    })
+}
+
+
+const getChooen = async()=>{
+    const data = new GetHandler();
+    await data.getChoosen().then(res=>{
+        if(res.status == 200){
+            setAllChoices(res.data)
+        }else{
+            alert('no questions')
+        }
+    })
+}
+
+
+const cons = ()=>{
+    setQuetionConstructor([])
+    // console.log(allQuestions)
+    allQuestions.forEach(each=>{
+        let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions } </h3>)
+        setQuetionConstructor(old=>[...old, question])
+        allChoices.forEach(element => {
+            if(element.question_id == each._id){
+                let choices = ( <div class="form-check">
+                <input class="form-check-input" onChange={()=>manageSelectedQuestion(element._id, each._id)} type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                <label class="form-check-label d-flex justify-content-start text text-success" for="flexRadioDefault1">
+                 {element.chooseContent} 
+                </label>
+              </div>)
+
+                setQuetionConstructor(old=>[...old, choices])
+            }
+        });
+    })
+}
+
+
+
+ 
+
+useEffect(()=>{
+    getQuestionsAndChoice()
+    getChooen()
+    
+},[])
+
+useEffect(()=>{
+    cons()
+},[allQuestions])
+
+
+    return (
+        <div>
+        <div  className="category" >
+{
+        //   cons()
+}
+            {
+             questionConstructor
+            }
+          
+        
+        </div>
+   
+    </div>
+    )
+}
+
+export default FeedBackPage;

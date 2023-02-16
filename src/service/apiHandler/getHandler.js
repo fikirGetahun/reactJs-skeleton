@@ -313,6 +313,27 @@ class GetHandler{
       return result
     }
 
+    getChoosen = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addChooseQuestion),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
     getRating = async (foodId) => {
       var result;
       try{

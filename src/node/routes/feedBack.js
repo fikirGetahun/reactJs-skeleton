@@ -81,6 +81,12 @@ router.get('/choose/:id', async (req,res)=>{
     res.send(data)
 })
 
+router.get('/choose', async (req,res)=>{
+    const data = await QuestionChoose.find()
+    if(!data) return res.status(404).send('page not found')
+    res.send(data)
+})
+
 
 // get rating
 router.get('/rating/:foodId', async (req,res)=>{

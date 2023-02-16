@@ -21,6 +21,7 @@ import OrderManage from './components/adminComponent/orderManage';
 import AddFeedBackQuestion from './components/adminComponent/addFeedBackQuestion';
 import ListFeedBackQuestion from './components/adminComponent/listFeedBackQuestion';
 import EditFeedBackQuestion from './components/adminComponent/editFeedbackQuestion';
+import FeedBackPage from './components/feedback';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
               <Route path="/product/:catId" element={<FoodLister />} />
               <Route   path="/search/:search" element={<FoodLister />} />
               <Route path="/nodata" element={<NoDataPage /> } />
+              <Route path='/feedback' element={<FeedBackPage />} />
 
           </Route>
           <Route path='/login' element={<LoginPage />}>
