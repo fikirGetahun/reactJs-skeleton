@@ -1029,3 +1029,13 @@ ValidationError: QuestionChoose validation failed: question_id: Path `question_i
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
     at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 16/02/2023 15:39:40 unhandledRejection: req.status is not a function
+TypeError: req.status is not a function
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:142:27
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 16/02/2023 16:21:17 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

@@ -132,14 +132,14 @@ count = 1;
 // update question
 router.patch('/:id', async (req,res)=>{
     const data = await FeedBackQuestions.findByIdAndUpdate(req.params.id,{questions: req.body.question})
-    if(!data ) return req.status(400).send('error updating')
+    if(!data ) return res.status(400).send('error updating')
     res.send(true)
 })
 
 // update choice
 router.patch('/choice/:id', async (req,res)=>{
     const data = await QuestionChoose.findByIdAndUpdate(req.params.id,{chooseContent: req.body.content})
-    if(!data ) return req.status(400).send('error updating')
+    if(!data ) return res.status(400).send('error updating')
     res.send(true)
 })
 

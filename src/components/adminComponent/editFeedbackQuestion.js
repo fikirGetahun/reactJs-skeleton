@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import GetHandler from "../../service/apiHandler/getHandler";
 import { useParams } from "react-router-dom";
+import PutHandler from "../../service/apiHandler/putHandler";
+import PostHandler from "../../service/apiHandler/postHandler";
  
 
 
@@ -13,7 +15,7 @@ const EditFeedBackQuestion = ()=>{
  
 ////--db side-------//
 
-
+/////--------------------------------------------------------------------------
 const [question, setQuestion] = useState(''); 
 const [choiceList, setChoiceList] = useState([]);
 const [newQuestion, setNewQuestion] = useState('')
@@ -41,7 +43,7 @@ const getChoice = async ()=>{
         }
     })
 }
-
+/////--------------------------------------------------------------------------
 useEffect(()=>{
     getQuestion();
     
@@ -51,6 +53,96 @@ useEffect(()=>{
     getChoice();
 },[question])
  
+/////--------------------------------------------------------------------------
+const updateQuestion = async ()=>{
+    const data = new PutHandler();
+    let body ={
+        question: newQuestion
+    }
+    data.updateQuestion(body, qid).then(res=>{
+        if(res.status == 200){
+            alert('Question Updated!!')
+        }else{
+            alert('error')
+        }
+    })
+}
+
+
+const updateChoice = async (content, id)=>{
+    const data = new PutHandler();
+    let body ={
+        content: content
+    }
+    data.updateQuestionChoice(body, id).then(res=>{
+        if(res.status == 200){
+            alert('Choice Updated!!')
+        }else{
+            alert('error')
+        }
+    })
+}
+
+/////--------------------------------------------------------------------------
+const [editActive, setEditActive] = useState(false)
+const [activeVal, setActiveVal] = useState('')
+const [singleEditForm, setSingleEditForm] = useState([])
+const [tobeEditedId, setTobeeditedid] = useState()
+
+const handleEdit = (val, id)=>{
+    setEditActive(true)
+    setTobeeditedid(id)
+    setSingleEditForm([])
+    let fild = (
+        <div className="textField ">
+        <label className="textFieldLabel d-flex justify-content-start    ">Edit Choice</label>
+             <input className="form-control" onChange={(e)=>setActiveVal(e.target.value)} placeholder={val}  />  
+     
+            <label></label>
+      
+         </div>
+    )
+    setSingleEditForm(old=>[...old,fild])
+}
+/////--------------------------------------------------------------------------
+
+const [newChoice, setNewChoice] = useState();
+const [singleFormNewChoice, setSingleFormNewChoice] = useState( )
+const [activeFormChoice , setActiveFormChoice] = useState(false)
+
+const handleNewChoice = ()=>{
+     setActiveFormChoice(true)
+
+    let fild = (
+        <div className="textField ">
+        <label className="textFieldLabel d-flex justify-content-start    ">Add Choice</label>
+             <input className="form-control" onChange={(e)=>setNewChoice(e.target.value)}    />  
+     
+            <label></label>
+      
+         </div>
+    )
+    setSingleFormNewChoice(fild)
+}
+
+
+const addNewChoice = async ()=>{
+    let sendQ = new PostHandler()
+
+    let body = {
+        chooseContent:newChoice , question_id: qid
+    }
+    await sendQ.addQuestionChoose(body).then(res=>{
+        if(res.status == 200){
+            alert('Question Added!!')
+            getChoice();
+
+        }else{
+            alert("error inserting choice")
+        }
+    })
+}
+
 
     return(
         <div>
@@ -65,21 +157,52 @@ useEffect(()=>{
                      <textarea className="form-control" onChange={(e)=>setNewQuestion(e.target.value)} placeholder={question.questions} value={newQuestion.questions} > </textarea>
                      
                     <label></label>
-
+                    <button type="button" onClick={()=>updateQuestion()}  class="btn btn-outline-info">Edit</button>
                  </div>
                 <hr></hr>
+
+                {
+                    activeFormChoice ? singleFormNewChoice : <div></div>
+                }
+    {
+                    activeFormChoice ?(<div>
+                         <button type="button" onClick={()=>addNewChoice()}  class="btn btn-outline-success">Submit New Choice</button> <button className="btn btn-outline-danger" onClick={()=>setActiveFormChoice(false)} > Cancel</button>
+                    </div>): <div></div>
+                }
+
+
+
                 <label className="textFieldLabel d-flex justify-content-start    ">Choice</label>
+                 {
+                    editActive ?  singleEditForm : <div></div>
+                }
+                {/* i copied the button b/c it seams it dosent understand when its pushed in to the array */}
+                {
+                    editActive ?       (
+                        <div>
+                            <button type="button" onClick={()=>updateChoice(activeVal,tobeEditedId)}  class="btn btn-outline-success">Save Edited Choice</button> <button className="btn btn-outline-danger" onClick={()=>setEditActive(false)}> Cancel</button>
+                        </div>
+                    ) : <div></div>
+                }
 
                   {
                     choiceList.map(sel=>{
                         return (
-                            <div className="textField ">
-                                 <input className="form-control" onChange={(e)=>setQuestion(e.target.value)} placeholder="Type Your Question here..." value={sel.chooseContent} /> 
-                                <label></label> 
+                            <div className="row ">
+                              
+                                <span className="text text-dark container col">{sel.chooseContent}</span>
+                                 <div className="col">
+                                 <button type="button" onClick={()=>handleEdit(sel.chooseContent, sel._id)}  class="btn btn-outline-info">Edit</button>
+                                
+
+                                |<button type="button" class="btn btn-outline-danger">Delete</button>
+                                 </div>
+
                             </div>
                         )
                     })
                   }
+                    |<button type="button" onClick={()=>handleNewChoice()} class="btn btn-outline-success">Add New Choice</button>
                 </div>
             </div>
         </div>
