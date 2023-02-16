@@ -38,7 +38,7 @@ const manageSelectedQuestion = (selectedChoice, selectedQustion)=>{
         q:selectedQustion,
         c:selectedChoice
     }
- 
+ // not to future self.. if alrady exist find the array key and overwrite the new data else push the new data 
     x.forEach(s=>{
         if(s.q ==selectedQustion ){
             x.push(xx)
