@@ -18,6 +18,9 @@ import NoDataPage from './components/noData';
 import ListUser from './components/adminComponent/listUser';
 import EditUser from './components/adminComponent/editUser';
 import OrderManage from './components/adminComponent/orderManage';
+import AddFeedBackQuestion from './components/adminComponent/addFeedBackQuestion';
+import ListFeedBackQuestion from './components/adminComponent/listFeedBackQuestion';
+import EditFeedBackQuestion from './components/adminComponent/editFeedbackQuestion';
 
 function App() {
   return (
@@ -48,6 +51,10 @@ function App() {
              
                
               <Route path='addFood' element={<AddFood />}/> 
+
+              <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
+              <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
+              <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
           </Route>
 
           <Route  path='/'  element={<HomePage/>} > 

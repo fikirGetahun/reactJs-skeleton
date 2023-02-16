@@ -16,24 +16,7 @@ const EditUser = ()=>{
     const [editPassword, setEditPassword] = useState(false)
   
 
-    const submitHandler = async()=>{
-//    alert('in')
-        var body = {
-            name: name,
-            email: email,
-            password: password,
-        }
-        var x;
-   server.EditUserAuth(body) 
-        .then((res)=>{
-            if(res == 'OK'){
-                setStatus('EditUserd Successfully')
-            }else{
-                setStatus(res)
-            }
-
-        })
-    }
+ 
 
 // const [toBeEdited, setToBeEdited] = useState('')
 const [data, setData]= useState('')

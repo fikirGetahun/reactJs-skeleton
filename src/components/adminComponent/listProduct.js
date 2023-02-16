@@ -13,7 +13,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
         let data = new GetHandler()
         let response = await data.getProductOnCategory(cid)
          .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
  
                 test = res.data
                 setFoodData(test)
@@ -28,7 +28,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
         let data = new DeleteHandler()
          if (window.confirm("Are you sure you want to delete this?") == true) {
             let handler = await data.deleteProduct(id).then(res=>{
-                if(res.statusText == 'OK'){
+                if(res.status == 200){
                     let arr = []
                     setFoodData([
                         ...foodData.slice(0, arrayId),
@@ -61,7 +61,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
         var test;
         let response =  await data.getCategory()
             .then(res=>{
-                if(res.statusText == 'OK'){
+                if(res.status == 200){
                     test = res.data
                     setCategory(test)
                 }else{
@@ -83,11 +83,12 @@ import GetHandler from "../../service/apiHandler/getHandler";
         foodData.forEach(async (food)=>{
             let x = await data.getProductPrice(food._id)
                 .then(res=>{
-                    if(res.statusText == 'OK'){
+                    if(res.status == 200){
                         setProductsPrice(c=>[...c,res.data])
 
                     }else{
-                        alert('no price is fetched')
+                        // alert('no price is fetched')
+                        
                     }
                 })
         })
@@ -101,9 +102,11 @@ import GetHandler from "../../service/apiHandler/getHandler";
         categoryLister()
     },[])
 
+    
     useEffect(()=>{
         dataFetcher(categorySelected.id)
         console.log(categorySelected.name)
+
     }, [categorySelected.id])
 
      

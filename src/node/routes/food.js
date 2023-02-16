@@ -20,8 +20,7 @@ router.post('/' , async (req, res)=>{
         name: req.body.food.name,
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
-        order: req.body.food.order,
-        image:req.body.food.image
+         image:req.body.food.image
     })
 
     let foodUploadedData = await data.save()
@@ -63,7 +62,7 @@ router.put('/:fid/:pid' , async (req, res)=>{
         name: req.body.food.name,
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
-        order: req.body.food.order,
+       
         image:req.body.food.image
     })
 

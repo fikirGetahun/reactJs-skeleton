@@ -123,6 +123,8 @@ import { useNavigate, useParams } from "react-router-dom";
         return x;
     }
 
+    // on first load if there is no search pram it loads food list besd on category
+    // if there is serach pram, it loads serach result
     useEffect(()=>{
         
         if(search != null){
@@ -135,6 +137,7 @@ import { useNavigate, useParams } from "react-router-dom";
         // console.log(x)
     },[ ])
 
+    // if the search pram is changed meaning if new search data is entered, it loads the new serach result
     useEffect(()=>{
         if(search != null){
             productSearch( search)

@@ -9,7 +9,7 @@ const ListUser = ()=>{
     const getAllUsers = async ()=>{
         let data = new GetHandler()
         let users = await data.getAllUsers().then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setUsers(res.data)
             }else{
                 alert('users are not there')

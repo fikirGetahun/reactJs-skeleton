@@ -18,7 +18,7 @@ const getDataToEdit = async () =>{
     let data = new GetHandler()
     let response = data.getOneCategory(id)
     .then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setCatName(res.data.name)
             setCatOrder(res.data.order)
             setCatPhoto(res.data.image)
@@ -65,7 +65,7 @@ const submitHandler = async()=>{
     }
    await sender.updateCategory(body, id)
     .then(resx=>{
-        if(resx.statusText == 'OK'){
+        if(resx.status == 200){
              setResponse(old=>(
                 {
                     ...old,
@@ -108,11 +108,11 @@ useEffect(()=>{
 
                        
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Category Order</label> 
                             <TextField className="" type="text" value={catOrder}   id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
-                        </div>
+                        </div> */}
                             {/* <div className="vstack gap-2">
                                 <div>
                                     <button className="btn btn-outline-danger">X</button>

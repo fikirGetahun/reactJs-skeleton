@@ -21,7 +21,15 @@ import { useParams } from "react-router-dom";
   },[])
 
   useEffect(()=>{
-    categoryGetter ()
+    // categoryGetter()
+    // if(type == )
+    if(type == 'category'){
+        setItems([])
+        getCategoryOrder()
+    }else if (type == 'product'){
+        setItems([])
+        categoryGetter ()
+    }
   },[type])
 
  const [catList, setCategoryList] = useState([])
@@ -35,7 +43,7 @@ useEffect(()=>{
     let catGetter = new GetHandler()
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
@@ -52,7 +60,7 @@ const [items, setItems] = useState([])
 const getCategoryOrder = async()=>{
     let data = new GetHandler()
     let x =data.getCategoryInOrder().then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setItems(res.data)
         }else{
             alert('db connect error')
@@ -66,7 +74,7 @@ const getCategoryOrder = async()=>{
 const categoryOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
     await data.updateCategoryOrder(body,id).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
         //    alert('ok') 
         }else{
             alert('db error')
@@ -78,7 +86,7 @@ const categoryOrderUpdater = async (body, id)=>{
 const productOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
     await data.updateProductOrder(body,id).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
         //    alert('ok') 
         }else{
             alert('db error')
@@ -92,7 +100,7 @@ const productOrderUpdater = async (body, id)=>{
 const getProductOrder = async(cid)=>{
     let data = new GetHandler()
     let x =data.getProductOnCategory(cid).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setItems(res.data)
         }else{
             alert('db connect error')

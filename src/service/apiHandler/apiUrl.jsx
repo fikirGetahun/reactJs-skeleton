@@ -1,7 +1,7 @@
 class apiUrl {
     constructor(){
-        this.baseUrl = "https://akko-menu-server.vercel.app";
-        // this.baseUrl = "http://192.168.1.2:3002";
+        // this.baseUrl = "https://akko-menu-server.vercel.app";
+        this.baseUrl = "http://localhost:3002";
         this.headers = {
             "Content-Type": "application/json",
             "x-auth-token": localStorage.getItem('token')
@@ -21,8 +21,13 @@ class apiUrl {
             getAllUsers: 'api/users/allUsers',
             getSearch: 'api/food/search',
             getCategoryInOrder:'api/category/order',
-            getProductInOrder:'api/food/order'
-        }
+            getProductInOrder:'api/food/order',
+            addFeedbackQuestion: 'api/feedback',
+            addChooseQuestion: 'api/feedback/choose',
+            addRating: 'api/feedback/rating',
+            addAnswer: 'api/feedback/answer',
+            getsingleQ : 'api/feedback/singleQ'
+         }
 
 
     }

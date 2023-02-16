@@ -43,7 +43,7 @@ const submitHandler = async()=>{
     }
    await sender.CategoryAdder(body)
     .then(resx=>{
-        if(resx == 'OK'){
+        if(resx.status == 200){
              setResponse(old=>(
                 {
                     ...old,
@@ -84,11 +84,11 @@ const submitHandler = async()=>{
 
                        
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Category Order</label> 
                             <TextField className="" type="text"    id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
-                        </div>
+                        </div> */}
                             
                            <DragDropFile onChange={FormHandler}  dbName="catImage" />
                            <button onClick={submitHandler} className="btn btn-warning">Add Category</button>

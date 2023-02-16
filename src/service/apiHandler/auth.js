@@ -22,7 +22,7 @@ class Auth{
             await axios 
             .post(api.joinUrl(api.endPoints.register), body)
             .then(function (res){
-                rrr = res.statusText
+                rrr = res.status
             })
         }catch(error){
            

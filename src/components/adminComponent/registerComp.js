@@ -22,7 +22,7 @@ const Register = ()=>{
         var x;
    server.registerAuth(body) 
         .then((res)=>{
-            if(res == 'OK'){
+            if(res == 200){
                 setStatus('Registerd Successfully')
             }else{
                 setStatus(res)

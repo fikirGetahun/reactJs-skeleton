@@ -66,7 +66,7 @@ const getLogedUser = async ()=>{
     let data = new GetHandler()
     let email = localStorage.getItem('email')
     let x = await data.getOneUser(email).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setLogedUser(res.data)
         }else{
             alert('no user name')

@@ -37,7 +37,7 @@ const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
@@ -66,7 +66,7 @@ const addFood = async () =>{
     console.log(body)
     product.FoodAdder(body)
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 204){
                 setResponse(old=>(
                     {
                         ...old,
@@ -123,11 +123,7 @@ useEffect(()=>{
                         </div>
 
 
-                        <div className="textField p-2">
-                        <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Order Of Appearance</label>
-                            <input className="form-control" type="text"    id="standard-basic" placeholder="Order of List"   onChange={(e)=>setFoodOrder(e.target.value)} name="catName" />
-                            <label></label>
-                        </div>
+                    
 
 
                         <div className="textField p-2">

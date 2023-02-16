@@ -267,7 +267,117 @@ class GetHandler{
       return result
     }
 
+    
 
+    //// --------- feedback handler ----------///
+    getQuestions = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addFeedbackQuestion),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getChoosenQuestion = async (qid) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addChooseQuestion)+qid,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getRating = async (foodId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addRating)+foodId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getAnswers = async (foodId, qid) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addAnswer)+qid+"/"+foodId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    
+    getSingleQ = async (id) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.getsingleQ)+id,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+ 
 }
 
 export default GetHandler

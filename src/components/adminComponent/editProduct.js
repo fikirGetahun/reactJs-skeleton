@@ -44,7 +44,7 @@ const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
@@ -73,7 +73,7 @@ const submitHandler = async () =>{
     console.log(body)
     product.updateProduct(body, foodId, priceId)
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setResponse(old=>(
                     {
                         ...old,
@@ -102,7 +102,7 @@ const oldDataGetter = async (id)=>{
     let test;
     let res = await data.getOneProduct(id)
     .then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             test =res.data
             setFoodName(res.data.name)
             setFoodOrder(res.data.order)
@@ -122,7 +122,7 @@ const [categoryName, setCategoryNme] = useState([])
 const getCategoryName = async (id)=>{
     let data = new GetHandler()
     let catName = await data.getOneCategory(id).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setCategoryNme(res.data)
             setFoodCategory(res.data._id)
            
@@ -135,7 +135,7 @@ const getCategoryName = async (id)=>{
 const getPrice = async (foodId)=>{
     let data = new GetHandler()
     let catName = await data.getProductPrice(foodId) .then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setFoodFullPrice(res.data.price)
             setFoodHalfPrice(res.data.halfPrice)
             setPriceId(res.data._id)
@@ -178,11 +178,11 @@ useEffect(()=>{
                         </div>
 
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Order Of Appearance</label>
                             <input className="form-control" type="text" value={foodOrder}   id="standard-basic" placeholder="Order of List"   onChange={(e)=>setFoodOrder(e.target.value)} name="catName" />
                             <label></label>
-                        </div>
+                        </div> */}
 
 
                         <div className="textField p-2">

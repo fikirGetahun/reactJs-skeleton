@@ -80,7 +80,7 @@ router.put('/:id',auth, async (req, res)=>{
 
 router.delete('/:id', auth, async (req,res)=>{
     // let data = await Category.findByIdAndRemove(req.params.id)
-    let data = await Category.findByIdAndUpdate(req.params.id)
+    let data = await Category.findByIdAndRemove(req.params.id)
     if(!data) return res.status(404).send('error: Cant delete unkown product')
 
     res.send('Deleted!')
