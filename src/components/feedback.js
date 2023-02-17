@@ -16,38 +16,30 @@ const [selectedChoice, setSelectedChoice] = useState(null)
 const [selectedQuestion, setSelectedQuestion] = useState(null);
 
 const {foodId} = useParams();
-const sendAnswer = async(selChoice, selQ)=>{
+const sendAnswer = async(ans)=>{
     const data = new PostHandler();
-    let body = {
-        food_id: foodId,
-        question_id: selQ,
-        choose_id:selChoice
-    }
-    await data.addAnswerFeedback(body).then(res=>{
-        if(res.status !=200){
-            alert('couldnot submit feedback!')
-        }else{
-            alert('submited')
+  
+    ans.forEach(async(sel)=>{
+        let body = {
+            food_id: foodId,
+            question_id: sel.qid,
+            choose_id:sel.cid
         }
+        await data.addAnswerFeedback(body).then(res=>{
+            if(res.status !=200){
+                alert('couldnot submit feedback!')
+            }else{
+                alert('submited')
+            }
+        })
     })
+   
 }
-let x =[]
-const manageSelectedQuestion = (selectedChoice, selectedQustion)=>{
-    
-    let xx = {
-        q:selectedQustion,
-        c:selectedChoice
-    }
- // not to future self.. if alrady exist find the array key and overwrite the new data else push the new data 
-    x.forEach(s=>{
-        if(s.q ==selectedQustion ){
-            x.push(xx)
-        }
-    })
-    // setSelectedChoice(selectedChoice);
-    // setSelectedQuestion(selectedQustion);
-    sendAnswer(selectedChoice,selectedQustion)
- }
+ 
+
+const [xxx, setXxx]= useState([])
+
+ 
 //  useEffect(()=>{
 //     sendAnswer()
 //  },[selectedChoice])
@@ -76,23 +68,56 @@ const getChooen = async()=>{
     })
 }
 
+let ff=[]
+const pls = (c, q)=>{
+
+    ff[q] = {
+        qid : q,
+        cid : c
+    }
+    setXxx([])
+    setXxx(ff)
+    // console.log(ff)
+}
 
 const cons = ()=>{
     setQuetionConstructor([])
     // console.log(allQuestions)
+
     allQuestions.forEach(each=>{
         let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions } </h3>)
         setQuetionConstructor(old=>[...old, question])
+        let choices;
+        let label;
+        let hug = (<div class="form-check">
+                {choices}
+                {label}
+            </div>)
         allChoices.forEach(element => {
             if(element.question_id == each._id){
-                let choices = ( <div class="form-check">
-                <input class="form-check-input" onChange={()=>manageSelectedQuestion(element._id, each._id)} type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                <label class="form-check-label d-flex justify-content-start text text-success" for="flexRadioDefault1">
-                 {element.chooseContent} 
-                </label>
-              </div>)
+          
+
+                  choices = (  
+             
+                        <div className="d-flex justify-content-start " style={{float: 'left'}}>
+                                        <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={element.chooseContent} id="flexRadioDefault1" />  
+                        </div>
+
+               )
+              label = (    
+                <div className="d-flex justify-content-start" style={{float: 'left', marginRight:'10px'}}>
+                    <span class="form-check-label    text text-success" for="flexRadio Default1">
+              {element.chooseContent} 
+             </span>
+                </div>
+                        )
+
+              
+                setQuetionConstructor(old=>[...old, label])
+            
 
                 setQuetionConstructor(old=>[...old, choices])
+                setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
             }
         });
     })
@@ -120,10 +145,19 @@ useEffect(()=>{
     return (
         <div>
         <div  className="category" >
- 
+       
             {
              questionConstructor
             }
+<h3 className="foodTitle d-flex justify-content-center" >Give Us Feedback </h3>
+<textarea className="form-control" >
+
+</textarea>
+ 
+<div>
+    <button className="btn btn-outline-warning">Send Feedback</button>
+</div>
+
           
         
         </div>
