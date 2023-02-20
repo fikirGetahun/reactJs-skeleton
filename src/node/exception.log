@@ -1057,3 +1057,129 @@ ValidationError: Answer validation failed: question_id: Path `question_id` is re
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
     at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 18/02/2023 12:17:32 unhandledRejection: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+ValidationError: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 18/02/2023 12:21:17 unhandledRejection: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+ValidationError: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 18/02/2023 12:24:43 unhandledRejection: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+ValidationError: feedBackQuestions validation failed: questions: Path `questions` is required., active: Path `active` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 18/02/2023 13:07:25 unhandledRejection: Rating validation failed: rating: Cast to Number failed for value "w" (type string) at path "rating"
+ValidationError: Rating validation failed: rating: Cast to Number failed for value "w" (type string) at path "rating"
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at model.$set (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:1463:12)
+    at model.$set (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:1146:16)
+    at model.Document (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:166:12)
+    at model.Model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:121:12)
+    at new model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:5048:15)
+    at model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:5043:16)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:44:20
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+error: 18/02/2023 13:19:31 unhandledRejection: Rating validation failed: rating: Cast to Number failed for value "fd" (type string) at path "rating"
+ValidationError: Rating validation failed: rating: Cast to Number failed for value "fd" (type string) at path "rating"
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at model.$set (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:1463:12)
+    at model.$set (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:1146:16)
+    at model.Document (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:166:12)
+    at model.Model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:121:12)
+    at new model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:5048:15)
+    at model (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\model.js:5043:16)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:44:20
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+error: 20/02/2023 09:26:03 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:27:37 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:28:19 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:28:50 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:29:21 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:29:26 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:29:26 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:30:20 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:30:29 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:31:51 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:33:08 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 09:37:02 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 10:32:18 unhandledRejection: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+ValidationError: Answer validation failed: question_id: Path `question_id` is required., choose_id: Path `choose_id` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+error: 20/02/2023 10:44:37 unhandledRejection: Rating validation failed: rating: Path `rating` is required., feedBack: Path `feedBack` is required.
+ValidationError: Rating validation failed: rating: Path `rating` is required., feedBack: Path `feedBack` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)

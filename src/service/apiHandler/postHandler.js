@@ -168,7 +168,7 @@ class PostHandler{
         let result;
         try{
             await axios({
-                url:api.joinUrl(api.endPoints.addFeedbackQuestion),
+                url:api.joinUrl(api.endPoints.addRating),
                 method:'post',
                 data:body,
                 headers:headers
