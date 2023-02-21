@@ -357,11 +357,16 @@ class GetHandler{
 
 
     getAnswers = async (foodId, qid) => {
+      var headers = {
+        "Content-Type": "application/json",
+     
+    }
       var result;
       try{
         await axios({
           url:api.joinUrl(api.endPoints.addAnswer)+qid+"/"+foodId,
-          method:'get'
+          method:'get',
+          headers: headers,
         }).then(res=>{
           result =res
         })

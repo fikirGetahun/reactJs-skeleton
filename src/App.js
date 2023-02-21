@@ -22,6 +22,7 @@ import AddFeedBackQuestion from './components/adminComponent/addFeedBackQuestion
 import ListFeedBackQuestion from './components/adminComponent/listFeedBackQuestion';
 import EditFeedBackQuestion from './components/adminComponent/editFeedbackQuestion';
 import FeedBackPage from './components/feedback';
+import AnaliticFeedBackPage from './components/adminComponent/analiticFeedback';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
               <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
               <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
               <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
+              <Route path='analitic/:qid/:foodId' element={<AnaliticFeedBackPage />} />
           </Route>
 
           <Route  path='/'  element={<HomePage/>} > 
@@ -64,6 +66,7 @@ function App() {
               <Route   path="/search/:search" element={<FoodLister />} />
               <Route path="/nodata" element={<NoDataPage /> } />
               <Route path='/feedback/:foodId' element={<FeedBackPage />} />
+             
 
           </Route>
           <Route path='/login' element={<LoginPage />}>

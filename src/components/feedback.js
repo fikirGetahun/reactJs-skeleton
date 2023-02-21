@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GetHandler from "../service/apiHandler/getHandler";
 import PostHandler from "../service/apiHandler/postHandler";
-
+import  "../css/allCss.css";
 
 
 
@@ -87,7 +87,7 @@ const cons = ()=>{
     // console.log(allQuestions)
 
     allQuestions.forEach(each=>{
-        let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }   {each._id}  </h3>)
+        let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }  <span className="text text-info " style={{marginLeft:10 }} >[optional]</span>   </h3>)
         setQuetionConstructor(old=>[...old, question])
 
      
@@ -102,7 +102,7 @@ const cons = ()=>{
  
                   choices = (  
              
-                        <div className="d-flex justify-content-start " style={{float: 'left'}}>
+                        <div className="d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
             <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
                     
                           </div>
@@ -112,7 +112,7 @@ const cons = ()=>{
               label = (    
                 <div className="d-flex justify-content-start" style={{float: 'left', marginRight:'10px'}}>
                     <span class="form-check-label    text text-success" for="flexRadio Default1">
-              {element.chooseContent}     {element._id}
+              {element.chooseContent}     
              </span>
                 </div>
                         )
@@ -129,7 +129,7 @@ const cons = ()=>{
                 // setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
             }
         });
-        setQuetionConstructor(old=>[...old, (<div className="form-check" >{thisx}</div>)])
+        setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
     })
 }
 
@@ -183,38 +183,42 @@ const sendAnswer = async( zz)=>{
    
     const data = new PostHandler();
     
-    
-    xxx.forEach(async(sel)=>{
-       let i = 0
-       console.log(sel)
-        sel.forEach(async(sel)=>{
-            let body = {
-                food_id: foodId,
-                question_id: sel.qid,
-                choose_id:sel.cid
-            }
+    if(xxx != []){
+        xxx.forEach(async(sel)=>{
+            let i = 0
             console.log(sel)
-         
-            // console.log('w')
-            // console.log( sel)
-          
-            if(sel.status == true){
-             
-                await data.addAnswerFeedback(body).then(res=>{
-             
-                    if(res.status !=200){
-                        alert('couldnot submit feedback!')
-                    }else{
-                        alert('submited')
-                    }
-                })
+             sel.forEach(async(sel)=>{
+                 let body = {
+                     food_id: foodId,
+                     question_id: sel.qid,
+                     choose_id:sel.cid
+                 }
+                 console.log(sel)
+              
+                 // console.log('w')
+                 // console.log( sel)
                
-            }
-            i = i+1
-        })
+                 if(sel.status == true){
+                  
+                     await data.addAnswerFeedback(body).then(res=>{
+                        
+                         if(res.status !=200){
+                             alert('couldnot submit feedback!')
+                         }else{
+                             alert('submited')
+                         }
+                     })
+                    
+                 }
+                 i = i+1
+             })
+     
+     
+         })
+    }else{
+        alert('empty quetion')
+    }
 
-
-    })
  
 
 }
@@ -236,6 +240,18 @@ const sender = async (x)=>{
             }
 <h3 className="foodTitle d-flex justify-content-center" >Give Us Feedback </h3>
 <input className="form-control" onChange={(e)=>setRating(e.target.value)} type="text" />
+ 
+<div className="star-wrapper">
+  <span style={{fontSize:'2vw'}} >&#9733;</span>
+  <span style={{fontSize:'2vw'}} >&#9733;</span>
+  <span style={{fontSize:'2vw'}} >&#9733;</span>
+  <span style={{fontSize:'2vw'}} >&#9733;</span>
+    <span style={{fontSize:'2vw'}} >&#9733;</span>
+</div>
+{/* <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
+<div class="wraper">
+  <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="gitlabBilal" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script>
+</div> */}
 <textarea className="form-control" onChange={(e)=>setComment(e.target.value)} >
 
 </textarea>
