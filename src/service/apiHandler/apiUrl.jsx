@@ -26,7 +26,8 @@ class apiUrl {
             addChooseQuestion: 'api/feedback/choose',
             addRating: 'api/feedback/rating',
             addAnswer: 'api/feedback/answer',
-            getsingleQ : 'api/feedback/singleQ'
+            getsingleQ : 'api/feedback/singleQ',
+            limitRating: 'api/feedback/ratingLimit'
          }
 
 

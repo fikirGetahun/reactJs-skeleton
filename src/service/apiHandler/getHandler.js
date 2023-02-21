@@ -355,6 +355,27 @@ class GetHandler{
       return result
     }
 
+    getRatingLimit = async (foodId, startingId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.limitRating)+foodId+'/'+startingId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
 
     getAnswers = async (foodId, qid) => {
       var headers = {

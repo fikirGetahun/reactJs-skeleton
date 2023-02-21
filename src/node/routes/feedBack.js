@@ -89,11 +89,22 @@ router.get('/choose', async (req,res)=>{
 
 
 // get rating
-router.get('/rating/:foodId', async (req,res)=>{
-    const data = await Rating({food_id: req.params.foodId})
+router.get('/ratingLimit/:foodId/:startId', async (req,res)=>{
+    const data = await Rating.find({food_id: req.params.foodId}).skip(req.params.startId).limit(10)
     if(!data) return res.status(404).send('page not found')
     res.send(data)
 })
+
+router.get('/rating/:foodId', async (req,res)=>{
+    const data = await Rating.find({food_id: req.params.foodId}).count()
+    if(!data) return res.send('page not found')
+    let count = {
+        count : data
+    }
+    res.send(count)
+})
+
+
 let ans = [];
 let count = 0;
 // get persentage of answeres
@@ -110,17 +121,17 @@ router.get('/answer/:qId/:foodId', async (req,res)=>{
        let choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
         // if(!choos) return res.status(404).send('Could not get choosen content')
         // console.log(choos)
-        let x = choos;
-        count +=  x; // to count over all answere
+        let xz = choos;
+        count +=  xz; // to count over all answere
 
-    });
+    }); 
      
     // after calculating persentage, put in object array to be outputed to front end
     data.forEach(async (element) => {
         const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
         // if(!choos) return res.status(404).send('Could not get choosen content')
         // console.log(count)
-        // let x = (choos*100)/(count-1);
+        // let x = (choos*100)/(count);
         let x = choos
         const body = {
             qid: element.question_id,
@@ -159,9 +170,7 @@ ans=[];
 
 count = 0;
 })
-ans=[];
-
-count = 0;
+ 
 // update question
 router.patch('/:id', async (req,res)=>{
     const data = await FeedBackQuestions.findByIdAndUpdate(req.params.id,{questions: req.body.question})
