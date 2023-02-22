@@ -159,7 +159,7 @@ const [submit, setSubmit] = useState(false)
 // },[submit])
 
 const handleSubmit = async (aa)=>{
- 
+  
     setSubmit(true)
     const data = new PostHandler()
     let body={
@@ -169,9 +169,9 @@ const handleSubmit = async (aa)=>{
     }
     await data.addRating(body).then(res=>{
         if(res.status == 200){
-            alert('good')
+            alert('submited')
         }else{
-            alert('bad')
+            console.log('bad')
         }
     })
    
@@ -203,7 +203,7 @@ const sendAnswer = async( zz)=>{
                      await data.addAnswerFeedback(body).then(res=>{
                         
                          if(res.status !=200){
-                             alert('couldnot submit feedback!')
+                            console.log('couldnot submit feedback!')
                          }else{
                              alert('submited')
                          }
@@ -227,6 +227,18 @@ const sender = async (x)=>{
   await  sendAnswer(x)
 }
 
+ const ratingHandler = (id)=>{
+    setRating(id)
+    for(let i=1;i<=id;i++){
+        document.getElementById('r'+i).style.color='yellow'
+
+    }
+    for(let i=id+1;i<=10;i++){
+        document.getElementById('r'+i).style.color='black'
+    }
+  
+}
+
     return (
         <div>
         <div  className="category" >
@@ -239,14 +251,17 @@ const sender = async (x)=>{
              questionConstructor
             }
 <h3 className="foodTitle d-flex justify-content-center" >Give Us Feedback </h3>
-<input className="form-control" onChange={(e)=>setRating(e.target.value)} type="text" />
+<div className="row  " >
+<h6 className="col">Rate this Food:</h6>
+{/* <input className="form-control" onChange={(e)=>setRating(e.target.value)} type="text" /> */}
  
-<div className="star-wrapper">
-  <span style={{fontSize:'2vw'}} >&#9733;</span>
-  <span style={{fontSize:'2vw'}} >&#9733;</span>
-  <span style={{fontSize:'2vw'}} >&#9733;</span>
-  <span style={{fontSize:'2vw'}} >&#9733;</span>
-    <span style={{fontSize:'2vw'}} >&#9733;</span>
+<div className="hstack   d-flex justify-content-center">
+  <span id="r1" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(1)  } >&#9733;</span>
+  <span id="r2" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(2)} >&#9733;</span>
+  <span id="r3" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(3)}>&#9733;</span>
+  <span id="r4" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(4)}>&#9733;</span>
+    <span  id="r5"style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(5)}>&#9733;</span>
+</div>
 </div>
 {/* <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
 <div class="wraper">
@@ -259,8 +274,10 @@ const sender = async (x)=>{
 <div>
     <button onClick={()=>handleSubmit(xxx)} className="btn btn-outline-warning">Send Feedback</button>
 </div>
-
-          
+<br></br>
+<br></br>
+<br></br>
+<br></br>      
         
         </div>
    

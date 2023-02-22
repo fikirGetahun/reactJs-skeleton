@@ -213,6 +213,8 @@ router.get('/answer/:qId/:foodId/:cid', async (req,res)=>{
     // } );
  
     const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: req.params.cid}).count()
+
+    const choos2  = await Answer.aggregate([{$match : {question_id:req.params.qId,food_id:req.params.foodId, choose_id: req.params.cid}}, {$group :{ _id :  "$choose_id"   , total :{ "$sum": 1 }  }}])
     // if(!choos) return res.status(404).send('Could not get choosen content')
     // console.log(count)
     let x = (choos*100)/(count-1);
@@ -221,13 +223,14 @@ router.get('/answer/:qId/:foodId/:cid', async (req,res)=>{
 
         countx: choos
     }
-    // console.log(body)
+    // console.log(choos2)
     
  
  
 
   
-// console.log(req.params)
+console.log( (choos*100)/(choos2[0].total) )
+// res.send(choos2)
 res.send(body)
 // the last lines are to remove the pushed data in the array ans and count data 
 // i did this b/c when i test it on post man , it returns the previous data that has been requested before
@@ -257,7 +260,21 @@ router.patch('/choice/:id', async (req,res)=>{
     res.send(true)
 })
 
+router.get('/rattingAvg/:foodId', async (req,res)=>{
+    const d = await Rating.find({food_id: req.params.foodId}).count()
+    const data = await Rating.aggregate([{$match : {food_id: req.params.foodId}}, {$group: { _id: "$food_id",rateAv: {$sum: "$rating" }}}])
+        // d.
 
+      
+       console.log(data[0].rateAv)
+       let f = (data[0].rateAv)/(d)
+       
+       let body = {
+        avg: f
+       }
+
+    res.send(body)
+})
 
 
 

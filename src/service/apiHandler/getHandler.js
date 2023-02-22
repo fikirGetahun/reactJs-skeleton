@@ -355,6 +355,28 @@ class GetHandler{
       return result
     }
 
+    getRatingAvg = async (foodId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.ratingAvg)+foodId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
     getRatingLimit = async (foodId, startingId) => {
       var result;
       try{
