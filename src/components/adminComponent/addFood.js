@@ -66,7 +66,7 @@ const addFood = async () =>{
     console.log(body)
     product.FoodAdder(body)
         .then(res=>{
-            if(res.status == 204){
+            if(res.status == 200){
                 setResponse(old=>(
                     {
                         ...old,

@@ -167,11 +167,17 @@ import GetHandler from "../../service/apiHandler/getHandler";
                         <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
         
                         </div>
+                        <div className="hstack" >
                         <Link to={"/admin/editProduct/"+selected._id}>
-                        <button className="btn btn-warning container">Edit</button>
+                        <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
+                        </Link>
+                        <Link to={"/admin/analitic/"+selected._id}>
+                        <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
                         </Link>
                         <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
                         
+                        </div>
+                
                         <br></br>
                       
                     </div>

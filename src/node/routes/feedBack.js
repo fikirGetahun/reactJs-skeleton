@@ -106,10 +106,11 @@ router.get('/rating/:foodId', async (req,res)=>{
 
 
 let ans = [];
+ans= []
 let count = 0;
 // get persentage of answeres
 router.get('/answer/:qId/:foodId', async (req,res)=>{
-
+    
     // first get all choose content on the question
     const data = await QuestionChoose.find({question_id : req.params.qId});
     if(!data) return res.status(404).send('Could not get choosen content')
@@ -117,15 +118,15 @@ router.get('/answer/:qId/:foodId', async (req,res)=>{
     // collect choosen id anser count per choosen id 
    
     // to get over all counts and put it on var
-    data.forEach(async (element) => {
-       let choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
-        // if(!choos) return res.status(404).send('Could not get choosen content')
-        // console.log(choos)
-        let xz = choos;
-        count +=  xz; // to count over all answere
+    // data.forEach(async (element) => {
+    //    let choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
+    //     // if(!choos) return res.status(404).send('Could not get choosen content')
+    //     // console.log(choos)
+    //     let xz = choos;
+    //     count +=  xz; // to count over all answere
 
-    }); 
-     
+    // }); 
+
     // after calculating persentage, put in object array to be outputed to front end
     data.forEach(async (element) => {
         const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
@@ -141,7 +142,7 @@ router.get('/answer/:qId/:foodId', async (req,res)=>{
         }
         // console.log(body)
         
-  ans.push(body)
+    ans.push(body)
     } );
  
     // const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: req.params.cid}).count()
@@ -167,10 +168,81 @@ res.send(ans)
 // i did this b/c when i test it on post man , it returns the previous data that has been requested before
 // so i made sure i empty the array ans and value count to 1 so that when next request comes, it will always be calculated in empty ans aray
 ans=[];
-
+ans=[];
+ans=[];
+ans=[];
 count = 0;
 })
+
+
+
+router.get('/answer/:qId/:foodId/:cid', async (req,res)=>{
+    
+    // first get all choose content on the question
+    const data = await QuestionChoose.find({question_id : req.params.qId});
+    if(!data) return res.status(404).send('Could not get choosen content')
+
+    // collect choosen id anser count per choosen id 
+   
+    // to get over all counts and put it on var
+    // data.forEach(async (element) => {
+    //    let choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
+    //     // if(!choos) return res.status(404).send('Could not get choosen content')
+    //     // console.log(choos)
+    //     let xz = choos;
+    //     count +=  xz; // to count over all answere
+
+    // }); 
+
+    // after calculating persentage, put in object array to be outputed to front end
+    // data.forEach(async (element) => {
+    //     const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
+    //     // if(!choos) return res.status(404).send('Could not get choosen content')
+    //     // console.log(count)
+    //     // let x = (choos*100)/(count);
+    //     let x = choos
+    //     const body = {
+    //         qid: element.question_id,
+    //         choice_id:element._id,
+    //         name: element.chooseContent,
+    //         countx: x
+    //     }
+    //     // console.log(body)
+        
+    // ans.push(body)
+    // } );
  
+    const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: req.params.cid}).count()
+    // if(!choos) return res.status(404).send('Could not get choosen content')
+    // console.log(count)
+    let x = (choos*100)/(count-1);
+    const f = await QuestionChoose.findById(req.params.cid)
+    const body = {
+
+        countx: choos
+    }
+    // console.log(body)
+    
+ 
+ 
+
+  
+// console.log(req.params)
+res.send(body)
+// the last lines are to remove the pushed data in the array ans and count data 
+// i did this b/c when i test it on post man , it returns the previous data that has been requested before
+// so i made sure i empty the array ans and value count to 1 so that when next request comes, it will always be calculated in empty ans aray
+ans=[];
+ans=[];
+ans=[];
+ans=[];
+count = 0;
+})
+
+
+ans=[];
+
+count = 0;
 // update question
 router.patch('/:id', async (req,res)=>{
     const data = await FeedBackQuestions.findByIdAndUpdate(req.params.id,{questions: req.body.question})

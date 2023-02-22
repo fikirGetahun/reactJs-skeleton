@@ -24,21 +24,31 @@ const getQuestionsAndChoice = async ()=>{
       
             setAllQuestions(res.data)
         }else{
-            alert('no questions')
+            console.log('no questions')
         }
     })
 }
-
-const {qid} = useParams();
- 
- 
- 
-useEffect(()=>{
+const [u, setu]=useState([])
   
-cons()
-cons()
+ const reloader = ()=>{
+    for(let i=1;i<5;i++){
+        window.location.reload(false)
+    }
+   
+ }
+//  window.location.reload(true)
+useEffect(()=>{
+//   cc()
+countReview()
+// cons()
+// reloader()
+// allAnsewresGetter()
+// allAnsewresGetter()
+// window.location.reload(false);
+
  
-},[allAnsewers])
+},[u])
+
 
 const allAnsewresGetter = async ()=>{
     const data = new GetHandler();
@@ -54,39 +64,162 @@ const allAnsewresGetter = async ()=>{
                // j = res.data
     
             }else{
-                alert('no questions')
+                console.log('no questions')
             }
         })
     });
 
+    
+
+}
+
+const [allchoices, setAllchoices] = useState([])
+
+const getAllchoice = async ()=>{
+    const data = new GetHandler();
+    setAllchoices([])
+    allQuestions.forEach(async(q)=>{
+        await data.getChoosenQuestion(q._id).then(res=>{
+            
+            if(res.status == 200){
+                
+               //  setAllAnsewers(res.data.qid)
+               setAllchoices(old=>[...old,res.data])
+            //    j.push(res.data)
+               // console.log(res.data)
+               // j = res.data
+    
+            }else{
+                console.log('no questions')
+            }
+        })
+    })
+
+   
 }
 
 
+const ppp = async ()=>{
+    const data = new GetHandler();
+   
+   
+        await data.getChoosen().then(res=>{
+            
+            if(res.status == 200){
+                
+               //  setAllAnsewers(res.data.qid)
+               setu(res.data)
+            //    j.push(res.data)
+               // console.log(res.data)
+               // j = res.data
+    
+            }else{
+                console.log('no questions')
+            }
+        })
+    
+}
+
+const answerPerChoice = async ()=>{
+      const data = new GetHandler();
+      let i = 0;
+      setAllAnsewers([])
+      allQuestions.forEach(q=>{
+        allchoices[i].forEach(async(x) => {
+            // each.forEach(async(x)=>{
+                await data.getAnswers(foodId, q._id, x._id) .then(res=>{
+                
+                    if(res.status == 200){
+                        
+                        // setAllAnsewers(res.data)
+                       setAllAnsewers(old=>[...old,res.data])
+                    //    j.push(res.data)
+                       // console.log(res.data)
+                       // j = res.data
+            
+                    }else{
+                        console.log('no questions')
+                    }
+                })
+            // })
+
+        });
+        i=i+1
+      })
+
+}
+
+ 
+useEffect(()=>{
+    // answerPerChoice()
+},[allchoices])
+
+const [pls, setpls] = useState([])
+
+const countReview = async ()=>{
+    const data = new GetHandler();
+    let result;
+
+    let i = 0
+    u.forEach(async (element) => {
+        await data.getAnswers(foodId, element.question_id, element._id).then(res=>{
+            if(res.status == 200){
+                result = res.data.countx
+                let f = []
+                f = {
+                    cid : element._id,
+                    count : result
+                }
+                setpls(old=>[...old,f])
+                // console.log(f)
+            }else{
+                console.log('no')
+            }
+        })
+        i = i +1
+    });
+// return result
+}
+
 const cons = ()=>{
     setQuetionConstructor([])
-    // console.log(allQuestions)
-    const data = new GetHandler();
+ 
 
      let answer = [];
      
-    //  console.log(allQuestions)
-    allQuestions.forEach(async (each)=>{
+    
+    //  console.log(u)   
+    allQuestions.forEach( (each)=>{
         let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }  <span className="text text-info " style={{marginLeft:10 }} >[Review]</span>   </h3>)
  
        
   
  
-        //  console.log(allAnsewers)
          setQuetionConstructor(old=>[...old, question])
+        
+       let  i = 0
 
-      allAnsewers[0].forEach(xx => {
-      
+       u.forEach((xx )=> {
+        // console.log('xx')
+        let t 
+    //    console.log(pls[i])
+       pls.forEach(g=>{
+         if(g.cid == xx._id){
+            t = g.count;
+         }
+       })
                 // ff.forEach(xx=>{
-                    // let thisx = [];
-                    if(xx.qid == each._id){
+                    let h = [];
+                    
+                    let thisx = [];
+            
+                    if(xx.question_id == each._id   ){
+
+                        // if( allAnsewers.find( e => xx.choice_id == !allQuestions[i]._id )   ){
                         // console.log(element.question_id)
-                        let choices;
+                        let choices ;
                         let label;
+                 
                         // choices = "";
          
                           choices = (  
@@ -103,33 +236,95 @@ const cons = ()=>{
                    
                      <div className="row" >
                      <span class="form-check-label col    text text-success" for="flexRadio Default1">
-                      {xx.name}    
+                      {xx.chooseContent}    
                      </span>
-                     <h5 className="col" > {xx.countx}</h5>
+                   
+                     <h5 className="col" >  {t} </h5>
                      </div>
                         </div>
                                 )
                                 // console.log(label)
-        
-                        // thisx.push(label)
-                        // thisx.push(choices)
-                        // thisx.push((<div style={{clear: 'both'}} ></div>))
+                             
+                        thisx.push(label)
+                        thisx.push(choices)
+                        thisx.push((<div style={{clear: 'both'}} ></div>))
                  setQuetionConstructor(old=>[...old, label])
             
 
                 setQuetionConstructor(old=>[...old, choices])
                 setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
                         // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
-
-                   
-                      } 
+                        // return;
+                       
+                    
+                    }
                 // })
-
+                // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+            i = i +1
         });
-      
- 
+    //   allAnsewers.forEach(xx => {
+    //     // console.log('xx')
+       
+    //             // ff.forEach(xx=>{
+    //                 let h = [];
+                    
+    //                 let thisx = [];
+            
+    //                 if(xx.qid == each._id   ){
+
+    //                     // if( allAnsewers.find( e => xx.choice_id == !allQuestions[i]._id )   ){
+    //                     // console.log(element.question_id)
+    //                     let choices ;
+    //                     let label;
+                 
+    //                     // choices = "";
+         
+    //                       choices = (  
+                     
+    //                             <div className="d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
+                   
+    //                               </div>
+        
+    //                    )
+    //                     // label = "";
+    //                   label = (    
+    //                     <div className="  w-100" style={{float: 'left', marginRight:'10px'}}>
+                       
+                   
+    //                  <div className="row" >
+    //                  <span class="form-check-label col    text text-success" for="flexRadio Default1">
+    //                   {xx.name}    
+    //                  </span>
+    //                  <h5 className="col" > {xx.countx}</h5>
+    //                  </div>
+    //                     </div>
+    //                             )
+    //                             // console.log(label)
+                             
+    //                     thisx.push(label)
+    //                     thisx.push(choices)
+    //                     thisx.push((<div style={{clear: 'both'}} ></div>))
+    //              setQuetionConstructor(old=>[...old, label])
+            
+
+    //             setQuetionConstructor(old=>[...old, choices])
+    //             setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
+    //                     // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+    //                     // return;
+                       
+                    
+    //                 }
+    //             // })
+    //             // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+    //         i = i +1
+    //     });
+        // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+//  
     })
+    // window.location.reload(true);
 }
+
+
 
 
 
@@ -139,14 +334,15 @@ const cons = ()=>{
 
 useEffect(()=>{
     getQuestionsAndChoice()
-    
-    
-},[])
+    ppp()
+},[foodId])
 
 useEffect(()=>{
-    allAnsewresGetter()
+    // allAnsewresGetter()
+    // reloader()
+    getAllchoice()
     getCount()
-},[allQuestions])
+},[allQuestions,foodId])
 
 
 const [ratings, setRatings] = useState([])
@@ -165,7 +361,7 @@ const getCount = async ()=>{
             // setCount(res.data.length)
             // setLastId(res.data[res.data.length-1]._id)
         }else{
-            alert('error')
+            console.log('error')
         }
     })
 }
@@ -180,14 +376,18 @@ const getRating = async ()=>{
             setRatings(res.data)
             // setLastId(res.data[count-1]._id)
         }else{
-            alert('n')
+            console.log('n')
         }
     })
 }
+useEffect(()=>{
+ 
+    cons()
+},[pls])
  
 useEffect(()=>{
     if(activeRating){
-        // alert('ddpp')
+        // console.log('ddpp')
         pageNation()
         getRating()
     }
@@ -211,11 +411,37 @@ const pageNation = ()=>{
     }
 }
  
+const cc = ()=>{
+    allQuestions.map(q=>{
+        return (
+            <div>
+            <h3 className="foodTitle d-flex justify-content-start" >{q.questions }  <span className="text text-info " style={{marginLeft:10 }} >[Review]</span>   </h3>
+            {
+                allAnsewers.map(ans=>{
+                    if(ans.qid == q._id){
+                        <div className="  w-100" style={{float: 'left', marginRight:'10px'}}>
+           
+       
+                        <div className="row" >
+                        <span class="form-check-label col    text text-success" for="flexRadio Default1">
+                         {ans.name}    
+                        </span>
+                        <h5 className="col" > {ans.countx}</h5>
+                        </div>
+                           </div>
+                    }
+                })
+            }
+            </div>
+        )
+
+})
+}
 
  
     return (
         <div>
-            {/* {           console.log(lastId)} */}
+            {/* { console.log(allchoices)} */}
             {/* {           console.log(lastId)} */}
         <div  className="category" >
             <h3>All Reviews of Question</h3>
@@ -224,6 +450,9 @@ const pageNation = ()=>{
            {
             !activeRating ? 
              questionConstructor
+
+            // cc() ? <div></div> : <div></div>
+
              :
                 (<div>
                     {

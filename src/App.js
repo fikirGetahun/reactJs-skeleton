@@ -57,7 +57,7 @@ function App() {
               <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
               <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
               <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
-              <Route path='analitic/:qid/:foodId' element={<AnaliticFeedBackPage />} />
+              <Route path='analitic/:foodId' element={<AnaliticFeedBackPage />} />
           </Route>
 
           <Route  path='/'  element={<HomePage/>} > 
