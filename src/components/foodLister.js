@@ -214,7 +214,7 @@ var captionText = document.getElementById("caption");
 
     return( 
         <div className="d-flex justify-content-center">
-            <div  className="category  " >
+            <div  className="category2  " >
                  {
                     
                     products.map ( (data, i)=>{

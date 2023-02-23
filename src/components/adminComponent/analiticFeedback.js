@@ -262,64 +262,7 @@ const cons = ()=>{
                 // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
             i = i +1
         });
-    //   allAnsewers.forEach(xx => {
-    //     // console.log('xx')
-       
-    //             // ff.forEach(xx=>{
-    //                 let h = [];
-                    
-    //                 let thisx = [];
-            
-    //                 if(xx.qid == each._id   ){
-
-    //                     // if( allAnsewers.find( e => xx.choice_id == !allQuestions[i]._id )   ){
-    //                     // console.log(element.question_id)
-    //                     let choices ;
-    //                     let label;
-                 
-    //                     // choices = "";
-         
-    //                       choices = (  
-                     
-    //                             <div className="d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
-                   
-    //                               </div>
-        
-    //                    )
-    //                     // label = "";
-    //                   label = (    
-    //                     <div className="  w-100" style={{float: 'left', marginRight:'10px'}}>
-                       
-                   
-    //                  <div className="row" >
-    //                  <span class="form-check-label col    text text-success" for="flexRadio Default1">
-    //                   {xx.name}    
-    //                  </span>
-    //                  <h5 className="col" > {xx.countx}</h5>
-    //                  </div>
-    //                     </div>
-    //                             )
-    //                             // console.log(label)
-                             
-    //                     thisx.push(label)
-    //                     thisx.push(choices)
-    //                     thisx.push((<div style={{clear: 'both'}} ></div>))
-    //              setQuetionConstructor(old=>[...old, label])
-            
-
-    //             setQuetionConstructor(old=>[...old, choices])
-    //             setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
-    //                     // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
-    //                     // return;
-                       
-                    
-    //                 }
-    //             // })
-    //             // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
-    //         i = i +1
-    //     });
-        // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
-//  
+  
     })
     // window.location.reload(true);
 }
