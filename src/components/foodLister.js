@@ -79,6 +79,7 @@ import { useNavigate, useParams } from "react-router-dom";
                 test = res.data
                 if(test.length > 0){
                     setProducts(test)
+                    setIsLoading(false)
                 }else{
                     navigate("/nodata")
                 }
@@ -212,10 +213,13 @@ var captionText = document.getElementById("caption");
         return f.avg
     }
 
+    const [ isLoadidng, setIsLoading] = useState(true)
+
     return( 
         <div className="d-flex justify-content-center">
             <div  className="category2  " >
                  {
+                    !isLoadidng ? 
                     
                     products.map ( (data, i)=>{
                     
@@ -315,9 +319,13 @@ var captionText = document.getElementById("caption");
                     
                        )
                   
-                    }
+                    } 
+                
            
-                    )
+                    )    : 
+                    <div>
+                         <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+                    </div>
                 }
 
             </div>
