@@ -4,7 +4,9 @@ const {FeedBackQuestions} = require('../model/feedBackQuestion');
 const {Rating} = require('../model/rating');
  const {QuestionChoose} = require('../model/questionChoose');
 const {Answer} = require('../model/answer');
+const {Food} =require('../model/food')
 const { date } = require('joi');
+// const { default: FoodLister } = require('../../components/foodLister');  
 
 
 router.post('/', async (req,res)=>{
@@ -272,16 +274,48 @@ router.get('/rattingAvg/:foodId', async (req,res)=>{
         let f = (data[0].rateAv)/(d)
        
         let body = {
-         avg: f
+         avg: f,
+         outOf: d
         }
  
      res.send(body)
     }else{
         let body = {
-            avg: 0
+            avg: 0,
+            outOf: 0
            }
         res.send(body)
     }
+
+})
+
+
+router.get('/rattingAvgAllFoods', async (req,res)=>{
+    // const d = await Rating.find({food_id: req.params.foodId}).count()
+    // const data = await Rating.aggregate([{$match : {food_id: req.params.foodId}}, {$group: { _id: "$food_id",rateAv: {$sum: "$rating" }}}])
+        // d.
+
+      const test = await Rating.aggregate([{$lookup :{from : "Food", localField:"food_id", foreignField:  "_id" , as: "joined"}}])
+    //    console.log(data[0].rateAv)
+
+
+
+    // if(data.length > 0){
+    //     let f = (data[0].rateAv)/(d)
+       
+    //     let body = {
+    //      avg: f
+    //     }
+ 
+    //  res.send(body)
+    // }else{
+    //     let body = {
+    //         avg: 0
+    //        }
+    //     res.send(body)
+    // }
+    console.log(test)
+    // res.send(test)
 
 })
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import akkoFood from '../file/img/akko.food.PNG';
 import GetHandler from "../service/apiHandler/getHandler";
+import { Link } from "react-router-dom";
 
 import  "../css/allCss.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,7 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
         let spanId = document.getElementById(id)
         let className = spanId.innerText
         if(className == "Read More..."){
-            spanId.innerHTML="Close"
+            spanId.innerHTML="Less"
         }else{
             spanId.innerHTML="Read More..."
         }
@@ -106,6 +107,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
     useEffect(()=>{
         test()
+        ratingGetter()
     }, [products])
 
     const priceGetter = async (foodId)=>{
@@ -179,47 +181,43 @@ var captionText = document.getElementById("caption");
     }
 
     let i = 0;
+    const [rating, setRating]=useState([])
+    const [from, setFrom]=useState([])
+    let t = []
+    const ratingGetter = async (foodId)=>{
+        const data = new GetHandler()
+        let result;
+        products.forEach(async (food)=>{
+            await data.getRatingAvg(food._id).then(res=>{
+                if(res.status == 200){
+                    // result = res.data 
+             
+                    setRating(old=>[...old,res.data.avg])
+                    setFrom(old=>[...old,res.data.outOf])
+                    // console.log(res.data)
+                }else{
+                    console.log('no food rating error occured')
+                }
+            })
+        })
+
+        // return result
+    }
+
+
+    const returner = (i)=>{
+        let f = rating[i]  
+         
+        // alert(f)
+        return f.avg
+    }
+
     return( 
         <div>
             <div  className="category" >
-                {/* <div className="foodImage"   style={bgCsss}>
-                
-                </div> */}
-                {/* <div className="vstack">
-                    <h3 className="foodTitle d-flex justify-content-start" >Title</h3>
-                    <p className={readActivity+" m-0 p-0 "} style={{  padding:0,   overflow:"hidden",
-    textOverflow:"ellipsis"}} onClick={readDisplay} >
-                    imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con          
-                    imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con       
-                    imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con       
-                    imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets con            
-                  
-                         </p>
-                         <span onClick={readDisplay} className="d-flex justify-content-end" >{readMore}</span>
- 
-                    <div className="row" >
-                        <div className="price hstack gap-3">
-                            <div className="fullPrice">
-                                <h4 className="fullPriceTitle" >Full price</h4>
-                                
-                                <h5 className="fullPriceBrr" >100 <span className="supperScript" >Br</span></h5>
-                            </div>
-                            <div className="halfPrice">
-                                <h4 className="fullPriceTitle">Half price</h4>
-                                <h5 className="fullPriceBrr">50 <span className="supperScript" >Br</span></h5>
-                            </div>
-                        </div>
-                        <div className="order">
-
-                        </div>
-                    </div>
-                </div> */}
-
-              {/* {console.log("th",x)} */}
-              
-                {
+                 {
                     
-                    products.map ((data, i)=>{
+                    products.map ( (data, i)=>{
                     
                     
                        return (
@@ -236,8 +234,30 @@ var captionText = document.getElementById("caption");
                         <img class="modal-content" src={data.image} id={"img01"+i} />
                         <div id="caption"></div>
                         </div>
+                        <div className="row">
+                        <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
+                        <div className="col">
+                            <div className="vstack " >
+                            <div className="hstack   d-flex justify-content-end">
+                            <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                            <span id={data._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 2 ||  rating[i]   == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                            <span id={data._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 3||  rating[i]   == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                            <span id={data._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 4||  rating[i]   == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                            <span  id={data._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 5 ||  rating[i]   == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
 
-                        <h3 className="foodTitle d-flex justify-content-start" >{data.name }</h3>
+                                <div>
+                                <button className="btn btn-outline-dark p-1 m-0">{ Math.floor( rating[i] *100) / 100 }<span>/{from[i]}</span></button>
+                                </div>
+                            </div>
+                            <Link to={'/feedback/'+data._id}>
+                            <span className=" d-flex justify-content-end" style={{color: 'coral' }}  >Rate Us </span>
+                            </Link>
+                          
+                            </div>
+
+                        </div>
+                        </div>
+                      
                         <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
         textOverflow:"ellipsis"}}   >
                                 { data.info}  
@@ -255,7 +275,7 @@ var captionText = document.getElementById("caption");
                                     (x[1] ? x[i].halfFull : null )?
                                   
                                     (<div className="halfPrice">
-                                    <h4 className="fullPriceTitle">Half price</h4>
+                                    <h4 className="fullPriceTitle ">Half price</h4>
                                     <h5 className="fullPriceBrr">{x[1] ? x[i].halfPrice : null } <span className="supperScript" >Br</span></h5>
                                 </div>) :
                                     (<div></div>)
