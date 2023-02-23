@@ -240,8 +240,8 @@ const sender = async (x)=>{
 }
 
     return (
-        <div>
-        <div  className="category" >
+        <div className="d-flex justify-content-center" >
+        <div  className="category " >
             {
                 //   console.log(ff)
                 // sendAnswer()

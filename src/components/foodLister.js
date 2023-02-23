@@ -213,8 +213,8 @@ var captionText = document.getElementById("caption");
     }
 
     return( 
-        <div>
-            <div  className="category" >
+        <div className="d-flex justify-content-center">
+            <div  className="category  " >
                  {
                     
                     products.map ( (data, i)=>{
@@ -236,23 +236,45 @@ var captionText = document.getElementById("caption");
                         </div>
                         <div className="row">
                         <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
-                        <div className="col">
-                            <div className="vstack " >
-                            <div className="hstack   d-flex justify-content-end">
-                            <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                        <div className="col ">
+                            <div className="hstack  d-flex justify-content-end  " >
+
+                            <div className="hstack  ">
+
+                                <div className="vstack  ">
+                                    <div className="hstack  d-flex justify-content-end ">
+                                    <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
+                                {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
+                                <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span>
+                                 </Link>
+
+                                <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>
+                                    </div>
+
+                           
+                                <span className="d-flex justify-content-end "> {from[i]}  Reviews</span>
+                                
+                                    {/* <div className="hstack p-0">
+                                    <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
                             <span id={data._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 2 ||  rating[i]   == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
                             <span id={data._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 3||  rating[i]   == 3? 'yellow' : 'black'}}  >&#9733;</span>
                             <span id={data._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 4||  rating[i]   == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
                             <span  id={data._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 5 ||  rating[i]   == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
-
-                                <div>
-                                <button className="btn btn-outline-dark p-1 m-0">{ Math.floor( rating[i] *100) / 100 }<span>/{from[i]}</span></button>
-                                </div>
-                            </div>
-                            <Link to={'/feedback/'+data._id}>
-                            <span className=" d-flex justify-content-end" style={{color: 'coral' }}  >Rate This Food </span>
+                                    </div> */}
+                                                                    {/* <div className=" p-0 m-0" >
+                                <Link to={'/feedback/'+data._id}>
+                            <span className="  " style={{color: 'coral' }}  >Rate This Food </span>
                             </Link>
-                          
+                                </div> */}
+
+                                </div>
+                                </div>
+
+
+                            </div>
+   
+                                <div >
+
                             </div>
 
                         </div>
@@ -262,9 +284,9 @@ var captionText = document.getElementById("caption");
         textOverflow:"ellipsis"}}   >
                                 { data.info}  
                              </p>
-                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" > Read More...</span>
+                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
      
-                        <div className="row" >
+                        <div className=" " >
                             <div className="price hstack gap-3">
                                 <div className="fullPrice">
                                     <h4 className="fullPriceTitle" >Full price</h4>
@@ -280,12 +302,15 @@ var captionText = document.getElementById("caption");
                                 </div>) :
                                     (<div></div>)
                                 }
-                       
+         
                             </div>
                             {/* <div className="order">
     
                             </div> */}
+                             
+                             
                         </div>
+  
                     </div>
                     
                        )
