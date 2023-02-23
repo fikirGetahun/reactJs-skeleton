@@ -229,7 +229,7 @@ router.get('/answer/:qId/:foodId/:cid', async (req,res)=>{
  
 
   
-console.log( (choos*100)/(choos2[0].total) )
+// console.log( (choos*100)/(choos2[0].total) )
 // res.send(choos2)
 res.send(body)
 // the last lines are to remove the pushed data in the array ans and count data 
@@ -266,14 +266,23 @@ router.get('/rattingAvg/:foodId', async (req,res)=>{
         // d.
 
       
-       console.log(data[0].rateAv)
-       let f = (data[0].rateAv)/(d)
-       
-       let body = {
-        avg: f
-       }
+    //    console.log(data[0].rateAv)
 
-    res.send(body)
+    if(data.length > 0){
+        let f = (data[0].rateAv)/(d)
+       
+        let body = {
+         avg: f
+        }
+ 
+     res.send(body)
+    }else{
+        let body = {
+            avg: 0
+           }
+        res.send(body)
+    }
+
 })
 
 

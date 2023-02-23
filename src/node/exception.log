@@ -1692,3 +1692,24 @@ RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: 7
     at ServerResponse.send (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\response.js:232:10)
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:234:5
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 23/02/2023 09:08:05 unhandledRejection: Cannot read properties of undefined (reading 'total')
+TypeError: Cannot read properties of undefined (reading 'total')
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:232:37
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 23/02/2023 09:14:50 unhandledRejection: Cannot read properties of undefined (reading 'rateAv')
+TypeError: Cannot read properties of undefined (reading 'rateAv')
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:269:28
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 23/02/2023 09:29:36 unhandledRejection: Cannot read properties of undefined (reading 'rateAv')
+TypeError: Cannot read properties of undefined (reading 'rateAv')
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:269:28
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 23/02/2023 09:31:49 unhandledRejection: Cannot read properties of undefined (reading 'rateAv')
+TypeError: Cannot read properties of undefined (reading 'rateAv')
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:271:16
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 23/02/2023 09:33:33 unhandledRejection: req.send is not a function
+TypeError: req.send is not a function
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:283:13
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
