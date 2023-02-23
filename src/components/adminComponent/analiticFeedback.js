@@ -350,7 +350,7 @@ useEffect(()=>{
 const [ratings, setRatings] = useState([])
 const [activeRating,setActiveRating] = useState(false)
 const [count, setCount] = useState()
-const [lastId, setLastId] = useState(10)
+const [lastId, setLastId] = useState(0)
 
 
 const getCount = async ()=>{
@@ -390,8 +390,9 @@ useEffect(()=>{
 useEffect(()=>{
     if(activeRating){
         // console.log('ddpp')
-        pageNation()
         getRating()
+        pageNation()
+      
     }
   
 },[activeRating, lastId])
@@ -402,7 +403,7 @@ const lastIdManage = (page)=>{
  
 const [pageNationLink, setPagenation] = useState([])
 const pageNation = ()=>{
-    let pages = Math.round(count/10)
+    let pages = Math.round(count/20)
     setPagenation([])
     for(let i = 1; i <= pages; i++){
         let links = (
@@ -456,27 +457,86 @@ const getFullRating = async ()=>{
                                 <button className="btn btn-outline-dark">{Math.floor(fullRating*100)/100}</button>
                             </div>
                             <br></br>
-                            {
-                                    ratings.map(each=>{
-                                        return(
-                                            <div>
-                                               
-                                                <div className="hstack   d-flex justify-content-start">
-                                                <h6 className="m-2" >Rating:</h6>
-                                                <span id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                                                <span id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                                                <span id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                                                <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <button className="btn btn-outline-dark">{each.rating}</button>
+                            {console.log(ratings)}
+
+
+
+
+<table class="table table-dark ">
+  <thead>
+    <tr>
+    
+      <th scope="col">Row 1</th>
+      <th scope="col">Row 2</th>
+       
+    </tr>
+  </thead>
+  <tbody> 
+ 
+    <tr>
+      {/* <th scope="row">{i+1}</th> */}
+      
+      <td>
+      {
+                                    ratings.map((each, i)=>{
+                                        if(i%2 != 0 ){
+                                            return(
+                                                <div>
+                                                   
+                                                    <div className="hstack   d-flex justify-content-start">
+                                                    <h6 className="m-2" >Rating:</h6>
+                                                    <span id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                        <button className="btn btn-outline-dark">{each.rating}</button>
+                                                    </div>
+                                                     
+                                                    <p className="d-flex justify-content-start border p-3 text " style={{color: 'white'}} >{each.feedBack} </p>
+    
+                            
                                                 </div>
-                                                 
-                                                <p className="d-flex justify-content-start border p-3 text text-dark" >{each.feedBack} </p>
-                        
-                                            </div>
-                                        )
+                                            )
+                                        }
+
                                       })
-                            }
+                            }                                   
+
+      </td>
+      <td>
+      {
+                                    ratings.map((each, i)=>{
+                                        if(i%2 == 0 ){
+                                            return(
+                                                <div>
+                                                   
+                                                    <div className="hstack   d-flex justify-content-start">
+                                                    <h6 className="m-2" >Rating:</h6>
+                                                    <span id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                        <button className="btn btn-outline-dark">{each.rating}</button>
+                                                    </div>
+                                                     
+                                                    <p className="d-flex justify-content-start border p-3 text text-dark" >{each.feedBack} </p>
+    
+                            
+                                                </div>
+                                            )
+                                        }
+
+                                      })
+                            }      
+      </td>
+     
+    </tr>
+    
+  </tbody>
+</table>
+
                         </div>
           
                     }

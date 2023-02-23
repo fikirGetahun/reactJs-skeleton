@@ -250,7 +250,7 @@ var captionText = document.getElementById("caption");
                                 </div>
                             </div>
                             <Link to={'/feedback/'+data._id}>
-                            <span className=" d-flex justify-content-end" style={{color: 'coral' }}  >Rate Us </span>
+                            <span className=" d-flex justify-content-end" style={{color: 'coral' }}  >Rate This Food </span>
                             </Link>
                           
                             </div>

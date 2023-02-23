@@ -92,7 +92,7 @@ router.get('/choose', async (req,res)=>{
 
 // get rating
 router.get('/ratingLimit/:foodId/:startId', async (req,res)=>{
-    const data = await Rating.find({food_id: req.params.foodId}).skip(req.params.startId).limit(10)
+    const data = await Rating.find({food_id: req.params.foodId}).skip(req.params.startId).limit(20)
     if(!data) return res.status(404).send('page not found')
     res.send(data)
 })
