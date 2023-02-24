@@ -24,7 +24,7 @@ router.post('/' , async (req, res)=>{
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
          image:req.body.food.image,
-         order: co
+         order: co+1
     })
 
     let foodUploadedData = await data.save()

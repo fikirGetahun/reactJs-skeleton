@@ -27,14 +27,17 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [adminRoutes, setAdminRoutes] = useState(false)
+  const [adminRoutes, setAdminRoutes] = useState()
 
   const authChecker = ()=>{
-    if(window.sessionStorage.getItem('token')){
+    // alert(window.sessionStorage.getItem('token') )
+    if(window.sessionStorage.getItem('token') != ''){
       setAdminRoutes(
         true
       )
-    } 
+    } else{
+      setAdminRoutes(false)
+    }
   }
 
   useEffect(()=>{
@@ -48,7 +51,7 @@ function App() {
         <Routes>
 
             {
-              adminRoutes ?
+              window.sessionStorage.getItem('token')   ?
               (
                 <Route path='/admin' element={<AdminHome />}>
                 <Route index element={<InnerDashboard />} />

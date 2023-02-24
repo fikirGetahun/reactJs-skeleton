@@ -10,7 +10,7 @@ router.post('/',auth, async (req,res)=>{
     // if(error) return res.status(400).send("this is errrrrorr")
     const co = await Category.find().count()
  
-        const data = Category({name:req.body.name, image:req.body.image, order: co})
+        const data = Category({name:req.body.name, image:req.body.image, order: co+1})
         const result =await data.save()
         return res.send(result);
    
