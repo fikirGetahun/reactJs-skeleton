@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Textarea, TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import { Link } from "react-router-dom";
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
  
 
 
@@ -104,13 +105,31 @@ useEffect(()=>{
 
  
 
+const deleteQuestion = async (id)=>{
+    const data = new DeleteHandler()
+    if (window.confirm("Are you sure you want to delete this? you will delete all related choices to this question too") == true) {
+        await data.deleteQustions(id).then(res=>{
+            if(res.status == 200){
+                window.alert("Deleted!")
+                window.location.reload()
+            }else{
+                alert('error not deleted!')
+            }
+        })
+    } else {
+    //  alert('error not deleted!')
+    }
+}
+
+
+
     return(
         <div>
         <div className="vstack  ">
             
             <hr/>
             <div className="row d-flex justify-content-center">
-            <h3>Add FeedBack Questions</h3>
+            <h3>Manage FeedBack Questions</h3>
              
                 <div className="col-6">
 
@@ -129,12 +148,13 @@ useEffect(()=>{
             return(
                 <tr>
                     <th scope="row">{i+1}</th>
-                    <td>{sel.questions} </td>
+                    <td>{sel.questions}</td>
                     <td>
                         <Link to={"/admin/editFeedBackQuestion/"+sel._id} >
-                        <button type="button"  class="btn btn-outline-info">Edit</button>|<button type="button" class="btn btn-outline-danger">Delete</button>
+                        <button type="button"  class="btn btn-outline-info">Edit</button>
 
                         </Link>
+                        |<button type="button" onClick={()=>deleteQuestion(sel._id)} class="btn btn-outline-danger">Delete</button>
                     </td>
                </tr>
             )

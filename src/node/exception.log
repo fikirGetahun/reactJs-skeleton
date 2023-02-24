@@ -1865,3 +1865,9 @@ MongoServerError: must specify 'pipeline' when 'from' is empty
     at MessageStream.Writable.write (node:internal/streams/writable:336:10)
     at Socket.ondata (node:internal/streams/readable:754:22)
     at Socket.emit (node:events:513:28)
+error: 24/02/2023 12:24:47 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "User"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "User"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

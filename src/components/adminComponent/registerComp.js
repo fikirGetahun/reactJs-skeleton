@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import TextFieldComp from "../helpComponents/textField";
-import Auth from "../../service/apiHandler/auth";
+ import Auth from "../../service/apiHandler/auth";
 import { TextField } from "@mui/joy";
 
 const Register = ()=>{
@@ -10,7 +9,7 @@ const Register = ()=>{
     const[password, setPassword]=useState('');
 
     const[status, setStatus]=useState('')
-  
+    const[isAdmin, setIsAdmin]=useState(true)
 
     const submitHandler = async()=>{
 //    alert('in')
@@ -18,6 +17,7 @@ const Register = ()=>{
             name: name,
             email: email,
             password: password,
+            isAdmin: isAdmin
         }
         var x;
    server.registerAuth(body) 
@@ -44,17 +44,26 @@ const Register = ()=>{
             <TextFieldComp label="Password" onChange={formHandler} dbName="password" type="password" /> */}
         <div className="textField p-2">
             <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Name</label>
-            <TextField className="" type="text"    id="standard-basic" placeholder="Full name"   onChange={(e)=>setName(e.target.value)}  name="name" />
+            <TextField  type="text"    id="standard-basic" placeholder="Full name"   onChange={(e)=>setName(e.target.value)}  name="name" />
             <label></label>
         </div>
         <div className="textField p-2">
             <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Email</label>
-            <TextField className="" type="text"    id="standard-basic" placeholder="Email"   onChange={(e)=>setEmail(e.target.value)} name="name" />
+            <TextField  type="text"    id="standard-basic" placeholder="Email"   onChange={(e)=>setEmail(e.target.value)} name="name" />
             <label></label>
         </div>
+        
+            <div className="form-control">
+            <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Select Roll</label>
+            <select  className="form-control border p-1 border-dark"    onChange={(e)=>setIsAdmin(e.target.value)}   >
+            <option value={true} >Is Admin</option>
+            <option value={false} > Is Editor</option>
+            </select>
+            </div>
+       
         <div className="textField p-2">
             <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Password</label>
-            <TextField className="" type="password"    id="standard-basic" placeholder="Password"    onChange={(e)=>setPassword(e.target.value)} name="name" />
+            <TextField  type="password"    id="standard-basic" placeholder="Password"    onChange={(e)=>setPassword(e.target.value)} name="name" />
             <label></label>
         </div>
 

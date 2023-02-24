@@ -56,8 +56,10 @@ class Auth{
         try{
             await axios.post(api.joinUrl(api.endPoints.login), body)
             .then(res=>{
-                localStorage.setItem('token', res.data)
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('isAdmin', res.data.isAdmin)
                 localStorage.setItem('email',body.email)
+               
                  result = true
             })
         }catch(err){
@@ -69,6 +71,7 @@ class Auth{
                 return err.message
             }
         }
+      
         return result;
     }
 

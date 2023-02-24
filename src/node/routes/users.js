@@ -62,7 +62,7 @@ router.post('/',async(req,res)=>{
 
 try {
    //  user= new User({name:req.body.name,email:req.body.email, password: req.body.password});
-   user =new User(_.pick(req.body,['name','email','password']));
+   user =new User(_.pick(req.body,['name','email','password','isAdmin']));
    
   const salt= await  bcrypt.genSalt(10);
   user.password= await bcrypt.hash(user.password,salt);
@@ -70,7 +70,7 @@ let result =await user.save();
     // res.send(result);
 const token=user.generateAuthToken();
    res.header('x-auth-token',token).send( _.pick(user,['_id', 'name','email']));
-
+console.log(req.body)
 } catch (error) {
     res.send(error.message)
 }

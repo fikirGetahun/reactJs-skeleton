@@ -21,6 +21,7 @@ const LoginComp = () =>{
   auth.Login(body).then(res=>{
     setResponse(res)
     if(res === true){
+      alert(localStorage.getItem('isAdmin'))
       navigate('/admin')
     }
   })

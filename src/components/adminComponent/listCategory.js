@@ -29,7 +29,7 @@ const ListCategory = ()=>{
         let data = new DeleteHandler()
          if (window.confirm("Are you sure you want to delete this?") == true) {
             let handler = await data.deleteCategory(id).then(res=>{
-                if(res.statusText == 'OK'){
+                if(res.status == 200){
                     let arr = []
                     setCatagoryData([
                         ...categoryData.slice(0, arrayId),
@@ -45,7 +45,7 @@ const ListCategory = ()=>{
                 }
             })   
         } else {
-         alert('error not deleted!')
+        //  alert('error not deleted!')
         }
 
     }

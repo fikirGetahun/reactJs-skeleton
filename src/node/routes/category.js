@@ -18,7 +18,7 @@ router.post('/',auth, async (req,res)=>{
 
 
 router.get('/', async (req,res)=>{
-    const data = await Category.find();
+    const data = await Category.find().sort("order")
     if(!data) return res.status(404).send('page not found')
     res.send(data)
 })

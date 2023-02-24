@@ -166,6 +166,7 @@ const countReview = async ()=>{
 }
 const [realc, setRealc] = useState([])
 
+
 const cons = ()=>{
     setQuetionConstructor([])
  
@@ -183,31 +184,30 @@ const cons = ()=>{
          setQuetionConstructor(old=>[...old, question])
         
        let  i = 0
-       let v = 0
+       
        let z 
-       u.forEach(yy=>{
-        pls.forEach(g=>{
-            if(g.cid == yy._id){
-               z = g.count;
-               v = v + z
-               console.log(v)
-            }
-          })
-       })
 
+       let v = 0
        u.forEach((xx )=> {
+
+
+     
+    
+           
         // console.log('xx')
+        
     let t
     //    console.log(pls[i])
        pls.forEach(g=>{
          if(g.cid == xx._id){
-            t = g.count;
-            // count = count + t
-
-            // t= (t*100)/(v)
+            t = g.count
             
          }
        })
+
+       v = v + t
+
+       
                 // ff.forEach(xx=>{
                     let h = [];
                     
@@ -238,8 +238,8 @@ const cons = ()=>{
                      <span class="form-check-label col    text text-success" for="flexRadio Default1">
                       {xx.chooseContent}    
                      </span>
-                   
-                     <h5 className="col" >  {t} </h5>
+                   {console.log(v)}
+                     <h5 className="col" >  { t  } </h5>
                      </div>
                         </div>
                                 )
@@ -373,7 +373,7 @@ const getFullRating = async ()=>{
  
     return (
         <div>
-            {  console.log(realc) }
+            {/* {  console.log(realc) } */}
             {/* {           console.log(lastId)} */}
         <div  className="category" >
             <h3>All Reviews of Question</h3>

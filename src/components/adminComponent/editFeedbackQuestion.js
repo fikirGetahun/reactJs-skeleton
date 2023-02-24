@@ -4,6 +4,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
 import { useParams } from "react-router-dom";
 import PutHandler from "../../service/apiHandler/putHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
  
 
 
@@ -144,6 +145,25 @@ const addNewChoice = async ()=>{
 }
 
 
+
+
+const deleteChoices = async (id)=>{
+    const data = new DeleteHandler()
+    if (window.confirm("Are you sure you want to delete this?  ") == true) {
+        await data.deleteChoices(id).then(res=>{
+            if(res.status == 200){
+                window.alert("Deleted!")
+                window.location.reload()
+            }else{
+                alert('error not deleted!')
+            }
+        })
+    } else {
+    //  alert('error not deleted!')
+    }
+
+}
+
     return(
         <div>
         <div className="vstack  ">
@@ -195,7 +215,7 @@ const addNewChoice = async ()=>{
                                  <button type="button" onClick={()=>handleEdit(sel.chooseContent, sel._id)}  class="btn btn-outline-info">Edit</button>
                                 
 
-                                |<button type="button" class="btn btn-outline-danger">Delete</button>
+                                |<button type="button" onClick={()=>deleteChoices(sel._id)} class="btn btn-outline-danger">Delete</button>
                                  </div>
 
                             </div>

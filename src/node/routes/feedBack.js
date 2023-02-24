@@ -320,8 +320,30 @@ router.get('/rattingAvgAllFoods', async (req,res)=>{
 })
 
 
+router.delete('/:qid', async (req,res)=>{
+    const data = await FeedBackQuestions.findByIdAndDelete(req.params.qid)
+    if(!data) return res.status(404).send('error on deleting question')
+
+    const choose = await QuestionChoose.deleteMany({question_id:req.params.qid})
+    if(!choose) return res.status(404).send('error on deleting question')
+
+    const ans = await Answer.deleteMany({question_id: req.params.qid})
+    if(!ans) return res.status(404).send('error on deleting question')
+
+    res.send('deleted Successfully!')
+})
 
 
+router.delete('/choice/:cid', async (req,res)=>{
+    const data = await QuestionChoose.findByIdAndDelete(req.params.cid)
+    if(!data) return res.status(404).send('error on deleting choice')
+
+    const ans = await Answer.deleteMany({choose_id: req.params.cid})
+    if(!ans) return res.status(404).send('error on deleting question')
+
+    res.send('deleted Successfully!')
+
+})
 
 
 

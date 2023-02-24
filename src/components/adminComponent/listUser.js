@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
 import GetHandler from "../../service/apiHandler/getHandler";
 
 
@@ -21,6 +22,22 @@ const ListUser = ()=>{
         getAllUsers()
     },[])
 
+
+    const deleteHandler = async (id)=>{
+        const data = new DeleteHandler()
+        if (window.confirm("Are you sure you want to delete this?") == true) {
+            await data.deleteUser(id).then(res=>{
+                if(res.status == 200){
+                    alert('deleted')
+                    window.location.reload()
+                }else{
+                    alert('error deleting')
+                }
+            })
+        }
+
+    }
+
     return (
         <div>
                  <hr></hr>
@@ -39,6 +56,8 @@ const ListUser = ()=>{
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Action</th>
+
      </tr>
   </thead>
   <tbody>
@@ -49,6 +68,7 @@ const ListUser = ()=>{
                     <th scope="row">{i}</th>
                     <td>{sel.name} </td>
                     <td>{sel.email} </td>
+                    <td><button onClick={()=>deleteHandler(sel._id)} className="btn btn-outline-danger">Delete</button> </td>
                    </tr>
                 )
             })
