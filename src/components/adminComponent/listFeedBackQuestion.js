@@ -111,7 +111,7 @@ const deleteQuestion = async (id)=>{
         await data.deleteQustions(id).then(res=>{
             if(res.status == 200){
                 window.alert("Deleted!")
-                window.location.reload()
+                getQuestion()
             }else{
                 alert('error not deleted!')
             }

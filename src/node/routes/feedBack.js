@@ -6,6 +6,7 @@ const {Rating} = require('../model/rating');
 const {Answer} = require('../model/answer');
 const {Food} =require('../model/food')
 const { date } = require('joi');
+const auth = require('../middleware/auth');
 // const { default: FoodLister } = require('../../components/foodLister');  
 
 
@@ -31,7 +32,7 @@ router.post('/', async (req,res)=>{
 })
 
 
-router.post('/choose', async(req,res)=>{
+router.post('/choose',auth, async(req,res)=>{
     body= req.body;  
     const data2 =  QuestionChoose({chooseContent:body.chooseContent , question_id: body.question_id})
     resultx = await data2.save();
@@ -41,7 +42,7 @@ router.post('/choose', async(req,res)=>{
     res.send('200')
 })
 
-router.post('/rating', async (req,res)=>{
+router.post('/rating',auth, async (req,res)=>{
     body= req.body;  
     const data2 =  Rating({food_id:body.food_id, rating: body.rating, feedBack: body.feedBack, time: Date.now()})
     resultx = await data2.save();
@@ -52,7 +53,7 @@ router.post('/rating', async (req,res)=>{
 })
 
 
-router.post('/answer', async (req,res)=>{
+router.post('/answer',auth, async (req,res)=>{
     body= req.body;  
     const data2 =  Answer({food_id:body.food_id,question_id: body.question_id, choose_id: body.choose_id, time: Date.now() })
     resultx = await data2.save();
@@ -334,7 +335,7 @@ router.delete('/:qid', async (req,res)=>{
 })
 
 
-router.delete('/choice/:cid', async (req,res)=>{
+router.delete('/choice/:cid', auth, async (req,res)=>{
     const data = await QuestionChoose.findByIdAndDelete(req.params.cid)
     if(!data) return res.status(404).send('error on deleting choice')
 

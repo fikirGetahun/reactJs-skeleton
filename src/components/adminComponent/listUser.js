@@ -29,7 +29,7 @@ const ListUser = ()=>{
             await data.deleteUser(id).then(res=>{
                 if(res.status == 200){
                     alert('deleted')
-                    window.location.reload()
+                    getAllUsers()
                 }else{
                     alert('error deleting')
                 }

@@ -1,6 +1,6 @@
 import { Box } from "@mui/joy";
 import React, { useEffect, useState } from "react";
-import { Outlet, Link, NavLink, useParams} from "react-router-dom";
+import { Outlet, Link, NavLink, useParams, useNavigate} from "react-router-dom";
 import GetHandler from "../../service/apiHandler/getHandler";
 
 
@@ -20,6 +20,11 @@ const toggler =(id)=>{
     let selected = document.getElementById(id);
  
     selected.classList.toggle('show');
+}
+let navigate =   useNavigate()
+const logoutHandler = ()=>{
+    window.sessionStorage.removeItem('token')
+    navigate('/login')
 }
 
 const drowdownHandler = (id)=>{
@@ -64,7 +69,7 @@ const drowdownHandler = (id)=>{
 const [logedUser, setLogedUser] = useState([])
 const getLogedUser = async ()=>{
     let data = new GetHandler()
-    let email = localStorage.getItem('email')
+    let email = window.sessionStorage.getItem('email')
     let x = await data.getOneUser(email).then(res=>{
         if(res.status == 200){
             setLogedUser(res.data)
@@ -162,7 +167,7 @@ getLogedUser()
                     <i className="fa fa-tachometer-alt me-2"></i>List Products
                     </NavLink>
                     {
-                        localStorage.getItem('isAdmin') == 'true'  ? (
+                        window.sessionStorage.getItem('isAdmin') == 'true'  ? (
                             <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
                             <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
                             <div id="test2"  className="dropdown-menu  bg-transparent border-0">
@@ -289,7 +294,7 @@ getLogedUser()
                         <a href="#" className="nav-link  hstack gap-2 " data-bs-toggle="dropdown">
                             {/* <img className="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"/> */}
                           <span>Loged User :</span>  <span className="d-none d-lg-inline-flex">{logedUser.name}</span>
-                          <button className="btn btn-warning">Log Out</button>
+                          <button onClick={()=>logoutHandler()} className="btn btn-warning">Log Out</button>
 
                         </a>
                         {/* <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">

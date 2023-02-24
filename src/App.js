@@ -1,7 +1,7 @@
  import './App.css';
 import HomePage from './pages/home';
 import AdminHome from './admin/adminPages/adminHome';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AddCategory from './components/adminComponent/addCategory';
 import FoodLister from './components/foodLister';
 import InnerDashboard from './components/adminComponent/innerDashboard';
@@ -23,41 +23,75 @@ import ListFeedBackQuestion from './components/adminComponent/listFeedBackQuesti
 import EditFeedBackQuestion from './components/adminComponent/editFeedbackQuestion';
 import FeedBackPage from './components/feedback';
 import AnaliticFeedBackPage from './components/adminComponent/analiticFeedback';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [adminRoutes, setAdminRoutes] = useState(false)
+
+  const authChecker = ()=>{
+    if(window.sessionStorage.getItem('token')){
+      setAdminRoutes(
+        true
+      )
+    } 
+  }
+
+  useEffect(()=>{
+    authChecker()
+  })
+
   return (
     <div className="App">
 
       <BrowserRouter>
         <Routes>
+
+            {
+              adminRoutes ?
+              (
+                <Route path='/admin' element={<AdminHome />}>
+                <Route index element={<InnerDashboard />} />
+                    <Route path='dashboard' element={<InnerDashboard />}/>
       
-          <Route path='/admin' element={<AdminHome />}>
-              <Route index element={<InnerDashboard />} />
-              <Route path='dashboard' element={<InnerDashboard />}/>
-
-              <Route path='addCategory' element={<AddCategory />} />
-              <Route  path='listCategory' element={<ListCategory />} />  
-              <Route  path='listProducts' element={<ListProducts /> } />  
-              <Route  path='listUsers' element={ <ListUser /> } />  
-              <Route  path='editUser' element={ <EditUser />} />  
-
-              <Route path='order/:type' element={<OrderManage />} />
-
-
-              <Route path='editProduct' >
-                <Route path=':id' element={<EditProduct />} />
-              </Route>
-               <Route path='editCategory'>
-                <Route path=':id'  element={<EditCategory />} />
-               </Route>
-             
+                    <Route path='addCategory' element={<AddCategory />} />
+                    <Route  path='listCategory' element={<ListCategory />} />  
+                    <Route  path='listProducts' element={<ListProducts /> } />  
+                    <Route  path='listUsers' element={ <ListUser /> } />  
+                    <Route  path='editUser' element={ <EditUser />} />  
+      
+                    <Route path='order/:type' element={<OrderManage />} />
+      
+      
+                    <Route path='editProduct' >
+                      <Route path=':id' element={<EditProduct />} />
+                    </Route>
+                     <Route path='editCategory'>
+                      <Route path=':id'  element={<EditCategory />} />
+                     </Route>
+                   
+                     
+                    <Route path='addFood' element={<AddFood />}/> 
+      
+                    <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
+                    <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
+                    <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
+                    <Route path='analitic/:foodId' element={<AnaliticFeedBackPage />} />
                
-              <Route path='addFood' element={<AddFood />}/> 
+                </Route>
+              ) : (
+                <Route path='/admin/*' element={<Navigate replace to='/login' />}>
+                   
+                 <Route index element={<Navigate to='/login' />} />
+                   
+                </Route>
+              )
+            }
 
-              <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
-              <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
-              <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
-              <Route path='analitic/:foodId' element={<AnaliticFeedBackPage />} />
+
+          <Route path='/login' element={<LoginPage />}>
+            <Route index element={<LoginComp />}/>
+            <Route path='reg' element={<Register />} />
           </Route>
 
           <Route  path='/'  element={<HomePage/>} > 
@@ -69,14 +103,12 @@ function App() {
              
 
           </Route>
-          <Route path='/login' element={<LoginPage />}>
-            <Route index element={<LoginComp />}/>
-            <Route path='reg' element={<Register />} />
-          </Route>
+
       
         </Routes>
+        
       </BrowserRouter>
-      
+        
       
     </div>
   );
