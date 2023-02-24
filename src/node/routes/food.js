@@ -16,11 +16,15 @@ router.post('/' , async (req, res)=>{
    
     if(error) return res.status(400).send(error.details[0].message)
     console.log('this is from express  ',req.body)
+
+    const co = await Food.find({categoryId:req.body.food.categoryId}).count()
+
     const data = await Food({
         name: req.body.food.name,
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
-         image:req.body.food.image
+         image:req.body.food.image,
+         order: co
     })
 
     let foodUploadedData = await data.save()
