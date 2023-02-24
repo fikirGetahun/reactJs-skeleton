@@ -46,7 +46,7 @@ const [uid, setUid] = useState()
 
 const getToBeEditedUser = async ()=>{
     let data = new GetHandler()
-   let userEmail = localStorage.getItem('email')
+   let userEmail = window.sessionStorage.getItem('email')
     let user = await data.getOneUser(userEmail ).then(res=>{
         if(res.statusText == 'OK'){
             setName(res.data.name)
