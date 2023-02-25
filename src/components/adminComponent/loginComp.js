@@ -23,6 +23,7 @@ const LoginComp = () =>{
     if(res === true){
       // alert(window.sessionStorage.getItem('isAdmin'))
       navigate('/admin')
+    
     }
   })
 

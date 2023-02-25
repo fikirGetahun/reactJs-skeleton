@@ -24,73 +24,49 @@ import EditFeedBackQuestion from './components/adminComponent/editFeedbackQuesti
 import FeedBackPage from './components/feedback';
 import AnaliticFeedBackPage from './components/adminComponent/analiticFeedback';
 import { useEffect, useState } from 'react';
+import ProtectedRoutes from './protectedRoutes';
 
 function App() {
 
-  const [adminRoutes, setAdminRoutes] = useState()
-
-  const authChecker = ()=>{
-    // alert(window.sessionStorage.getItem('token') )
-    if(window.sessionStorage.getItem('token') != ''){
-      setAdminRoutes(
-        true
-      )
-    } else{
-      setAdminRoutes(false)
-    }
-  }
-
-  useEffect(()=>{
-    authChecker()
-  })
-
+ 
   return (
     <div className="App">
 
       <BrowserRouter>
         <Routes>
+            <Route element={<ProtectedRoutes />}>
+            <Route path='/admin' element={<AdminHome />}>
+              <Route index element={<InnerDashboard />} />
+                  <Route path='dashboard' element={<InnerDashboard />}/>
 
-            {
-              window.sessionStorage.getItem('token')   ?
-              (
-                <Route path='/admin' element={<AdminHome />}>
-                <Route index element={<InnerDashboard />} />
-                    <Route path='dashboard' element={<InnerDashboard />}/>
-      
-                    <Route path='addCategory' element={<AddCategory />} />
-                    <Route  path='listCategory' element={<ListCategory />} />  
-                    <Route  path='listProducts' element={<ListProducts /> } />  
-                    <Route  path='listUsers' element={ <ListUser /> } />  
-                    <Route  path='editUser' element={ <EditUser />} />  
-      
-                    <Route path='order/:type' element={<OrderManage />} />
-      
-      
-                    <Route path='editProduct' >
-                      <Route path=':id' element={<EditProduct />} />
-                    </Route>
-                     <Route path='editCategory'>
-                      <Route path=':id'  element={<EditCategory />} />
-                     </Route>
-                   
-                     
-                    <Route path='addFood' element={<AddFood />}/> 
-      
-                    <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
-                    <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
-                    <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
-                    <Route path='analitic/:foodId' element={<AnaliticFeedBackPage />} />
-               
-                </Route>
-              ) : (
-                <Route path='/admin/*' element={<Navigate replace to='/login' />}>
-                   
-                 <Route index element={<Navigate to='/login' />} />
-                   
-                </Route>
-              )
-            }
+                  <Route path='addCategory' element={<AddCategory />} />
+                  <Route  path='listCategory' element={<ListCategory />} />  
+                  <Route  path='listProducts' element={<ListProducts /> } />  
+                  <Route  path='listUsers' element={ <ListUser /> } />  
+                  <Route  path='editUser' element={ <EditUser />} />  
 
+                  <Route path='order/:type' element={<OrderManage />} />
+
+
+                  <Route path='editProduct' >
+                    <Route path=':id' element={<EditProduct />} />
+                  </Route>
+                  <Route path='editCategory'>
+                    <Route path=':id'  element={<EditCategory />} />
+                  </Route>
+                
+                  
+                  <Route path='addFood' element={<AddFood />}/> 
+
+                  <Route path='addFeedbackQuestion' element={<AddFeedBackQuestion />} />
+                  <Route path='listFeedBackQuestion' element={<ListFeedBackQuestion />} />
+                  <Route path='editFeedBackQuestion/:qid' element={<EditFeedBackQuestion />} />
+                  <Route path='analitic/:foodId' element={<AnaliticFeedBackPage />} />
+            
+              </Route>
+            </Route>
+
+         
 
           <Route path='/login' element={<LoginPage />}>
             <Route index element={<LoginComp />}/>

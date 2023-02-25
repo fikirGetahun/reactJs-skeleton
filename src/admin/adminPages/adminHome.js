@@ -23,7 +23,7 @@ const toggler =(id)=>{
 }
 let navigate =   useNavigate()
 const logoutHandler = ()=>{
-    window.sessionStorage.removeItem('token')
+    window.localStorage.removeItem('token')
     navigate('/login')
 }
 
@@ -69,7 +69,7 @@ const drowdownHandler = (id)=>{
 const [logedUser, setLogedUser] = useState([])
 const getLogedUser = async ()=>{
     let data = new GetHandler()
-    let email = window.sessionStorage.getItem('email')
+    let email = window.localStorage.getItem('email')
     let x = await data.getOneUser(email).then(res=>{
         if(res.status == 200){
             setLogedUser(res.data)
@@ -167,7 +167,7 @@ getLogedUser()
                     <i className="fa fa-tachometer-alt me-2"></i>List Products
                     </NavLink>
                     {
-                        window.sessionStorage.getItem('isAdmin') == 'true'  ? (
+                        window.localStorage.getItem('isAdmin') == 'true'  ? (
                             <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
                             <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
                             <div id="test2"  className="dropdown-menu  bg-transparent border-0">

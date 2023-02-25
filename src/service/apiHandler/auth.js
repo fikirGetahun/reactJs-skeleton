@@ -1,4 +1,5 @@
  import axios from "axios";
+import { useNavigate } from "react-router-dom";
  import apiUrl from "./apiUrl";
 
  const api = new apiUrl()
@@ -56,11 +57,11 @@ class Auth{
         try{
             await axios.post(api.joinUrl(api.endPoints.login), body)
             .then(res=>{
+            
+                window.localStorage.setItem('token', res.data.token)
+                window.localStorage.setItem('isAdmin', res.data.isAdmin)
+                window.localStorage.setItem('email',body.email)
                 
-                window.sessionStorage.setItem('token', res.data.token)
-                window.sessionStorage.setItem('isAdmin', res.data.isAdmin)
-                window.sessionStorage.setItem('email',body.email)
-               
                  result = true
             })
         }catch(err){

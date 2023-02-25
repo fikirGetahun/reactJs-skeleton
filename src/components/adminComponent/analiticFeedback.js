@@ -434,6 +434,7 @@ const getFullRating = async ()=>{
                                                     <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                     <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                         <button className="btn btn-outline-dark">{each.rating}</button>
+                                                    <span>{each.time.split('T')[0]}</span>
                                                     </div>
                                                      
                                                     <p className="d-flex justify-content-start border p-3 text " style={{color: 'white'}} >{each.feedBack} </p>
@@ -462,6 +463,7 @@ const getFullRating = async ()=>{
                                                     <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                     <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                         <button className="btn btn-outline-dark">{each.rating}</button>
+                                                        <span>{each.time.split('T')[0]}</span>
                                                     </div>
                                                      
                                                     <p className="d-flex justify-content-start border p-3 text text-dark" >{each.feedBack} </p>
