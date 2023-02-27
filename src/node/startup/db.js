@@ -9,7 +9,7 @@ module.exports= async function(){
      
     // const url='mongodb+srv://vercel-admin-user:Qwe%40123@cluster0.syzc5vp.mongodb.net/?retryWrites=true&w=majority';  
 
-    const url = 'mongodb+srv://vercel-admin-user:Qwe%40123@cluster0.syzc5vp.mongodb.net/test';
+    // const url = 'mongodb+srv://vercel-admin-user:Qwe%40123@cluster0.syzc5vp.mongodb.net/test';
     mongoose.set('strictQuery', true);
    
   await  mongoose.connect(url,{
