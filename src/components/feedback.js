@@ -122,14 +122,14 @@ const cons = ()=>{
                 thisx.push(choices)
                 thisx.push((<div style={{clear: 'both'}} ></div>))
               
-                // setQuetionConstructor(old=>[...old, label])
+                setQuetionConstructor(old=>[...old, label])
             
 
-                // setQuetionConstructor(old=>[...old, choices])
-                // setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
+                setQuetionConstructor(old=>[...old, choices])
+                setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
             }
         });
-        setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+        // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
     })
 }
 
