@@ -147,7 +147,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     cons()
-},[allQuestions])
+},[allChoices])
 
 //// ------------- post answer and rating ---------//
 const [comment, setComment]= useState('')
