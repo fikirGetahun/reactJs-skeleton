@@ -492,6 +492,9 @@ useEffect(()=>{
 
          
             <button className="btn btn-outline-info" onClick={()=>setActiveRating(!activeRating)} >{activeRating ? (<span className="text text-danger">View Question Review</span>) : (<span className="text text-danger" >View Rattings </span>)} </button>
+            <br></br>
+            <br></br>
+            <br></br>
            <div className="d-flex justify-content-center vstack gap 1" >
            {
             !activeRating ? 
@@ -522,7 +525,7 @@ useEffect(()=>{
                             <input className="form-control col" onChange={(e)=>startDateSetter(e.target.value)} type='date' />
                             <input className="form-control col" onChange={(e)=>finalDateSetter(e.target.value)} type='date' />
                            <div className="col">
-                           <button className="btn btn-outline-info " onClick={()=>rangSearch()} ><span className="text text-dark" >Search By Rang</span></button>
+                           <button className="btn btn-outline-info " onClick={()=>rangSearch()} ><span className="text text-dark" >Search By Range</span></button>
                            </div>
                             </div>
                         </div>
@@ -530,7 +533,7 @@ useEffect(()=>{
 
                             <br></br>
  
-
+                            <br></br>
 
 <table class="table table-info ">
   <thead>
@@ -551,20 +554,22 @@ useEffect(()=>{
                                     ratings.map((each, i)=>{
                                         if(i%2 != 0 ){
                                             return(
-                                                <div>
+                                                <div className="border p-1">
                                                    
-                                                    <div className="hstack   d-flex justify-content-start">
-                                                    <h6 className="m-2" >Rating:</h6>
-                                                    <span id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                                                    <span id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                                                    <span id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                        <button className="btn btn-outline-dark">{each.rating}</button>
-                                                    <span>{each.time.split('T')[0]}</span>
+                                                    <div className="row   d-flex justify-content-start ">
+                                                     
+                                                    <span className="col-1" id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1"id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                        <button className="btn btn-outline-dark col-1">{each.rating}</button>
+                                                    <div className="col">
+                                                    <span className="d-flex justify-content-center" >{each.time.split('T')[0]}</span>
+                                                    </div>
                                                     </div>
                                                      
-                                                    <p className="d-flex justify-content-start border p-3 text " style={{color: 'white'}} >{each.feedBack} </p>
+                                                    <p className="d-flex justify-content-start border p-3 text " style={{color: 'black'}} >{each.feedBack} </p>
     
                             
                                                 </div>
@@ -580,20 +585,22 @@ useEffect(()=>{
                                     ratings.map((each, i)=>{
                                         if(i%2 == 0 ){
                                             return(
-                                                <div>
+                                                <div className="border p-1">
                                                    
-                                                    <div className="hstack   d-flex justify-content-start">
-                                                    <h6 className="m-2" >Rating:</h6>
-                                                    <span id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                                                    <span id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                                                    <span id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span  id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                        <button className="btn btn-outline-dark">{each.rating}</button>
-                                                        <span>{each.time.split('T')[0]}</span>
+                                                    <div className="row   d-flex justify-content-start ">
+                                                     
+                                                    <span className="col-1" id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1"id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                        <button className="btn btn-outline-dark col-1">{each.rating}</button>
+                                                    <div className="col">
+                                                    <span className="d-flex justify-content-center" >{each.time.split('T')[0]}</span>
+                                                    </div>
                                                     </div>
                                                      
-                                                    <p className="d-flex justify-content-start border p-3 text text-dark" >{each.feedBack} </p>
+                                                    <p className="d-flex justify-content-start border p-3 text " style={{color: 'black'}} >{each.feedBack} </p>
     
                             
                                                 </div>
