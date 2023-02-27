@@ -93,10 +93,23 @@ router.get('/choose', async (req,res)=>{
 
 // get rating
 router.get('/ratingLimit/:foodId/:startId', async (req,res)=>{
-    const data = await Rating.find({food_id: req.params.foodId}).skip(req.params.startId).limit(20)
+    const data = await Rating.find({food_id: req.params.foodId}).skip(req.params.startId).limit(20).sort({time: 'desc'})
+  
+
+
     if(!data) return res.status(404).send('page not found')
     res.send(data)
 })
+
+router.get('/ratingLimitDate/:foodId/:startId/:stDate/:fDate', async (req,res)=>{
+    const data = await Rating.find({food_id: req.params.foodId, time:{
+        $gte: new Date(req.params.stDate),
+        $lt: new Date(req.params.fDate)
+    } }).skip(req.params.startId).limit(20).sort({time: 'desc'})
+    if(!data) return res.status(404).send('page not found')
+    res.send(data)
+})
+
 
 router.get('/rating/:foodId', async (req,res)=>{
     const data = await Rating.find({food_id: req.params.foodId}).count()
@@ -345,6 +358,10 @@ router.delete('/choice/:cid', auth, async (req,res)=>{
     res.send('deleted Successfully!')
 
 })
+
+
+
+ 
 
 
 

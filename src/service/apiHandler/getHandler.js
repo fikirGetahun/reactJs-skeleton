@@ -398,6 +398,27 @@ class GetHandler{
       return result
     }
 
+    getRatingLimitDay = async (foodId, startingId,stDate, fDate) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.ratingAvgDate)+foodId+'/'+startingId+'/'+stDate+'/'+fDate,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
 
     getAnswers = async (foodId, qid, cid) => {
       var headers = {

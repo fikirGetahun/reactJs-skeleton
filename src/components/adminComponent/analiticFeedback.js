@@ -329,16 +329,22 @@ useEffect(()=>{
  
     cons()
 },[pls])
- 
+ const [searchModeActive, setSearchModeActive]=useState(false)
 useEffect(()=>{
     if(activeRating){
         // console.log('ddpp')
-        getRating()
+        if(!searchModeActive){
+            getRating()
+        } 
+        else{
+            rangSearch()
+        }
+
         pageNation()
       
     }
   
-},[activeRating, lastId])
+},[activeRating, lastId,searchModeActive])
 
 const lastIdManage = (page)=>{
     setLastId(10*page)
@@ -369,7 +375,42 @@ const getFullRating = async ()=>{
     })
 }
  
+const [startDate, setStartDate]=useState()
+const [finalDate, setFinalDate] = useState()
 
+const startDateSetter = (val)=>{
+        if(val > finalDate){
+            alert('Starting Date Must be less than Final Date!')
+        }else{
+            setStartDate(val)
+        }
+   
+ 
+}
+
+const finalDateSetter = (val)=>{
+    if(val < startDate){
+        alert('Final Date must be grater than Starting Date!')
+    }else{
+        setFinalDate(val)
+    }
+  
+}
+
+
+const rangSearch = async ()=>{
+    setSearchModeActive(true)
+    const data = new GetHandler()
+    await data.getRatingLimitDay(foodId,lastId, startDate, finalDate).then(res=>{
+        if(res.status != 200){
+            alert('error on rang search')
+        }else{
+
+            setRatings([])
+            setRatings(res.data)
+        }
+    })
+}
  
     return (
         <div>
@@ -389,8 +430,8 @@ const getFullRating = async ()=>{
                 (<div>
                     {
                         <div>
-                          
-                           <div className="hstack   d-flex justify-content-start">
+                          <div className="row">
+                          <div className="hstack col  d-flex justify-content-start">
                            <h4 className="m-2" >Rating :  </h4>
                             <span id={'1'} style={{fontSize:'4vw', cursor: 'pointer', color:fullRating > 1|| fullRating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
                             <span id={'2'} style={{fontSize:'4vw', cursor: 'pointer', color:fullRating > 2 || fullRating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
@@ -399,13 +440,26 @@ const getFullRating = async ()=>{
                             <span  id={'5'}style={{fontSize:'4vw', cursor: 'pointer', color:fullRating > 5 || fullRating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
                                 <button className="btn btn-outline-dark">{Math.floor(fullRating*100)/100}</button>
                             </div>
+
+
+                            <div className="col">
+                            <h5>Range Of Date</h5>
+                            <div className="row">
+                          
+                            <input className="form-control col" onChange={(e)=>startDateSetter(e.target.value)} type='date' />
+                            <input className="form-control col" onChange={(e)=>finalDateSetter(e.target.value)} type='date' />
+                           <div className="col">
+                           <button className="btn btn-outline-info " onClick={()=>rangSearch()} ><span className="text text-dark" >Search By Rang</span></button>
+                           </div>
+                            </div>
+                        </div>
+                          </div>
+
                             <br></br>
-                            {console.log(ratings)}
+ 
 
 
-
-
-<table class="table table-dark ">
+<table class="table table-info ">
   <thead>
     <tr>
     

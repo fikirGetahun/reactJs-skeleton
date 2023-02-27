@@ -29,6 +29,7 @@ class apiUrl {
             getsingleQ : 'api/feedback/singleQ',
             limitRating: 'api/feedback/ratingLimit',
             ratingAvg: 'api/feedback/rattingAvg',
+            ratingAvgDate: 'api/feedback/ratingLimitDate',
             deleteQuestion : 'api/feedback/choice'
          }
 
