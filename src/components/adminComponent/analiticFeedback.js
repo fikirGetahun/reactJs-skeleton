@@ -429,19 +429,19 @@ useEffect(()=>{
  
     return (
         <div>
-            {/* {  console.log(realc) } */}
+            {  console.log(foodData) }
             {/* {           console.log(lastId)} */}
         <div  className="category" >
             <div>
-                <h5>Product : {foodData.name}</h5>
+                <h5>Product : {foodData ? foodData.name : ''}</h5>
                 <div className="hstack" >
-                    <span>Discription: <span className="text text-info">{foodData.info}</span></span>
+                    <span>Discription: <span className="text text-info">{foodData ? foodData.info : ''}</span></span>
                 </div>
-                <div className="d-flex justify-content-center category" style={{backgroundImage: `url('${foodData.image}')`}} > </div>
+                <div className="d-flex justify-content-center category" style={{backgroundImage: `url('${foodData? foodData.image :''}')`}} > </div>
             </div>
 
-            <h3>All Reviews of Question</h3>
-            <button className="btn btn-outline-info" onClick={()=>setActiveRating(!activeRating)} >{activeRating ? (<span>View Question Review</span>) : (<span>View Rattings </span>)} </button>
+            <h3>Customers Answerd Questions</h3>
+            <button className="btn btn-outline-info" onClick={()=>setActiveRating(!activeRating)} >{activeRating ? (<span>View Question Review</span>) : (<span className="text text-danger" >View Rattings </span>)} </button>
            <div className="d-flex justify-content-center vstack gap 1" >
            {
             !activeRating ? 
