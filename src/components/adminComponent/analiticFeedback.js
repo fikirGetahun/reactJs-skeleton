@@ -165,16 +165,71 @@ const countReview = async ()=>{
 // return result
 }
 const [realc, setRealc] = useState([])
+const [singleAns, setSingleAns] = useState([])
 
 
 const cons = ()=>{
     setQuetionConstructor([])
- 
+    setQuetionConstructor(old=>[...old,(   <h3>Customers Answerd Questions</h3>)])
 
      let answer = [];
+    let ff = 0
+     allQuestions.forEach(r=>{
+        let v = 0
+        let bb = 0
+        u.forEach((xx )=> {
+ 
+ 
+      
+     
+            
+         // console.log('xx')
+         
+     let t
+     //    console.log(pls[i])
+        pls.forEach(g=>{
+          if(g.cid == xx._id){
+             t = g.count
+             
+          }
+        })
+      
+        
+     
+        
+                 // ff.forEach(xx=>{
+                     let h = [];
+                     
+                     let thisx = [];
+             
+                     if(xx.question_id == r._id   ){
+ 
+                  
+          
+                      
+                         // label = "";
+                     let  label = (    
+                         <div className="  w-100" style={{float: 'left', marginRight:'10px'}}>
+                        
+                        <h5 className="col" >  {    singleAns[bb] = t   } {  v= v+ t  } </h5>
+                 
+                         </div>
+                                 )
+                   
+                     
+                     }
+                  
+                 // })
+                 // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+             bb = bb +1
+         });
+         realc[ff] = v
+        //  setRealc(old=>[...old,v])
+         ff = ff +1
+     })
      
     
-     
+    let iq = 0
     allQuestions.forEach( (each)=>{ 
         let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }  <span className="text text-info " style={{marginLeft:10 }} >[Review]</span>   </h3>)
  
@@ -187,28 +242,11 @@ const cons = ()=>{
        
        let z 
 
-       let v = 0
+
+        
        u.forEach((xx )=> {
 
-
-     
-    
-           
-        // console.log('xx')
-        
-    let t
-    //    console.log(pls[i])
-       pls.forEach(g=>{
-         if(g.cid == xx._id){
-            t = g.count
-            
-         }
-       })
-
-       v = v + t
-
-       
-                // ff.forEach(xx=>{
+ 
                     let h = [];
                     
                     let thisx = [];
@@ -238,8 +276,9 @@ const cons = ()=>{
                      <span class="form-check-label col    text text-success" for="flexRadio Default1">
                       {xx.chooseContent}    
                      </span>
-                   {console.log(v)}
-                     <h5 className="col" >  { t  } </h5>
+                 
+                     <h5 className="col" >  {   Math.floor((singleAns[i] *100 )/(realc[iq]) *100)/100     } %  </h5>
+                     
                      </div>
                         </div>
                                 )
@@ -258,13 +297,24 @@ const cons = ()=>{
                        
                     
                     }
+                    if(u.length -1 == i){
+                        
+                      
+                    }
                 // })
                 // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
             i = i +1
         });
-  
+        // setQuetionConstructor(old=>[...old, v])
+       
+       
+       
+       
+       iq = iq +1
+     
     })
     // window.location.reload(true);
+    // console.log(realc)
 }
 
 
@@ -429,7 +479,7 @@ useEffect(()=>{
  
     return (
         <div>
-            {  console.log(foodData) }
+            {/* {  console.log(foodData) } */}
             {/* {           console.log(lastId)} */}
         <div  className="category" >
             <div>
@@ -440,8 +490,8 @@ useEffect(()=>{
                 <div className="d-flex justify-content-center category" style={{backgroundImage: `url('${foodData? foodData.image :''}')`}} > </div>
             </div>
 
-            <h3>Customers Answerd Questions</h3>
-            <button className="btn btn-outline-info" onClick={()=>setActiveRating(!activeRating)} >{activeRating ? (<span>View Question Review</span>) : (<span className="text text-danger" >View Rattings </span>)} </button>
+         
+            <button className="btn btn-outline-info" onClick={()=>setActiveRating(!activeRating)} >{activeRating ? (<span className="text text-danger">View Question Review</span>) : (<span className="text text-danger" >View Rattings </span>)} </button>
            <div className="d-flex justify-content-center vstack gap 1" >
            {
             !activeRating ? 
