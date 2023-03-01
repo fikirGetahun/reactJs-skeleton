@@ -8,7 +8,7 @@ const InnerDashboard = ()=>{
 
 <div>
 <div className="container-fluid pt-4 px-4 ">
-    {x}
+    {window.localStorage.getItem('token')}
     {
         localStorage.getItem('isAdmin')
     }
