@@ -167,7 +167,7 @@ getLogedUser()
                     <i className="fa fa-tachometer-alt me-2"></i>List Products
                     </NavLink>
                     {
-                        window.localStorage.getItem('isAdmin') == 'true'  ? (
+                        window.localStorage.getItem('isAdmin')  ? (
                             <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
                             <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
                             <div id="test2"  className="dropdown-menu  bg-transparent border-0">
