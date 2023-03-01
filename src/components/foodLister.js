@@ -204,12 +204,13 @@ var captionText = document.getElementById("caption");
                 if(res.status == 200){
                     // result = res.data
                     let g=[] 
-                    g[food._id] = {
+                    g  = {
                         avg : res.data.avg,
                         outOf: res.data.outOf
                     }
              
-                    setRating(old=>[...old,g])
+                    // setRating(old=>[...old,g])
+                    rating[food._id]=g
                     setFrom(old=>[...old,res.data.outOf])
                      
                 }else{
@@ -264,7 +265,7 @@ useEffect(()=>{
     return( 
         <div className="d-flex justify-content-center">
             <div  className="category2  " >
-            {/* {console.log(rating['63ff549dccb6cf9732ad4650'])} */}
+            {rating['63ff549dccb6cf9732ad4650'] ?  console.log(rating['63ff549dccb6cf9732ad4650'].avg) : ''}
                  {
                     !isLoadidng ? 
                     
@@ -296,15 +297,15 @@ useEffect(()=>{
                                     <div className="hstack  d-flex justify-content-end ">
                                     <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
                                 {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
-                                <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span>
-                        {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ ()=> sss(data._id)  }</span> */}
+                                {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
+                        <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ rating[data._id] ? rating[data._id].avg : '0'  }</span>
                                  </Link>
 
                                 <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>
                                     </div>
 
                            
-                                <span className="d-flex justify-content-end "> {from[i]}  Reviews</span>
+                                <span className="d-flex justify-content-end "> { rating[data._id] ? rating[data._id].outOf : '0'}  Reviews</span>
                                 
                                     {/* <div className="hstack p-0">
                                     <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
