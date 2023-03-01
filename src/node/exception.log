@@ -2048,3 +2048,9 @@ CastError: Cast to ObjectId failed for value "undefined" (type string) at path "
     at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
     at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 11:27:31 unhandledRejection: Rating validation failed: feedBack: Path `feedBack` is required.
+ValidationError: Rating validation failed: feedBack: Path `feedBack` is required.
+    at model.Document.invalidate (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:3123:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\document.js:2911:17
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)

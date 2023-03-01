@@ -361,6 +361,22 @@ router.delete('/choice/:cid', auth, async (req,res)=>{
 })
 
 
+router.get('/questionWithChoice', async(req,res)=>{
+    const data = await FeedBackQuestions.aggregate([
+        {
+            $lookup:
+ 
+              {
+                from: "questionchooses",
+                localField: "_id",
+                foreignField: "question_id",
+                as: "result",
+              },
+          }
+    ])
+    if(!data) return res.status(404).send('error page not found')
+    res.send(data)
+})
 
  
 

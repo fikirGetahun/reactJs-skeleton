@@ -81,6 +81,19 @@ const pls =   (c, q)=>{
     // console.log(xxx)
     // alert(xxx)
 }
+const [allq, setAllq] = useState([])
+const getQuestionWithChoice = async ()=>{
+    const data = new GetHandler()
+     await data.getQuestionWithChoice().then(res=>{
+        if(res.status == 200){
+            setAllq(res.data)
+        }else{
+            alert('no q')
+        }
+     })
+
+}
+
 
 const cons = ()=>{
     setQuetionConstructor([])
@@ -140,13 +153,14 @@ const cons = ()=>{
  
 
 useEffect(()=>{
+    getQuestionWithChoice()
     getQuestionsAndChoice()
     getChooen()
     
 },[])
 
 useEffect(()=>{
-    cons()
+    // cons()
 },[allChoices])
 
 //// ------------- post answer and rating ---------//
@@ -248,7 +262,36 @@ const sender = async (x)=>{
                 // submit ? sender() : <div></div>
             }
             {
-             questionConstructor
+            //  questionConstructor
+                allq.map(each=>{
+        
+                        return(
+                          <div>
+                            <h5 className="d-flex justify-content-start" >{each.questions}</h5>
+                            {
+                                each.result.map(element=>{
+                                    return(
+                                        <div className="vstack d-flex justify-content-center">
+                                            <div className="row ">
+                                            <div className="col d-flex justify-content-center" style={{float: 'left', marginRight:'10px'}}>
+                            <span class="form-check-label    text text-info" for="flexRadio Default1">
+              {element.chooseContent}     
+                            </span>
+                            </div>
+                            <div className="col d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
+                            <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
+                    
+                          </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+
+                          </div>  
+                        )
+                })
+
             }
 <h3 className="foodTitle d-flex justify-content-center" >Give Us Feedback </h3>
 <div className="row  " >

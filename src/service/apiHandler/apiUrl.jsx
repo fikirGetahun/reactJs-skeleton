@@ -30,7 +30,8 @@ class apiUrl {
             limitRating: 'api/feedback/ratingLimit',
             ratingAvg: 'api/feedback/rattingAvg',
             ratingAvgDate: 'api/feedback/ratingLimitDate',
-            deleteQuestion : 'api/feedback/choice'
+            deleteQuestion : 'api/feedback/choice',
+            questionWithChoice: 'api/feedback/questionWithChoice'
          }
 
 
