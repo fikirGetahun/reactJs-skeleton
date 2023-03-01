@@ -107,7 +107,7 @@ import { useNavigate, useParams } from "react-router-dom";
     }
 
     useEffect(()=>{
-        test()
+        // test()
         ratingGetter()
     }, [products])
 
@@ -134,11 +134,21 @@ import { useNavigate, useParams } from "react-router-dom";
             productSearch( search)
          }else{
             productGetter()
+            getProductByCatt()
          }
       
         // let x = priceGetter("63ae8a0163731ed525b5a81b")
         // console.log(x)
     },[ ])
+    const getProductByCatt = async ()=>{
+        const data = new GetHandler()
+        await data.getProductbyCat(catId).then(res=>{
+            if(res.status == 200){
+                setPbyCat(res.data)
+                setIsLoading(false)
+            }
+        })
+    }
 
     // if the search pram is changed meaning if new search data is entered, it loads the new serach result
     useEffect(()=>{
@@ -188,14 +198,20 @@ var captionText = document.getElementById("caption");
     const ratingGetter = async (foodId)=>{
         const data = new GetHandler()
         let result;
+     
         products.forEach(async (food)=>{
             await data.getRatingAvg(food._id).then(res=>{
                 if(res.status == 200){
-                    // result = res.data 
+                    // result = res.data
+                    let g=[] 
+                    g[food._id] = {
+                        avg : res.data.avg,
+                        outOf: res.data.outOf
+                    }
              
-                    setRating(old=>[...old,res.data.avg])
+                    setRating(old=>[...old,g])
                     setFrom(old=>[...old,res.data.outOf])
-                    // console.log(res.data)
+                     
                 }else{
                     console.log('no food rating error occured')
                 }
@@ -205,6 +221,27 @@ var captionText = document.getElementById("caption");
         // return result
     }
 
+
+    const sss =(foodid)=>{
+        const data = new GetHandler()
+        let r;
+        data.getRatingAvg(foodid).then(res=>{
+            if(res.status == 200){
+                // result = res.data
+                
+               let g  = {
+                    avg : res.data.avg,
+                    outOf: res.data.outOf
+                }
+         
+                r = res.data.avg;
+                 console.log(g)
+            }else{
+                console.log('no food rating error occured')
+            }
+        })
+        return r
+    }
 
     const returner = (i)=>{
         let f = rating[i]  
@@ -219,14 +256,7 @@ var captionText = document.getElementById("caption");
 
 
 
-const getProductByCatt = async ()=>{
-    const data = new GetHandler()
-    await data.getProductByCatt(catId).then(res=>{
-        if(res.status == 200){
-            setPbyCat(res.data)
-        }
-    })
-}
+
 useEffect(()=>{
     getProductByCatt()
 },[])
@@ -234,6 +264,7 @@ useEffect(()=>{
     return( 
         <div className="d-flex justify-content-center">
             <div  className="category2  " >
+            {/* {console.log(rating['63ff549dccb6cf9732ad4650'])} */}
                  {
                     !isLoadidng ? 
                     
@@ -243,7 +274,7 @@ useEffect(()=>{
                        return (
                         
                         <div className="vstack" >
-                            
+                               
                              {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
                              <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
                              {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
@@ -266,6 +297,7 @@ useEffect(()=>{
                                     <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
                                 {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
                                 <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span>
+                        {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ ()=> sss(data._id)  }</span> */}
                                  </Link>
 
                                 <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>
@@ -311,14 +343,14 @@ useEffect(()=>{
                                 <div className="fullPrice">
                                     <h4 className="fullPriceTitle" >Full price</h4>
                                     {/* { priceGetter(data._id)} */}
-                                    <h5 className="fullPriceBrr" > { data.result.price }   <span className="supperScript" >Br</span></h5>
+                                    <h5 className="fullPriceBrr" > { data.result[0].price }   <span className="supperScript" >Br</span></h5>
                                  </div>      
                                 {
-                                    (x[1] ? x[i].halfFull : null )?
+                                    (  data.result[0].halfFull  )?
                                   
                                     (<div className="halfPrice">
                                     <h4 className="fullPriceTitle ">Half price</h4>
-                                    <h5 className="fullPriceBrr">{data.result.halfPrice  } <span className="supperScript" >Br</span></h5>
+                                    <h5 className="fullPriceBrr">{data.result[0].halfPrice  } <span className="supperScript" >Br</span></h5>
                                 </div>) :
                                     (<div></div>)
                                 }
