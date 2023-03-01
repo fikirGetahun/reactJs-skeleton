@@ -217,16 +217,16 @@ const sendAnswer = async( zz)=>{
                          if(res.status !=200){
                             console.log('couldnot submit feedback!')
                          }else{
-                            alert('submited')
+                             stat = true
                          }
                      })
                     
                  }
                  i = i+1
              })
-            //  if(stat == true){
-            //     alert('submited')
-            //  }
+             if(stat == true){
+                alert('submited')
+             }
      
          })
     }else{
