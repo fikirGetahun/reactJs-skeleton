@@ -1,12 +1,14 @@
 import React from "react";
 
 const InnerDashboard = ()=>{
+
+    let x = window.localStorage.getItem('token');
     return(
         
 
 <div>
 <div className="container-fluid pt-4 px-4 ">
-    {localStorage.getItem('token')}
+    {x}
     {
         localStorage.getItem('isAdmin')
     }

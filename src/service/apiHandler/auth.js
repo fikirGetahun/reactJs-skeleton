@@ -55,15 +55,14 @@ class Auth{
     Login = async (body) =>{
         var result;
         try{
-            await axios.post(api.joinUrl(api.endPoints.login), body)
-            .then(res=>{
-            
-                window.localStorage.setItem('token', res.data.token)
-                window.localStorage.setItem('isAdmin', res.data.isAdmin)
-                window.localStorage.setItem('email',body.email)
-                
-                 result = true
-            })
+          let res =  await axios.post(api.joinUrl(api.endPoints.login), body)
+          window.localStorage.setItem('token', res.data.token)
+          window.localStorage.setItem('isAdmin', res.data.isAdmin)
+          window.localStorage.setItem('email',body.email)
+          console.log(localStorage.getItem('token'))
+          console.log(localStorage.getItem('isAdmin'))
+          alert(res.data)
+           result = true
         }catch(err){
             if(err.response){
                 return err.response.data
