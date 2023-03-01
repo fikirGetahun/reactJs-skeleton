@@ -1,0 +1,115 @@
+        <div className="d-flex justify-content-center">
+            <div  className="category2  " >
+                 {
+                    !isLoadidng ? 
+                    
+                    products.map ( (data, i)=>{
+                    
+                    
+                       return (
+                        
+                        <div className="vstack" >
+                            
+                             {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
+                             <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
+                             {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
+
+                        {/* this is th */}
+                        <div id={"myModal"+i} class="modal">
+                        <span  className="close" onClick={()=>modalImageClose(i)}>&times;</span>
+                        <img class="modal-content" src={data.image} id={"img01"+i} />
+                        <div id="caption"></div>
+                        </div>
+                        <div className="row">
+                        <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
+                        <div className="col ">
+                            <div className="hstack  d-flex justify-content-end  " >
+
+                            <div className="hstack  ">
+
+                                <div className="vstack  ">
+                                    <div className="hstack  d-flex justify-content-end ">
+                                    <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
+                                {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
+                                <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span>
+                                 </Link>
+
+                                <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>
+                                    </div>
+
+                           
+                                <span className="d-flex justify-content-end "> {from[i]}  Reviews</span>
+                                
+                                    {/* <div className="hstack p-0">
+                                    <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                            <span id={data._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 2 ||  rating[i]   == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                            <span id={data._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 3||  rating[i]   == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                            <span id={data._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 4||  rating[i]   == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                            <span  id={data._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 5 ||  rating[i]   == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                    </div> */}
+                                                                    {/* <div className=" p-0 m-0" >
+                                <Link to={'/feedback/'+data._id}>
+                            <span className="  " style={{color: 'coral' }}  >Rate This Food </span>
+                            </Link>
+                                </div> */}
+
+                                </div>
+                                </div>
+
+
+                            </div>
+   
+                                <div >
+
+                            </div>
+
+                        </div>
+                        </div>
+                      
+                        <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
+        textOverflow:"ellipsis"}}   >
+                                { data.info}  
+                             </p>
+                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
+     
+                        <div className=" " >
+                            <div className="price hstack gap-3">
+                                <div className="fullPrice">
+                                    <h4 className="fullPriceTitle" >Full price</h4>
+                                    {/* { priceGetter(data._id)} */}
+                                    <h5 className="fullPriceBrr" > { x[i] ? x[i].price : null }   <span className="supperScript" >Br</span></h5>
+                                 </div>      
+                                {
+                                    (x[1] ? x[i].halfFull : null )?
+                                  
+                                    (<div className="halfPrice">
+                                    <h4 className="fullPriceTitle ">Half price</h4>
+                                    <h5 className="fullPriceBrr">{x[1] ? x[i].halfPrice : null } <span className="supperScript" >Br</span></h5>
+                                </div>) :
+                                    (<div></div>)
+                                }
+         
+                            </div>
+                            {/* <div className="order">
+    
+                            </div> */}
+                             
+                             
+                        </div>
+  
+                    </div>
+                    
+                       )
+                  
+                    } 
+                
+           
+                    )    : 
+                    <div>
+                         <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+                    </div>
+                }
+
+            </div>
+       
+        </div>

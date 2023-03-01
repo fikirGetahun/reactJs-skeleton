@@ -31,7 +31,8 @@ class apiUrl {
             ratingAvg: 'api/feedback/rattingAvg',
             ratingAvgDate: 'api/feedback/ratingLimitDate',
             deleteQuestion : 'api/feedback/choice',
-            questionWithChoice: 'api/feedback/questionWithChoice'
+            questionWithChoice: 'api/feedback/questionWithChoice',
+            catWithProduct: 'api/food/catWithProduct'
          }
 
 

@@ -376,6 +376,27 @@ class GetHandler{
       return result
     }
 
+    getProductbyCat = async (cid) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.catWithProduct)+cid,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
     getRatingAvg = async (foodId) => {
       var result;
       try{

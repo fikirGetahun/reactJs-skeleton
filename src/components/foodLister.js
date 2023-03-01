@@ -215,13 +215,29 @@ var captionText = document.getElementById("caption");
 
     const [ isLoadidng, setIsLoading] = useState(true)
 
+    const [pbycat, setPbyCat] = useState([])
+
+
+
+const getProductByCatt = async ()=>{
+    const data = new GetHandler()
+    await data.getProductByCatt(catId).then(res=>{
+        if(res.status == 200){
+            setPbyCat(res.data)
+        }
+    })
+}
+useEffect(()=>{
+    getProductByCatt()
+},[])
+
     return( 
         <div className="d-flex justify-content-center">
             <div  className="category2  " >
                  {
                     !isLoadidng ? 
                     
-                    products.map ( (data, i)=>{
+                    pbycat.map ( (data, i)=>{
                     
                     
                        return (
@@ -295,14 +311,14 @@ var captionText = document.getElementById("caption");
                                 <div className="fullPrice">
                                     <h4 className="fullPriceTitle" >Full price</h4>
                                     {/* { priceGetter(data._id)} */}
-                                    <h5 className="fullPriceBrr" > { x[i] ? x[i].price : null }   <span className="supperScript" >Br</span></h5>
+                                    <h5 className="fullPriceBrr" > { data.result.price }   <span className="supperScript" >Br</span></h5>
                                  </div>      
                                 {
                                     (x[1] ? x[i].halfFull : null )?
                                   
                                     (<div className="halfPrice">
                                     <h4 className="fullPriceTitle ">Half price</h4>
-                                    <h5 className="fullPriceBrr">{x[1] ? x[i].halfPrice : null } <span className="supperScript" >Br</span></h5>
+                                    <h5 className="fullPriceBrr">{data.result.halfPrice  } <span className="supperScript" >Br</span></h5>
                                 </div>) :
                                     (<div></div>)
                                 }

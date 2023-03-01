@@ -2114,3 +2114,15 @@ MongooseServerSelectionError: Could not connect to any servers in your MongoDB A
     at module.exports (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\startup\db.js:16:19)
     at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\index.js:12:24)
     at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 01/03/2023 15:50:44 unhandledRejection: connect ECONNREFUSED 192.168.1.2:27017
+MongooseServerSelectionError: connect ECONNREFUSED 192.168.1.2:27017
+    at NativeConnection.Connection.openUri (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\connection.js:825:32)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\index.js:419:10
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\index.js:1272:10)
+    at Mongoose.connect (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\index.js:418:20)
+    at module.exports (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\startup\db.js:16:19)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\index.js:12:24)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
