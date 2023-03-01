@@ -94,7 +94,7 @@ const getQuestion = async ()=>{
         if(res.status == 200){
             setQuestionList(res.data)
         }else{
-            alert('errr getting questions')
+            // alert('errr getting questions')
         }
     })
 }

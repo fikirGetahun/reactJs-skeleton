@@ -1,7 +1,7 @@
 class apiUrl {
     constructor(){
-        this.baseUrl = "https://akko-menu-server.vercel.app";
-        // this.baseUrl = "http://localhost:3002";
+        // this.baseUrl = "https://akko-menu-server.vercel.app";
+        this.baseUrl = "http://localhost:3002";
         this.headers = {
             "Content-Type": "application/json",
             "x-auth-token": localStorage.getItem('token')

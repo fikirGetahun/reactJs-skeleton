@@ -81,6 +81,7 @@ router.get('/singleQ/:id', async (req,res)=>{
 router.get('/choose/:id', async (req,res)=>{
     const data = await QuestionChoose.find({question_id : req.params.id})
     if(!data) return res.status(404).send('page not found')
+    
     res.send(data)
 })
 

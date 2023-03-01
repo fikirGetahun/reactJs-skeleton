@@ -1929,3 +1929,122 @@ ReferenceError: url is not defined
     at Function.Module._load (node:internal/modules/cjs/loader:839:12)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
     at node:internal/main/run_main_module:17:47
+error: 01/03/2023 10:18:33 uncaughtException: Invalid schema configuration: `question_id` schematype definition is invalid. See https://mongoosejs.com/docs/guide.html#definition for more info on supported schema syntaxes.
+TypeError: Invalid schema configuration: `question_id` schematype definition is invalid. See https://mongoosejs.com/docs/guide.html#definition for more info on supported schema syntaxes.
+    at Schema.interpretAsType (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:1332:11)
+    at Schema.path (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:963:27)
+    at Schema.add (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:682:14)
+    at new Schema (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:133:10)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\model\questionChoose.js:6:57)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+error: 01/03/2023 10:19:29 uncaughtException: Invalid schema configuration: `True` is not a valid type at path `question_id.required`. See https://bit.ly/mongoose-schematypes for a list of valid schema types.
+TypeError: Invalid schema configuration: `True` is not a valid type at path `question_id.required`. See https://bit.ly/mongoose-schematypes for a list of valid schema types.
+    at Schema.interpretAsType (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:1337:11)
+    at Schema.path (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:963:27)
+    at Schema.add (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:634:12)
+    at Schema.add (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:665:12)
+    at new Schema (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:133:10)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\model\questionChoose.js:6:57)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+error: 01/03/2023 10:19:32 uncaughtException: Invalid schema configuration: `True` is not a valid type at path `question_id.required`. See https://bit.ly/mongoose-schematypes for a list of valid schema types.
+TypeError: Invalid schema configuration: `True` is not a valid type at path `question_id.required`. See https://bit.ly/mongoose-schematypes for a list of valid schema types.
+    at Schema.interpretAsType (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:1337:11)
+    at Schema.path (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:963:27)
+    at Schema.add (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:634:12)
+    at Schema.add (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:665:12)
+    at new Schema (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema.js:133:10)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\model\questionChoose.js:6:57)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+error: 01/03/2023 10:36:41 uncaughtException: this.splitPath is not a function
+TypeError: this.splitPath is not a function
+    at Mongoose.SchemaType (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schematype.js:52:8)
+    at Mongoose.ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\schema\objectid.js:36:14)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\model\questionChoose.js:13:27)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:5:27)
+error: 01/03/2023 10:37:07 uncaughtException: Unexpected token ')'
+C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\model\questionChoose.js:13
+            type:mongoose.ObjectId)
+                                  ^
+
+SyntaxError: Unexpected token ')'
+    at Object.compileFunction (node:vm:360:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1055:15)
+    at Module._compile (node:internal/modules/cjs/loader:1090:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1180:10)
+    at Module.load (node:internal/modules/cjs/loader:1004:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:839:12)
+    at Module.require (node:internal/modules/cjs/loader:1028:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\feedBack.js:5:27)
+    at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 01/03/2023 10:49:50 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:53:27 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:54:05 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:55:47 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:56:54 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:57:45 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 10:59:25 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 11:00:48 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 11:02:29 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 11:05:02 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 01/03/2023 11:05:35 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "question_id" for model "QuestionChoose"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

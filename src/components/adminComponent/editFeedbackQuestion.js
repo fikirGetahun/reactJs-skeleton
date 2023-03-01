@@ -35,7 +35,7 @@ const getQuestion = async ()=>{
 
 const getChoice = async ()=>{
     const data = new GetHandler();
-   await data.getChoosenQuestion(question._id) .then(res=>{
+   await data.getChoosenQuestion(question?question._id:'') .then(res=>{
      
         if(res.status == 200){
              setChoiceList(res.data)
