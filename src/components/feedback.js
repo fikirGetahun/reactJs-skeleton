@@ -95,56 +95,56 @@ const getQuestionWithChoice = async ()=>{
 }
 
 
-const cons = ()=>{
-    setQuetionConstructor([])
-    // console.log(allQuestions)
+// const cons = ()=>{
+//     setQuetionConstructor([])
+//     // console.log(allQuestions)
 
-    allQuestions.forEach(each=>{
-        let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }  <span className="text text-info " style={{marginLeft:10 }} >[optional]</span>   </h3>)
-        setQuetionConstructor(old=>[...old, question])
+//     allQuestions.forEach(each=>{
+//         let question = (<h3 className="foodTitle d-flex justify-content-start" >{each.questions }  <span className="text text-info " style={{marginLeft:10 }} >[optional]</span>   </h3>)
+//         setQuetionConstructor(old=>[...old, question])
 
      
-         let thisx = [];
-        allChoices.forEach(element => {
-        let choices;
-        let label;
-            if(element.question_id == each._id){
-                // console.log(element.question_id)
+//          let thisx = [];
+//         allChoices.forEach(element => {
+//         let choices;
+//         let label;
+//             if(element.question_id == each._id){
+//                 // console.log(element.question_id)
                 
-                // choices = "";
+//                 // choices = "";
  
-                  choices = (  
+//                   choices = (  
              
-                        <div className="d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
-            <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
+//                         <div className="d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
+//             <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
                     
-                          </div>
+//                           </div>
 
-               )
-                // label = "";
-              label = (    
-                <div className="d-flex justify-content-start" style={{float: 'left', marginRight:'10px'}}>
-                    <span class="form-check-label    text text-success" for="flexRadio Default1">
-              {element.chooseContent}     
-             </span>
-                </div>
-                        )
-                        // console.log(label)
+//                )
+//                 // label = "";
+//               label = (    
+//                 <div className="d-flex justify-content-start" style={{float: 'left', marginRight:'10px'}}>
+//                     <span class="form-check-label    text text-success" for="flexRadio Default1">
+//               {element.chooseContent}     
+//              </span>
+//                 </div>
+//                         )
+//                         // console.log(label)
 
-                thisx.push(label)
-                thisx.push(choices)
-                thisx.push((<div style={{clear: 'both'}} ></div>))
+//                 thisx.push(label)
+//                 thisx.push(choices)
+//                 thisx.push((<div style={{clear: 'both'}} ></div>))
               
-                setQuetionConstructor(old=>[...old, label])
+//                 setQuetionConstructor(old=>[...old, label])
             
 
-                setQuetionConstructor(old=>[...old, choices])
-                setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
-            }
-        });
-        // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
-    })
-}
+//                 setQuetionConstructor(old=>[...old, choices])
+//                 setQuetionConstructor(old=>[...old, (<div style={{clear: 'both'}} ></div>)])
+//             }
+//         });
+//         // setQuetionConstructor(old=>[...old, (<div className="p-1" >{thisx}</div>)])
+//     })
+// }
 
 
 
@@ -154,14 +154,12 @@ const cons = ()=>{
 
 useEffect(()=>{
     getQuestionWithChoice()
-    getQuestionsAndChoice()
+    // getQuestionsAndChoice()
     getChooen()
     
 },[])
 
-useEffect(()=>{
-    // cons()
-},[allChoices])
+ 
 
 //// ------------- post answer and rating ---------//
 const [comment, setComment]= useState('')
@@ -200,7 +198,7 @@ const sendAnswer = async( zz)=>{
     if(xxx != []){
         xxx.forEach(async(sel)=>{
             let i = 0
-            console.log(sel)
+            let stat = false
              sel.forEach(async(sel)=>{
                  let body = {
                      food_id: foodId,
@@ -219,14 +217,16 @@ const sendAnswer = async( zz)=>{
                          if(res.status !=200){
                             console.log('couldnot submit feedback!')
                          }else{
-                             alert('submited')
+                             stat = true
                          }
                      })
                     
                  }
                  i = i+1
              })
-     
+             if(stat == true){
+                alert('submited')
+             }
      
          })
     }else{
@@ -263,34 +263,35 @@ const sender = async (x)=>{
             }
             {
             //  questionConstructor
-                allq.map(each=>{
+                allq ?                 allq.map(each=>{
         
-                        return(
-                          <div>
-                            <h5 className="d-flex justify-content-start" >{each.questions}</h5>
-                            {
-                                each.result.map(element=>{
-                                    return(
-                                        <div className="vstack d-flex justify-content-center">
-                                            <div className="row ">
-                                            <div className="col d-flex justify-content-center" style={{float: 'left', marginRight:'10px'}}>
-                            <span class="form-check-label    text text-info" for="flexRadio Default1">
-              {element.chooseContent}     
-                            </span>
-                            </div>
-                            <div className="col d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
-                            <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
-                    
-                          </div>
-                                            </div>
+                    return(
+                      <div>
+                        <h5 className="d-flex justify-content-start" >{each.questions}</h5>
+                        {
+                            each.result.map(element=>{
+                                return(
+                                    <div className="vstack d-flex justify-content-center">
+                                        <div className="row ">
+                                        <div className="col d-flex justify-content-center" style={{float: 'left', marginRight:'10px'}}>
+                        <span class="form-check-label    text text-info" for="flexRadio Default1">
+          {element.chooseContent}     
+                        </span>
+                        </div>
+                        <div className="col d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
+                        <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
+                
+                      </div>
                                         </div>
-                                    )
-                                })
-                            }
+                                    </div>
+                                )
+                            })
+                        }
 
-                          </div>  
-                        )
-                })
+                      </div>  
+                    )
+            }) :
+            <span>pls wait</span>
 
             }
 <h3 className="foodTitle d-flex justify-content-center" >Give Us Feedback </h3>
