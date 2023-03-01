@@ -6,6 +6,10 @@ const InnerDashboard = ()=>{
 
 <div>
 <div className="container-fluid pt-4 px-4 ">
+    {localStorage.getItem('token')}
+    {
+        localStorage.getItem('isAdmin')
+    }
                 <div className="row g-4">
                     <div className="col-sm-6 col-xl-3">
                         <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
