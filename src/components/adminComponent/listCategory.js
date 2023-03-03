@@ -81,7 +81,9 @@ const ListCategory = ()=>{
             <div className="row m-5">
             {
                              isLoadidng ?  
-                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                             <div>
+                             <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                        </div>
 
                             : <div></div>
                         }

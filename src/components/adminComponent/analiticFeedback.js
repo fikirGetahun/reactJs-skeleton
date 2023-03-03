@@ -512,7 +512,9 @@ useEffect(()=>{
            <div className="d-flex justify-content-center vstack gap 1" >
            {
                              isLoadidng ?  
-                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                             <div>
+                                  <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                             </div>
 
                             : <div></div>
                            }

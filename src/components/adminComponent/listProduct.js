@@ -167,7 +167,9 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 <h3>{categorySelected.name}</h3>
                 {
                              isLoadidng ?  
-                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                             <div>
+                             <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                        </div>
 
                             : <div></div>
                         }
