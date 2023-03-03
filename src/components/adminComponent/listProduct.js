@@ -105,11 +105,27 @@ import GetHandler from "../../service/apiHandler/getHandler";
     
     useEffect(()=>{
         dataFetcher(categorySelected.id)
+        if(categorySelected.id != ''){
+            getProductByCatt(categorySelected.id)
+
+        }
         console.log(categorySelected.name)
 
     }, [categorySelected.id])
 
-     
+
+    const [pbycat, setPbyCat] = useState([])
+    const getProductByCatt = async (catId)=>{
+        const data = new GetHandler()
+        await data.getProductbyCat(catId).then(res=>{
+            if(res.status == 200){
+                setPbyCat(res.data)
+                 
+            }
+        })
+    }
+
+    
 
     return(
         <div>
@@ -138,7 +154,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 <h3>{categorySelected.name}</h3>
              {
                 
-                foodData.map((selected, i)=>{
+                pbycat.map((selected, i)=>{
                     return(
                     <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
                         <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
@@ -148,15 +164,15 @@ import GetHandler from "../../service/apiHandler/getHandler";
                        <div className="row">
                         <div className="col">
                         <label>Full Price</label>
-                        <h5>{ productPrice[i]? productPrice[i].price : null } </h5>
+                        <h5>{ selected.result[0].price } </h5>
                         </div>
                         <div className="col">
                         {
-                            (productPrice[i] ? productPrice[i].halfFull : null)?
+                            (selected.result[0].halfFull )?
                             (
                                 <div>
                                     <label>Half Price</label>
-                                <h5>{productPrice[i] ? productPrice[i].halfPrice : null} </h5>
+                                <h5>{selected.result[0].halfPrice } </h5>
                                 </div>
                             ) :
                             <div></div>

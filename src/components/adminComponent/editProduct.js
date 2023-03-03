@@ -71,7 +71,7 @@ const submitHandler = async () =>{
 
     let product = new PutHandler()
     console.log(body)
-    product.updateProduct(body, foodId, priceId)
+   await product.updateProduct(body, foodId, priceId)
         .then(res=>{
             if(res.status == 200){
                 setResponse(old=>(
@@ -139,6 +139,7 @@ const getPrice = async (foodId)=>{
             setFoodFullPrice(res.data.price)
             setFoodHalfPrice(res.data.halfPrice)
             setPriceId(res.data._id)
+            setHalfFull(res.data.halfFull)
         }else{
             alert('no category')
         }
@@ -197,7 +198,14 @@ useEffect(()=>{
                          </select>
                         </div>
 
-       
+                        <div className="d-flex justify-content-start m-2">
+                          <span>Half price: </span> &nbsp;  
+                          {
+                            halfFull ?   <input checked    onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                            : 
+                            <input     onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                          }
+                           </div> 
 
                         <div className="row">
                         <div className="textField p-2">
@@ -206,12 +214,26 @@ useEffect(()=>{
                             <label></label>
                         </div>
                          
-                            
+
+                         {
+                            halfFull ? (
                                 <div className="textField p-2">
                                 <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Half Price</label>
                                     <input className="form-control" type="text" value={foodHalfPrice}    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
                                     <label></label>
                                 </div>
+                            ) : (
+                                // <div className="textField p-2">
+                                // <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Half Price</label>
+                                //     <input className="form-control" type="text" value={false}    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
+                                //     <label></label>
+                                // </div>
+                                <div></div>
+                                 
+                            )
+                         }
+                            
+
                              
                          
                             

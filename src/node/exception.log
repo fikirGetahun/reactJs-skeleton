@@ -2126,3 +2126,33 @@ MongooseServerSelectionError: connect ECONNREFUSED 192.168.1.2:27017
     at module.exports (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\startup\db.js:16:19)
     at Object.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\index.js:12:24)
     at Module._compile (node:internal/modules/cjs/loader:1126:14)
+error: 03/03/2023 10:19:54 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 10:22:42 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 10:25:22 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 10:25:59 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 10:26:21 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 10:27:59 unhandledRejection: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
