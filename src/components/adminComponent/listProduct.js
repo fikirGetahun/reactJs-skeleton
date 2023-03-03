@@ -26,8 +26,11 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
     const deleteHandler = async (id, arrayId)=>{
         let data = new DeleteHandler()
+        setIsLoading(true)
          if (window.confirm("Are you sure you want to delete this?") == true) {
             let handler = await data.deleteProduct(id).then(res=>{
+                setIsLoading(true)
+
                 if(res.status == 200){
                     let arr = []
                     setFoodData([
@@ -48,10 +51,13 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 }
             })   
         } else {
-         alert('error not deleted!')
+            
+            setIsLoading(false)
+
         }
 
     }
+    const [isLoadidng, setIsLoading]=useState()
 
 
     const [categorySelected, setCategorySelected] =useState({id:'', name:''})
@@ -59,8 +65,12 @@ import GetHandler from "../../service/apiHandler/getHandler";
     const categoryLister = async ()=>{
         let data = new GetHandler()
         var test;
+        setIsLoading(true)
+
         let response =  await data.getCategory()
             .then(res=>{
+                setIsLoading(false)
+
                 if(res.status == 200){
                     test = res.data
                     setCategory(test)
@@ -117,7 +127,11 @@ import GetHandler from "../../service/apiHandler/getHandler";
     const [pbycat, setPbyCat] = useState([])
     const getProductByCatt = async (catId)=>{
         const data = new GetHandler()
+        setIsLoading(true)
+
         await data.getProductbyCat(catId).then(res=>{
+            setIsLoading(false)
+
             if(res.status == 200){
                 setPbyCat(res.data)
                  
@@ -137,8 +151,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 </div>
                 <button className="btn btn-warning">Edit</button>
             </div> */}
-            {console.log('dddd ', productPrice)}
-            <h3>Select Category to List Products</h3>
+             <h3>Select Category to List Products</h3>
             <label>Category List</label>
             <select className="form-controle" onChange={e=>categoryName(e) } >
                 <option   >Select Category</option>
@@ -152,6 +165,12 @@ import GetHandler from "../../service/apiHandler/getHandler";
             <hr></hr>
             <div className="row m-5">
                 <h3>{categorySelected.name}</h3>
+                {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
              {
                 
                 pbycat.map((selected, i)=>{

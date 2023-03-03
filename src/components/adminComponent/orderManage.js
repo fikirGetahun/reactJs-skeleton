@@ -31,6 +31,7 @@ import { useParams } from "react-router-dom";
         categoryGetter ()
     }
   },[type])
+  const [isLoadidng, setIsLoading]=useState()
 
  const [catList, setCategoryList] = useState([])
  const [selectedCat, setSelectedCat] = useState()
@@ -41,8 +42,12 @@ useEffect(()=>{
 
   const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
+    setIsLoading(true)
+
     let cat = catGetter.getCategory()
         .then(res=>{
+            setIsLoading(false)
+
             if(res.status == 200){
                 setCategoryList(res.data)
             }else{
@@ -59,7 +64,11 @@ const [items, setItems] = useState([])
 // category order data featcher
 const getCategoryOrder = async()=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let x =data.getCategoryInOrder().then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
             setItems(res.data)
         }else{
@@ -73,7 +82,11 @@ const getCategoryOrder = async()=>{
 // category order updater
 const categoryOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
+    setIsLoading(true)
+
     await data.updateCategoryOrder(body,id).then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
         //    alert('ok') 
         }else{
@@ -85,7 +98,11 @@ const categoryOrderUpdater = async (body, id)=>{
 // PRODUCT UPDATER
 const productOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
+    setIsLoading(true)
+
     await data.updateProductOrder(body,id).then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
         //    alert('ok') 
         }else{
@@ -99,7 +116,11 @@ const productOrderUpdater = async (body, id)=>{
 // product data fetcher 
 const getProductOrder = async(cid)=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let x =data.getProductOnCategory(cid).then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
             setItems(res.data)
         }else{
@@ -232,7 +253,12 @@ const catDisplay = ()=>{
         <h2>Category Order Manager</h2>
         <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
         <div className=" d-flex justify-content-center align-itmes-center  ">
-      
+        {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
      
         <div className="card " style={{width: "18rem"}}>
         <ul className="list-group list-group-flush">
@@ -272,6 +298,12 @@ const productDisplay = ()=>{
     return(            <div>
         <h2>Product Order Manager</h2>
         <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
+        {
+                isLoadidng ?  
+                <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+            : <div></div>
+        }
 
         <div className="container d-flex justify-content-center">
         <select onChange={(e)=>setSelectedCat(e.target.value)} className="form-control">

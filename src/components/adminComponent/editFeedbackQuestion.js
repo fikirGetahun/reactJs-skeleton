@@ -13,7 +13,8 @@ import DeleteHandler from "../../service/apiHandler/deleteHandler";
 const EditFeedBackQuestion = ()=>{
     const {qid} = useParams();
 
- 
+    const [isLoadidng, setIsLoading]=useState()
+
 ////--db side-------//
 
 /////--------------------------------------------------------------------------
@@ -23,11 +24,18 @@ const [newQuestion, setNewQuestion] = useState('')
 
 const getQuestion = async ()=>{
     const data = new GetHandler();
+    setIsLoading(true)
+
   await  data.getSingleQ(qid) .then(res=>{
+    setIsLoading(false)
         if(res.status == 200){
+            
+
             setQuestion(res.data)
             setNewQuestion(res.data)
         }else{
+         
+
             alert('errr getting questions')
         }
     })
@@ -35,11 +43,16 @@ const getQuestion = async ()=>{
 
 const getChoice = async ()=>{
     const data = new GetHandler();
+    setIsLoading(true)
+
    await data.getChoosenQuestion(question?question._id:'') .then(res=>{
-     
+    setIsLoading(false)
         if(res.status == 200){
+            
+
              setChoiceList(res.data)
         }else{
+            
             alert('errr getting questions')
         }
     })
@@ -56,14 +69,18 @@ useEffect(()=>{
  
 /////--------------------------------------------------------------------------
 const updateQuestion = async ()=>{
+    setIsLoading(true)
     const data = new PutHandler();
     let body ={
         question: newQuestion
     }
     data.updateQuestion(body, qid).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
+             
             alert('Question Updated!!')
         }else{
+             
             alert('error')
         }
     })
@@ -75,10 +92,14 @@ const updateChoice = async (content, id)=>{
     let body ={
         content: content
     }
+    setIsLoading(true)
     data.updateQuestionChoice(body, id).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
+             
             alert('Choice Updated!!')
         }else{
+            
             alert('error')
         }
     })
@@ -129,16 +150,19 @@ const handleNewChoice = ()=>{
 
 const addNewChoice = async ()=>{
     let sendQ = new PostHandler()
-
+    setIsLoading(true)
     let body = {
         chooseContent:newChoice , question_id: qid
     }
     await sendQ.addQuestionChoose(body).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
+             
             alert('Question Added!!')
             getChoice();
 
         }else{
+            
             alert("error inserting choice")
         }
     })
@@ -149,16 +173,21 @@ const addNewChoice = async ()=>{
 
 const deleteChoices = async (id)=>{
     const data = new DeleteHandler()
+    setIsLoading(true)
     if (window.confirm("Are you sure you want to delete this?  ") == true) {
         await data.deleteChoices(id).then(res=>{
+            setIsLoading(false)
             if(res.status == 200){
+               
                 window.alert("Deleted!")
                 window.location.reload()
             }else{
+              
                 alert('error not deleted!')
             }
         })
     } else {
+        setIsLoading(false)
     //  alert('error not deleted!')
     }
 
@@ -204,7 +233,12 @@ const deleteChoices = async (id)=>{
                         </div>
                     ) : <div></div>
                 }
+                           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
 
+                            : <div></div>
+                           }
                   {
                     choiceList.map(sel=>{
                         return (
@@ -223,6 +257,7 @@ const deleteChoices = async (id)=>{
                     })
                   }
                     |<button type="button" onClick={()=>handleNewChoice()} class="btn btn-outline-success">Add New Choice</button>
+              
                 </div>
             </div>
         </div>

@@ -52,6 +52,8 @@ const chooiceArrManage = ()=>{
 const [question , setQuestion] = useState('');
 const [result, setResult] = useState('');
 
+const [isLoadidng, setIsLoading]=useState()
+
 const sendRequest = async ()=>{
     let sendQ = new PostHandler();
     let body = {
@@ -59,12 +61,15 @@ const sendRequest = async ()=>{
         active : true
     }
     let insertedQ;
+    setIsLoading(true)
     await sendQ.AddFeedBackQuestion(body).then(res=>{
         
         if(res.status == 200){
             insertedQ = res.data// get the inserted response to get the question id to input it in chooice
             // console.log(insertedQ)
+            setIsLoading(false)
         }else{
+            setIsLoading(false)
             alert('error inserting question')
         }
     })
@@ -116,6 +121,13 @@ const sendRequest = async ()=>{
                     <label></label>
                 </div> */}
                     <button className="btn btn-outline-dark" onClick={()=>sendRequest()}> <span className="text text-primary">Submit Feedback Question</span> </button><br></br>
+                    {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
+
                     {
                         result
                     }

@@ -30,6 +30,7 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
        
     }
 }
+const [isLoading, setIsloading] = useState( )
 
 const submitHandler = async()=>{
     const sender = new PostHandler()
@@ -41,9 +42,11 @@ const submitHandler = async()=>{
         order: catOrder,
      
     }
+    setIsloading(true)
    await sender.CategoryAdder(body)
     .then(resx=>{
         if(resx.status == 200){
+            setIsloading(false)
              setResponse(old=>(
                 {
                     ...old,
@@ -52,6 +55,7 @@ const submitHandler = async()=>{
                 }
             ))
         }else{
+            isLoading(false)
             setResponse(old=>(
                 {
                     ...old,
@@ -93,6 +97,12 @@ const submitHandler = async()=>{
                            <DragDropFile onChange={FormHandler}  dbName="catImage" />
                            <button onClick={submitHandler} className="btn btn-warning">Add Category</button>
                            <br></br>
+                           {
+                            isLoading ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                             <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

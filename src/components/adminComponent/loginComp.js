@@ -5,6 +5,7 @@ import {  useNavigate } from "react-router-dom";
 
 
 const LoginComp = () =>{
+  const [isLoadidng, setIsLoading]=useState()
 
   const navigate = useNavigate();
   const [userName, setUsername] = useState('')
@@ -18,7 +19,11 @@ const LoginComp = () =>{
     email: userName,
     password: password
   }
+  setIsLoading(true)
+
   auth.Login(body).then(res=>{
+    setIsLoading(false)
+
     setResponse(res)
     if(res === true){
       // alert(window.sessionStorage.getItem('isAdmin'))
@@ -52,6 +57,12 @@ const LoginComp = () =>{
               </div>
 
               <input    onClick={loginHandler} value="Log In" className="btn btn-block btn-primary"/>
+              {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
               <label className="text text-danger">{response}</label>
         </div>
     )

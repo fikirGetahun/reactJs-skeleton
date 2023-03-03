@@ -39,11 +39,16 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
     
 }
 
+const [isLoadidng, setIsLoading]=useState()
 
 const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
+    setIsLoading(true)
+
     let cat = catGetter.getCategory()
         .then(res=>{
+            setIsLoading(false)
+
             if(res.status == 200){
                 setCategoryList(res.data)
             }else{
@@ -68,11 +73,14 @@ const submitHandler = async () =>{
             oldPrice:foodOrder,
           }
     }
+    setIsLoading(true)
 
     let product = new PutHandler()
     console.log(body)
    await product.updateProduct(body, foodId, priceId)
         .then(res=>{
+            setIsLoading(false)
+
             if(res.status == 200){
                 setResponse(old=>(
                     {
@@ -100,8 +108,12 @@ const submitHandler = async () =>{
 const oldDataGetter = async (id)=>{
     let data = new GetHandler()
     let test;
+    setIsLoading(true)
+
     let res = await data.getOneProduct(id)
     .then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
             test =res.data
             setFoodName(res.data.name)
@@ -121,7 +133,11 @@ const oldDataGetter = async (id)=>{
 const [categoryName, setCategoryNme] = useState([])
 const getCategoryName = async (id)=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let catName = await data.getOneCategory(id).then(res=>{
+        setIsLoading(false)
+
         if(res.status == 200){
             setCategoryNme(res.data)
             setFoodCategory(res.data._id)
@@ -163,6 +179,12 @@ useEffect(()=>{
                     <div className="row d-flex justify-content-center">
                     <h3>Edit Product</h3>
                         <div className="col-6">
+                        {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                          <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Name</label>
                             <input className="form-control" type="text" value={foodName}   id="standard-basic" placeholder="Food Name"   onChange={(e)=>setFoodName(e.target.value)} name="catName" />

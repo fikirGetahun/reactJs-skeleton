@@ -45,6 +45,8 @@ const categoryGetter = async ()=>{
         })
 }
 
+const [isLoadidng, setIsLoading]=useState()
+
 const addFood = async () =>{
     let body = {
         food:{
@@ -61,12 +63,13 @@ const addFood = async () =>{
             oldPrice:foodOrder,
          }
     }
-
+    setIsLoading(true)
     let product = new PostHandler()
     console.log(body)
     product.FoodAdder(body)
         .then(res=>{
             if(res.status == 200){
+                setIsLoading(false)
                 setResponse(old=>(
                     {
                         ...old,
@@ -75,6 +78,7 @@ const addFood = async () =>{
                     }
                 ))
             }else{
+                setIsLoading(false)
                 // alert(res)
                 setResponse(old=>(
                     {
@@ -182,6 +186,12 @@ useEffect(()=>{
                            <div>
                             <button onClick={addFood} className="btn btn-warning">Add Product</button>
                            </div>
+                           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                            <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

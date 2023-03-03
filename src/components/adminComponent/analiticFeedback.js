@@ -50,16 +50,20 @@ useEffect(()=>{
 },[u])
 
 
- 
+const [isLoadidng, setIsLoading]=useState()
+
 
 const [allchoices, setAllchoices] = useState([])
 
 const getAllchoice = async ()=>{
     const data = new GetHandler();
     setAllchoices([])
+   
+
     allQuestions.forEach(async(q)=>{
+        setIsLoading(true)
         await data.getChoosenQuestion(q._id).then(res=>{
-            
+            setIsLoading(false)
             if(res.status == 200){
                 
                //  setAllAnsewers(res.data.qid)
@@ -80,10 +84,10 @@ const getAllchoice = async ()=>{
 
 const ppp = async ()=>{
     const data = new GetHandler();
-   
+    setIsLoading(true)
    
         await data.getChoosen().then(res=>{
-            
+            setIsLoading(false)
             if(res.status == 200){
                 
                //  setAllAnsewers(res.data.qid)
@@ -138,8 +142,9 @@ const countReview = async ()=>{
        
         let count = 0
         element.forEach(async(nn)=>{
-          
+            setIsLoading(true)
             await data.getAnswers(foodId, nn.question_id, nn._id).then(res=>{
+                setIsLoading(false)
                 if(res.status == 200){
                     result = res.data.countx
                     
@@ -348,7 +353,9 @@ const [lastId, setLastId] = useState(0)
 
 const getCount = async ()=>{
     const data = new GetHandler();
+    setIsLoading(true)
     await data.getRating(foodId).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
             // setRatings(old=>[...old,res.data])
             setCount(res.data.count)
@@ -363,9 +370,10 @@ const getCount = async ()=>{
 
 const getRating = async ()=>{
     const data = new GetHandler();
-
+    setIsLoading(true)
 
     await data.getRatingLimit(foodId, lastId).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
             setRatings([])
             setRatings(res.data)
@@ -416,7 +424,9 @@ const pageNation = ()=>{
 const [fullRating, setFullRating] = useState()
 const getFullRating = async ()=>{
     const data = new GetHandler()
+    setIsLoading(true)
     await data.getRatingAvg(foodId).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
             setFullRating(res.data.avg)
         }else{
@@ -451,7 +461,9 @@ const finalDateSetter = (val)=>{
 const rangSearch = async ()=>{
     setSearchModeActive(true)
     const data = new GetHandler()
+    setIsLoading(true)
     await data.getRatingLimitDay(foodId,lastId, startDate, finalDate).then(res=>{
+        setIsLoading(false)
         if(res.status != 200){
             alert('error on rang search')
         }else{
@@ -465,7 +477,9 @@ const rangSearch = async ()=>{
 const [foodData, setFoodData] = useState()
 const getFoodData = async ()=>{
     const data = new GetHandler()
+    setIsLoading(true)
     await data.getOneProduct(foodId).then(res=>{
+        setIsLoading(false)
         if(res.status == 200){
             setFoodData(res.data)
         }else{
@@ -496,6 +510,12 @@ useEffect(()=>{
             <br></br>
             <br></br>
            <div className="d-flex justify-content-center vstack gap 1" >
+           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
            {
             !activeRating ? 
              questionConstructor

@@ -298,7 +298,7 @@ useEffect(()=>{
                                     <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
                                 {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
                                 {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
-                        <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *100) / 100 : '0'  }</span>
+                        <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *10) / 10 : '0'  }</span>
                                  </Link>
 
                                 <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>

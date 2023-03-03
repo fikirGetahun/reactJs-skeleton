@@ -15,6 +15,7 @@ import PutHandler from "../../service/apiHandler/putHandler";
 
 
 const getDataToEdit = async () =>{
+    setIsLoading(true)
     let data = new GetHandler()
     let response = data.getOneCategory(id)
     .then(res=>{
@@ -22,7 +23,9 @@ const getDataToEdit = async () =>{
             setCatName(res.data.name)
             setCatOrder(res.data.order)
             setCatPhoto(res.data.image)
+            setIsLoading(false)
         }else{
+            setIsLoading(false)
             alert('not found err:404')
         }
     })
@@ -52,7 +55,7 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
        
     }
 }
-
+const [isLoadidng, setIsLoading]=useState()
 const submitHandler = async()=>{
     const sender = new PutHandler()
     // var x = new Buffer.from(catPhoto, 'base64')
@@ -63,9 +66,11 @@ const submitHandler = async()=>{
         order: catOrder,
      
     }
+    setIsLoading(true)
    await sender.updateCategory(body, id)
     .then(resx=>{
         if(resx.status == 200){
+            setIsLoading(false)
              setResponse(old=>(
                 {
                     ...old,
@@ -74,6 +79,7 @@ const submitHandler = async()=>{
                 }
             ))
         }else{
+            setIsLoading(false)
             setResponse(old=>(
                 {
                     ...old,
@@ -143,6 +149,12 @@ useEffect(()=>{
                         
                            <button onClick={submitHandler} className="btn btn-warning">Edit Category</button>
                            <br></br>
+                           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                             <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

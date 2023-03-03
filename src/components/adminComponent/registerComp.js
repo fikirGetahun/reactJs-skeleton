@@ -10,6 +10,7 @@ const Register = ()=>{
 
     const[status, setStatus]=useState('')
     const[isAdmin, setIsAdmin]=useState(true)
+    const [isLoadidng, setIsLoading]=useState()
 
     const submitHandler = async()=>{
 //    alert('in')
@@ -20,8 +21,12 @@ const Register = ()=>{
             isAdmin: isAdmin
         }
         var x;
+        setIsLoading(true)
+
    server.registerAuth(body) 
         .then((res)=>{
+            setIsLoading(false)
+
             if(res == 200){
                 setStatus('Registerd Successfully')
             }else{
@@ -70,6 +75,12 @@ const Register = ()=>{
         
 
             <button onClick={submitHandler} className="btn btn-warning">Register</button><br></br>
+            {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
             <label className="text text-danger">{status}</label>
 
         </div>

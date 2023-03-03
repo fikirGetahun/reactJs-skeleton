@@ -5,11 +5,16 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
 
 const ListUser = ()=>{
+    const [isLoadidng, setIsLoading]=useState()
 
     const [users, setUsers] = useState([])
     const getAllUsers = async ()=>{
         let data = new GetHandler()
+        setIsLoading(true)
+
         let users = await data.getAllUsers().then(res=>{
+            setIsLoading(false)
+
             if(res.status == 200){
                 setUsers(res.data)
             }else{
@@ -25,8 +30,12 @@ const ListUser = ()=>{
 
     const deleteHandler = async (id)=>{
         const data = new DeleteHandler()
+        setIsLoading(true)
+
         if (window.confirm("Are you sure you want to delete this?") == true) {
             await data.deleteUser(id).then(res=>{
+                setIsLoading(false)
+
                 if(res.status == 200){
                     alert('deleted')
                     getAllUsers()
@@ -34,6 +43,9 @@ const ListUser = ()=>{
                     alert('error deleting')
                 }
             })
+        }else{
+            setIsLoading(false)
+
         }
 
     }
@@ -61,6 +73,12 @@ const ListUser = ()=>{
      </tr>
   </thead>
   <tbody>
+  {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
         {
             users.map((sel, i)=>{
                 return (
