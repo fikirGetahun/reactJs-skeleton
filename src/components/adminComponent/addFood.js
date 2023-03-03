@@ -145,7 +145,8 @@ useEffect(()=>{
                            <span>Full price: </span> &nbsp; <input  type="checkbox" name="fullPrice" />  
                            </div> */}
                           <div className="d-flex justify-content-start m-2">
-                          <span>Half price: </span> &nbsp;    <input  onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" /></div> 
+                          <span>Half price: </span> &nbsp;    <input  onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                          </div> 
 
                         </div>
 
