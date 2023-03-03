@@ -2156,3 +2156,14 @@ CastError: Cast to ObjectId failed for value "catWithProduct" (type string) at p
     at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
     at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 15:29:56 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+error: 03/03/2023 15:31:29 unhandledRejection: Cast to ObjectId failed for value "undefined" (type string) at path "categoryId" for model "Food"
+CastError: Cast to ObjectId failed for value "undefined" (type string) at path "categoryId" for model "Food"
+    at model.Query.exec (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:4913:21)
+    at model.Query.Query.then (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongoose\lib\query.js:5012:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

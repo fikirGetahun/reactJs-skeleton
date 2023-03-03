@@ -34,10 +34,13 @@ import { useParams } from "react-router-dom";
   const [isLoadidng, setIsLoading]=useState()
 
  const [catList, setCategoryList] = useState([])
- const [selectedCat, setSelectedCat] = useState()
+ const [selectedCat, setSelectedCat] = useState('')
 
 useEffect(()=>{
-     getProductOrder(selectedCat)
+    if(selectedCat != ''){
+        getProductOrder(selectedCat)
+    }
+     
 },[selectedCat])
 
   const categoryGetter = async ()=>{
@@ -72,7 +75,7 @@ const getCategoryOrder = async()=>{
         if(res.status == 200){
             setItems(res.data)
         }else{
-            alert('db connect error')
+            alert('db connect error2')
         }
     })
 }
@@ -255,8 +258,8 @@ const catDisplay = ()=>{
         <div className=" d-flex justify-content-center align-itmes-center  ">
         {
                              isLoadidng ?  
-                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
-
+                            <div>                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                            </div>
                             : <div></div>
                         }
      
