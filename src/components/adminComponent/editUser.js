@@ -15,6 +15,7 @@ const EditUser = ()=>{
 
     const [editPassword, setEditPassword] = useState(false)
   
+    const [isLoadidng, setIsLoading]=useState()
 
  
 
@@ -35,8 +36,12 @@ const editData = async (toBeEdited)=>{
         data : realData,
         id: uid
     }
+    setIsLoading(true)
+
      let db = new PutHandler()
     let x = await db.updateUserData(body).then(res=>{
+        setIsLoading(false)
+
         setDbRes(res.data)
     })
 }
@@ -46,8 +51,12 @@ const [uid, setUid] = useState()
 
 const getToBeEditedUser = async ()=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
    let userEmail = window.sessionStorage.getItem('email')
     let user = await data.getOneUser(userEmail ).then(res=>{
+        setIsLoading(false)
+
         if(res.statusText == 'OK'){
             setName(res.data.name)
             setEmail(res.data.email)
@@ -64,6 +73,12 @@ useEffect(()=>{
         <div className="container" >
             <h2 className="d-flex justify-content-center">Akko Coffee Menu</h2>
             <h4 className="d-flex justify-content-center" >EditUser</h4>
+                        {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                        }
 
             {/* <TextFieldComp label="Name" onChange={formHandler} dbName="name" type="text"/>
              <TextFieldComp label="Email" onChange={formHandler} dbName="email" type="text"/>
