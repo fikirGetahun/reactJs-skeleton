@@ -300,12 +300,12 @@ const sender = async (x)=>{
 {/* <input className="form-control" onChange={(e)=>setRating(e.target.value)} type="text" /> */}
  
 <div className="hstack   d-flex justify-content-center">
-  <span id="r1" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(1)  } >&#9733;</span>
-  <span id="r2" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(2)} >&#9733;</span>
-  <span id="r3" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(3)}>&#9733;</span>
-  <span id="r4" style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(4)}>&#9733;</span>
-    <span  id="r5"style={{fontSize:'2vw', cursor: 'pointer'}} onClick={()=>ratingHandler(5)}>&#9733;</span>
-</div>
+  <span id="r1" style={{fontSize:'30px', cursor: 'pointer'}} onClick={()=>ratingHandler(1)  } >&#9733;</span>
+  <span id="r2" style={{fontSize:'30px', cursor: 'pointer'}} onClick={()=>ratingHandler(2)} >&#9733;</span>
+  <span id="r3" style={{fontSize:'30px', cursor: 'pointer'}} onClick={()=>ratingHandler(3)}>&#9733;</span>
+  <span id="r4" style={{fontSize:'30px', cursor: 'pointer'}} onClick={()=>ratingHandler(4)}>&#9733;</span>
+    <span  id="r5"style={{fontSize:'30px', cursor: 'pointer'}} onClick={()=>ratingHandler(5)}>&#9733;</span>
+</div> 
 </div>
 {/* <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
 <div class="wraper">
