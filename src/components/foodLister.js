@@ -378,7 +378,7 @@ const scrollHandler = (e)=>{
                     nodata
                 }
                     {
-                        isLoadidng ? (
+                        isLoadidng && nodata!='No more product' ? (
                             
                             <div>
                                 {console.log('scroll')}
