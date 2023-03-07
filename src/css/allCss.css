@@ -1,7 +1,7 @@
  
     .category{
         width: 96%;
-        /* height: 100%; */
+
      
         border-radius:30px;
         margin-Left:2%; 
@@ -16,8 +16,9 @@
     }
     .category2{
       width: 96%;
-      /* height: 100%; */
-   
+      /* height: 50%; */
+      /* height: 300px; */
+      /* overflow: scroll; */
       border-radius:30px;
       /* margin-Left:2%;  */
       margin-Right:2%;
@@ -29,7 +30,22 @@
   
   
   }
+  .category3{
+    width: 96%;
+    /* height: 50%; */
+    height: 60vh;
+    overflow: scroll;
+    border-radius:30px;
+    /* margin-Left:2%;  */
+    margin-Right:2%;
+    margin-Bottom:10px;
 
+     background-Size:cover;
+    align-Items:center;
+    justify-Content: center;
+
+
+}
     .mainMenu{
       cursor: pointer;
     background: var(--color-white);

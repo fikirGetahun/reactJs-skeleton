@@ -125,7 +125,7 @@ import { useNavigate, useParams } from "react-router-dom";
         })
         return x;
     }
-
+    const [pbycat, setPbyCat] = useState([])
     // on first load if there is no search pram it loads food list besd on category
     // if there is serach pram, it loads serach result
     useEffect(()=>{
@@ -135,18 +135,30 @@ import { useNavigate, useParams } from "react-router-dom";
          }else{
             productGetter()
             getProductByCatt()
+            console.log('i fire once');
          }
       
         // let x = priceGetter("63ae8a0163731ed525b5a81b")
         // console.log(x)
-    },[ ])
+    },[])
+    const [nodata, setNodata] = useState()
     const getProductByCatt = async ()=>{
+        // alert('getp')
+        setIsLoading(true)
         const data = new GetHandler()
-        await data.getProductbyCat(catId).then(res=>{
+        await data.getProductbyCat(catId,scrollPage).then(res=>{
+
             if(res.status == 200){
-                setPbyCat(res.data)
-                setIsLoading(false)
+                if(res.data.message == 400){
+                    setNodata('No more product')
+                    
+                }else{
+                    setPbyCat(old=>[...old,res.data])
+                   
+                }
+
             }
+            setIsLoading(false)
         })
     }
 
@@ -222,163 +234,169 @@ var captionText = document.getElementById("caption");
         // return result
     }
 
+ 
 
-    const sss =(foodid)=>{
-        const data = new GetHandler()
-        let r;
-        data.getRatingAvg(foodid).then(res=>{
-            if(res.status == 200){
-                // result = res.data
-                
-               let g  = {
-                    avg : res.data.avg,
-                    outOf: res.data.outOf
-                }
-         
-                r = res.data.avg;
-                 console.log(g)
-            }else{
-                console.log('no food rating error occured')
-            }
-        })
-        return r
+ 
+
+    const [ isLoadidng, setIsLoading] = useState()
+
+
+
+
+
+
+    const [scrollPage, setScrollPage]=useState(0)
+
+ 
+
+const scrollHandler = (e)=>{
+    // console.log(e.currentTarget.scrollTop)
+    const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+    if(bottom){
+        // alert('bottom')
+
+        setScrollPage(scrollPage+2)
+        // alert('dd')
+        
+        getProductByCatt()
+        
+        // alert(scrollPage)
     }
-
-    const returner = (i)=>{
-        let f = rating[i]  
-         
-        // alert(f)
-        return f.avg
-    }
-
-    const [ isLoadidng, setIsLoading] = useState(true)
-
-    const [pbycat, setPbyCat] = useState([])
-
-
-
-
-useEffect(()=>{
-    getProductByCatt()
-},[])
+    // console.log(e.target.clientHeight)
+    // console.log(bottom)
+}
 
     return( 
-        <div className="d-flex justify-content-center">
-            <div  className="category2  " >
-            {rating['63ff549dccb6cf9732ad4650'] ?  console.log(rating['63ff549dccb6cf9732ad4650'].avg) : ''}
+        <div className="d-flex justify-content-center" onScroll={scrollHandler}
+         style={{height:'83vh',overflow: 'scroll', overflowX:'hidden'}} >
+            <div  className="category2 "       >
+               
+            {/* {rating['63ff549dccb6cf9732ad4650'] ?  console.log(rating['63ff549dccb6cf9732ad4650'].avg) : ''} */}
                  {
-                    !isLoadidng ? 
-                    
-                    pbycat.map ( (data, i)=>{
                     
                     
-                       return (
+                    pbycat.map ( (datax, i)=>{
                         
-                        <div className="vstack" >
-                               
-                             {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
-                             <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
-                             {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
-
-                        {/* this is th */}
-                        <div id={"myModal"+i} class="modal">
-                        <span  className="close" onClick={()=>modalImageClose(i)}>&times;</span>
-                        <img class="modal-content" src={data.image} id={"img01"+i} />
-                        <div id="caption"></div>
-                        </div>
-                        <div className="row">
-                        <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
-                        <div className="col ">
-                            <div className="hstack  d-flex justify-content-end  " >
-
-                            <div className="hstack  ">
-
-                                <div className="vstack  ">
-                                    <div className="hstack  d-flex justify-content-end ">
-                                    <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
-                                {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
-                                {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
-                        <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *10) / 10 : '0'  }</span>
-                                 </Link>
-
-                                <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none'}} >&#9733;</span>
+                        return (
+                            datax.map((data,ix)=>{
+                                return (
+                            
+                                    <div className="vstack" >
+                                           
+                                         {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
+                                         <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
+                                         {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
+            
+                                    {/* this is th */}
+                                    <div id={"myModal"+i} class="modal">
+                                    <span  className="close" onClick={()=>modalImageClose(i)}>&times;</span>
+                                    <img class="modal-content" src={data.image} id={"img01"+i} />
+                                    <div id="caption"></div>
                                     </div>
-
-                           
-                                <span className="d-flex justify-content-end "> { rating[data._id] ? rating[data._id].outOf : '0'}  Reviews</span>
-                                
-                                    {/* <div className="hstack p-0">
-                                    <span id={data._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 1||  rating[i]   == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                            <span id={data._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 2 ||  rating[i]   == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                            <span id={data._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 3||  rating[i]   == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                            <span id={data._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 4||  rating[i]   == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                            <span  id={data._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color: rating[i]   > 5 ||  rating[i]   == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                    </div> */}
-                                                                    {/* <div className=" p-0 m-0" >
-                                <Link to={'/feedback/'+data._id}>
-                            <span className="  " style={{color: 'coral' }}  >Rate This Food </span>
-                            </Link>
-                                </div> */}
-
-                                </div>
-                                </div>
-
-
-                            </div>
-   
-                                <div >
-
-                            </div>
-
-                        </div>
-                        </div>
-                      
-                        <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
-        textOverflow:"ellipsis"}}   >
-                                { data.info}  
-                             </p>
-                             <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
-     
-                        <div className=" " >
-                            <div className="price hstack gap-3">
-                                <div className="fullPrice">
-                                    <h4 className="fullPriceTitle" >Full price</h4>
-                                    {/* { priceGetter(data._id)} */}
-                                    <h5 className="fullPriceBrr" > { data.result[0].price }   <span className="supperScript" >Br</span></h5>
-                                 </div>      
-                                {
-                                    (  data.result[0].halfFull  )?
-                                  
-                                    (<div className="halfPrice">
-                                    <h4 className="fullPriceTitle ">Half price</h4>
-                                    <h5 className="fullPriceBrr">{data.result[0].halfPrice  } <span className="supperScript" >Br</span></h5>
-                                </div>) :
-                                    (<div></div>)
-                                }
+                                    <div className="row">
+                                    <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
+                                    <div className="col ">
+                                        <div className="hstack  d-flex justify-content-end  " >
+            
+                                        <div className="hstack  ">  
+            
+                                            <div className="vstack  ">
+                                                <div className="hstack  d-flex justify-content-end ">
+                                                <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
+                                            {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
+                                            {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
+                                    <span className="text" style={{color:'coral', fontFamily:'cursive', fontSize:'18px'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *10) / 10 : '0'  }</span>
+                                             </Link>
+            
+                                            <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none', fontSize:'18px'}} >&#9733;</span>
+                                                </div>
+            
+                                       
+                                            <span className="d-flex justify-content-end "> { rating[data._id] ? rating[data._id].outOf : '0'}  Reviews</span>
+                                            
          
-                            </div>
-                            {/* <div className="order">
-    
-                            </div> */}
-                             
-                             
-                        </div>
-  
-                    </div>
+            
+                                            </div>
+                                            </div>
+            
+            
+                                        </div>
+               
+                                            <div >
+            
+                                        </div>
+            
+                                    </div>
+                                    </div>
+                                  
+                                    <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
+                    textOverflow:"ellipsis"}}   >
+                                            { data.info}  
+                                         </p>
+                                         <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
+                 
+                                    <div className=" " >
+                                        <div className="price hstack gap-3">
+                                            <div className="fullPrice">
+                                                <h4 className="fullPriceTitle" >Full price</h4>
+                                                {/* { priceGetter(data._id)} */}
+                                                <h5 className="fullPriceBrr" > { data.result[0].price }   <span className="supperScript" >Br</span></h5>
+                                             </div>      
+                                            {
+                                                (  data.result[0].halfFull  )?
+                                              
+                                                (<div className="halfPrice">
+                                                <h4 className="fullPriceTitle ">Half price</h4>
+                                                <h5 className="fullPriceBrr">{data.result[0].halfPrice  } <span className="supperScript" >Br</span></h5>
+                                            </div>) :
+                                                (<div></div>)
+                                            }
+                     
+                                        </div>
+                                        {/* <div className="order">
+                
+                                        </div> */}
+                                         
+                                         
+                                    </div>
                     
-                       )
+                                </div>
+                                
+                                   )
+                            })
+                        )
+                    
+
                   
                     } 
                 
            
-                    )    : 
-                    <div>
-                         <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
-                    </div>
+                    )     
                 }
 
+                {
+                    nodata
+                }
+                    {
+                        isLoadidng ? (
+                            
+                            <div>
+                                {console.log('scroll')}
+                            <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+                        </div>
+                        ):
+                        <div>{console.log('scroll222')}</div>
+                    }
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
             </div>
-       
+
         </div>
     )
 

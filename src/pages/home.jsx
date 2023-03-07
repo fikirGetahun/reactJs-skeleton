@@ -46,7 +46,7 @@ export default function HomePage() {
         <img     className="headerBackground" src={require('../file/img/akko bg.png')} alt={"test"} />
                  </div>
            
-            <div     className="innerBackground">
+            <div     className="innerBackground" style={{position:'sticky', top:'20vh'}}>
             <h2 className="d-flex justify-content-start" style={{  marginLeft:"5%",
 }} >Akko Menu</h2>
 
