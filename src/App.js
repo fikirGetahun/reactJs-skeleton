@@ -27,10 +27,10 @@ import { useEffect, useState } from 'react';
 import ProtectedRoutes from './protectedRoutes';
 
 function App() {
-
+ 
  
   return (
-    <div className="App">
+    <div className="App"  >
 
       <BrowserRouter>
         <Routes>

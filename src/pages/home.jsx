@@ -38,19 +38,27 @@ export default function HomePage() {
         navigate("/")
     }
 
+
+    const onscroll2 = ()=>{
+        // style={{position:'sticky', top:'20vh'}}
+      
+        document.getElementById('scrollHolder').style.top = '0px'
+    }
+
     return(
-        <div   className="container p-0  mainBG" >
-            <div className='v-stack'>
+        <div   className="container p-0  mainBG "     >
+            <div className='v-stackz'>
        
-                 <div    className="headerBackground" >
+                 <div    className="headerBackground"  >
         <img     className="headerBackground" src={require('../file/img/akko bg.png')} alt={"test"} />
                  </div>
-           
-            <div     className="innerBackground" style={{position:'sticky', top:'20vh'}}>
-            <h2 className="d-flex justify-content-start" style={{  marginLeft:"5%",
+
+            <div className="innerBackground"  >
+            <div      className=" scrollHolder   "    >
+            <h2 className="d-flex justify-content-start  "  style={{  marginLeft:"5%",
 }} >Akko Menu</h2>
 
-            <div className="vstack ">
+            <div className="vstack scrollHolder " style={{backgroundColor:'white'}} >
                
                 <div className="row" style={{ marginLeft:"4.6%", maxWidth:'35%'
 }}>
@@ -98,6 +106,9 @@ export default function HomePage() {
           
             
             </div>
+            </div>
+
+
             <div className="categoryHome"   >
               
               {/* <CategoryLister/> */}

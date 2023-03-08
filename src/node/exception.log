@@ -2335,3 +2335,51 @@ MongoServerError: the count field must be a non-empty string
     at MessageStream.Writable.write (node:internal/streams/writable:336:10)
     at Socket.ondata (node:internal/streams/readable:754:22)
     at Socket.emit (node:events:513:28)
+error: 08/03/2023 09:48:06 unhandledRejection: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:67:23)
+    at ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:26:20)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\food.js:212:41
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:365:14)
+error: 08/03/2023 09:48:44 unhandledRejection: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:67:23)
+    at ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:26:20)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\food.js:212:41
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:365:14)
+error: 08/03/2023 09:52:58 unhandledRejection: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:67:23)
+    at ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:26:20)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\food.js:212:41
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:365:14)
+error: 08/03/2023 10:04:10 unhandledRejection: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:67:23)
+    at ObjectId (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\bson\lib\objectid.js:26:20)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\src\node\routes\food.js:229:41
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:365:14)

@@ -47,16 +47,19 @@ import { useNavigate, useParams } from "react-router-dom";
             x.classList.add("foodDisc")
         }
     }
-
+    const [pbycat, setPbyCat] = useState([])
     const productSearch = async (s)=>{
         const datax = new GetHandler()
         var test
+        setIsLoading(true)
       await  datax.getSearchResult(s).then((res)=>{
    
         if(res.status == 200){
                 test = res.data
-                console.log('search........'+test)
+                // console.log(test)
                 if(test.length > 0){
+                    setPbyCat([])
+                    setPbyCat(old=>[...old,res.data])
                     setProducts(test)
                 }else{
                     navigate("/nodata")
@@ -66,6 +69,7 @@ import { useNavigate, useParams } from "react-router-dom";
             }else{
                 alert(res)
             }
+            setIsLoading(false)
         })
     }
  
@@ -125,7 +129,7 @@ import { useNavigate, useParams } from "react-router-dom";
         })
         return x;
     }
-    const [pbycat, setPbyCat] = useState([])
+
     // on first load if there is no search pram it loads food list besd on category
     // if there is serach pram, it loads serach result
     useEffect(()=>{
@@ -248,9 +252,48 @@ var captionText = document.getElementById("caption");
     const [scrollPage, setScrollPage]=useState(0)
 
  
+window.scroll = function(ev){
+    alert('dddd')
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        // you're at the bottom of the page
+        
+    }
+}
+const [scrollTop, setScrollTop] = useState(0);
+useEffect(() => {
+    const handleScroll = (e) => {
+      setScrollTop(window.scrollY);
+    //   const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          // alert('bottom')
+  
+          setScrollPage(scrollPage+2)
+          
+          
+        //   getProductByCatt()
+          
+          // alert(scrollPage)
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(()=>{
+    if(scrollPage != 0){
+        getProductByCatt()
+    }
+  },[scrollPage])
 
 const scrollHandler = (e)=>{
     // console.log(e.currentTarget.scrollTop)
+ 
+    
+
     const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
     if(bottom){
         // alert('bottom')
@@ -258,19 +301,20 @@ const scrollHandler = (e)=>{
         setScrollPage(scrollPage+2)
         // alert('dd')
         
-        getProductByCatt()
+   
         
         // alert(scrollPage)
     }
     // console.log(e.target.clientHeight)
-    // console.log(bottom)
+    // console.log(bottom)    style={{height:'83vh',overflow: 'scroll', overflowX:'hidden'}}
 }
 
     return( 
-        <div className="d-flex justify-content-center" onScroll={scrollHandler}
-         style={{height:'83vh',overflow: 'scroll', overflowX:'hidden'}} >
+        <div id="hold" className="d-flex justify-content-center"  
+       
+       >
             <div  className="category2 "       >
-               
+               {console.log(pbycat)}
             {/* {rating['63ff549dccb6cf9732ad4650'] ?  console.log(rating['63ff549dccb6cf9732ad4650'].avg) : ''} */}
                  {
                     

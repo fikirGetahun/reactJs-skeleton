@@ -30,11 +30,20 @@
   
   
   }
+
+  .scrollHolder{
+    position: sticky;
+     position:-webkit-sticky;
+     padding-top: 5px;
+      top:0px;
+    z-index: 5;
+     
+  }
   .category3{
     width: 96%;
     /* height: 50%; */
     height: 60vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     border-radius:30px;
     /* margin-Left:2%;  */
     margin-Right:2%;
