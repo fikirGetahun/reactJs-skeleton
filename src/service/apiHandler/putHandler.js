@@ -14,7 +14,7 @@ class PutHandler{
         try{
             await axios({
                 url: api.joinUrl(api.endPoints.addCategory)+id ,
-                method: 'put',
+                method: 'patch',
                 data: body,
                 headers:this.headers
             }).then(res=>{
