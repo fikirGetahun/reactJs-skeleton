@@ -41,16 +41,20 @@ useEffect( ()=>{
 return(
     <div className="d-flex justify-content-center">
       <div className="category11" >
-        {/* {console.log(categoryData)} */}
+          <div className="" >
+                    {/* {console.log(categoryData)} */}
         { 
 
 !isLoadidng ? 
     categoryData.map(data=>{
         // alert(data.catagoryName)
         return(
-          <Link to={"/product/"+data._id} >
+          <Link to={"/product/"+data._id} className="" style={{textDecoration:'none'}} >
               <div className="d-flex justify-content-center category" key={data.id} style={{ backgroundImage:  `url('${data.image}')`}} >
-            <span   className= "categoryText" >{data.name}</span>
+            <div className="bgCat container   d-flex align-items-center justify-content-center">
+            <span   className= "categoryText  " style={{opacity:'revert'}}  >{data.name}</span>
+
+            </div>
         </div>
           </Link>
         )
@@ -59,6 +63,7 @@ return(
     <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
 
 }
+          </div>
       </div>
       
 

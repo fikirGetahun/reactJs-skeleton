@@ -63,12 +63,12 @@ router.get('/:id', async(req, res)=>{
 })
 
 
-router.put('/:id',auth, async (req, res)=>{
+router.patch('/:id',auth, async (req, res)=>{
     const {error} = Validate(req.body)
     if(error) return res.status(400).send(error.details[0].message)
     const data = await Category.findByIdAndUpdate(req.params.id,{
         name:req.body.name,
-        order:req.body.order,
+     
         image:req.body.image
     })
 

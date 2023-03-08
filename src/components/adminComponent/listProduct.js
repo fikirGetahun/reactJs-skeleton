@@ -8,6 +8,31 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
     const [foodData, setFoodData] = useState([])
 
+
+    useEffect(() => {
+        
+        const handleScroll = () => {
+            alert('scroll')
+        //   const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              // alert('bottom')
+      
+              setScrollPage(scrollPage+2)
+              
+              
+            //   getProductByCatt()
+              
+              // alert(scrollPage)
+          }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
     const dataFetcher = async (cid)=>{
         var test;
         let data = new GetHandler()
@@ -116,33 +141,45 @@ import GetHandler from "../../service/apiHandler/getHandler";
     useEffect(()=>{
         dataFetcher(categorySelected.id)
         if(categorySelected.id != ''){
-            getProductByCatt(categorySelected.id)
+            getProductByCatt()
 
         }
-        console.log(categorySelected.name)
+        // console.log(categorySelected.name)
 
     }, [categorySelected.id])
 
+    const [nodata, setNodata] = useState()
 
     const [pbycat, setPbyCat] = useState([])
-    const getProductByCatt = async (catId)=>{
-        const data = new GetHandler()
+    const getProductByCatt = async ()=>{
+        // alert('getp')
         setIsLoading(true)
-
-        await data.getProductbyCat(catId).then(res=>{
-            setIsLoading(false)
+        const data = new GetHandler()
+        await data.getProductbyCat(categorySelected.id,scrollPage).then(res=>{
 
             if(res.status == 200){
-                setPbyCat(res.data)
-                 
+                if(res.data.message == 400){
+                    setNodata('No more product')
+                    
+                }else{
+                    setPbyCat(old=>[...old,res.data])
+                   
+                }
+
             }
+            setIsLoading(false)
         })
     }
+    const [scrollPage, setScrollPage]=useState(0)
 
-    
 
+      useEffect(()=>{
+        if(scrollPage != 0){
+            getProductByCatt()
+        }
+      },[scrollPage])
     return(
-        <div>
+        <div style={{height:"100%", overflowY:'scroll'}} >
             {/* <div className="vstack gap-2" >
                 <h4>Title</h4>
                 <h4>Order: <span>3</span></h4>
@@ -175,49 +212,54 @@ import GetHandler from "../../service/apiHandler/getHandler";
                         }
              {
                 
-                pbycat.map((selected, i)=>{
+                pbycat.map((selectedx, i)=>{
                     return(
-                    <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
-                        <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
-                        <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
-                        <label>Description</label>
-                        <p>lorem ipsom</p>
-                       <div className="row">
-                        <div className="col">
-                        <label>Full Price</label>
-                        <h5>{ selected.result[0].price } </h5>
-                        </div>
-                        <div className="col">
-                        {
-                            (selected.result[0].halfFull )?
-                            (
-                                <div>
-                                    <label>Half Price</label>
-                                <h5>{selected.result[0].halfPrice } </h5>
+                        selectedx.map((selected,ix)=>{
+                            return (
+                                <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
+                                <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
+                                <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
+                                <label>Description</label>
+                                <p>lorem ipsom</p>
+                               <div className="row">
+                                <div className="col">
+                                <label>Full Price</label>
+                                <h5>{ selected.result[0].price } </h5>
                                 </div>
-                            ) :
-                            <div></div>
-                        }
-                        </div>
-                       </div>
-
-                        <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
+                                <div className="col">
+                                {
+                                    (selected.result[0].halfFull )?
+                                    (
+                                        <div>
+                                            <label>Half Price</label>
+                                        <h5>{selected.result[0].halfPrice } </h5>
+                                        </div>
+                                    ) :
+                                    <div></div>
+                                }
+                                </div>
+                               </div>
         
-                        </div>
-                        <div className="hstack" >
-                        <Link to={"/admin/editProduct/"+selected._id}>
-                        <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
-                        </Link>
-                        <Link to={"/admin/analitic/"+selected._id}>
-                        <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
-                        </Link>
-                        <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
-                        
-                        </div>
+                                <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
                 
-                        <br></br>
-                      
-                    </div>
+                                </div>
+                                <div className="hstack" >
+                                <Link to={"/admin/editProduct/"+selected._id}>
+                                <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
+                                </Link>
+                                <Link to={"/admin/analitic/"+selected._id}>
+                                <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
+                                </Link>
+                                <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
+                                
+                                </div>
+                        
+                                <br></br>
+                              
+                            </div>
+                            )
+                        })
+
                     )
                 })
             }

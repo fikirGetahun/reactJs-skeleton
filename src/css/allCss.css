@@ -31,6 +31,14 @@
   
   }
 
+.bgCat{
+  /* background-color: white; */
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  height: 100%;
+  border-radius:30px;
+}
+
   .category11{
     width: 97%;
     /* height: 50%; */

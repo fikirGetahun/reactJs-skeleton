@@ -2383,3 +2383,27 @@ BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24
     at Layer.handle [as handle_request] (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\layer.js:95:5)
     at C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:284:15
     at param (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\express\lib\router\index.js:365:14)
+error: 08/03/2023 11:24:28 unhandledRejection: invalid argument to $skip stage: Expected an integer, but found NaN in: $skip: nan.0
+MongoServerError: invalid argument to $skip stage: Expected an integer, but found NaN in: $skip: nan.0
+    at Connection.onMessage (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\connection.js:230:30)
+    at MessageStream.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at Socket.ondata (node:internal/streams/readable:754:22)
+    at Socket.emit (node:events:513:28)
+error: 08/03/2023 11:24:55 unhandledRejection: invalid argument to $skip stage: Expected an integer, but found NaN in: $skip: nan.0
+MongoServerError: invalid argument to $skip stage: Expected an integer, but found NaN in: $skip: nan.0
+    at Connection.onMessage (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\connection.js:230:30)
+    at MessageStream.<anonymous> (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\connection.js:61:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\message_stream.js:125:16)
+    at MessageStream._write (C:\Users\Fetun\Documents\akko-menu\reactJs-skeleton\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at Socket.ondata (node:internal/streams/readable:754:22)
+    at Socket.emit (node:events:513:28)
