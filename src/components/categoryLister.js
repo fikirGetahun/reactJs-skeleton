@@ -40,7 +40,7 @@ useEffect( ()=>{
 
 return(
     <div className="d-flex justify-content-center">
-      <div className="category2" >
+      <div className="category11" >
         {/* {console.log(categoryData)} */}
         { 
 

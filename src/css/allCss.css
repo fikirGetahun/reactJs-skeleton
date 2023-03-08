@@ -31,6 +31,23 @@
   
   }
 
+  .category11{
+    width: 97%;
+    /* height: 50%; */
+    /* height: 300px; */
+    /* overflow: scroll; */
+    border-radius:30px;
+    margin-Left:4.5%; 
+    margin-Right:2%;
+    margin-Bottom:10px;
+
+     background-Size:cover;
+    align-Items:center;
+    justify-Content: center;
+
+
+}
+
   .scrollHolder{
     position: sticky;
      position:-webkit-sticky;
