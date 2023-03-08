@@ -47,13 +47,13 @@ export default function HomePage() {
 
     return(
         <div   className="container p-0  mainBG "     >
-            <div className='v-stackz'>
+            <div className='v-stack'>
        
                  <div    className="headerBackground"  >
         <img     className="headerBackground" src={require('../file/img/akko bg.png')} alt={"test"} />
                  </div>
 
-            <div className="innerBackground"  >
+            <div className="innerBackground scrollHolder"  >
             <div      className=" scrollHolder   "    >
             <h2 className="d-flex justify-content-start  "  style={{  marginLeft:"5%",
 }} >Akko Menu</h2>
