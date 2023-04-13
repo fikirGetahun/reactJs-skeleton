@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DeleteHandler from "../../service/apiHandler/deleteHandler";
 import GetHandler from "../../service/apiHandler/getHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
  
@@ -172,11 +173,25 @@ const countReview = async ()=>{
 const [realc, setRealc] = useState([])
 const [singleAns, setSingleAns] = useState([])
 
+const resetHandler = async ()=>{
+    const del = new DeleteHandler()
+    if(window.confirm("Are you sure do you want to delete all the reviewed ansewers? you will lose all the review data of this product")== true){
+        await del.resetReview(foodId).then(res=>{
+            if(res.status ==200){
+                alert('reset successfull')
+            }{
+                alert('reset faild')
+            }
+        })
+    }
+    
+}
 
 const cons = ()=>{
     setQuetionConstructor([])
     setQuetionConstructor(old=>[...old,(   <h3>Customers Answerd Questions</h3>)])
-
+    setQuetionConstructor(old=>[...old,(   <span><button onClick={resetHandler} className="btn btn-outline-danger">Reset</button> </span>)])
+    setQuetionConstructor(old=>[...old,(   <span className="text text-info">Reset will delete all the reviews. to startover </span>)])
      let answer = [];
     let ff = 0
      allQuestions.forEach(r=>{
@@ -248,10 +263,16 @@ const cons = ()=>{
        let z 
 
 
-        
+       let t;
        u.forEach((xx )=> {
 
- 
+      
+        pls.forEach(g=>{
+            if(g.cid == xx._id){
+               t = t + g.count
+               
+            }
+          })
                     let h = [];
                     
                     let thisx = [];
@@ -283,7 +304,7 @@ const cons = ()=>{
                      </span>
                  
                      <h5 className="col" >  {   Math.floor((singleAns[i] *100 )/(realc[iq]) *100)/100     } %  </h5>
-                     
+                    
                      </div>
                         </div>
                                 )
@@ -490,6 +511,20 @@ const getFoodData = async ()=>{
 useEffect(()=>{
     getFoodData()
 },[])
+
+const restRating = async ()=>{
+    const del = new DeleteHandler()
+    if(window.confirm("Are you sure do you want to delete all the rating of this product? you will lose all the review data of this product")== true){
+        await del.resetRating(foodId).then(res=>{
+            if(res.status == 200){
+                alert("rating reseted")
+            }else{
+                alert('error reseting rating')
+            }
+        })
+    }
+
+}
  
     return (
         <div>
@@ -528,6 +563,10 @@ useEffect(()=>{
                 (<div>
                     {
                         <div>
+                            <div>
+                            <span><button onClick={()=>restRating()}  className="btn btn-outline-danger">Reset</button> </span><br></br>
+                            <span className="text text-info">Reset will delete all the reviews. to startover </span>
+                            </div>
                           <div className="row">
                           <div className="hstack col  d-flex justify-content-start">
                            <h4 className="m-2" >Rating :  </h4>

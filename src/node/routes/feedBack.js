@@ -7,6 +7,7 @@ const {Answer} = require('../model/answer');
 const {Food} =require('../model/food')
 const { date } = require('joi');
 const auth = require('../middleware/auth');
+const { default: mongoose } = require('mongoose');
 // const { default: FoodLister } = require('../../components/foodLister');  
 
 
@@ -55,6 +56,8 @@ router.post('/rating',auth, async (req,res)=>{
 
 router.post('/answer',auth, async (req,res)=>{
     body= req.body;  
+    // const data2 =  Answer({food_id: mongoose.Types.ObjectId(body.food_id) ,question_id: mongoose.Types.ObjectId(body.question_id), choose_id: mongoose.Types.ObjectId(body.choose_id), time: Date.now() })
+
     const data2 =  Answer({food_id:body.food_id,question_id: body.question_id, choose_id: body.choose_id, time: Date.now() })
     resultx = await data2.save();
     if(!resultx){
@@ -112,14 +115,9 @@ router.get('/ratingLimitDate/:foodId/:startId/:stDate/:fDate', async (req,res)=>
 })
 
 
-router.get('/rating/:foodId', async (req,res)=>{
-    const data = await Rating.find({food_id: req.params.foodId}).count()
-    if(!data) return res.send('page not found')
-    let count = {
-        count : data
-    }
-    res.send(count)
-})
+
+
+
 
 
 let ans = [];
@@ -199,35 +197,7 @@ router.get('/answer/:qId/:foodId/:cid', async (req,res)=>{
     const data = await QuestionChoose.find({question_id : req.params.qId});
     if(!data) return res.status(404).send('Could not get choosen content')
 
-    // collect choosen id anser count per choosen id 
-   
-    // to get over all counts and put it on var
-    // data.forEach(async (element) => {
-    //    let choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
-    //     // if(!choos) return res.status(404).send('Could not get choosen content')
-    //     // console.log(choos)
-    //     let xz = choos;
-    //     count +=  xz; // to count over all answere
-
-    // }); 
-
-    // after calculating persentage, put in object array to be outputed to front end
-    // data.forEach(async (element) => {
-    //     const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: element._id}).count()
-    //     // if(!choos) return res.status(404).send('Could not get choosen content')
-    //     // console.log(count)
-    //     // let x = (choos*100)/(count);
-    //     let x = choos
-    //     const body = {
-    //         qid: element.question_id,
-    //         choice_id:element._id,
-    //         name: element.chooseContent,
-    //         countx: x
-    //     }
-    //     // console.log(body)
-        
-    // ans.push(body)
-    // } );
+ 
  
     const choos = await Answer.find({question_id:req.params.qId,food_id:req.params.foodId, choose_id: req.params.cid}).count()
 
@@ -277,9 +247,140 @@ router.patch('/choice/:id', async (req,res)=>{
     res.send(true)
 })
 
+
+router.get('/ratingCompareGte/:gte/:skip', async (req,res)=>{
+    let skip = Number(req.params.skip);
+    const data2 = await Rating.aggregate([{$match : { rating: {
+        $gte : Number(req.params.gte)
+    } }}, {$lookup: 
+        {
+            from: "foods",
+            pipeline:[
+                {
+                    $group:{
+                        _id:{
+                            name: '$name',
+                            image:'$image'
+                        }
+                    }
+                }
+            ],
+            localField: "food_id",
+            foreignField: "_id",
+            as: "result",
+          }
+    }, {$group:{ _id:{ foodId:"$food_id"},rateAv: {$sum: "$rating" }, count:{$count: {}} , foodName :{'$first':'$result'}  }}  ])
+
+    const data = await Rating.aggregate([{$match : { rating: {
+        $gte : Number(req.params.gte)
+    } }}, {$lookup: 
+        {
+            from: "foods",
+            pipeline:[
+                {
+                    $group:{
+                        _id:{
+                            name: '$name',
+                            image:'$image'
+                        }
+                    }
+                }
+            ],
+            localField: "food_id",
+            foreignField: "_id",
+            as: "result",
+          }
+    }, {$group:{ _id:{ foodId:"$food_id"},rateAv: {$sum: "$rating" }, count:{$count: {}} , foodName :{'$first':'$result'}  }}  ]).skip(skip).limit(3)
+
+
+ 
+    // d.
+ 
+    if(data2.length <= skip){
+        let body = {
+            message : 4000
+        }
+   
+      return  res.send(body)
+    }
+
+
+
+    if(!data) return res.status(404).send('page not found')
+    res.send(data)
+})
+
+router.get('/ratingCompareLs/:ls/:skip', async (req,res)=>{
+    let skip = Number(req.params.skip);
+
+    const data2 = await Rating.aggregate([{$match : { rating: {
+        $lt : Number(req.params.ls)
+    } }}, {$lookup: 
+        {
+            from: "foods",
+            pipeline:[
+                {
+                    $group:{
+                        _id:{
+                            name: '$name',
+                            image:'$image'
+                        }
+                    }
+                }
+            ],
+            localField: "food_id",
+            foreignField: "_id",
+            as: "result",
+          }
+    }, {$group:{ _id:{ foodId:"$food_id"},rateAv: {$sum: "$rating" }, count:{$count: {}} , foodName :{'$first':'$result'}  }}  ])
+
+    const data = await Rating.aggregate([{$match : { rating: {
+        $lt : Number(req.params.ls)
+    } }}, {$lookup: 
+        {
+            from: "foods",
+            pipeline:[
+                {
+                    $group:{
+                        _id:{
+                            name: '$name',
+                            image:'$image'
+                        }
+                    }
+                }
+            ],
+            localField: "food_id",
+            foreignField: "_id",
+            as: "result",
+          }
+    }, {$group:{ _id:{ foodId:"$food_id"},rateAv: {$sum: "$rating" }, count:{$count: {}} , foodName :{'$first':'$result'}  }}  ]).skip(skip).limit(3)
+
+    if(data2.length <= skip){
+        let body = {
+            message : 4000
+        }
+   
+      return  res.send(body)
+    }
+
+    if(!data) return res.status(404).send('page not found')
+    res.send(data)
+})
+
+router.get('/ratingcount', async (req,res)=>{
+    const data = await Rating.find().count()
+    if(!data) return res.status(404).send('page not found')
+
+    let ress = {
+        data : data
+      }
+    
+      res.send(ress)
+})
+
 router.get('/rattingAvg/:foodId', async (req,res)=>{
     const d = await Rating.find({food_id: req.params.foodId}).count()
-    const data = await Rating.aggregate([{$match : {food_id: req.params.foodId}}, {$group: { _id: "$food_id",rateAv: {$sum: "$rating" }}}])
+    const data = await Rating.aggregate([{$match : {food_id:mongoose.Types.ObjectId(req.params.foodId) }}, {$group: { _id: "$food_id",rateAv: {$sum: "$rating" }}}])
         // d.
 
       
@@ -312,28 +413,30 @@ router.get('/rattingAvgAllFoods', async (req,res)=>{
 
       const test = await Rating.aggregate([{$lookup :{from : "Food", localField:"food_id", foreignField:  "_id" , as: "joined"}}])
     //    console.log(data[0].rateAv)
-
-
-
-    // if(data.length > 0){
-    //     let f = (data[0].rateAv)/(d)
-       
-    //     let body = {
-    //      avg: f
-    //     }
  
-    //  res.send(body)
-    // }else{
-    //     let body = {
-    //         avg: 0
-    //        }
-    //     res.send(body)
-    // }
     console.log(test)
     // res.send(test)
 
 })
 
+// to reset reviews
+router.delete('/delReview/:pid', async (req,res)=>{
+    const data = await Answer.deleteMany({food_id: req.params.pid})
+    if(!data) return res.status(404).send('error on deleting  ')
+
+    res.send('deleted Successfully!')
+
+})
+
+
+// to reset rating
+router.delete('/delRating/:fid', async (req,res)=>{
+    const data = await Rating.deleteMany({food_id: mongoose.Types.ObjectId(req.params.fid) })
+    if(!data) return res.status(404).send('error on deleting  ')
+
+    res.send('deleted Successfully!')
+
+})
 
 router.delete('/:qid', async (req,res)=>{
     const data = await FeedBackQuestions.findByIdAndDelete(req.params.qid)

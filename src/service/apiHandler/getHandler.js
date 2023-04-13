@@ -50,6 +50,86 @@ class GetHandler{
       return result;
     }
 
+    getRatingGre = async (gte,skip) =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingGte)+gte+'/'+skip)
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getRatingLs = async (gte,skip) =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingLs)+gte+'/'+skip)
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getRatingCountTotal = async () =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingcount))
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getFoodCountTotal = async () =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.foodCount))
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
     getActiveCategory = async () =>{
       var result;
       try{

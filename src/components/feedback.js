@@ -60,17 +60,20 @@ const pls =   (c, q)=>{
                 status: true
              }
         let i = 0
-        ff.forEach(element => {
-                if(element.status == true && element.qid == q){
-                    // element.status = false
-                    ff.splice(i,1)
-                }
-                i = i+1;
-        });
+            xxx.forEach(ff=>{
+                ff.forEach(element => {
+                    if(element.status == true && element.qid == q){
+                        element.status = false
+                        // alert('in')
+                        // ff.splice(i,1)
+                    }
+                    i = i+1;
+            });
+            })
   
         ff.push(current);
         // console.log(ff)
-        setXxx([])
+        // setXxx([])
         setXxx(old=>[...old,ff])
 //     ff[q] = {
 //         qid : q,
@@ -189,12 +192,14 @@ const handleSubmit = async (aa)=>{
    
  
     sendAnswer(aa)
+  
 }
 
 const sendAnswer = async( zz)=>{
    
     const data = new PostHandler();
-    
+    console.log('xxx')
+    console.log(xxx)
     if(xxx != []){
         xxx.forEach(async(sel)=>{
             let i = 0
@@ -205,7 +210,7 @@ const sendAnswer = async( zz)=>{
                      question_id: sel.qid,
                      choose_id:sel.cid
                  }
-                 console.log(sel)
+                //  console.log(sel)
               
                  // console.log('w')
                  // console.log( sel)

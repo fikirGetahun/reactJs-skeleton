@@ -117,6 +117,49 @@ class DeleteHandler {
         }
         return result;
     }
+
+
+    resetReview = async (qid)=>{
+        var result;
+        try{
+            await axios({
+                url: api.joinUrl(api.endPoints.resetAnswers)+qid ,
+                method:'delete',
+            }).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+    resetRating= async (fid)=>{
+        var result;
+        try{
+            await axios({
+                url: api.joinUrl(api.endPoints.resetRating)+fid ,
+                method:'delete',
+            }).then(res=>{
+                result = res
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
 }
 
 export default DeleteHandler;

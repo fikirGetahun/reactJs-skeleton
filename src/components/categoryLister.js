@@ -52,7 +52,7 @@ return(
           <Link to={"/product/"+data._id} className="" style={{textDecoration:'none'}} >
               <div className="d-flex justify-content-center category" key={data.id} style={{ backgroundImage:  `url('${data.image}')`}} >
             <div className="bgCat container   d-flex align-items-center justify-content-center">
-            <span   className= "categoryText  " style={{opacity:'revert'}}  >{data.name}</span>
+            <span   className= "categoryText   " style={{opacity:'revert'}}  >{data.name}</span>
 
             </div>
         </div>
