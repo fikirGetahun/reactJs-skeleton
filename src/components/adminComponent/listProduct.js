@@ -31,7 +31,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
-      }, []);
+      });
 
     const dataFetcher = async (cid)=>{
         var test;
@@ -174,12 +174,36 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
 
       useEffect(()=>{
-        if(scrollPage != 0){
+        if(scrollPage != 0 && nodata!='No more product' ){
             getProductByCatt()
         }
       },[scrollPage])
+
+
+
+      const scrollHandler = (e)=>{
+        // console.log(e.currentTarget.scrollTop)
+     
+       
+    
+        const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+        
+        if(bottom){
+            // alert('bottom')
+            
+            setScrollPage(scrollPage+2)
+            // alert('dd')
+            
+       
+            
+            // alert(scrollPage)
+        }
+        // console.log(e.target.clientHeight)
+        // console.log(bottom)    style={{height:'83vh',overflow: 'scroll', overflowX:'hidden'}}
+    }
+
     return(
-        <div style={{height:"100%", overflowY:'scroll'}} >
+        <div style={{height:"500px", overflowY:'scroll'}} onScroll={(e)=>scrollHandler(e)} >
             {/* <div className="vstack gap-2" >
                 <h4>Title</h4>
                 <h4>Order: <span>3</span></h4>
