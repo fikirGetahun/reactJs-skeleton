@@ -64,8 +64,12 @@ const pls =   (c, q)=>{
                 ff.forEach(element => {
                     if(element.status == true && element.qid == q){
                         element.status = false
+
                         // alert('in')
                         // ff.splice(i,1)
+                    
+                   
+
                     }
                     i = i+1;
             });
