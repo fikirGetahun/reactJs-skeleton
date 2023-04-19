@@ -151,7 +151,7 @@ import { useNavigate, useParams } from "react-router-dom";
         setIsLoading(true)
         const data = new GetHandler()
         await data.getProductbyCat(catId,scrollPage).then(res=>{
-
+            // alert(scrollPage)
             if(res.status == 200){
                 if(res.data.message == 400){
                     setNodata('No more product')
@@ -281,10 +281,10 @@ useEffect(() => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  });
 
   useEffect(()=>{
-    if(scrollPage != 0){
+    if(scrollPage != 0 && nodata != 'No more product'){
         getProductByCatt()
     }
   },[scrollPage])
