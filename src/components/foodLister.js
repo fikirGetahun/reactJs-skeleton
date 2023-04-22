@@ -314,6 +314,7 @@ const scrollHandler = (e)=>{
        
        >
             <div  className="category2 "       >
+            
                {console.log(pbycat)}
             {/* {rating['63ff549dccb6cf9732ad4650'] ?  console.log(rating['63ff549dccb6cf9732ad4650'].avg) : ''} */}
                  {
@@ -326,7 +327,7 @@ const scrollHandler = (e)=>{
                                 return (
                             
                                     <div className="vstack" >
-                                           
+                                            
                                          {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
                                          <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
                                          {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
@@ -338,7 +339,7 @@ const scrollHandler = (e)=>{
                                     <div id="caption"></div>
                                     </div>
                                     <div className="row">
-                                    <h3 className="foodTitle d-flex justify-content-start col align-items-center" >{data.name }</h3>
+                                    <h3 className="foodTitle d-flex justify-content-start col align-items-center p-3" >{data.name }</h3>
                                     <div className="col ">
                                         <div className="hstack  d-flex justify-content-end  " >
             
@@ -425,8 +426,12 @@ const scrollHandler = (e)=>{
                         isLoadidng && nodata!='No more product' ? (
                             
                             <div>
-                                {console.log('scroll')}
-                            <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+                               
+                            {/* <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  /> */}
+                            <div className="foodImage skeletonAnimation" ></div>
+                            <div className="skeletonAnimation skeletonText justify-content-center" ></div>
+                            <div className="skeletonAnimation skeletonText justify-content-center" ></div>
+                            <div className="skeletonAnimation skeletonText justify-content-center" ></div>
                         </div>
                         ):
                         <div>{console.log('scroll222')}</div>

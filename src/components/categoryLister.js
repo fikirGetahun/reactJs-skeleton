@@ -60,7 +60,17 @@ return(
         )
     }) :
 
-    <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+    // <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
+
+    <div>
+      <div className="category skeletonAnimation" ></div>
+      <div className="category skeletonAnimation" ></div>
+      <div className="category skeletonAnimation" ></div>
+      <div className="category skeletonAnimation" ></div>
+      <div className="category skeletonAnimation" ></div>
+      <div className="category skeletonAnimation" ></div>
+
+    </div>
 
 }
           </div>
