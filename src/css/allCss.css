@@ -113,8 +113,40 @@
       align-Items:center;
       justify-Content: center;
     }
+
+    .skeletonAnimation {
+      animation: skeleton-loading 1s linear infinite alternate ;
+    }
+
+    .skeletonText{
+      width: 100%;
+      
+      justify-content: center;
+      height: 0.5rem;
+      margin-bottom: .25rem;
+      border-radius: .125rem;
+    }
+
+    .skeletonText:last-child {
+      width: 70%;
+    }
+
+    @keyframes skeleton-loading {
+      0% {
+        background-color: hsl(200, 20%, 70%);
+      }
+      100% {
+        background-color: hsl(200, 20%, 95%);
+      }
+
+    }
+
+
+
+
     .foodTitle{
       font-size: larger;
+      padding-left: 30px;
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       overflow:hidden;
       text-overflow:ellipsis;
