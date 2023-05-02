@@ -12,7 +12,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
     useEffect(() => {
         
         const handleScroll = () => {
-            alert('scroll')
+           
         //   const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
               // alert('bottom')
