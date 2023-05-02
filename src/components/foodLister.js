@@ -329,13 +329,13 @@ const scrollHandler = (e)=>{
                                     <div className="vstack" >
                                             
                                          {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
-                                         <img id={"myImg"+i} className="foodImage" onClick={()=>modalImage(i,data.image)}  src={data.image} alt="Snow"   />
+                                         <img id={"myImg"+data._id} className="foodImage" onClick={()=>modalImage(data._id,data.image)}  src={data.image} alt="Snow"   />
                                          {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
             
                                     {/* this is th */}
-                                    <div id={"myModal"+i} class="modal">
-                                    <span  className="close" onClick={()=>modalImageClose(i)}>&times;</span>
-                                    <img class="modal-content" src={data.image} id={"img01"+i} />
+                                    <div id={"myModal"+data._id} class="modal">
+                                    <span  className="close" onClick={()=>modalImageClose(data._id)}>&times;</span>
+                                    <img class="modal-content" src={data.image} id={"img01"+data._id} />
                                     <div id="caption"></div>
                                     </div>
                                     <div className="row">
