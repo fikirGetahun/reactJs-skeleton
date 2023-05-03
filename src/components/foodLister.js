@@ -26,26 +26,36 @@ import { useNavigate, useParams } from "react-router-dom";
         let className = spanId.innerText
         if(className == "Read More..."){
             spanId.innerHTML="Less"
-        }else{
-            spanId.innerHTML="Read More..."
-        }
-
-
-          
-        if(readActivity == "foodDisc"){
             setReadActivity( "foodDiscRead" ) 
             setReadMore('Close')
            let x = document.getElementById(pid)
            x.classList.add("foodDiscRead")
            x.classList.remove("foodDisc")
-           
         }else{
+            spanId.innerHTML="Read More..."
             setReadActivity("foodDisc")
             setReadMore('Read More..')
             let x = document.getElementById(pid)
             x.classList.remove("foodDiscRead")
             x.classList.add("foodDisc")
         }
+
+
+          
+        // if(readActivity == "foodDisc"){
+        //     setReadActivity( "foodDiscRead" ) 
+        //     setReadMore('Close')
+        //    let x = document.getElementById(pid)
+        //    x.classList.add("foodDiscRead")
+        //    x.classList.remove("foodDisc")
+           
+        // }else{
+        //     setReadActivity("foodDisc")
+        //     setReadMore('Read More..')
+        //     let x = document.getElementById(pid)
+        //     x.classList.remove("foodDiscRead")
+        //     x.classList.add("foodDisc")
+        // }
     }
     const [pbycat, setPbyCat] = useState([])
     const productSearch = async (s)=>{
@@ -191,7 +201,9 @@ var captionText = document.getElementById("caption");
     modal.style.display = "block";
     modalImg.src = image
     captionText.innerHTML = this.alt;
-  
+    let body = document.querySelector("body")
+    body.style.height = "100%" // Make sure the height is fixed
+    body.style.overflow = "hidden" // H
 
     }
 
@@ -329,13 +341,13 @@ const scrollHandler = (e)=>{
                                     <div className="vstack" >
                                             
                                          {/* <div className="foodImage"   style={{backgroundImage:  `url('${data.image}')`}}> </div> */}
-                                         <img id={"myImg"+data._id} className="foodImage" onClick={()=>modalImage(data._id,data.image)}  src={data.image} alt="Snow"   />
+                                         <img id={"myImg"+data._id} className="foodImage" style={{backgroundColor: "black"}} onClick={()=>modalImage(data._id,data.image)}  src={data.image} alt="Snow"   />
                                          {/* <div id={"myImg"+i} onClick={()=>modalImage(i,data.image)} className="foodImage"   alt="Snow" style={{backgroundImage:  `url('${data.image}')`}}></div>   */}
             
                                     {/* this is th */}
-                                    <div id={"myModal"+data._id} class="modal">
+                                    <div id={"myModal"+data._id} class="modal justify-content-center align-items-center "  style={{overflow:"hidden"}} >
                                     <span  className="close" onClick={()=>modalImageClose(data._id)}>&times;</span>
-                                    <img class="modal-content" src={data.image} id={"img01"+data._id} />
+                                    <img className= "modal-content" style={{backgroundColor: "black"}} src={data.image} id={"img01"+data._id} />
                                     <div id="caption"></div>
                                     </div>
                                     <div className="row">
@@ -344,43 +356,6 @@ const scrollHandler = (e)=>{
                                         <div className="hstack  d-flex justify-content-end  " >
             
                                         <div className="hstack  ">  
-            
-                                            <div className="vstack  ">
-                                                <div className="hstack  d-flex justify-content-end ">
-                                                <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
-                                            {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
-                                            {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
-                                    <span className="text" style={{color:'coral', fontFamily:'cursive', fontSize:'18px'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *10) / 10 : '0'  }</span>
-                                             </Link>
-            
-                                            <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none', fontSize:'18px'}} >&#9733;</span>
-                                                </div>
-            
-                                       
-                                            <span className="d-flex justify-content-end "> { rating[data._id] ? rating[data._id].outOf : '0'}  Reviews</span>
-                                            
-         
-            
-                                            </div>
-                                            </div>
-            
-            
-                                        </div>
-               
-                                            <div >
-            
-                                        </div>
-            
-                                    </div>
-                                    </div>
-                                  
-                                    <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
-                    textOverflow:"ellipsis"}}   >
-                                            { data.info}  
-                                         </p>
-                                         <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
-                 
-                                    <div className=" " >
                                         <div className="price hstack gap-3">
                                             <div className="fullPrice">
                                                 <h4 className="fullPriceTitle" >Full price</h4>
@@ -398,13 +373,54 @@ const scrollHandler = (e)=>{
                                             }
                      
                                         </div>
+
+                                            </div>
+            
+            
+                                        </div>
+               
+                                            <div >
+            
+                                        </div>
+            
+                                    </div>
+                                    </div>
+                                  
+                                    <p id={data._id} className="foodDisc m-0 p-0 " style={{  padding:0,   overflow:"hidden",
+                    textOverflow:"ellipsis"}}   >
+                                            { data.info}  
+                                         </p>
+
+                 
+                                    <div className=" hstack" >
+                                    <span id={"read"+data._id} onClick={()=>readMoreHandler("read"+data._id, data._id)} className="d-flex justify-content-end cursor" style={{color:'green'}} > Read More...</span>
+                                    <div className="vstack  ">
+                                                <div className="hstack  d-flex justify-content-end ">
+                                                <Link to={'/feedback/'+data._id} style={{textDecoration:'none'}} >
+                                            {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
+                                            {/* <span className="text" style={{color:'coral', fontFamily:'cursive'}} >{ Math.floor( rating[i] *100) / 100 }</span> */}
+                                    <span className="text" style={{color:'coral' , fontSize:'18px'}} >{ rating[data._id] ?  Math.floor( rating[data._id].avg *10) / 10 : '0'  }</span>
+                                             </Link>
+            
+                                            <span className="d-flex align-items-center" style={{ cursor: 'pointer', textDecoration: 'none', fontSize:'18px'}} >&#9733;</span>
+                                                </div>
+            
+                                       
+                                            <span className="d-flex justify-content-end "> { rating[data._id] ? rating[data._id].outOf : '0'}  Reviews</span>
+                                            
+         
+            
+                                            </div>
+
                                         {/* <div className="order">
                 
                                         </div> */}
                                          
                                          
                                     </div>
-                    
+                                      
+                    <br></br>
+ 
                                 </div>
                                 
                                    )
@@ -436,13 +452,8 @@ const scrollHandler = (e)=>{
                         ):
                         <div>{console.log('scroll222')}</div>
                     }
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+             
+                
 
             </div>
 
