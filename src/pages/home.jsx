@@ -9,6 +9,7 @@ import { Outlet, useNavigate, Link } from "react-router-dom";
 import search2 from '../file/img/search.png'
 import GetHandler from "../service/apiHandler/getHandler";
 import FoodLister from "../components/foodLister";
+import { Axios } from "axios";
  
 export default function HomePage() {
  
@@ -30,6 +31,9 @@ export default function HomePage() {
 
     }
     useEffect(()=>{
+        //const ourRequest = Axios.CancelToken.source()
+        // const ourRequest = new AbortController()
+        // ourRequest.abort()
         handleSearch()
     },[searchData])
 

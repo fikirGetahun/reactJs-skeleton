@@ -33,7 +33,7 @@
 
 .bgCat{
   /* background-color: white; */
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(48, 46, 45, 0.5);
   color: #0e0c0c;
   height: 100%;
   border-radius:30px;
@@ -95,7 +95,7 @@
 
     
       .categoryText{
-    color: white ;
+    color: rgb(255, 255, 255);
  
     font-size: x-large;
     }
@@ -108,7 +108,7 @@
       margin-Left:1%;
       margin-Right:1%;
       margin-Bottom:10px;
- 
+      object-fit: cover;
        background-Size:cover;
       align-Items:center;
       justify-Content: center;

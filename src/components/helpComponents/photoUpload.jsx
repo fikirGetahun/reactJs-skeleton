@@ -2,10 +2,12 @@
 
 import React from "react";
 import { useState, useRef } from "react";
+import imageCompression from 'browser-image-compression';
 // import { useDispatch } from "react-redux";
 // import { albumActions, artistAddSliceActions } from "../../store/postData";
 import '../../css/helperComponent.css';
-// drag drop file component
+// import imageToBase64 from "fixed-image-to-base64";
+  // drag drop file component
 const DragDropFile = ( props ) => {
 //   const dispatch = useDispatch();
   // drag state
@@ -22,6 +24,12 @@ const DragDropFile = ( props ) => {
   //   }
 
   // handle drag events
+
+  const options = {
+    maxSizeMB: 0.45,
+
+    useWebWorker: true
+  }
   const handleDrag = function (e) {
 
 
@@ -38,8 +46,21 @@ const DragDropFile = ( props ) => {
     }
   };
 
+ async function image_to_base64(file) {
+    let result_base64 = await new Promise((resolve) => {
+        let fileReader = new FileReader();
+        fileReader.onload = (e) => resolve(fileReader.result);
+        fileReader.onerror = (error) => {
+            console.log(error)
+            alert('An Error occurred please try again, File might be corrupt');
+        };
+        fileReader.readAsDataURL(file);
+    });
+    return result_base64;
+}
+
   // triggers when file is dro pped
-  const handleDrop = function (e) {
+  const handleDrop = async function (e) {
      e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -48,15 +69,41 @@ const DragDropFile = ( props ) => {
       setPhoto(e.dataTransfer.files[0]);
    
         var file = e.dataTransfer.files[0];
-        
+        let cphoto;
+       
+
+    
+        try {
+          // const compressedFile = await imageCompression(imageFile, options);
+          const compressedFile = await imageCompression(file,options)
+          cphoto = compressedFile;
+          console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+          let xx =await image_to_base64(compressedFile)
+          console.log(xx)
+      
+          props.onChange(photo, props.dbName, xx)
+        } catch (error) {
+          console.log(error);
+        }
+        // reader.onloadend = async function() {
+        //   //  setPhoto(reader.result)
+        //   // console.log('RESULT', reader.result)
         var reader = new FileReader();
         reader.onloadend = function() {
           //  setPhoto(reader.result)
           // console.log('RESULT', reader.result)
-          props.onChange(photo, props.dbName, reader.result  )
+           
+            
         }
+        let x =   reader.readAsDataURL(cphoto);
+        // props.onChange(photo, props.dbName, x  )
+
+         
+        // }
        
-         reader.readAsDataURL(file);
+      // let x =   reader.readAsDataURL(cphoto);
+        //  props.onChange(photo, props.dbName, x  )
         //  setPhoto(reader.result)
         setBuffer(reader.result)
 
@@ -77,7 +124,7 @@ const DragDropFile = ( props ) => {
   };
 
   // triggers when file is selected with click
-  const handleChange = function (e) {
+  const handleChange = async function  (e) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       // handleFiles(e.target.files);
@@ -85,15 +132,21 @@ const DragDropFile = ( props ) => {
       
       var file = e.target.files[0];
       var q;
-      var reader = new FileReader();
-      reader.onloadend = function() {
-        //  setPhoto(reader.result)
-        // console.log('RESULT', reader.result)
-         props.onChange(photo, props.dbName, reader.result  )
-          
+   
+  
+      try {
+        // const compressedFile = await imageCompression(imageFile, options);
+        const compressedFile = await imageCompression(file,options)
+ 
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+        let xx =await image_to_base64(compressedFile)
+        console.log(xx)
+    
+        props.onChange(photo, props.dbName, xx)
+      } catch (error) {
+        console.log(error);
       }
-     
-       reader.readAsDataURL(file);
 
        //  setPhoto(reader.result)
        setBuffer(q)

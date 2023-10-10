@@ -329,6 +329,8 @@ class GetHandler{
     getSearchResult = async (food) => {
       var result;
       try{
+        const ourRequest = new AbortController()
+        ourRequest.abort()
         await axios({
           url:api.joinUrl(api.endPoints.getSearch)+food,
           method:'get'

@@ -170,7 +170,7 @@ useEffect(()=>{
 
 //// ------------- post answer and rating ---------//
 const [comment, setComment]= useState('')
-const [rating, setRating] = useState();
+const [rating, setRating] = useState('');
 const [submit, setSubmit] = useState(false)
 
 // useEffect(()=>{
@@ -185,6 +185,10 @@ const handleSubmit = async (aa)=>{
         food_id: foodId,
         rating: rating,
         feedBack: comment
+    }
+    if(rating == ''){
+        alert('please select rating before submiting!')
+        return
     }
     await data.addRating(body).then(res=>{
         if(res.status == 200){
@@ -280,15 +284,15 @@ const sender = async (x)=>{
                         {
                             each.result.map(element=>{
                                 return(
-                                    <div className="vstack d-flex justify-content-center">
+                                    <div className="   ">
                                         <div className="row ">
-                                        <div className="col d-flex justify-content-center" style={{float: 'left', marginRight:'10px'}}>
+                                        <div className="col-8 d-flex justify-content-start" style={{float: 'left', marginRight:'10px'}}>
                         <span class="form-check-label    text text-info" for="flexRadio Default1">
           {element.chooseContent}     
                         </span>
                         </div>
-                        <div className="col d-flex justify-content-start " style={{float: 'left', marginLeft:10}}>
-                        <input class="form-check-input " onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
+                        <div className="col" style={{  marginLeft:10}}>
+                        <input class="form-check-input" style={{fontSize:"20px"}} onChange={()=>pls(element._id, each._id)} type="radio" name={each._id}   />  
                 
                       </div>
                                         </div>

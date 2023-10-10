@@ -123,7 +123,9 @@ router.get('/search/:product', async (req,res)=>{
       {
         $match: {
         
-          name: { $regex: ".*"+req.params.product+".*" }
+          // name: { $regex: ".*"+req.params.product+".*" }
+          name: { $regex:    new RegExp( req.params.product  , "i") }
+       
         }
       },
       {

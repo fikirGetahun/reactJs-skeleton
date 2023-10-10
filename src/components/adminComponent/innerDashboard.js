@@ -215,19 +215,19 @@ const InnerDashboard = ()=>{
                             </thead>
                             <tbody>
                                 {
-                                    bestRating ? bestRating.map(datax=>{
-                                        return (
-                                          datax.map(data=>{
-                                            return (
-                                            <tr>
-                                                <td> <img src={data.foodName[0]._id.image} style={{width:'70px'}} /> </td>
-                                                <td>{data.foodName[0]._id.name}</td>
-                                                <td> {Math.floor(data.rateAv/data.count*10)/10}</td>
-                                           </tr>
-                                            )
-                                          })  
-                                        )
-                                    }) : <div></div>
+                                    // bestRating ? bestRating.map(datax=>{
+                                    //     return (
+                                    //       datax.map(data=>{
+                                    //         return (
+                                    //         <tr>
+                                    //             <td> <img src={data.foodName[0]._id.image} style={{width:'70px'}} /> </td>
+                                    //             <td>{data.foodName[0]._id.name}</td>
+                                    //             <td> {Math.floor(data.rateAv/data.count*10)/10}</td>
+                                    //        </tr>
+                                    //         )
+                                    //       })  
+                                    //     )
+                                    // }) : <div></div>
                                 }
 
                              

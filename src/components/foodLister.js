@@ -61,6 +61,7 @@ import { useNavigate, useParams } from "react-router-dom";
     const productSearch = async (s)=>{
         const datax = new GetHandler()
         var test
+
         setIsLoading(true)
       await  datax.getSearchResult(s).then((res)=>{
    
@@ -78,6 +79,7 @@ import { useNavigate, useParams } from "react-router-dom";
                 
             }else{
                 alert(res)
+                console.log(res)
             }
             setIsLoading(false)
         })
@@ -265,7 +267,7 @@ var captionText = document.getElementById("caption");
 
  
 window.scroll = function(ev){
-    alert('dddd')
+     
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         // you're at the bottom of the page
         
@@ -297,7 +299,10 @@ useEffect(() => {
 
   useEffect(()=>{
     if(scrollPage != 0 && nodata != 'No more product'){
-        getProductByCatt()
+        if(search == null){ // if search string is there, scroll must not featch new data
+            getProductByCatt()
+        }
+
     }
   },[scrollPage])
 
@@ -358,7 +363,14 @@ const scrollHandler = (e)=>{
                                         <div className="hstack  ">  
                                         <div className="price hstack gap-3">
                                             <div className="fullPrice">
-                                                <h4 className="fullPriceTitle" >Full price</h4>
+                                                {
+                                                   (  data.result[0].halfFull  )?  <h4  className="fullPriceTitle">Full Price</h4> : <h4 className="fullPriceTitle">Price</h4>
+                                                }
+                                                {/* <h4 className="fullPriceTitle" >
+                                                    {
+                                                         (  data.result[0].halfFull  )?  <div>Full</div> : <div></div>
+                                                    }
+                                                   Price</h4> */}
                                                 {/* { priceGetter(data._id)} */}
                                                 <h5 className="fullPriceBrr" > { data.result[0].price }   <span className="supperScript" >Br</span></h5>
                                              </div>      
@@ -366,7 +378,7 @@ const scrollHandler = (e)=>{
                                                 (  data.result[0].halfFull  )?
                                               
                                                 (<div className="halfPrice">
-                                                <h4 className="fullPriceTitle ">Half price</h4>
+                                                <h4 className="fullPriceTitle ">Half Price</h4>
                                                 <h5 className="fullPriceBrr">{data.result[0].halfPrice  } <span className="supperScript" >Br</span></h5>
                                             </div>) :
                                                 (<div></div>)
@@ -420,7 +432,7 @@ const scrollHandler = (e)=>{
                                     </div>
                                       
                     <br></br>
- 
+
                                 </div>
                                 
                                    )
