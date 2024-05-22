@@ -5,6 +5,7 @@ import SelectFieldComp from "../helpComponents/selectField";
 import { TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
+import { isEmpty } from "lodash";
 
  const AddFood=()=>{
 
@@ -24,8 +25,8 @@ const [halfFull, setHalfFull] = useState(false);
 const [resResult, setResResult] = useState()
 const [response, setResponse] = useState({class: 'text', resp: ' '})
 
-const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
- 
+const FormHandler= async (value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
+       
  
         setFoodPhoto(buffer)
     
@@ -66,7 +67,8 @@ const addFood = async () =>{
     setIsLoading(true)
     let product = new PostHandler()
     console.log(body)
-    product.FoodAdder(body)
+    if(!isEmpty(foodPhoto)){
+        product.FoodAdder(body)
         .then(res=>{
             if(res.status == 200){
                 setIsLoading(false)
@@ -89,6 +91,8 @@ const addFood = async () =>{
                 ))
             }
         })
+    }
+   
 
     
  
