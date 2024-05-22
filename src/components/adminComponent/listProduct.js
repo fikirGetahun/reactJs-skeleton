@@ -162,6 +162,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                     setNodata('No more product')
                     
                 }else{
+                    setPbyCat([])
                     setPbyCat(old=>[...old,res.data])
                    
                 }
