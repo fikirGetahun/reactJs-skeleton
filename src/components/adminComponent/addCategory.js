@@ -4,6 +4,7 @@ import TextFieldComp from "../helpComponents/textField";
  import { useState } from "react";
 import PostHandler from "../../service/apiHandler/postHandler";
 import { TextField } from "@mui/joy";
+import { isEmpty } from "lodash";
 
 
  const AddCategory =()=>{
@@ -43,28 +44,31 @@ const submitHandler = async()=>{
      
     }
     setIsloading(true)
-   await sender.CategoryAdder(body)
-    .then(resx=>{
-        if(resx.status == 200){
-            setIsloading(false)
-             setResponse(old=>(
-                {
-                    ...old,
-                    class: 'text text-success',
-                    resp: 'Added Successfully!'
-                }
-            ))
-        }else{
-            isLoading(false)
-            setResponse(old=>(
-                {
-                    ...old,
-                    class: 'text text-danger',
-                    resp: resx
-                }
-            ))
-        }
-    })
+    if(!isEmpty(catPhoto)){
+        await sender.CategoryAdder(body)
+        .then(resx=>{
+            if(resx.status == 200){
+                setIsloading(false)
+                 setResponse(old=>(
+                    {
+                        ...old,
+                        class: 'text text-success',
+                        resp: 'Added Successfully!'
+                    }
+                ))
+            }else{
+                isLoading(false)
+                setResponse(old=>(
+                    {
+                        ...old,
+                        class: 'text text-danger',
+                        resp: resx
+                    }
+                ))
+            }
+        })
+    }
+
 }
 
 
