@@ -20,7 +20,7 @@ class PostHandler{
                     
                 }
             ).then(res=>{
-                result = res.statusText
+                result = res
             })
         }catch(err){
             if(err.response){
@@ -96,6 +96,126 @@ class PostHandler{
         }
         return result
     }
+
+
+    //////----------feedback post handling-----------//
+
+     AddFeedBackQuestion =async(body)=>{
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        let result;
+        try{
+            await axios(
+                {
+                url:api.joinUrl(api.endPoints.addFeedbackQuestion),
+                method:'post',
+                data:body,
+                headers:headers
+            }
+            ).then(res=>{
+                // console.log('zzzzzzzzz '+api.joinUrl(api.endPoints.addFeedbackQuestion))
+                result = res;
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+
+    addQuestionChoose = async (body)=>{
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        let result;
+        try{
+            await axios({
+                url:api.joinUrl(api.endPoints.addChooseQuestion),
+                method:'post',
+                data:body,
+                headers:headers
+            }).then(res=>{
+                result = res;
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+ 
+
+    addRating = async (body)=>{
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        let result;
+        try{
+            await axios({
+                url:api.joinUrl(api.endPoints.addRating),
+                method:'post',
+                data:body,
+                headers:headers
+            }).then(res=>{
+                result = res;
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+
+    addAnswerFeedback = async (body)=>{
+        var headers = {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem('token')
+        }
+        let result;
+        try{
+            await axios({
+                url:api.joinUrl(api.endPoints.addAnswer),
+                method:'post',
+                data:body,
+                headers:headers
+            }).then(res=>{
+                result = res;
+            })
+        }catch(err){
+            if(err.response){
+                return err.response.data
+            }else if(err.request){
+                return err.request
+            }else{
+                return err.message()
+            }
+        }
+        return result;
+    }
+
+     
 
 }
 

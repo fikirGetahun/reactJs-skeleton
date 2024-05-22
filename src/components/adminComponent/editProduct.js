@@ -39,12 +39,17 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
     
 }
 
+const [isLoadidng, setIsLoading]=useState()
 
 const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
+    setIsLoading(true)
+
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            setIsLoading(false)
+
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
@@ -68,12 +73,15 @@ const submitHandler = async () =>{
             oldPrice:foodOrder,
           }
     }
+    setIsLoading(true)
 
     let product = new PutHandler()
     console.log(body)
-    product.updateProduct(body, foodId, priceId)
+   await product.updateProduct(body, foodId, priceId)
         .then(res=>{
-            if(res.statusText == 'OK'){
+            setIsLoading(false)
+
+            if(res.status == 200){
                 setResponse(old=>(
                     {
                         ...old,
@@ -100,9 +108,13 @@ const submitHandler = async () =>{
 const oldDataGetter = async (id)=>{
     let data = new GetHandler()
     let test;
+    setIsLoading(true)
+
     let res = await data.getOneProduct(id)
     .then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
             test =res.data
             setFoodName(res.data.name)
             setFoodOrder(res.data.order)
@@ -121,8 +133,12 @@ const oldDataGetter = async (id)=>{
 const [categoryName, setCategoryNme] = useState([])
 const getCategoryName = async (id)=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let catName = await data.getOneCategory(id).then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
             setCategoryNme(res.data)
             setFoodCategory(res.data._id)
            
@@ -135,10 +151,11 @@ const getCategoryName = async (id)=>{
 const getPrice = async (foodId)=>{
     let data = new GetHandler()
     let catName = await data.getProductPrice(foodId) .then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setFoodFullPrice(res.data.price)
             setFoodHalfPrice(res.data.halfPrice)
             setPriceId(res.data._id)
+            setHalfFull(res.data.halfFull)
         }else{
             alert('no category')
         }
@@ -162,6 +179,12 @@ useEffect(()=>{
                     <div className="row d-flex justify-content-center">
                     <h3>Edit Product</h3>
                         <div className="col-6">
+                        {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                          <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Name</label>
                             <input className="form-control" type="text" value={foodName}   id="standard-basic" placeholder="Food Name"   onChange={(e)=>setFoodName(e.target.value)} name="catName" />
@@ -178,11 +201,11 @@ useEffect(()=>{
                         </div>
 
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Order Of Appearance</label>
                             <input className="form-control" type="text" value={foodOrder}   id="standard-basic" placeholder="Order of List"   onChange={(e)=>setFoodOrder(e.target.value)} name="catName" />
                             <label></label>
-                        </div>
+                        </div> */}
 
 
                         <div className="textField p-2">
@@ -197,7 +220,14 @@ useEffect(()=>{
                          </select>
                         </div>
 
-       
+                        <div className="d-flex justify-content-start m-2">
+                          <span>Half price: </span> &nbsp;  
+                          {
+                            halfFull ?   <input checked    onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                            : 
+                            <input     onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                          }
+                           </div> 
 
                         <div className="row">
                         <div className="textField p-2">
@@ -206,12 +236,26 @@ useEffect(()=>{
                             <label></label>
                         </div>
                          
-                            
+
+                         {
+                            halfFull ? (
                                 <div className="textField p-2">
                                 <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Half Price</label>
                                     <input className="form-control" type="text" value={foodHalfPrice}    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
                                     <label></label>
                                 </div>
+                            ) : (
+                                // <div className="textField p-2">
+                                // <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Half Price</label>
+                                //     <input className="form-control" type="text" value={false}    id="standard-basic" placeholder="00.00 Br"   onChange={(e)=>setFoodHalfPrice(e.target.value)} name="catName" />
+                                //     <label></label>
+                                // </div>
+                                <div></div>
+                                 
+                            )
+                         }
+                            
+
                              
                          
                             

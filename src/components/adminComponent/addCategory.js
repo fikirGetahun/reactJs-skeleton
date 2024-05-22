@@ -30,6 +30,7 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
        
     }
 }
+const [isLoading, setIsloading] = useState( )
 
 const submitHandler = async()=>{
     const sender = new PostHandler()
@@ -41,9 +42,11 @@ const submitHandler = async()=>{
         order: catOrder,
      
     }
+    setIsloading(true)
    await sender.CategoryAdder(body)
     .then(resx=>{
-        if(resx == 'OK'){
+        if(resx.status == 200){
+            setIsloading(false)
              setResponse(old=>(
                 {
                     ...old,
@@ -52,6 +55,7 @@ const submitHandler = async()=>{
                 }
             ))
         }else{
+            isLoading(false)
             setResponse(old=>(
                 {
                     ...old,
@@ -84,15 +88,21 @@ const submitHandler = async()=>{
 
                        
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Category Order</label> 
                             <TextField className="" type="text"    id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
-                        </div>
+                        </div> */}
                             
                            <DragDropFile onChange={FormHandler}  dbName="catImage" />
                            <button onClick={submitHandler} className="btn btn-warning">Add Category</button>
                            <br></br>
+                           {
+                            isLoading ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                             <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

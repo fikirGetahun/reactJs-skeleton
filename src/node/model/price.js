@@ -16,14 +16,9 @@ const Price=   mongoose.model('Price', new mongoose.Schema({
     halfFull:{
         type:Boolean
     },
-    oldPrice:{
-        type:Number,
-        required:true,
-        minlength:2,
-        maxlength:1000
-    },
+   
     foodId:{
-        type:String,
+        type:mongoose.Types.ObjectId,
         required:true,
         minlength:2,
         maxlength:1000

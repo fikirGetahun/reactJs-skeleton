@@ -21,21 +21,37 @@ import { useParams } from "react-router-dom";
   },[])
 
   useEffect(()=>{
-    categoryGetter ()
+    // categoryGetter()
+    // if(type == )
+    if(type == 'category'){
+        setItems([])
+        getCategoryOrder()
+    }else if (type == 'product'){
+        setItems([])
+        categoryGetter ()
+    }
   },[type])
+  const [isLoadidng, setIsLoading]=useState()
 
  const [catList, setCategoryList] = useState([])
- const [selectedCat, setSelectedCat] = useState()
+ const [selectedCat, setSelectedCat] = useState('')
 
 useEffect(()=>{
-     getProductOrder(selectedCat)
+    if(selectedCat != ''){
+        getProductOrder(selectedCat)
+    }
+     
 },[selectedCat])
 
   const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
+    setIsLoading(true)
+
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            setIsLoading(false)
+
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
@@ -51,11 +67,15 @@ const [items, setItems] = useState([])
 // category order data featcher
 const getCategoryOrder = async()=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let x =data.getCategoryInOrder().then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
             setItems(res.data)
         }else{
-            alert('db connect error')
+            alert('db connect error2')
         }
     })
 }
@@ -65,8 +85,12 @@ const getCategoryOrder = async()=>{
 // category order updater
 const categoryOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
+    setIsLoading(true)
+
     await data.updateCategoryOrder(body,id).then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
         //    alert('ok') 
         }else{
             alert('db error')
@@ -77,8 +101,12 @@ const categoryOrderUpdater = async (body, id)=>{
 // PRODUCT UPDATER
 const productOrderUpdater = async (body, id)=>{
     let data = new PutHandler()
+    setIsLoading(true)
+
     await data.updateProductOrder(body,id).then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
         //    alert('ok') 
         }else{
             alert('db error')
@@ -91,8 +119,12 @@ const productOrderUpdater = async (body, id)=>{
 // product data fetcher 
 const getProductOrder = async(cid)=>{
     let data = new GetHandler()
+    setIsLoading(true)
+
     let x =data.getProductOnCategory(cid).then(res=>{
-        if(res.statusText == 'OK'){
+        setIsLoading(false)
+
+        if(res.status == 200){
             setItems(res.data)
         }else{
             alert('db connect error')
@@ -224,7 +256,12 @@ const catDisplay = ()=>{
         <h2>Category Order Manager</h2>
         <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
         <div className=" d-flex justify-content-center align-itmes-center  ">
-      
+        {
+                             isLoadidng ?  
+                            <div>                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                            </div>
+                            : <div></div>
+                        }
      
         <div className="card " style={{width: "18rem"}}>
         <ul className="list-group list-group-flush">
@@ -264,6 +301,12 @@ const productDisplay = ()=>{
     return(            <div>
         <h2>Product Order Manager</h2>
         <h6 className="text text-warning" >Orders you modify will be automaticaly saved!</h6>
+        {
+                isLoadidng ?  
+                <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+            : <div></div>
+        }
 
         <div className="container d-flex justify-content-center">
         <select onChange={(e)=>setSelectedCat(e.target.value)} className="form-control">

@@ -8,13 +8,18 @@ import AddCategory from "./addCategory";
 const ListCategory = ()=>{
 
     const [categoryData, setCatagoryData] = useState([])
+    const [isLoadidng, setIsLoading]=useState()
 
     const dataFetcher = async ()=>{
         var test;
         let data = new GetHandler()
+        setIsLoading(true)
+
         let response = await data.getCategory()
          .then(res=>{
-            if(res.statusText == 'OK'){
+            setIsLoading(false)
+
+            if(res.status == 200){
  
                 test = res.data
                 setCatagoryData(test)
@@ -27,9 +32,13 @@ const ListCategory = ()=>{
 
     const deleteHandler = async (id, arrayId)=>{
         let data = new DeleteHandler()
+        setIsLoading(true)
+
          if (window.confirm("Are you sure you want to delete this?") == true) {
             let handler = await data.deleteCategory(id).then(res=>{
-                if(res.statusText == 'OK'){
+                setIsLoading(false)
+
+                if(res.status == 200){
                     let arr = []
                     setCatagoryData([
                         ...categoryData.slice(0, arrayId),
@@ -45,7 +54,8 @@ const ListCategory = ()=>{
                 }
             })   
         } else {
-         alert('error not deleted!')
+            setIsLoading(false)
+        //  alert('error not deleted!')
         }
 
     }
@@ -69,6 +79,14 @@ const ListCategory = ()=>{
             <h3>Select Category to Edit</h3>
             <hr></hr>
             <div className="row m-5">
+            {
+                             isLoadidng ?  
+                             <div>
+                             <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                        </div>
+
+                            : <div></div>
+                        }
              {
                 
                 categoryData.map((selected,i)=>{

@@ -37,13 +37,15 @@ const categoryGetter = async ()=>{
     let catGetter = new GetHandler()
     let cat = catGetter.getCategory()
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
                 setCategoryList(res.data)
             }else{
                 alert('db not connected')
             }
         })
 }
+
+const [isLoadidng, setIsLoading]=useState()
 
 const addFood = async () =>{
     let body = {
@@ -61,12 +63,13 @@ const addFood = async () =>{
             oldPrice:foodOrder,
          }
     }
-
+    setIsLoading(true)
     let product = new PostHandler()
     console.log(body)
     product.FoodAdder(body)
         .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
+                setIsLoading(false)
                 setResponse(old=>(
                     {
                         ...old,
@@ -75,6 +78,7 @@ const addFood = async () =>{
                     }
                 ))
             }else{
+                setIsLoading(false)
                 // alert(res)
                 setResponse(old=>(
                     {
@@ -123,11 +127,7 @@ useEffect(()=>{
                         </div>
 
 
-                        <div className="textField p-2">
-                        <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Order Of Appearance</label>
-                            <input className="form-control" type="text"    id="standard-basic" placeholder="Order of List"   onChange={(e)=>setFoodOrder(e.target.value)} name="catName" />
-                            <label></label>
-                        </div>
+                    
 
 
                         <div className="textField p-2">
@@ -149,7 +149,8 @@ useEffect(()=>{
                            <span>Full price: </span> &nbsp; <input  type="checkbox" name="fullPrice" />  
                            </div> */}
                           <div className="d-flex justify-content-start m-2">
-                          <span>Half price: </span> &nbsp;    <input  onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" /></div> 
+                          <span>Half price: </span> &nbsp;    <input  onChange={()=>setHalfFull(!halfFull)} type="checkbox" name="halfPrice" />
+                          </div> 
 
                         </div>
 
@@ -185,6 +186,12 @@ useEffect(()=>{
                            <div>
                             <button onClick={addFood} className="btn btn-warning">Add Product</button>
                            </div>
+                           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                            <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

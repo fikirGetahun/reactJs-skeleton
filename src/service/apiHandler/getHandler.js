@@ -50,6 +50,86 @@ class GetHandler{
       return result;
     }
 
+    getRatingGre = async (gte,skip) =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingGte)+gte+'/'+skip)
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getRatingLs = async (gte,skip) =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingLs)+gte+'/'+skip)
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getRatingCountTotal = async () =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.ratingcount))
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
+    getFoodCountTotal = async () =>{
+      var result;
+      try{
+        await axios.get(api.joinUrl(api.endPoints.foodCount))
+        .then(res=>{
+          result = res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message
+        }
+      }
+
+      return result;
+    }
+
     getActiveCategory = async () =>{
       var result;
       try{
@@ -249,6 +329,8 @@ class GetHandler{
     getSearchResult = async (food) => {
       var result;
       try{
+        const ourRequest = new AbortController()
+        ourRequest.abort()
         await axios({
           url:api.joinUrl(api.endPoints.getSearch)+food,
           method:'get'
@@ -267,7 +349,268 @@ class GetHandler{
       return result
     }
 
+    
 
+    //// --------- feedback handler ----------///
+    getQuestions = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addFeedbackQuestion),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getChoosenQuestion = async (qid) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addChooseQuestion)+qid,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getChoosen = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addChooseQuestion),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getQuestionWithChoice = async () => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.questionWithChoice),
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getRating = async (foodId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addRating)+foodId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+    // getProductbyCat = async (cid ) => {
+    //   var result;
+    //   try{
+    //     await axios({
+    //       url:api.joinUrl(api.endPoints.catWithProduct)+cid ,
+    //       method:'get'
+    //     }).then(res=>{
+    //       result =res
+    //     })
+    //   }catch(err){
+    //     if(err.response){
+    //       return err.response.data
+    //     }else if(err.request){
+    //       return err.request
+    //     }else{
+    //       return err.message()
+    //     }
+    //   }
+    //   return result
+    // }
+    getProductbyCat = async (cid,pid) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.catWithProduct)+cid+'/'+pid,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getRatingAvg = async (foodId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.ratingAvg)+foodId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getRatingLimit = async (foodId, startingId) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.limitRating)+foodId+'/'+startingId,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    getRatingLimitDay = async (foodId, startingId,stDate, fDate) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.ratingAvgDate)+foodId+'/'+startingId+'/'+stDate+'/'+fDate,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+
+    getAnswers = async (foodId, qid, cid) => {
+      var headers = {
+        "Content-Type": "application/json",
+     
+    }
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.addAnswer)+qid+"/"+foodId+"/"+cid,
+          method:'get',
+          headers: headers,
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+
+    
+    getSingleQ = async (id) => {
+      var result;
+      try{
+        await axios({
+          url:api.joinUrl(api.endPoints.getsingleQ)+id,
+          method:'get'
+        }).then(res=>{
+          result =res
+        })
+      }catch(err){
+        if(err.response){
+          return err.response.data
+        }else if(err.request){
+          return err.request
+        }else{
+          return err.message()
+        }
+      }
+      return result
+    }
+ 
 }
 
 export default GetHandler

@@ -8,12 +8,37 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
     const [foodData, setFoodData] = useState([])
 
+
+    useEffect(() => {
+        
+        const handleScroll = () => {
+           
+        //   const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              // alert('bottom')
+      
+              setScrollPage(scrollPage+2)
+              
+              
+            //   getProductByCatt()
+              
+              // alert(scrollPage)
+          }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      });
+
     const dataFetcher = async (cid)=>{
         var test;
         let data = new GetHandler()
         let response = await data.getProductOnCategory(cid)
          .then(res=>{
-            if(res.statusText == 'OK'){
+            if(res.status == 200){
  
                 test = res.data
                 setFoodData(test)
@@ -26,9 +51,12 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
     const deleteHandler = async (id, arrayId)=>{
         let data = new DeleteHandler()
+        setIsLoading(true)
          if (window.confirm("Are you sure you want to delete this?") == true) {
             let handler = await data.deleteProduct(id).then(res=>{
-                if(res.statusText == 'OK'){
+                setIsLoading(true)
+
+                if(res.status == 200){
                     let arr = []
                     setFoodData([
                         ...foodData.slice(0, arrayId),
@@ -48,10 +76,13 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 }
             })   
         } else {
-         alert('error not deleted!')
+            
+            setIsLoading(false)
+
         }
 
     }
+    const [isLoadidng, setIsLoading]=useState()
 
 
     const [categorySelected, setCategorySelected] =useState({id:'', name:''})
@@ -59,9 +90,13 @@ import GetHandler from "../../service/apiHandler/getHandler";
     const categoryLister = async ()=>{
         let data = new GetHandler()
         var test;
+        setIsLoading(true)
+
         let response =  await data.getCategory()
             .then(res=>{
-                if(res.statusText == 'OK'){
+                setIsLoading(false)
+
+                if(res.status == 200){
                     test = res.data
                     setCategory(test)
                 }else{
@@ -83,11 +118,12 @@ import GetHandler from "../../service/apiHandler/getHandler";
         foodData.forEach(async (food)=>{
             let x = await data.getProductPrice(food._id)
                 .then(res=>{
-                    if(res.statusText == 'OK'){
+                    if(res.status == 200){
                         setProductsPrice(c=>[...c,res.data])
 
                     }else{
-                        alert('no price is fetched')
+                        // alert('no price is fetched')
+                        
                     }
                 })
         })
@@ -101,15 +137,73 @@ import GetHandler from "../../service/apiHandler/getHandler";
         categoryLister()
     },[])
 
+    
     useEffect(()=>{
         dataFetcher(categorySelected.id)
-        console.log(categorySelected.name)
+        if(categorySelected.id != ''){
+            getProductByCatt()
+
+        }
+        // console.log(categorySelected.name)
+
     }, [categorySelected.id])
 
+    const [nodata, setNodata] = useState()
+
+    const [pbycat, setPbyCat] = useState([])
+    const getProductByCatt = async ()=>{
+        // alert('getp')
+        setIsLoading(true)
+        const data = new GetHandler()
+        await data.getProductbyCat(categorySelected.id,scrollPage).then(res=>{
+
+            if(res.status == 200){
+                if(res.data.message == 400){
+                    setNodata('No more product')
+                    
+                }else{
+                    setPbyCat(old=>[...old,res.data])
+                   
+                }
+
+            }
+            setIsLoading(false)
+        })
+    }
+    const [scrollPage, setScrollPage]=useState(0)
+
+
+      useEffect(()=>{
+        if(scrollPage != 0 && nodata!='No more product' ){
+            getProductByCatt()
+        }
+      },[scrollPage])
+
+
+
+      const scrollHandler = (e)=>{
+        // console.log(e.currentTarget.scrollTop)
      
+       
+    
+        const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
+        
+        if(bottom){
+            // alert('bottom')
+            
+            setScrollPage(scrollPage+2)
+            // alert('dd')
+            
+       
+            
+            // alert(scrollPage)
+        }
+        // console.log(e.target.clientHeight)
+        // console.log(bottom)    style={{height:'83vh',overflow: 'scroll', overflowX:'hidden'}}
+    }
 
     return(
-        <div>
+        <div style={{height:"500px", overflowY:'scroll'}} onScroll={(e)=>scrollHandler(e)} >
             {/* <div className="vstack gap-2" >
                 <h4>Title</h4>
                 <h4>Order: <span>3</span></h4>
@@ -118,8 +212,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                 </div>
                 <button className="btn btn-warning">Edit</button>
             </div> */}
-            {console.log('dddd ', productPrice)}
-            <h3>Select Category to List Products</h3>
+             <h3>Select Category to List Products</h3>
             <label>Category List</label>
             <select className="form-controle" onChange={e=>categoryName(e) } >
                 <option   >Select Category</option>
@@ -133,45 +226,64 @@ import GetHandler from "../../service/apiHandler/getHandler";
             <hr></hr>
             <div className="row m-5">
                 <h3>{categorySelected.name}</h3>
+                {
+                             isLoadidng ?  
+                             <div>
+                             <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+                        </div>
+
+                            : <div></div>
+                        }
              {
                 
-                foodData.map((selected, i)=>{
+                pbycat.map((selectedx, i)=>{
                     return(
-                    <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
-                        <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
-                        <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
-                        <label>Description</label>
-                        <p>lorem ipsom</p>
-                       <div className="row">
-                        <div className="col">
-                        <label>Full Price</label>
-                        <h5>{ productPrice[i]? productPrice[i].price : null } </h5>
-                        </div>
-                        <div className="col">
-                        {
-                            (productPrice[i] ? productPrice[i].halfFull : null)?
-                            (
-                                <div>
-                                    <label>Half Price</label>
-                                <h5>{productPrice[i] ? productPrice[i].halfPrice : null} </h5>
+                        selectedx.map((selected,ix)=>{
+                            return (
+                                <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
+                                <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
+                                <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
+                                <label>Description</label>
+                                <p>lorem ipsom</p>
+                               <div className="row">
+                                <div className="col">
+                                <label>Full Price</label>
+                                <h5>{ selected.result[0].price } </h5>
                                 </div>
-                            ) :
-                            <div></div>
-                        }
-                        </div>
-                       </div>
-
-                        <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
+                                <div className="col">
+                                {
+                                    (selected.result[0].halfFull )?
+                                    (
+                                        <div>
+                                            <label>Half Price</label>
+                                        <h5>{selected.result[0].halfPrice } </h5>
+                                        </div>
+                                    ) :
+                                    <div></div>
+                                }
+                                </div>
+                               </div>
         
-                        </div>
-                        <Link to={"/admin/editProduct/"+selected._id}>
-                        <button className="btn btn-warning container">Edit</button>
-                        </Link>
-                        <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
+                                <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
+                
+                                </div>
+                                <div className="hstack" >
+                                <Link to={"/admin/editProduct/"+selected._id}>
+                                <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
+                                </Link>
+                                <Link to={"/admin/analitic/"+selected._id}>
+                                <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
+                                </Link>
+                                <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
+                                
+                                </div>
                         
-                        <br></br>
-                      
-                    </div>
+                                <br></br>
+                              
+                            </div>
+                            )
+                        })
+
                     )
                 })
             }

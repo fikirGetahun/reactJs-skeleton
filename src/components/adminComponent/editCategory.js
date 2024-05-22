@@ -15,14 +15,17 @@ import PutHandler from "../../service/apiHandler/putHandler";
 
 
 const getDataToEdit = async () =>{
+    setIsLoading(true)
     let data = new GetHandler()
     let response = data.getOneCategory(id)
     .then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setCatName(res.data.name)
             setCatOrder(res.data.order)
             setCatPhoto(res.data.image)
+            setIsLoading(false)
         }else{
+            setIsLoading(false)
             alert('not found err:404')
         }
     })
@@ -52,7 +55,7 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
        
     }
 }
-
+const [isLoadidng, setIsLoading]=useState()
 const submitHandler = async()=>{
     const sender = new PutHandler()
     // var x = new Buffer.from(catPhoto, 'base64')
@@ -63,9 +66,11 @@ const submitHandler = async()=>{
         order: catOrder,
      
     }
+    setIsLoading(true)
    await sender.updateCategory(body, id)
     .then(resx=>{
-        if(resx.statusText == 'OK'){
+        if(resx.status == 200){
+            setIsLoading(false)
              setResponse(old=>(
                 {
                     ...old,
@@ -74,6 +79,7 @@ const submitHandler = async()=>{
                 }
             ))
         }else{
+            setIsLoading(false)
             setResponse(old=>(
                 {
                     ...old,
@@ -108,11 +114,11 @@ useEffect(()=>{
 
                        
 
-                        <div className="textField p-2">
+                        {/* <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Category Order</label> 
                             <TextField className="" type="text" value={catOrder}   id="standard-basic" placeholder="Order of the Display"   onChange={(e)=>setCatOrder(e.target.value)} name="catOrder" />
                             <label></label>
-                        </div>
+                        </div> */}
                             {/* <div className="vstack gap-2">
                                 <div>
                                     <button className="btn btn-outline-danger">X</button>
@@ -143,6 +149,12 @@ useEffect(()=>{
                         
                            <button onClick={submitHandler} className="btn btn-warning">Edit Category</button>
                            <br></br>
+                           {
+                             isLoadidng ?  
+                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
+
+                            : <div></div>
+                           }
                             <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

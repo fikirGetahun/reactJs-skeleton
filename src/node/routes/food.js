@@ -7,6 +7,7 @@ const {Food , Validation   } = require('../model/food')
  const Category = require('../model/category')
 const { compareSync } = require('bcrypt')
 const auth = require( '../middleware/auth')
+const { default: mongoose } = require('mongoose')
 
 
 router.post('/' , async (req, res)=>{
@@ -16,12 +17,15 @@ router.post('/' , async (req, res)=>{
    
     if(error) return res.status(400).send(error.details[0].message)
     console.log('this is from express  ',req.body)
+
+    const co = await Food.find({categoryId:req.body.food.categoryId}).count()
+
     const data = await Food({
         name: req.body.food.name,
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
-        order: req.body.food.order,
-        image:req.body.food.image
+         image:req.body.food.image,
+         order: co+1
     })
 
     let foodUploadedData = await data.save()
@@ -63,7 +67,7 @@ router.put('/:fid/:pid' , async (req, res)=>{
         name: req.body.food.name,
         categoryId:req.body.food.categoryId,
         info: req.body.food.info,
-        order: req.body.food.order,
+       
         image:req.body.food.image
     })
 
@@ -106,38 +110,35 @@ router.get('/:catId',  async (req, res)=>{
  
 
 
-    // const data =await Food.aggregate([
-    //     {
-    //         $lookup:{
-    //             from: Category,
-    //             localField: "categoryId",
-    //             foreignField: "_id",
-    //             as: "foodWithCategory"
-    //         },
-    //         $unwind: "foodWithCategory",
-    //         $lookup:{
-    //             from: Price,
-    //             localField: "priceId",
-    //             foreignField: "foodId",
-    //             as: "foodWithCategoryWithPrice"
-    //         }
-    //     }
-    // ]).exec(function (err, res){
-    //     console.log("this is output ",JSON.stringify(res))
-    //     return res
-    // })
-
-     
-    // if(error) return res.status(400).send('404 error')
+ 
 
     res.send(JSON.stringify(data))
     
 })
 
 router.get('/search/:product', async (req,res)=>{
-     let data = await Food.find({name: { $regex: ".*"+req.params.product+".*" }    })
+    //  let data = await Food.find({name: { $regex: ".*"+req.params.product+".*" }    }).limit(3)
 
- 
+     let data = await Food.aggregate([
+      {
+        $match: {
+        
+          // name: { $regex: ".*"+req.params.product+".*" }
+          name: { $regex:    new RegExp( req.params.product  , "i") }
+       
+        }
+      },
+      {
+      $lookup:   
+
+    {
+      from: "prices",
+      localField: "_id",
+      foreignField: "foodId",
+      as: "result"
+    }
+    } 
+    ])
     // 
      if(!data) return res.status(404).send('error on search')
 
@@ -153,6 +154,17 @@ router.get('/', async (req,res)=>{
     res.send(data)
 })
 
+router.get('/count/count', async (req,res)=>{
+  const data = await Food.find().count()
+
+  if(!data) return res.status(404).send('error on db')
+
+  let ress = {
+    data : data
+  }
+
+  res.send(ress)
+})
  
 
 router.patch('/order/:id', async (req,res)=>{
@@ -170,6 +182,84 @@ router.get('/product/:id', async (req,res)=>{
 
     if(!data) return res.status(404).send('error: product not found')
 
+    res.send(data)
+})
+
+// router.get('/catWithProduct/:cid', async(req,res)=>{
+//     var result;
+    
+//     let data = await Food.aggregate([
+//         {
+//           $match: {
+//             categoryId : mongoose.Types.ObjectId(req.params.cid)
+//           }
+//         },
+//         {
+//         $lookup:   
+ 
+//       {
+//         from: "prices",
+//         localField: "_id",
+//         foreignField: "foodId",
+//         as: "result"
+//       }
+//       }
+//       ]) 
+
+//     if(!data) return res.status(404).send('error: product not found')
+
+//     res.send(data)
+// })
+
+router.get('/catWithProduct/:cid/:pid', async(req,res)=>{
+    var result;
+    var s = Number(req.params.pid)
+    let data = await Food.aggregate([
+        {
+          $match: {
+            categoryId : mongoose.Types.ObjectId(req.params.cid)
+          }
+        },
+        {
+        $lookup:   
+ 
+      {
+        from: "prices",
+        localField: "_id",
+        foreignField: "foodId",
+        as: "result"
+      }
+      } 
+      ]).skip(s).limit(2)
+
+      let data2 = await Food.aggregate([
+        {
+          $match: {
+            categoryId : mongoose.Types.ObjectId(req.params.cid)
+          }
+        },
+        {
+        $lookup:   
+ 
+      {
+        from: "prices",
+        localField: "_id",
+        foreignField: "foodId",
+        as: "result"
+      }
+      } 
+      ])
+       
+
+      if(data2.length < s){
+        let body = {
+            message: 400
+        }
+        return res.send(body)
+      }
+
+    if(!data) return res.status(404).send('error: product not found')
+    //   console.log(data)
     res.send(data)
 })
 

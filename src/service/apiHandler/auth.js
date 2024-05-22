@@ -1,4 +1,5 @@
  import axios from "axios";
+import { useNavigate } from "react-router-dom";
  import apiUrl from "./apiUrl";
 
  const api = new apiUrl()
@@ -22,7 +23,7 @@ class Auth{
             await axios 
             .post(api.joinUrl(api.endPoints.register), body)
             .then(function (res){
-                rrr = res.statusText
+                rrr = res.status
             })
         }catch(error){
            
@@ -54,12 +55,14 @@ class Auth{
     Login = async (body) =>{
         var result;
         try{
-            await axios.post(api.joinUrl(api.endPoints.login), body)
-            .then(res=>{
-                localStorage.setItem('token', res.data)
-                localStorage.setItem('email',body.email)
-                 result = true
-            })
+          let res =  await axios.post(api.joinUrl(api.endPoints.login), body)
+          window.localStorage.setItem('token', res.data.token)
+          window.localStorage.setItem('isAdmin', res.data.isAdmin)
+          window.localStorage.setItem('email',body.email)
+          console.log(localStorage.getItem('token'))
+          console.log(localStorage.getItem('isAdmin'))
+          alert(res.data)
+           result = true
         }catch(err){
             if(err.response){
                 return err.response.data
@@ -69,6 +72,7 @@ class Auth{
                 return err.message
             }
         }
+      
         return result;
     }
 

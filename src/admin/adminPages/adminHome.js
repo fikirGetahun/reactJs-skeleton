@@ -1,6 +1,6 @@
 import { Box } from "@mui/joy";
 import React, { useEffect, useState } from "react";
-import { Outlet, Link, NavLink, useParams} from "react-router-dom";
+import { Outlet, Link, NavLink, useParams, useNavigate} from "react-router-dom";
 import GetHandler from "../../service/apiHandler/getHandler";
 
 
@@ -20,6 +20,11 @@ const toggler =(id)=>{
     let selected = document.getElementById(id);
  
     selected.classList.toggle('show');
+}
+let navigate =   useNavigate()
+const logoutHandler = ()=>{
+    window.localStorage.removeItem('token')
+    navigate('/login')
 }
 
 const drowdownHandler = (id)=>{
@@ -64,9 +69,9 @@ const drowdownHandler = (id)=>{
 const [logedUser, setLogedUser] = useState([])
 const getLogedUser = async ()=>{
     let data = new GetHandler()
-    let email = localStorage.getItem('email')
+    let email = window.localStorage.getItem('email')
     let x = await data.getOneUser(email).then(res=>{
-        if(res.statusText == 'OK'){
+        if(res.status == 200){
             setLogedUser(res.data)
         }else{
             alert('no user name')
@@ -75,7 +80,7 @@ const getLogedUser = async ()=>{
 }
 useEffect(()=>{
 getLogedUser()
-},[])
+ },[])
 
 
 
@@ -161,21 +166,26 @@ getLogedUser()
                     <NavLink    to="listProducts" className={({ isActive }) => (isActive ? 'active' : '')+" nav-item nav-link d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                     <i className="fa fa-tachometer-alt me-2"></i>List Products
                     </NavLink>
-                    <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
-                        <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
-                        <div id="test2"  className="dropdown-menu  bg-transparent border-0">
-                        <NavLink    to="/login/reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                            <a  className="dropdown-item">Add User</a>
-                            </NavLink>
-                            <NavLink    to="listUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                            <a   className="dropdown-item">List User</a>
-                            </NavLink>
-                            <NavLink    to="editUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
-                            <a href="typography.html" className="dropdown-item">Edit Profile</a>
-                            </NavLink>
-                            {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
+                    {
+                        window.localStorage.getItem('isAdmin')  ? (
+                            <div  onClick={()=>drowdownHandler("test2")} className="nav-item   ">
+                            <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>User Managment</a>
+                            <div id="test2"  className="dropdown-menu  bg-transparent border-0">
+                            <NavLink    to="/login/reg" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                                <a  className="dropdown-item">Add User</a>
+                                </NavLink>
+                                <NavLink    to="listUsers" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                                <a   className="dropdown-item">List User</a>
+                                </NavLink>
+                                <NavLink    to="editUser" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                                <a href="typography.html" className="dropdown-item">Edit Profile</a>
+                                </NavLink>
+                                {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
+                            </div>
                         </div>
-                    </div>
+                        ):
+                        <div></div>
+                    }
                     <div  onClick={()=>drowdownHandler("test3")} className="nav-item   ">
                         <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Order Managment</a>
                         <div id="test3"  className="dropdown-menu  bg-transparent border-0">
@@ -184,6 +194,19 @@ getLogedUser()
                             </NavLink>
                             <NavLink    to="order/product" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
                             <a   className="dropdown-item">Product Order Modify</a>
+                            </NavLink>
+                
+                            {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
+                        </div>
+                    </div>
+                    <div  onClick={()=>drowdownHandler("test3q")} className="nav-item   ">
+                        <a href="#" className="nav-link d-flex justify-content-start align-items-center dropdown dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>FeedBack & Review </a>
+                        <div id="test3q"  className="dropdown-menu  bg-transparent border-0">
+                        <NavLink    to="addFeedbackQuestion" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a   className="dropdown-item">Add Feedback Questions</a>
+                            </NavLink>
+                            <NavLink    to="listFeedBackQuestion" className={({ isActive }) => (isActive ? 'active' : '')+" dropdown-item d-flex justify-content-start align-items-center "} style={{ textDecoration: "none" }} >
+                            <a   className="dropdown-item">List Feedback Questions</a>
                             </NavLink>
                 
                             {/* <a href="element.html" className="dropdown-item">Other Elements</a> */}
@@ -271,7 +294,7 @@ getLogedUser()
                         <a href="#" className="nav-link  hstack gap-2 " data-bs-toggle="dropdown">
                             {/* <img className="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"/> */}
                           <span>Loged User :</span>  <span className="d-none d-lg-inline-flex">{logedUser.name}</span>
-                          <button className="btn btn-warning">Log Out</button>
+                          <button onClick={()=>logoutHandler()} className="btn btn-warning">Log Out</button>
 
                         </a>
                         {/* <div className="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
@@ -285,7 +308,7 @@ getLogedUser()
            
             <div style={{height:"85vh", overflow:"scroll", overflowX:"hidden" }} >
                     <Outlet />
-            <div className="container-fluid pt-4 px-4">
+            {/* <div className="container-fluid pt-4 px-4">
                 <div className="bg-secondary rounded-top p-4">
                     <div className="row">
                         <div className="col-12 col-sm-6 text-center text-sm-start">
@@ -298,7 +321,11 @@ getLogedUser()
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             </div>
        
 
