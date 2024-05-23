@@ -4,35 +4,13 @@ import  '../../css/allCss.css';
 import DeleteHandler from "../../service/apiHandler/deleteHandler";
 // import   from '../../service/apiHandler/getHandler.ts';
 import GetHandler from "../../service/apiHandler/getHandler";
+import { isEmpty } from "lodash";
  const ListProducts = ()=>{
 
     const [foodData, setFoodData] = useState([])
 
 
-    useEffect(() => {
-        
-        const handleScroll = () => {
-           
-        //   const bottom = e.target.scrollHeight - e.target.scrollTop=== e.target.clientHeight;
-          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-              // alert('bottom')
-      
-              setScrollPage(scrollPage+2)
-              
-              
-            //   getProductByCatt()
-              
-              // alert(scrollPage)
-          }
-        };
-    
-        window.addEventListener('scroll', handleScroll);
-    
-        return () => {
-          window.removeEventListener('scroll', handleScroll);
-        };
-      });
-
+ 
     const dataFetcher = async (cid)=>{
         var test;
         let data = new GetHandler()
@@ -41,6 +19,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
             if(res.status == 200){
  
                 test = res.data
+                 
                 setFoodData(test)
             }else{
                 // alert('error:404 Page not found')
@@ -109,7 +88,11 @@ import GetHandler from "../../service/apiHandler/getHandler";
     const categoryName = (e)=>{
         let i = e.target.selectedIndex
         let updated = {id:e.target.value, name: e.nativeEvent.target[i].text}
+        
         setCategorySelected(old=>({...old, ...updated}))
+      
+       
+       
     }
 
     const [productPrice, setProductsPrice] = useState([])
@@ -139,8 +122,11 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
     
     useEffect(()=>{
+
         dataFetcher(categorySelected.id)
         if(categorySelected.id != ''){
+           
+
             getProductByCatt()
 
         }
@@ -151,18 +137,40 @@ import GetHandler from "../../service/apiHandler/getHandler";
     const [nodata, setNodata] = useState()
 
     const [pbycat, setPbyCat] = useState([])
-    const getProductByCatt = async ()=>{
+    const getProductByCatt =  ()=>{
         // alert('getp')
         setIsLoading(true)
         const data = new GetHandler()
-        await data.getProductbyCat(categorySelected.id,scrollPage).then(res=>{
-
+        data.getProductbyCat(categorySelected.id,1).then(res=>{
+            setPbyCat([])
             if(res.status == 200){
                 if(res.data.message == 400){
                     setNodata('No more product')
                     
                 }else{
-                    setPbyCat([])
+                    
+                    setScrollPage(1)  
+                    setPbyCat(old=>[...old,res.data])
+                   
+                }
+
+            }
+            setIsLoading(false)
+        })
+    }
+
+    const getProductByCatt2 =  ()=>{
+        // alert('getp')
+        setIsLoading(true)
+        const data = new GetHandler()
+        data.getProductbyCat(categorySelected.id,scrollPage).then(res=>{
+         
+            if(res.status == 200){
+                if(res.data.message == 400){
+                    setNodata('No more product')
+                    
+                }else{
+                    
                     setPbyCat(old=>[...old,res.data])
                    
                 }
@@ -175,8 +183,9 @@ import GetHandler from "../../service/apiHandler/getHandler";
 
 
       useEffect(()=>{
-        if(scrollPage != 0 && nodata!='No more product' ){
-            getProductByCatt()
+        console.log(scrollPage)
+        if(scrollPage != 0 ){
+            getProductByCatt2()
         }
       },[scrollPage])
 
@@ -236,7 +245,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                             : <div></div>
                         }
              {
-                
+                !isEmpty(pbycat) ?
                 pbycat.map((selectedx, i)=>{
                     return(
                         selectedx.map((selected,ix)=>{
@@ -286,7 +295,7 @@ import GetHandler from "../../service/apiHandler/getHandler";
                         })
 
                     )
-                })
+                }) : <div>no data</div>
             }
             </div>
         </div>
