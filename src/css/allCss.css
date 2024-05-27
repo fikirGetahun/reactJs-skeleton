@@ -145,12 +145,14 @@
 
 
     .foodTitle{
-      font-size: larger;
+      font-size:3vh;  
       padding-left: 30px;
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       overflow:hidden;
       text-overflow:ellipsis;
     }
+
+     
     .foodDisc{
       /* max-height: 120px; */
       white-space:nowrap;
@@ -188,14 +190,16 @@
       .foodImage{
         height: 55vw;
       }
-
+      .foodTitle  {
+        font-size: 2vh; /* Adjust as needed for smaller screens */
+      }
     }
 
      .innerBackground  {
       border-top-left-radius:30px;
      border-top-right-radius: 30px;
      margin:1vh;
-     padding-top:35px;
+     padding-top:30px;
       background:white ;
    
  }
@@ -234,19 +238,19 @@
  }
 
  .fullPriceTitle{
-      font-size: larger;
+      font-size: 1.8vh;
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
  }
   
 .fullPriceBrr{
   color: coral;
   font-weight: bold;
-  font-size: x-large;
+  font-size: large;
 }
 .supperScript{
   vertical-align: sub;
   position: relative; top: -0.5em;
-  font-size:  large ;
+  font-size:  small ;
 }
 
      
