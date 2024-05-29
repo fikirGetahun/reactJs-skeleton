@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GetHandler from "../../service/apiHandler/getHandler";
+import { isEmpty } from "lodash";
 
 const InnerDashboard = ()=>{
 
@@ -171,18 +172,19 @@ const InnerDashboard = ()=>{
                                 </thead>
                                 <tbody>
                                     {
-                                        lessThanRating ? lessThanRating.map(datax=>{
+                                        !isEmpty(lessThanRating )? lessThanRating.map(datax=>{
+                                            console.log(lessThanRating)
                                             return (
                                               datax.map(data=>{
                                                 return (
                                                     <tr>
-                                                    <td className="link"> 
+                                                    <td className="link">     
                                                         <Link to={'analitic/'+data._id.foodId} style={{textDecoration:'none'}} >
-                                                         <img src={data.foodName[0]._id.image} style={{width:'70px'}} />
+                                                         <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} />
                                                          </Link> 
                                                     </td>
-                                                    <td>  <Link to={'analitic/'+data._id.foodId}  style={{textDecoration:'none'}} > {data.foodName[0]._id.name}</Link></td>
-                                                    <td> <Link to={'analitic/'+data._id.foodId}  style={{textDecoration:'none'}}  >{Math.floor(data.rateAv/data.count*10)/10}</Link></td>
+                                                    <td>  <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId: '#'}  style={{textDecoration:'none'}} > {data.foodName[0]._id.name}</Link></td>
+                                                    <td> <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId:'#'}  style={{textDecoration:'none'}}  >{Math.floor(data.rateAv/data.count*10)/10}</Link></td>
                                             </tr>
                                                 )
                                               })  
@@ -215,19 +217,20 @@ const InnerDashboard = ()=>{
                             </thead>
                             <tbody>
                                 {
-                                    // bestRating ? bestRating.map(datax=>{
-                                    //     return (
-                                    //       datax.map(data=>{
-                                    //         return (
-                                    //         <tr>
-                                    //             <td> <img src={data.foodName[0]._id.image} style={{width:'70px'}} /> </td>
-                                    //             <td>{data.foodName[0]._id.name}</td>
-                                    //             <td> {Math.floor(data.rateAv/data.count*10)/10}</td>
-                                    //        </tr>
-                                    //         )
-                                    //       })  
-                                    //     )
-                                    // }) : <div></div>
+                                    !isEmpty(bestRating) ? bestRating.map(datax=>{
+                                        return (
+                                          datax.map(data=>{
+
+                                            return (
+                                            <tr>
+                                                <td> <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} /> </td>
+                                                <td>{!isEmpty(data.foodName )? data.foodName[0]._id.name: 'none'}</td>
+                                                <td> {Math.floor(data.rateAv/data.count*10)/10}</td>
+                                           </tr>
+                                            )
+                                          })  
+                                        )
+                                    }) : <div></div>
                                 }
 
                              
