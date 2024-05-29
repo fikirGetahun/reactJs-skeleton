@@ -179,7 +179,7 @@ const InnerDashboard = ()=>{
                                                 return (
                                                     <tr>
                                                     <td className="link">     
-                                                        <Link to={'analitic/'+data._id.foodId} style={{textDecoration:'none'}} >
+                                                        <Link to={!isEmpty(data.foodName )?'analitic/'+data._id.foodId:'#'} style={{textDecoration:'none'}} >
                                                          <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} />
                                                          </Link> 
                                                     </td>
