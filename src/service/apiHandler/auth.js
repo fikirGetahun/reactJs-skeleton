@@ -61,7 +61,7 @@ class Auth{
           window.localStorage.setItem('email',body.email)
           console.log(localStorage.getItem('token'))
           console.log(localStorage.getItem('isAdmin'))
-          alert(res.data)
+           
            result = true
         }catch(err){
             if(err.response){

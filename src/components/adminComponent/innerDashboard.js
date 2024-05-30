@@ -172,7 +172,7 @@ const InnerDashboard = ()=>{
                                 </thead>
                                 <tbody>
                                     {
-                                        !isEmpty(lessThanRating )? lessThanRating.map(datax=>{
+                                        !isEmpty(lessThanRating) && lessThanRating.length >0 ? lessThanRating.map(datax=>{
                                             console.log(lessThanRating)
                                             return (
                                               datax.map(data=>{
@@ -183,8 +183,8 @@ const InnerDashboard = ()=>{
                                                          <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} />
                                                          </Link> 
                                                     </td>
-                                                    <td>  <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId: '#'}  style={{textDecoration:'none'}} > {data.foodName[0]._id.name}</Link></td>
-                                                    <td> <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId:'#'}  style={{textDecoration:'none'}}  >{Math.floor(data.rateAv/data.count*10)/10}</Link></td>
+                                                    <td>  <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId: '#'}  style={{textDecoration:'none'}} > {!isEmpty(data.foodName )?data.foodName[0]._id.name:'none'}</Link></td>
+                                                    <td> <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId:'#'}  style={{textDecoration:'none'}}  >{!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</Link></td>
                                             </tr>
                                                 )
                                               })  
@@ -225,7 +225,7 @@ const InnerDashboard = ()=>{
                                             <tr>
                                                 <td> <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} /> </td>
                                                 <td>{!isEmpty(data.foodName )? data.foodName[0]._id.name: 'none'}</td>
-                                                <td> {Math.floor(data.rateAv/data.count*10)/10}</td>
+                                                <td> {!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</td>
                                            </tr>
                                             )
                                           })  
