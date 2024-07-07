@@ -75,7 +75,8 @@ const sendRequest = async ()=>{
     })
      chooiceVal.forEach(async (element) => {
         body = {
-            chooseContent:element , question_id: insertedQ._id
+            chooseContent:element ,
+            question_id: insertedQ._id
         }
         await sendQ.addQuestionChoose(body).then(res=>{
             if(res.status == 200){

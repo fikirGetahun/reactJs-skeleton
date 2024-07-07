@@ -11,7 +11,8 @@ class PostHandler{
         }
         
          try{
-            await axios(
+            await axios(// echo "i am here";
+
                 {
                     url: api.joinUrl(api.endPoints.addCategory),
                     method:"post",
