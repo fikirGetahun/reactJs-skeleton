@@ -1,618 +1,613 @@
 import axios from "axios";
 // import Category from "../model/category";
 //  import Convert from "../model/helperClass";
-import apiUrl from './apiUrl';
+import apiUrl from "./apiUrl";
 // import Category from '../model/category';
-
 
 const api = new apiUrl(); // this is url objects
 
-class GetHandler{
- 
+class GetHandler {
+  //  getCategory   = async ( )=> {
+  //  return  await axios
+  //         .get(api.joinUrl(api.endPoints.catagory))
+  //         .then((res) => {
+  //             if (res.status == 200) {
+  //                 //   cat:Array   = new Category();
+  //                 // cat = res.data;
+  //                 // return  cat;
+  //                 // var jj = new Convert()
 
-    //  getCategory   = async ( )=> {
-    //  return  await axios
-    //         .get(api.joinUrl(api.endPoints.catagory))
-    //         .then((res) => {
-    //             if (res.status == 200) {
-    //                 //   cat:Array   = new Category(); 
-    //                 // cat = res.data;
-    //                 // return  cat;
-    //                 // var jj = new Convert()
-                
-    //               // var x =      Convert.toCategory(res.data)
-    //             var x: any = res.data;
-    //               return x;
-    //             } else{
-    //                 return 'error'
-    //             }
-    //         });
-    // }
+  //               // var x =      Convert.toCategory(res.data)
+  //             var x: any = res.data;
+  //               return x;
+  //             } else{
+  //                 return 'error'
+  //             }
+  //         });
+  // }
 
-
-    getCategory = async () =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.addCategory))
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
+  getCategory = async () => {
+    var result;
+    try {
+      await axios.get(api.joinUrl(api.endPoints.getCategory)).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-
-      return result;
     }
 
-    getRatingGre = async (gte,skip) =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.ratingGte)+gte+'/'+skip)
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
-      }
+    return result;
+  };
 
-      return result;
-    }
-
-    getRatingLs = async (gte,skip) =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.ratingLs)+gte+'/'+skip)
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
-      }
-
-      return result;
-    }
-
-    getRatingCountTotal = async () =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.ratingcount))
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
-      }
-
-      return result;
-    }
-
-    getFoodCountTotal = async () =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.foodCount))
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
-      }
-
-      return result;
-    }
-
-    getActiveCategory = async () =>{
-      var result;
-      try{
-        await axios.get(api.joinUrl(api.endPoints.listActiveCategory))
-        .then(res=>{
-          result = res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message
-        }
-      }
-
-      return result;
-    }
-
-
-    getOneCategory = async (id)=>{
-      var result;
-      try{
-        await axios({
-          url: api.joinUrl(api.endPoints.addCategory)+id,
-          method:'get',
-        
-        }).then(res=>{
+  getRatingGre = async (gte, skip) => {
+    var result;
+    try {
+      await axios
+        .get(api.joinUrl(api.endPoints.ratingGte) + gte + "/" + skip)
+        .then((res) => {
           result = res;
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+        });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-      return result;
     }
 
+    return result;
+  };
 
-
-    getProductOnCategory = async (catId)=>{
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addFood)+catId,
-          method:'get',
-        }).then(res=>{
+  getRatingLs = async (gte, skip) => {
+    var result;
+    try {
+      await axios
+        .get(api.joinUrl(api.endPoints.ratingLs) + gte + "/" + skip)
+        .then((res) => {
           result = res;
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+        });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-      return result;
     }
 
-    getCategoryInOrder = async ()=>{
-      var result
-      try{
-       await  axios({
-          url:api.joinUrl(api.endPoints.getCategoryInOrder),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+    return result;
+  };
+
+  getRatingCountTotal = async () => {
+    var result;
+    try {
+      await axios.get(api.joinUrl(api.endPoints.ratingcount)).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-      return result;
     }
 
+    return result;
+  };
 
-    getProductInOrder = async ()=>{
-      var result
-      try{
-       await  axios({
-          url:api.joinUrl(api.endPoints.addFood),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getFoodCountTotal = async () => {
+    var result;
+    try {
+      await axios.get(api.joinUrl(api.endPoints.foodCount)).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-      return result;
     }
 
-    getProductPrice = async (foodId)=>{
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.getPrice)+foodId,
-          method:'get',
-        }).then(res=>{
+    return result;
+  };
+
+  getActiveCategory = async () => {
+    var result;
+    try {
+      await axios
+        .get(api.joinUrl(api.endPoints.listActiveCategory))
+        .then((res) => {
           result = res;
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+        });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message;
       }
-      return result;
     }
 
+    return result;
+  };
 
-    getOneProduct = async (id)=>{
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.product)+id,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getOneCategory = async (id) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getOneCatagory) + id,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
-    
+    return result;
+  };
 
-    getOneUser = async (email)=>{
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.getOneUser)+email,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getProductOnCategory = async (catId) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getOneProduct) + catId,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-
-    getAllUsers = async () => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.getAllUsers),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getCategoryInOrder = async () => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getCategoryInOrder),
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getSearchResult = async (food) => {
-      var result;
-      try{
-        const ourRequest = new AbortController()
-        ourRequest.abort()
-        await axios({
-          url:api.joinUrl(api.endPoints.getSearch)+food,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getProductInOrder = async () => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.addFood),
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    
-
-    //// --------- feedback handler ----------///
-    getQuestions = async () => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addFeedbackQuestion),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getProductPrice = async (foodId) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getPrice) + foodId,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-
-    getChoosenQuestion = async (qid) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addChooseQuestion)+qid,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getOneProduct = async (id) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.product) + id,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getChoosen = async () => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addChooseQuestion),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getOneUser = async (email) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getOneUser) + email,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getQuestionWithChoice = async () => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.questionWithChoice),
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getAllUsers = async () => {
+    var result;
+    const tk = localStorage.getItem("token");
+    var ss =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ5b3VyaXNzdWVyIiwiaWF0IjoxNzIwODY1MjQ3LCJuYmYiOjE3MjA4NjUyNDcsImV4cCI6MjA4MDg2NTI0NywiZW1haWwiOiJmaWtyQGdtYWlsLmNvbSJ9.jNCrehWWjEjpoej_lEGHofbfBopQTbo2-CdF-aRx7Ss";
+
+    var headers = {
+      "X-AuthToken": tk,    
+    };
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getAllUsers),
+        method: "get",
+        headers: headers,
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getRating = async (foodId) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addRating)+foodId,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getSearchResult = async (food) => {
+    var result;
+    try {
+      const ourRequest = new AbortController();
+      ourRequest.abort();
+      await axios({
+        url: api.joinUrl(api.endPoints.getSearch) + food,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
-    // getProductbyCat = async (cid ) => {
-    //   var result;
-    //   try{
-    //     await axios({
-    //       url:api.joinUrl(api.endPoints.catWithProduct)+cid ,
-    //       method:'get'
-    //     }).then(res=>{
-    //       result =res
-    //     })
-    //   }catch(err){
-    //     if(err.response){
-    //       return err.response.data
-    //     }else if(err.request){
-    //       return err.request
-    //     }else{
-    //       return err.message()
-    //     }
-    //   }
-    //   return result
-    // }
-    getProductbyCat = async (cid,pid) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.catWithProduct)+cid+'/'+pid,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+    return result;
+  };
+
+  //// --------- feedback handler ----------///
+  getQuestions = async () => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getFeedBackQuestion),
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getRatingAvg = async (foodId) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.ratingAvg)+foodId,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getChoosenQuestion = async (qid) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getOneQuestionChoose) + qid,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-
-    getRatingLimit = async (foodId, startingId) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.limitRating)+foodId+'/'+startingId,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getChoosen = async () => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getQuestionChoose),
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-    getRatingLimitDay = async (foodId, startingId,stDate, fDate) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.ratingAvgDate)+foodId+'/'+startingId+'/'+stDate+'/'+fDate,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getQuestionWithChoice = async () => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.questionWithChoice),
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
+    return result;
+  };
 
-
-    getAnswers = async (foodId, qid, cid) => {
-      var headers = {
-        "Content-Type": "application/json",
-     
-    }
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.addAnswer)+qid+"/"+foodId+"/"+cid,
-          method:'get',
-          headers: headers,
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+  getRating = async (foodId) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.addRating) + foodId,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
-
-    
-    getSingleQ = async (id) => {
-      var result;
-      try{
-        await axios({
-          url:api.joinUrl(api.endPoints.getsingleQ)+id,
-          method:'get'
-        }).then(res=>{
-          result =res
-        })
-      }catch(err){
-        if(err.response){
-          return err.response.data
-        }else if(err.request){
-          return err.request
-        }else{
-          return err.message()
-        }
+    return result;
+  };
+  // getProductbyCat = async (cid ) => {
+  //   var result;
+  //   try{
+  //     await axios({
+  //       url:api.joinUrl(api.endPoints.catWithProduct)+cid ,
+  //       method:'get'
+  //     }).then(res=>{
+  //       result =res
+  //     })
+  //   }catch(err){
+  //     if(err.response){
+  //       return err.response.data
+  //     }else if(err.request){
+  //       return err.request
+  //     }else{
+  //       return err.message()
+  //     }
+  //   }
+  //   return result
+  // }
+  getProductbyCat = async (cid, pid) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.catWithProduct) + cid + "/" + pid,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
       }
-      return result
     }
- 
+    return result;
+  };
+
+  getRatingAvg = async (foodId) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getRattingAvg) + "/" + foodId,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
+      }
+    }
+    return result;
+  };
+
+  getRatingLimit = async (foodId, startingId) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.limitRating) + foodId + "/" + startingId,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
+      }
+    }
+    return result;
+  };
+
+  getRatingLimitDay = async (foodId, startingId, stDate, fDate) => {
+    var result;
+    try {
+      await axios({
+        url:
+          api.joinUrl(api.endPoints.ratingAvgDate) +
+          foodId +
+          "/" +
+          startingId +
+          "/" +
+          stDate +
+          "/" +
+          fDate,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
+      }
+    }
+    return result;
+  };
+
+  getAnswers = async (foodId, qid, cid) => {
+    var headers = {
+      "Content-Type": "application/json",
+    };
+    var result;
+    try {
+      await axios({
+        url:
+          api.joinUrl(api.endPoints.addAnswer) + qid + "/" + foodId + "/" + cid,
+        method: "get",
+        headers: headers,
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
+      }
+    }
+    return result;
+  };
+
+  getSingleQ = async (id) => {
+    var result;
+    try {
+      await axios({
+        url: api.joinUrl(api.endPoints.getsingleQ) + id,
+        method: "get",
+      }).then((res) => {
+        result = res;
+      });
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else if (err.request) {
+        return err.request;
+      } else {
+        return err.message();
+      }
+    }
+    return result;
+  };
 }
 
-export default GetHandler
-
- 
+export default GetHandler;

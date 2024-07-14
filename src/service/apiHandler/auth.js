@@ -67,7 +67,7 @@ class Auth{
             if(err.response){
                 return err.response.data
             }else if(err.request){
-                return err.request+"sdf"
+                return err.request
             }else{
                 return err.message
             }
