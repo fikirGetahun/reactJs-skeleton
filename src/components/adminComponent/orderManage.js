@@ -47,12 +47,12 @@ useEffect(()=>{
     let catGetter = new GetHandler()
     setIsLoading(true)
 
-    let cat = catGetter.getCategory()
+    let cat = await catGetter.getCategory()
         .then(res=>{
             setIsLoading(false)
 
             if(res.status == 200){
-                setCategoryList(res.data)
+                setCategoryList(res.data.data)
             }else{
                 alert('db not connected')
             }
@@ -73,7 +73,7 @@ const getCategoryOrder = async()=>{
         setIsLoading(false)
 
         if(res.status == 200){
-            setItems(res.data)
+            setItems(res.data.data)
         }else{
             alert('db connect error2')
         }
@@ -90,10 +90,10 @@ const categoryOrderUpdater = async (body, id)=>{
     await data.updateCategoryOrder(body,id).then(res=>{
         setIsLoading(false)
 
-        if(res.status == 200){
+        if(res.status == 201){
         //    alert('ok') 
         }else{
-            alert('db error')
+            alert(res.data.message)
         }
     })
 }
@@ -106,8 +106,9 @@ const productOrderUpdater = async (body, id)=>{
     await data.updateProductOrder(body,id).then(res=>{
         setIsLoading(false)
 
-        if(res.status == 200){
+        if(res.status == 201){
         //    alert('ok') 
+            
         }else{
             alert('db error')
         }
@@ -125,7 +126,7 @@ const getProductOrder = async(cid)=>{
         setIsLoading(false)
 
         if(res.status == 200){
-            setItems(res.data)
+            setItems(res.data.data)
         }else{
             alert('db connect error')
         }
@@ -139,8 +140,8 @@ const upMoveHandler = (i, objId)=>{
     let old = [...items]
         // const toBeEditedCurrent = old.findIndex(x=> x[i])
         // const toBeEditedPrev = old.findIndex(x=>x[i-1])
-        let toBeEditedCurrent = old.find(obj => obj._id === objId)
-        let toBeEditedPrev = old.find(obj => obj._id === prev._id)
+        let toBeEditedCurrent = old.find(obj => obj.id === objId)
+        let toBeEditedPrev = old.find(obj => obj.id === prev.id)
         console.log(toBeEditedCurrent)
  
         let pName = toBeEditedPrev.name
@@ -149,8 +150,8 @@ const upMoveHandler = (i, objId)=>{
         let pOrder = toBeEditedPrev.order
         let cOrder = toBeEditedCurrent.order
 
-        let cId = toBeEditedCurrent._id
-        let pId = toBeEditedPrev._id
+        let cId = toBeEditedCurrent.id
+        let pId = toBeEditedPrev.id
 
         toBeEditedCurrent.name = pName
         toBeEditedCurrent.order = cOrder
@@ -158,8 +159,8 @@ const upMoveHandler = (i, objId)=>{
         toBeEditedPrev.name = cName
         toBeEditedPrev.order = pOrder
 
-        toBeEditedCurrent._id = pId
-        toBeEditedPrev._id = cId
+        toBeEditedCurrent.id = pId
+        toBeEditedPrev.id = cId
         
        
         //db change updater
@@ -172,16 +173,16 @@ const upMoveHandler = (i, objId)=>{
         setItems(old)
         if(type =='category'){
         // current order updater
-        categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+        categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent.id)
 
         // prev order updater
-        categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+        categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev.id)
         }else if(type == 'product'){
                     // current order updater
-        productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+        productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent.id)
 
         // prev order updater
-        productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+        productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev.id)
         }
 
        
@@ -196,8 +197,8 @@ const downMoveHandler = (i, objId)=>{
     let old = [...items]
         // const toBeEditedCurrent = old.findIndex(x=> x[i])
         // const toBeEditedPrev = old.findIndex(x=>x[i-1])
-       let toBeEditedCurrent = old.find(obj => obj._id === objId)
-       let toBeEditedPrev = old.find(obj => obj._id === prev._id)
+       let toBeEditedCurrent = old.find(obj => obj.id === objId)
+       let toBeEditedPrev = old.find(obj => obj.id === prev.id)
         // console.log(toBeEditedCurrent)
  
         let pName = toBeEditedPrev.name
@@ -206,8 +207,8 @@ const downMoveHandler = (i, objId)=>{
         let pOrder = toBeEditedPrev.order
         let cOrder = toBeEditedCurrent.order
 
-        let cId = toBeEditedCurrent._id
-        let pId = toBeEditedPrev._id
+        let cId = toBeEditedCurrent.id
+        let pId = toBeEditedPrev.id
 
         toBeEditedCurrent.name = pName
         toBeEditedCurrent.order = cOrder
@@ -215,8 +216,8 @@ const downMoveHandler = (i, objId)=>{
         toBeEditedPrev.name = cName
         toBeEditedPrev.order = pOrder
 
-        toBeEditedCurrent._id = pId
-        toBeEditedPrev._id = cId
+        toBeEditedCurrent.id = pId
+        toBeEditedPrev.id = cId
         
        
         //db change updater
@@ -229,16 +230,16 @@ const downMoveHandler = (i, objId)=>{
         setItems(old)
         if(type =='category'){
             // current order updater
-            categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+            categoryOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent.id)
     
             // prev order updater
-            categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+            categoryOrderUpdater(toBeUpdatedPrev, toBeEditedPrev.id)
             }else if(type == 'product'){
                         // current order updater
-            productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent._id)
+            productOrderUpdater(toBeUpdatedCurrent, toBeEditedCurrent.id)
     
             // prev order updater
-            productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev._id)
+            productOrderUpdater(toBeUpdatedPrev, toBeEditedPrev.id)
             }
 }
 
@@ -275,13 +276,13 @@ return(
         <div className="col-4">
         {/* // to hide the up arrow if at begginng  */}
         {
-            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
+            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat.id)} >^</span> : <div></div>
         }
       </div>
       <div className="col-4">
         {
             // this means the last row. length of array and i are equal
-            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
+            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat.id)}>v    </span> : <div></div>
         }
         </div>
         </div>
@@ -314,7 +315,7 @@ const productDisplay = ()=>{
             {
                 catList.map(sel=>{
                     return (
-                        <option  value={sel._id} >{sel.name}   </option>
+                        <option  value={sel.id} >{sel.name}   </option>
                     )
                 })
             }
@@ -336,13 +337,13 @@ return(
         <div className="col-4">
         {/* // to hide the up arrow if at begginng  */}
         {
-            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat._id)} >^</span> : <div></div>
+            i != 0 ?  <span className="btn btn-outline-info" onClick={()=>upMoveHandler(i,cat.id)} >^</span> : <div></div>
         }
       </div>
       <div className="col-4">
         {
             // this means the last row. length of array and i are equal
-            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat._id)}>v    </span> : <div></div>
+            items.length != (i+1) ? <span className="btn btn-outline-info" onClick={()=>downMoveHandler(i,cat.id)}>v    </span> : <div></div>
         }
         </div>
         </div>

@@ -78,6 +78,8 @@ const DragDropFile = ( props ) => {
           const compressedFile = await imageCompression(file,options)
           cphoto = compressedFile;
           console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        
+     
 
           let xx =await image_to_base64(compressedFile)
           console.log(xx)
@@ -126,10 +128,12 @@ const DragDropFile = ( props ) => {
   // triggers when file is selected with click
   const handleChange = async function  (e) {
     e.preventDefault();
+    
     if (e.target.files && e.target.files[0]) {
       // handleFiles(e.target.files);
       setPhoto(e.target.files[0]);
-      
+      let yy = 'no'
+      props.onChange(photo, props.dbName, yy)
       var file = e.target.files[0];
       var q;
    
@@ -140,28 +144,19 @@ const DragDropFile = ( props ) => {
  
         console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
+      
         let xx =await image_to_base64(compressedFile)
         console.log(xx)
     
         props.onChange(photo, props.dbName, xx)
       } catch (error) {
         console.log(error);
-      }
+      }formData
 
-       //  setPhoto(reader.result)
-       setBuffer(q)
+    
+        setBuffer(q)
 
-      // console.log(photo)
-    //  alert(photo)
-
-     
-
-    //   if (props == "albumInput") {
-    //     setSe("albumInput");
-    //     // dispatch(albumActions.setCover(e.target.files[0]));
-    //   } else if (props == "artistInput") {
-    //     // dispatch(artistAddSliceActions.setartist_avatar(e.target.files[0]));
-    //   }
+    
     }
   };
 

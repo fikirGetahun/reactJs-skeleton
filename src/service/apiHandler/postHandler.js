@@ -6,8 +6,8 @@ class PostHandler {
     var result;
     var headers = {
       "Content-Type": "application/json",
-      "X-AuthToken": localStorage.getItem("token"),
-    };
+       "X-AuthToken": localStorage.getItem("token"),
+    }
 
     try {
       await axios(
@@ -66,7 +66,7 @@ class PostHandler {
     var result;
     var headers = {
       "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
+      "X-AuthToken": localStorage.getItem("token"),
     };
     try {
       await axios({

@@ -42,7 +42,13 @@ const editData = async (toBeEdited)=>{
     let x = await db.updateUserData(body).then(res=>{
         setIsLoading(false)
 
-        setDbRes(res.data)
+        
+        if(res.status == 200){
+            setDbRes(res.data.data)
+            alert('Successfull')
+        }else{
+            alert(res.data.message)
+        }
     })
 }
 
@@ -53,14 +59,13 @@ const getToBeEditedUser = async ()=>{
     let data = new GetHandler()
     setIsLoading(true)
 
-   let userEmail = window.sessionStorage.getItem('email')
-    let user = await data.getOneUser(userEmail ).then(res=>{
+   let userEmail = window.localStorage.getItem('email')
+    let user = await data.getOneUser(userEmail).then(res=>{
         setIsLoading(false)
-
-        if(res.statusText == 'OK'){
-            setName(res.data.name)
-            setEmail(res.data.email)
-            setUid(res.data._id)
+         if(res.statusText == 'OK'){
+            setName(res.data.data[0].name)
+            setEmail(res.data.data[0].email)
+            setUid(res.data.data[0].id)
         }
     })
 }

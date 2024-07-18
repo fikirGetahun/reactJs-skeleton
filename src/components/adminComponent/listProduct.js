@@ -18,7 +18,7 @@ import { isEmpty } from "lodash";
          .then(res=>{
             if(res.status == 200){
  
-                test = res.data
+                test = res.data.data
                  
                 setFoodData(test)
             }else{
@@ -49,6 +49,7 @@ import { isEmpty } from "lodash";
                     // console.log('zzzddddd----',arrayId, 'iddd', foodData.splice(arrayId, 1))
                  
                     //  productPrice.splice(arrayId, 1)
+                    setIsLoading(false)
                     window.alert("Deleted!") 
                 }else{
                     alert("error")
@@ -76,7 +77,7 @@ import { isEmpty } from "lodash";
                 setIsLoading(false)
 
                 if(res.status == 200){
-                    test = res.data
+                    test = res.data.data
                     setCategory(test)
                 }else{
                     alert('category is not there')
@@ -99,10 +100,10 @@ import { isEmpty } from "lodash";
     const priceGetter = async ()=>{
         let data = new GetHandler()
         foodData.forEach(async (food)=>{
-            let x = await data.getProductPrice(food._id)
+            let x = await data.getProductPrice(food.id)
                 .then(res=>{
                     if(res.status == 200){
-                        setProductsPrice(c=>[...c,res.data])
+                        setProductsPrice(c=>[...c,res.data.data])
 
                     }else{
                         // alert('no price is fetched')
@@ -113,7 +114,7 @@ import { isEmpty } from "lodash";
     }
 
     useEffect(()=>{
-        priceGetter()
+        // priceGetter()
     },[foodData])
 
     useEffect(()=>{
@@ -150,7 +151,7 @@ import { isEmpty } from "lodash";
                 }else{
                     
                     setScrollPage(1)  
-                    setPbyCat(old=>[...old,res.data])
+                    setPbyCat(old=>[...old,res.data.data])
                    
                 }
 
@@ -171,7 +172,7 @@ import { isEmpty } from "lodash";
                     
                 }else{
                     
-                    setPbyCat(old=>[...old,res.data])
+                    setPbyCat(old=>[...old,res.data.data])
                    
                 }
 
@@ -228,7 +229,7 @@ import { isEmpty } from "lodash";
                 <option   >Select Category</option>
                 {
                     category.map(data=>{
-                      return  <option value={data._id}  >{data.name} </option>
+                      return  <option value={data.id}  >{data.name} </option>
                     })
                 }
                 
@@ -250,7 +251,7 @@ import { isEmpty } from "lodash";
                     return(
                         selectedx.map((selected,ix)=>{
                             return (
-                                <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
+                                <div className="vstack gap-1 col-5 border m-2 p-2" key={selected.id} >
                                 <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
                                 <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
                                 <label>Description</label>
@@ -258,15 +259,15 @@ import { isEmpty } from "lodash";
                                <div className="row">
                                 <div className="col">
                                 <label>Full Price</label>
-                                <h5>{ selected.result[0].price } </h5>
+                                <h5>{ selected.price } </h5>
                                 </div>
                                 <div className="col">
                                 {
-                                    (selected.result[0].halfFull )?
+                                    (selected.halfFull )?
                                     (
                                         <div>
                                             <label>Half Price</label>
-                                        <h5>{selected.result[0].halfPrice } </h5>
+                                        <h5>{selected.halfPrice } </h5>
                                         </div>
                                     ) :
                                     <div></div>
@@ -278,13 +279,13 @@ import { isEmpty } from "lodash";
                 
                                 </div>
                                 <div className="hstack" >
-                                <Link to={"/admin/editProduct/"+selected._id}>
+                                <Link to={"/admin/editProduct/"+selected.id}>
                                 <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
                                 </Link>
-                                <Link to={"/admin/analitic/"+selected._id}>
+                                <Link to={"/admin/analitic/"+selected.id}>
                                 <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
                                 </Link>
-                                <button onClick={()=>deleteHandler(selected._id, i)} className="btn btn-danger">Delete</button>
+                                <button onClick={()=>deleteHandler(selected.id, i)} className="btn btn-danger">Delete</button>
                                 
                                 </div>
                         

@@ -1,34 +1,43 @@
 class apiUrl {
+   headers = {
+    "Content-Type": "application/json",
+    "X-AuthToken": localStorage.getItem("token"),
+  };
   constructor() {
     // this.baseUrl = "https://akko-menu-server.vercel.app";
     this.baseUrl = "http://localhost/qrMenuServer/public";
-    this.headers = {
+    var headers = {
       "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
+      "X-AuthToken": localStorage.getItem("token"),
     };
     this.endPoints = {
       food: "test",
       catagory: "cat",
       login: "user/login",
       register: "User",
+      userUpdate: "user/userUpdate",
+      deleteUser:"User/deleteUser/",
       getCategory: "category/getCategory",
       addCategory: "category",
-      getOneCatagory: "category/getOneCatagory",
-      updateCategory: "category/updateCategory",
-      deleteCategory: "category/deleteCategory",
+      getOneCatagory: "category/getOneCatagory/",
+      updateCategory: "category/updateCategory/",
+      deleteCategory: "category/deleteCategory/",
       // listActiveCategory: "api/category/active",
       // makeCategoryActive: "api/category/makeActive",
       getOneProduct: "Products/getProductByCategoryIdOnly/",
       addFood: "products",
-      updateFood: "products/updateProduct",
-      deleteProduct: "products/deleteProduct",
+      productsSingle: "products/getProductByIdWithPrice/",
+      updateFood: "products/updateProduct/",
+      updateProductOrder : "products/updateProductOrder/",
+      deleteProduct: "products/deleteProduct/",
       // getPrice: "api/price",
       // product: "api/food/product",
       getOneUser: "user/getOneUser/",
       getAllUsers: "user/ListAllUser",
       // getSearch: "api/food/search",
       getCategoryInOrder: "category/getCategory",
-      // getProductInOrder: "api/food/order",
+      getCategoryInOrderfor: "category/updateCategoryOrder/",
+      getProductInOrder: "api/food/order",
       deleteQuestion: "FeedBackQuestions/deleteQuestion",
       getFeedBackQuestion: "FeedBackQuestions/getFeedBackQuestion",
       addFeedbackQuestion: "FeedBackQuestions",

@@ -50,7 +50,7 @@ const categoryGetter = async ()=>{
             setIsLoading(false)
 
             if(res.status == 200){
-                setCategoryList(res.data)
+                setCategoryList(res.data.data)
             }else{
                 alert('db not connected')
             }
@@ -77,11 +77,11 @@ const submitHandler = async () =>{
 
     let product = new PutHandler()
     console.log(body)
-   await product.updateProduct(body, foodId, priceId)
+   await product.updateProduct(body, id, priceId)
         .then(res=>{
             setIsLoading(false)
 
-            if(res.status == 200){
+            if(res.status == 201){
                 setResponse(old=>(
                     {
                         ...old,
@@ -95,7 +95,7 @@ const submitHandler = async () =>{
                     {
                         ...old,
                         class: 'text text-danger',
-                        resp: res
+                        resp: res.message
                     }
                 ))
             }
@@ -115,18 +115,23 @@ const oldDataGetter = async (id)=>{
         setIsLoading(false)
 
         if(res.status == 200){
-            test =res.data
-            setFoodName(res.data.name)
-            setFoodOrder(res.data.order)
-            setFoodPhoto(res.data.image)
-            setFoodInfo(res.data.info)
-            setFoodId(res.data._id)
+            console.log(res.data.data)
+            test =res.data.data[0].categoryId
+            setFoodName(res.data.data[0].name)
+            setFoodOrder(res.data.data[0].order)
+            setFoodPhoto(res.data.data[0].image)
+            setFoodInfo(res.data.data[0].info)
+            setFoodId(res.data.data[0].id)
+            setFoodFullPrice(res.data.data[0].price)
+            setFoodHalfPrice(res.data.data[0].halfPrice)
+            setHalfFull(res.data.data[0].halfFull)
+            setPriceId(res.data.data[0].id)
         }else{
             alert('product is unkown')
         }
     })
-    await getCategoryName(test.categoryId)
-    await getPrice(test._id)
+    await getCategoryName(test)
+    // await getPrice(test.id)
 
 }
 
@@ -139,8 +144,9 @@ const getCategoryName = async (id)=>{
         setIsLoading(false)
 
         if(res.status == 200){
-            setCategoryNme(res.data)
-            setFoodCategory(res.data._id)
+            console.log(res.data.data)
+            setCategoryNme(res.data.data[0])
+            setFoodCategory(res.data.data[0].id)
            
         }else{
             alert('no category')
@@ -154,7 +160,7 @@ const getPrice = async (foodId)=>{
         if(res.status == 200){
             setFoodFullPrice(res.data.price)
             setFoodHalfPrice(res.data.halfPrice)
-            setPriceId(res.data._id)
+            setPriceId(res.data.id)
             setHalfFull(res.data.halfFull)
         }else{
             alert('no category')
@@ -211,10 +217,10 @@ useEffect(()=>{
                         <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Select Category</label>
                          <select  className="form-control"  onChange={(e)=>setFoodCategory(e.target.value)} >
-                            <option value={categoryName._id} >{categoryName.name}</option>
+                            <option value={categoryName.id} >{categoryName.name}</option>
                             {
                                 categoryList.map(sel=>{
-                                   return ( <option value={sel._id} >{sel.name} </option>)
+                                   return ( <option value={sel.id} >{sel.name} </option>)
                                 })
                             }
                          </select>

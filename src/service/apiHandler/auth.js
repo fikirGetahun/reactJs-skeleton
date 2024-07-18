@@ -19,9 +19,18 @@ class Auth{
 
     registerAuth = async (body)=>{
         var rrr;
+        var headers = {
+            "Content-Type": "application/json",
+             "X-AuthToken": localStorage.getItem("token"),
+          }
         try{
-            await axios 
-            .post(api.joinUrl(api.endPoints.register), body)
+            await axios({
+                url: api.joinUrl(api.endPoints.register),
+                method: "post",
+                data: body,
+                headers: headers,
+              })
+             
             .then(function (res){
                 rrr = res.status
             })
@@ -58,7 +67,7 @@ class Auth{
           let res =  await axios.post(api.joinUrl(api.endPoints.login), body)
           window.localStorage.setItem('token', res.data.token)
           window.localStorage.setItem('isAdmin', res.data.isAdmin)
-          window.localStorage.setItem('email',body.email)
+          window.localStorage.setItem('email',res.data.email)
           console.log(localStorage.getItem('token'))
           console.log(localStorage.getItem('isAdmin'))
            

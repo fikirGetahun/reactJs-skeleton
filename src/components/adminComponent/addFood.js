@@ -24,12 +24,31 @@ const [categoryList, setCategoryList] = useState([])
 const [halfFull, setHalfFull] = useState(false);
 const [resResult, setResResult] = useState()
 const [response, setResponse] = useState({class: 'text', resp: ' '})
+const [isLoadidng, setIsLoading]=useState()
 
 const FormHandler= async (value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
        
  
-        setFoodPhoto(buffer)
-    
+      
+        setIsLoading(true)
+        try{
+
+           if(buffer == 'no'){
+           
+            // alert('nottt wait')
+           }else{
+            // alert('yess')
+            setFoodPhoto(buffer)
+            setIsLoading(false)
+           }
+                // setCatPhoto(buffer)
+                // setIsLoading(false)
+             
+             
+             
+        }catch{
+            alert('not setting')
+        }
     
 }
 
@@ -39,14 +58,13 @@ const categoryGetter = async ()=>{
     let cat = catGetter.getCategory()
         .then(res=>{
             if(res.status == 200){
-                setCategoryList(res.data)
+                setCategoryList(res.data.data)
             }else{
                 alert('db not connected')
             }
         })
 }
 
-const [isLoadidng, setIsLoading]=useState()
 
 const addFood = async () =>{
     let body = {
@@ -70,7 +88,7 @@ const addFood = async () =>{
     if(!isEmpty(foodPhoto)){
         product.FoodAdder(body)
         .then(res=>{
-            if(res.status == 200){
+            if(res.status == 201){
                 setIsLoading(false)
                 setResponse(old=>(
                     {
@@ -86,7 +104,7 @@ const addFood = async () =>{
                     {
                         ...old,
                         class: 'text text-danger',
-                        resp: res
+                        resp: res.data.data
                     }
                 ))
             }
@@ -140,7 +158,7 @@ useEffect(()=>{
                             <option >category</option>
                             {
                                 categoryList.map(sel=>{
-                                   return ( <option value={sel._id} >{sel.name} </option>)
+                                   return ( <option value={sel.id} >{sel.name} </option>)
                                 })
                             }
                          </select>

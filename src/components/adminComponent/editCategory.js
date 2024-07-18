@@ -7,22 +7,26 @@ import { TextField } from "@mui/joy";
 import GetHandler from "../../service/apiHandler/getHandler";
 import { useParams } from "react-router-dom";
 import PutHandler from "../../service/apiHandler/putHandler";
+import { isEmpty } from "lodash";
 
 
  const EditCategory =()=>{
 
      const {id} = useParams()
 
+     const [catName, setCatName] = useState();
+     const [catOrder, setCatOrder] = useState();
+     const [catPhoto, setCatPhoto] = useState();
 
 const getDataToEdit = async () =>{
     setIsLoading(true)
     let data = new GetHandler()
-    let response = data.getOneCategory(id)
+    let response =await data.getOneCategory(id)
     .then(res=>{
         if(res.status == 200){
-            setCatName(res.data.name)
-            setCatOrder(res.data.order)
-            setCatPhoto(res.data.image)
+            setCatName(res.data.data[0].name)
+            setCatOrder(res.data.data[0].order)
+            setCatPhoto(res.data.data[0].image)
             setIsLoading(false)
         }else{
             setIsLoading(false)
@@ -34,15 +38,13 @@ const getDataToEdit = async () =>{
 
     //input form handler
 //
-const [catName, setCatName] = useState();
-const [catOrder, setCatOrder] = useState();
-const [catPhoto, setCatPhoto] = useState();
+
  
 const [response, setResponse] = useState({class: 'text', resp: ' '})
 
 const [photoEdited, setPhotoEdited] = useState(false)
 
-const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
+const FormHandler =  (value, dbName, buffer )=>{ // value and dbName are passed from the chiled to parent throgh props
     if(dbName == "catName"){
         setCatName(value)
     }
@@ -51,10 +53,44 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
     }
     if(dbName == "catImage"){
         // alert('inin image')
-         setCatPhoto(buffer)
-       
+        //  setIsLoading(true)
+        setIsLoading(true)
+        try{
+
+           if(buffer == 'no'){
+           
+            // alert('nottt wait')
+           }else{
+            // alert('yess')
+            setCatPhoto(buffer)
+            setIsLoading(false)
+           }
+                // setCatPhoto(buffer)
+                // setIsLoading(false)
+             
+             
+             
+        }catch{
+            alert('not setting')
+        }
+      
+        // if(buffer == catPhoto){
+        //     setIsLoading(false)
+        // }else{
+        //     setIsLoading(true)
+        //     setCatPhoto(buffer)
+        //     setIsLoading(false)
+
+        // }
+        
+
     }
 }
+
+useEffect(()=>{
+
+
+},[catPhoto])
 const [isLoadidng, setIsLoading]=useState()
 const submitHandler = async()=>{
     const sender = new PutHandler()
@@ -64,31 +100,45 @@ const submitHandler = async()=>{
         name:catName,
         image:catPhoto,
         order: catOrder,
-     
     }
     setIsLoading(true)
-   await sender.updateCategory(body, id)
-    .then(resx=>{
-        if(resx.status == 200){
-            setIsLoading(false)
-             setResponse(old=>(
-                {
-                    ...old,
-                    class: 'text text-success',
-                    resp: 'Edited Successfully!'
-                }
-            ))
-        }else{
-            setIsLoading(false)
-            setResponse(old=>(
-                {
-                    ...old,
-                    class: 'text text-danger',
-                    resp: resx
-                }
-            ))
-        }
-    })
+    if(catPhoto != null){
+        await sender.updateCategory(body, id)
+        .then(resx=>{
+            
+            if(resx.status == 200){
+                setIsLoading(false)
+                 setResponse(old=>(
+                    {
+                        ...old,
+                        class: 'text text-success',
+                        resp: 'Edited Successfully!'
+                    }
+                ))
+            }else{
+                setIsLoading(false)
+                setResponse(old=>(
+                    {
+                        ...old,
+                        class: 'text text-danger',
+                        resp: resx.message
+                    }
+                ))
+            }
+          
+        })
+    }
+ else{
+    setIsLoading(false)
+    setResponse(old=>(
+       {
+           ...old,
+           class: 'text text-success',
+           resp: 'Photo is empty!'
+       }
+   ))  
+ }
+     
 }
 useEffect(()=>{
     getDataToEdit()

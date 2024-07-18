@@ -5,17 +5,20 @@ const api = new apiUrl();
 class PutHandler {
   headers = {
     "Content-Type": "application/json",
-    "x-auth-token": localStorage.getItem("token"),
+    "X-AuthToken":localStorage.getItem("token"),    
   };
 
   updateCategory = async (body, id) => {
     var result;
+    let headers = {
+       "X-AuthToken":localStorage.getItem("token"),    
+    };
     try {
       await axios({
         url: api.joinUrl(api.endPoints.updateCategory) + id,
         method: "patch",
         data: body,
-        headers: this.headers,
+        headers: headers,
       }).then((res) => {
         result = res;
       });
@@ -36,9 +39,9 @@ class PutHandler {
     try {
       await axios({
         url: api.joinUrl(api.endPoints.updateFood) + fid + "/" + pid,
-        method: "put",
+        method: "patch",
         data: body,
-        headers: this.headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -58,7 +61,7 @@ class PutHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.register),
+        url: api.joinUrl(api.endPoints.userUpdate),
         method: "patch",
         data: body,
         headers: this.headers,
@@ -83,10 +86,10 @@ class PutHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.getCategoryInOrder) + id,
+        url: api.joinUrl(api.endPoints.getCategoryInOrderfor) + id,
         method: "patch",
         data: body,
-        headers: this.headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -108,10 +111,10 @@ class PutHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.getProductInOrder) + id,
+        url: api.joinUrl(api.endPoints.updateProductOrder) + id,
         method: "patch",
         data: body,
-        headers: this.headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });

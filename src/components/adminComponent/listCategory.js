@@ -21,7 +21,7 @@ const ListCategory = ()=>{
 
             if(res.status == 200){
  
-                test = res.data
+                test = res.data.data
                 setCatagoryData(test)
             }else{
                 alert('error:404 Page not found')
@@ -91,16 +91,16 @@ const ListCategory = ()=>{
                 
                 categoryData.map((selected,i)=>{
                     return(
-                    <div className="vstack gap-1 col-5 border m-2 p-2" key={selected._id} >
+                    <div className="vstack gap-1 col-5 border m-2 p-2" key={selected.id} >
                         <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary" >Title:</span> {selected.name}</h4>
                         <h4 className="d-flex justify-content-start"><span className="d-flex justify-content-start text text-primary">Order:</span><span>{selected.order}</span></h4>
                         <div className="d-flex justify-content-center category" style={{backgroundImage:`url('${selected.image}')`}}>
         
                         </div>
-                        <Link to={"/admin/editCategory/"+selected._id}>
+                        <Link to={"/admin/editCategory/"+selected.id}>
                         <button className="btn btn-warning container">Edit</button>
                         </Link>
-                        <button onClick={()=>deleteHandler(selected._id,i )} className="btn btn-danger container">Delete</button>
+                        <button onClick={()=>deleteHandler(selected.id,i )} className="btn btn-danger container">Delete</button>
                         <br></br>
                       
                     </div>

@@ -148,10 +148,14 @@ class GetHandler {
 
   getOneCategory = async (id) => {
     var result;
+    var headers = {
+      "X-AuthToken":localStorage.getItem("token"),    
+    };
     try {
       await axios({
         url: api.joinUrl(api.endPoints.getOneCatagory) + id,
         method: "get",
+        headers:headers
       }).then((res) => {
         result = res;
       });
@@ -255,7 +259,7 @@ class GetHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.product) + id,
+        url: api.joinUrl(api.endPoints.productsSingle) + id,
         method: "get",
       }).then((res) => {
         result = res;
@@ -295,12 +299,9 @@ class GetHandler {
 
   getAllUsers = async () => {
     var result;
-    const tk = localStorage.getItem("token");
-    var ss =
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ5b3VyaXNzdWVyIiwiaWF0IjoxNzIwODY1MjQ3LCJuYmYiOjE3MjA4NjUyNDcsImV4cCI6MjA4MDg2NTI0NywiZW1haWwiOiJmaWtyQGdtYWlsLmNvbSJ9.jNCrehWWjEjpoej_lEGHofbfBopQTbo2-CdF-aRx7Ss";
-
+    let tk = localStorage.getItem("token");
     var headers = {
-      "X-AuthToken": tk,    
+      "X-AuthToken":localStorage.getItem("token"),    
     };
     try {
       await axios({

@@ -28,12 +28,12 @@ const ListUser = () => {
     getAllUsers();
   }, []);
 
-  const deleteHandler = async (id) => {
+  const deleteHandler = async (uid) => {
     const data = new DeleteHandler();
     setIsLoading(true);
 
     if (window.confirm("Are you sure you want to delete this?") == true) {
-      await data.deleteUser(id).then((res) => {
+      await data.deleteUser(uid).then((res) => {
         setIsLoading(false);
 
         if (res.status == 200) {

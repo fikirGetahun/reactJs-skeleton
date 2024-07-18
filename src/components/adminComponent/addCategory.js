@@ -15,7 +15,8 @@ import { isEmpty } from "lodash";
 const [catName, setCatName] = useState();
 const [catOrder, setCatOrder] = useState();
 const [catPhoto, setCatPhoto] = useState();
- 
+const [isLoading, setIsloading] = useState(false)
+
 const [response, setResponse] = useState({class: 'text', resp: ' '})
 
 const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
@@ -27,11 +28,29 @@ const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from
     }
     if(dbName == "catImage"){
         // alert('inin image')
-         setCatPhoto(buffer)
+        setIsloading(true)
+        try{
+
+           if(buffer == 'no'){
+           
+            // alert('nottt wait')
+           }else{
+            // alert('yess')
+            setCatPhoto(buffer)
+            setIsloading(false)
+           }
+                // setCatPhoto(buffer)
+                // setIsLoading(false)
+             
+             
+             
+        }catch{
+            alert('not setting')
+        }
+    
        
     }
 }
-const [isLoading, setIsloading] = useState( )
 
 const submitHandler = async()=>{
     const sender = new PostHandler()
@@ -47,7 +66,7 @@ const submitHandler = async()=>{
     if(!isEmpty(catPhoto)){
         await sender.CategoryAdder(body)
         .then(resx=>{
-            if(resx.status == 200){
+            if(resx.status == 201){
                 setIsloading(false)
                  setResponse(old=>(
                     {
@@ -67,7 +86,7 @@ const submitHandler = async()=>{
                 ))
             }
         })
-    }
+    } 
 
 }
 

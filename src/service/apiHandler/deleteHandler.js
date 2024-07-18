@@ -96,7 +96,7 @@ class DeleteHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.register) + id,
+        url: api.joinUrl(api.endPoints.deleteUser) + id,
         method: "delete",
         headers: api.headers,
       }).then((res) => {
