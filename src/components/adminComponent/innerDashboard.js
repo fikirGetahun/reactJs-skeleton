@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import GetHandler from "../../service/apiHandler/getHandler";
-import { isEmpty } from "lodash";
+import { isArray, isEmpty } from "lodash";
 
 const InnerDashboard = ()=>{
 
@@ -42,7 +42,7 @@ const InnerDashboard = ()=>{
                 if(res.data.message == 4000){
                      
                 }else{
-                    setLessThanRating(old=>[...old,res.data])
+                    setLessThanRating(old=>[...old,res.data.data])
 
                 }
             } else{
@@ -61,7 +61,7 @@ const InnerDashboard = ()=>{
                 if(res.data.message == 4000){
                      
                 }else{
-                    setBestRating(old=>[...old,res.data])
+                    setBestRating(old=>[...old,res.data.data])
 
                 }
             } else{
@@ -172,22 +172,22 @@ const InnerDashboard = ()=>{
                                 </thead>
                                 <tbody>
                                     {
-                                        !isEmpty(lessThanRating) && lessThanRating.length >0 ? lessThanRating.map(datax=>{
+                                        isArray(lessThanRating) && lessThanRating.length >0 ? lessThanRating.map(datax=>{
                                             console.log(lessThanRating)
                                             return (
-                                              datax.map(data=>{
+                                            isArray(datax)?  datax.map(data=>{
                                                 return (
                                                     <tr>
                                                     <td className="link">     
-                                                        <Link to={!isEmpty(data._id.foodId )?'analitic/'+data._id.foodId:'#'} style={{textDecoration:'none'}} >
-                                                         <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} />
+                                                        <Link to={!isEmpty(data.foodId )?'analitic/'+data.foodId:'#'} style={{textDecoration:'none'}} >
+                                                         <img src={!isEmpty(data.foodName )? JSON.parse(data.foodName).image: 'none'} style={{width:'70px'}} />
                                                          </Link> 
                                                     </td>
-                                                    <td>  <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId: '#'}  style={{textDecoration:'none'}} > {!isEmpty(data.foodName )?data.foodName[0]._id.name:'none'}</Link></td>
-                                                    <td> <Link to={!isEmpty(data._id.foodId )? 'analitic/'+data._id.foodId:'#'}  style={{textDecoration:'none'}}  >{!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</Link></td>
+                                                    <td>  <Link to={!isEmpty(data.foodId )? 'analitic/'+data.foodId: '#'}  style={{textDecoration:'none'}} > {!isEmpty(data.foodName )?JSON.parse(data.foodName).name:'none'}</Link></td>
+                                                    <td> <Link to={!isEmpty(data.foodId )? 'analitic/'+data.foodId:'#'}  style={{textDecoration:'none'}}  >{!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</Link></td>
                                             </tr>
                                                 )
-                                              })  
+                                              })  : <div>no data</div>
 
                                               
                                             )
@@ -216,19 +216,20 @@ const InnerDashboard = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    !isEmpty(bestRating) ? bestRating.map(datax=>{
+                                { 
+                                    isArray(bestRating) ? bestRating.map(datax=>{
                                         return (
-                                          datax.map(data=>{
-
+                                         isArray(datax)? datax.map(data=>{
+                                          
+                                            console.log(JSON.parse(data.foodName))
                                             return (
                                             <tr>
-                                                <td> <img src={!isEmpty(data.foodName )? data.foodName[0]._id.image: 'none'} style={{width:'70px'}} /> </td>
-                                                <td>{!isEmpty(data.foodName )? data.foodName[0]._id.name: 'none'}</td>
-                                                <td> {!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</td>
+                                                <td> <img src={!isEmpty(data.foodName )? JSON.parse(data.foodName).image: 'none'} style={{width:'70px'}} /> </td>
+                                                <td>{!isEmpty(data.foodName )? JSON.parse(data.foodName).name: 'none'}</td>
+                                                <td> {!isEmpty(data.foodName )?Math.floor(data.rateAv/data.count*10)/10:'none'}</td> 
                                            </tr>
                                             )
-                                          })  
+                                          })  : <div>no data</div>
                                         )
                                     }) : <div></div>
                                 }

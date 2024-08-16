@@ -142,7 +142,7 @@ import { isEmpty } from "lodash";
         // alert('getp')
         setIsLoading(true)
         const data = new GetHandler()
-        data.getProductbyCat(categorySelected.id,1).then(res=>{
+        data.getProductbyCat(categorySelected.id,0).then(res=>{
             setPbyCat([])
             if(res.status == 200){
                 if(res.data.message == 400){
@@ -279,13 +279,13 @@ import { isEmpty } from "lodash";
                 
                                 </div>
                                 <div className="hstack" >
-                                <Link to={"/admin/editProduct/"+selected.id}>
+                                <Link to={"/admin/editProduct/"+selected.foodId}>
                                 <button className="btn btn-outline-warning container"><span className="text text-dark" >Edit</span></button>
                                 </Link>
-                                <Link to={"/admin/analitic/"+selected.id}>
+                                <Link to={"/admin/analitic/"+selected.foodId}>
                                 <button className="btn btn-outline-info container"><span className="text text-dark" >Reviews</span></button>
                                 </Link>
-                                <button onClick={()=>deleteHandler(selected.id, i)} className="btn btn-danger">Delete</button>
+                                <button onClick={()=>deleteHandler(selected.foodId, i)} className="btn btn-danger">Delete</button>
                                 
                                 </div>
                         

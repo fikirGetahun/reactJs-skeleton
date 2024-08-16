@@ -5,7 +5,8 @@ class apiUrl {
   };
   constructor() {
     // this.baseUrl = "https://akko-menu-server.vercel.app";
-    this.baseUrl = "http://localhost/qrMenuServer/public";
+    // this.baseUrl = "http://localhost/qrMenuServer/public";  
+    this.baseUrl = "https://qrmenu.livebetes.net/qrMenuServer/public";
     var headers = {
       "Content-Type": "application/json",
       "X-AuthToken": localStorage.getItem("token"),
@@ -24,9 +25,10 @@ class apiUrl {
       deleteCategory: "category/deleteCategory/",
       // listActiveCategory: "api/category/active",
       // makeCategoryActive: "api/category/makeActive",
+      getProductCount: "Products/getProductCount",
       getOneProduct: "Products/getProductByCategoryIdOnly/",
       addFood: "products",
-      productsSingle: "products/getProductByIdWithPrice/",
+  productsSingle: "products/getProductByIdWithPrice/",
       updateFood: "products/updateProduct/",
       updateProductOrder : "products/updateProductOrder/",
       deleteProduct: "products/deleteProduct/",
@@ -38,19 +40,24 @@ class apiUrl {
       getCategoryInOrder: "category/getCategory",
       getCategoryInOrderfor: "category/updateCategoryOrder/",
       getProductInOrder: "api/food/order",
-      deleteQuestion: "FeedBackQuestions/deleteQuestion",
+      deleteChoice: "QuestionChoose/deleteChoice/",
+      deleteQuestion: "FeedBackQuestions/deleteQuestion/",
       getFeedBackQuestion: "FeedBackQuestions/getFeedBackQuestion",
       addFeedbackQuestion: "FeedBackQuestions",
-      updateFeedBackQuestions: "FeedBackQuestions/updateFeedBackQuestions",
-      updateQuestionsChoose: "FeedBackQuestions/updateQuestionsChoose",
-      getOneQuestionChoose: "QuestionChoose/getOneQuestionChoose",
+      updateFeedBackQuestions: "FeedBackQuestions/updateFeedBackQuestions/",
+      updateQuestionsChoose: "QuestionChoose/updateQuestionsChoose/",
+      getOneQuestionChoose: "QuestionChoose/getOneQuestionChoose/",
       getQuestionChoose: "QuestionChoose/getQuestionChoose",
       addChooseQuestion: "QuestionChoose",
       addRating: "rating",
-      getRattingAvg: "rating/getRattingAvg",
-      // addAnswer: "api/feedback/answer",
+      getRattingAvg: "rating/getRattingAvg/",
+      getOneFeedBackQuestion: "FeedBackQuestions/getOneFeedBackQuestion/",
+      getAnswerWithChiceByProduct: "answer/getAnswerWithChiceByProduct/",
       // getsingleQ: "api/feedback/singleQ",
-      // limitRating: "api/feedback/ratingLimit",
+      getRattingCount: "rating/getRattingCount",
+      limitRating: "rating/getratingLimit/",
+      getRattingCompareGte: 'rating/getRattingCompareGte/',
+      getRattingCompareLes: 'rating/getRattingCompareLes/',
       // ratingAvg: "api/feedback/rattingAvg",
       // ratingAvgDate: "api/feedback/ratingLimitDate",
       // deleteQuestion: "api/feedback/choice",

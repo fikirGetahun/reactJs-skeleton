@@ -152,14 +152,18 @@ const FoodLister = (props) => {
     const data = new GetHandler();
     await data.getProductbyCat(catId, scrollPage).then((res) => {
       // alert(scrollPage)
+      
       if (res.status == 200) {
+       
         if (res.data.code == 400) {
+         
           setNodata("No more product");
         } else {
-          setPbyCat((old) => [...old, res.data.data]);
+           setPbyCat((old) => [...old, res.data.data]);
+          setIsLoading(false); 
         }
       }
-      setIsLoading(false);
+      setIsLoading(false); 
     });
   };
 
@@ -331,7 +335,7 @@ const FoodLister = (props) => {
                   <div id="caption"></div>
                 </div>
                 <div className="row">
-                  <h3 className="foodTitle d-flex justify-content-start col align-items-center p-3">
+                  <h3 className="foodTitle d-flex justify-content-start col align-items-center">
                     {data.name}
                   </h3>
                   <div className="col ">
@@ -339,10 +343,10 @@ const FoodLister = (props) => {
                       <div className="hstack  ">
                         <div className="price hstack gap-3">
                           <div className="fullPrice">
-                            {data.halfFull ? (
+                            {data.halfFull == "1" ? (
                               <h4 className="fullPriceTitle">Full Price</h4>
                             ) : (
-                              <h4 className="fullPriceTitle">Price</h4>
+                              <h4 className="fullPriceTitle"></h4>
                             )}
                             {/* <h4 className="fullPriceTitle" >
                                                     {
@@ -356,7 +360,7 @@ const FoodLister = (props) => {
                               <span className="supperScript">Br</span>
                             </h5>
                           </div>
-                          {data.halfFull ? (
+                          {data.halfFull == "1"? (
                             <div className="halfPrice">
                               <h4 className="fullPriceTitle ">Half Price</h4>
                               <h5 className="fullPriceBrr">
@@ -400,7 +404,7 @@ const FoodLister = (props) => {
                   <div className="vstack  ">
                     <div className="hstack  d-flex justify-content-end ">
                       <Link
-                        to={"/feedback/" + data.id}
+                        to={"/feedback/" + data.foodId}
                         style={{ textDecoration: "none" }}
                       >
                         {/* <button className="btn btn-outline-dark p-1 m-0"></button>     */}
@@ -409,8 +413,8 @@ const FoodLister = (props) => {
                           className="text"
                           style={{ color: "coral", fontSize: "18px" }}
                         >
-                          {rating[data.id]
-                            ? Math.floor(rating[data.id].avg * 10) / 10
+                          {rating[data.foodId]
+                            ? Math.floor(rating[data.foodId].avg * 10) / 10
                             : "0"}
                         </span>
                       </Link>
@@ -429,7 +433,7 @@ const FoodLister = (props) => {
 
                     <span className="d-flex justify-content-end ">
                       {" "}
-                      {rating[data.id] ? rating[data.id].outOf : "0"} Reviews
+                      {rating[data.foodId] ? rating[data.foodId].outOf : "0"} Reviews
                     </span>
                   </div>
 
@@ -439,13 +443,14 @@ const FoodLister = (props) => {
                 </div>
 
                 <br></br>
+                
               </div>
             );
           });
         })}
 
-        {nodata}
-        {isLoadidng && nodata != "No more product" ? (
+        
+        {isLoadidng || nodata != "No more product"? (
           <div>
             {/* <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  /> */}
             <div className="foodImage skeletonAnimation"></div>
@@ -456,7 +461,23 @@ const FoodLister = (props) => {
         ) : (
           <div>{console.log("scroll222")}</div>
         )}
+
+        {
+          // nodata == "No more product"? <div>{nodata}</div>:<div></div>
+        }
+        <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br> 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       </div>
+
+      
     </div>
   );
 };

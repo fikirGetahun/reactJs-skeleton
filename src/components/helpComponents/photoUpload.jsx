@@ -26,8 +26,8 @@ const DragDropFile = ( props ) => {
   // handle drag events
 
   const options = {
-    maxSizeMB: 0.45,
-
+    maxSizeMB: 0.1,
+    initialQuality:0.3,
     useWebWorker: true
   }
   const handleDrag = function (e) {
@@ -151,7 +151,7 @@ const DragDropFile = ( props ) => {
         props.onChange(photo, props.dbName, xx)
       } catch (error) {
         console.log(error);
-      }formData
+      } 
 
     
         setBuffer(q)

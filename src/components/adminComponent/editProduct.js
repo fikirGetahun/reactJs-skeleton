@@ -34,8 +34,27 @@ const [response, setResponse] = useState({class: 'text', resp: ' '})
 const FormHandler=(value, dbName, buffer)=>{ // value and dbName are passed from the chiled to parent throgh props
  
  
-        setFoodPhoto(buffer)
-    
+       
+        setIsLoading(true)
+        try{
+
+           if(buffer == 'no'){
+           
+            // alert('nottt wait')
+           }else{
+            // alert('yess')
+            setFoodPhoto(buffer)
+            setIsLoading(false)
+           }
+                // setCatPhoto(buffer)
+                // setIsLoading(false)
+             
+             
+             
+        }catch{
+            alert('not setting')
+        }
+      
     
 }
 
@@ -140,7 +159,7 @@ const getCategoryName = async (id)=>{
     let data = new GetHandler()
     setIsLoading(true)
 
-    let catName = await data.getOneCategory(id).then(res=>{
+    await data.getOneCategory(id).then(res=>{
         setIsLoading(false)
 
         if(res.status == 200){
@@ -185,12 +204,7 @@ useEffect(()=>{
                     <div className="row d-flex justify-content-center">
                     <h3>Edit Product</h3>
                         <div className="col-6">
-                        {
-                             isLoadidng ?  
-                               <img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  />
-
-                            : <div></div>
-                           }
+       
                          <div className="textField p-2">
                         <label className="textFieldLabel d-flex justify-content-start   pb-1 ">Food Name</label>
                             <input className="form-control" type="text" value={foodName}   id="standard-basic" placeholder="Food Name"   onChange={(e)=>setFoodName(e.target.value)} name="catName" />
@@ -263,10 +277,7 @@ useEffect(()=>{
                             
 
                              
-                         
-                            
-
-                          
+                       
 
                         </div>
 
@@ -296,6 +307,15 @@ useEffect(()=>{
                            <div>
                             <button onClick={submitHandler} className="btn btn-warning">Edit Product</button>
                            </div>
+                           {
+                             isLoadidng ?  
+                               <div><img    className="m-0 p-1  " src={require('../../file/img/loading.gif')}  /></div>
+
+                            : <div></div>
+                           }
+                            
+
+                          
                            <label className={response.class}>{  response.resp} </label>
                         </div>
                     </div>

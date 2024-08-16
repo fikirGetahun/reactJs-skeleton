@@ -102,7 +102,7 @@ class PostHandler {
         url: api.joinUrl(api.endPoints.addFeedbackQuestion),
         method: "post",
         data: body,
-        headers: headers,
+        headers: api.headers,
       }).then((res) => {
         // console.log('zzzzzzzzz '+api.joinUrl(api.endPoints.addFeedbackQuestion))
         result = res;
@@ -130,7 +130,7 @@ class PostHandler {
         url: api.joinUrl(api.endPoints.addChooseQuestion),
         method: "post",
         data: body,
-        headers: headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -157,7 +157,7 @@ class PostHandler {
         url: api.joinUrl(api.endPoints.addRating),
         method: "post",
         data: body,
-        headers: headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -184,7 +184,7 @@ class PostHandler {
         url: api.joinUrl(api.endPoints.addAnswer),
         method: "post",
         data: body,
-        headers: headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });

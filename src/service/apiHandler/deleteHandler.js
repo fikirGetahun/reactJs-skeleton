@@ -74,7 +74,7 @@ class DeleteHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.deleteQuestion) + id,
+        url: api.joinUrl(api.endPoints.deleteChoice) + id,
         method: "delete",
         headers: api.headers,
       }).then((res) => {
@@ -91,6 +91,8 @@ class DeleteHandler {
     }
     return result;
   };
+
+  
 
   deleteUser = async (id) => {
     var result;
@@ -120,6 +122,7 @@ class DeleteHandler {
       await axios({
         url: api.joinUrl(api.endPoints.resetAnswers) + qid,
         method: "delete",
+        headers: api.headers
       }).then((res) => {
         result = res;
       });
@@ -141,6 +144,7 @@ class DeleteHandler {
       await axios({
         url: api.joinUrl(api.endPoints.deleteRating) + fid,
         method: "delete",
+        headers: api.headers
       }).then((res) => {
         result = res;
       });

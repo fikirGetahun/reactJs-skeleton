@@ -72,7 +72,7 @@ const ListFeedBackQuestion = ()=>{
 //     })
 //      chooiceVal.forEach(async (element) => {
 //         body = {
-//             chooseContent:element , question_id: insertedQ._id
+//             chooseContent:element , question_id: insertedQ.id
 //         }
 //         await sendQ.addQuestionChoose(body).then(res=>{
 //             if(res.status == 200){
@@ -97,7 +97,7 @@ const getQuestion = async ()=>{
         setIsLoading(false)
 
         if(res.status == 200){
-            setQuestionList(res.data)
+            setQuestionList(res.data.data)
         }else{
             // alert('errr getting questions')
         }
@@ -166,11 +166,11 @@ const deleteQuestion = async (id)=>{
                     <th scope="row">{i+1}</th>
                     <td>{sel.questions}</td>
                     <td>
-                        <Link to={"/admin/editFeedBackQuestion/"+sel._id} >
+                        <Link to={"/admin/editFeedBackQuestion/"+sel.id} >
                         <button type="button"  class="btn btn-outline-info">Edit</button>
 
                         </Link>
-                        |<button type="button" onClick={()=>deleteQuestion(sel._id)} class="btn btn-outline-danger">Delete</button>
+                        |<button type="button" onClick={()=>deleteQuestion(sel.id)} class="btn btn-outline-danger">Delete</button>
                     </td>
                </tr>
             )

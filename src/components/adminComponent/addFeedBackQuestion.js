@@ -64,7 +64,7 @@ const sendRequest = async ()=>{
     setIsLoading(true)
     await sendQ.AddFeedBackQuestion(body).then(res=>{
         
-        if(res.status == 200){
+        if(res.status == 201){
             insertedQ = res.data// get the inserted response to get the question id to input it in chooice
             // console.log(insertedQ)
             setIsLoading(false)
@@ -74,12 +74,14 @@ const sendRequest = async ()=>{
         }
     })
      chooiceVal.forEach(async (element) => {
+       
         body = {
             chooseContent:element ,
-            question_id: insertedQ._id
+            question_id: insertedQ.qid
         }
+        console.log(body)
         await sendQ.addQuestionChoose(body).then(res=>{
-            if(res.status == 200){
+            if(res.status == 201){
                 setResult((<span className="text text-success" >Question Added!!</span>))
             }else{
                 alert("error inserting choice")

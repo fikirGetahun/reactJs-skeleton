@@ -62,7 +62,7 @@ const getToBeEditedUser = async ()=>{
    let userEmail = window.localStorage.getItem('email')
     let user = await data.getOneUser(userEmail).then(res=>{
         setIsLoading(false)
-         if(res.statusText == 'OK'){
+         if(res.status ==200){
             setName(res.data.data[0].name)
             setEmail(res.data.data[0].email)
             setUid(res.data.data[0].id)

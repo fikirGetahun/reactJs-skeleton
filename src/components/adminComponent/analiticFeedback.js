@@ -23,7 +23,7 @@ const getQuestionsAndChoice = async ()=>{
     await data.getQuestions().then(res=>{
         if(res.status == 200){
       
-            setAllQuestions(res.data)
+            setAllQuestions(res.data.data)
         }else{
             console.log('no questions')
         }
@@ -63,12 +63,12 @@ const getAllchoice = async ()=>{
 
     allQuestions.forEach(async(q)=>{
         setIsLoading(true)
-        await data.getChoosenQuestion(q._id).then(res=>{
+        await data.getChoosenQuestion(q.id).then(res=>{
             setIsLoading(false)
             if(res.status == 200){
                 
                //  setAllAnsewers(res.data.qid)
-               setAllchoices(old=>[...old,res.data])
+               setAllchoices(old=>[...old,res.data.data])
             //    j.push(res.data)
                // console.log(res.data)
                // j = res.data
@@ -120,12 +120,12 @@ const countReview = async ()=>{
 
     
     // u.forEach(async (element) => {
-    //     await data.getAnswers(foodId, element.question_id, element._id).then(res=>{
+    //     await data.getAnswers(foodId, element.question_id, element.id).then(res=>{
     //         if(res.status == 200){
     //             result = res.data.countx
     //             let f = []
     //             f = {
-    //                 cid : element._id,
+    //                 cid : element.id,
     //                 count : result
     //             }
     //             setpls(old=>[...old,f])
@@ -144,13 +144,13 @@ const countReview = async ()=>{
         let count = 0
         element.forEach(async(nn)=>{
             setIsLoading(true)
-            await data.getAnswers(foodId, nn.question_id, nn._id).then(res=>{
+            await data.getAnswers(foodId, nn.question_id, nn.id).then(res=>{
                 setIsLoading(false)
                 if(res.status == 200){
                     result = res.data.countx
                     
                     let f = {
-                        cid : nn._id,
+                        cid : nn.id,
                         count : result
                     }
                   
@@ -208,7 +208,7 @@ const cons = ()=>{
      let t
      //    console.log(pls[i])
         pls.forEach(g=>{
-          if(g.cid == xx._id){
+          if(g.cid == xx.id){
              t = g.count
              
           }
@@ -222,7 +222,7 @@ const cons = ()=>{
                      
                      let thisx = [];
              
-                     if(xx.question_id == r._id   ){
+                     if(xx.question_id == r.id   ){
  
                   
           
@@ -268,7 +268,7 @@ const cons = ()=>{
 
       
         pls.forEach(g=>{
-            if(g.cid == xx._id){
+            if(g.cid == xx.id){
                t = t + g.count
                
             }
@@ -277,9 +277,9 @@ const cons = ()=>{
                     
                     let thisx = [];
             
-                    if(xx.question_id == each._id   ){
+                    if(xx.question_id == each.id   ){
 
-                        // if( allAnsewers.find( e => xx.choice_id == !allQuestions[i]._id )   ){
+                        // if( allAnsewers.find( e => xx.choice_id == !allQuestions[i].id )   ){
                         // console.log(element.question_id)
                         let choices ;
                         let label;
@@ -382,7 +382,7 @@ const getCount = async ()=>{
             setCount(res.data.count)
             // setRatings(res.data.count)
             // setCount(res.data.length)
-            // setLastId(res.data[res.data.length-1]._id)
+            // setLastId(res.data[res.data.length-1].id)
         }else{
             console.log('error')
         }
@@ -397,8 +397,8 @@ const getRating = async ()=>{
         setIsLoading(false)
         if(res.status == 200){
             setRatings([])
-            setRatings(res.data)
-            // setLastId(res.data[count-1]._id)
+            setRatings(res.data.data)
+            // setLastId(res.data[count-1].id)
         }else{
             console.log('n')
         }
@@ -414,6 +414,7 @@ useEffect(()=>{
         // console.log('ddpp')
         if(!searchModeActive){
             getRating()
+             getFullRating()
         } 
         else{
             rangSearch()
@@ -449,7 +450,8 @@ const getFullRating = async ()=>{
     await data.getRatingAvg(foodId).then(res=>{
         setIsLoading(false)
         if(res.status == 200){
-            setFullRating(res.data.avg)
+            setFullRating(res.data.data.avg)
+            // alert(res.data.avg)
         }else{
             console.log('no rating')
         }
@@ -502,7 +504,7 @@ const getFoodData = async ()=>{
     await data.getOneProduct(foodId).then(res=>{
         setIsLoading(false)
         if(res.status == 200){
-            setFoodData(res.data)
+            setFoodData(res.data.data)
         }else{
             alert('no food is found')
         }
@@ -619,11 +621,11 @@ const restRating = async ()=>{
                                                    
                                                     <div className="row   d-flex justify-content-start ">
                                                      
-                                                    <span className="col-1" id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span className="col-1"id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1"id={each.id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                         <button className="btn btn-outline-dark col-1">{each.rating}</button>
                                                     <div className="col">
                                                     <span className="d-flex justify-content-center" >{each.time.split('T')[0]}</span>
@@ -650,11 +652,11 @@ const restRating = async ()=>{
                                                    
                                                     <div className="row   d-flex justify-content-start ">
                                                      
-                                                    <span className="col-1" id={each._id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span className="col-1"id={each._id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
-                                                    <span className="col-1" id={each._id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'1'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 1|| each.rating == 1 ? 'yellow' : 'black' }}   >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'2'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 2 || each.rating == 2 ? 'yellow' : 'black'}}   >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'3'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 3|| each.rating == 3? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1"id={each.id+'4'} style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 4|| each.rating == 4 ? 'yellow' : 'black'}}  >&#9733;</span>
+                                                    <span className="col-1" id={each.id+'5'}style={{fontSize:'2vw', cursor: 'pointer', color:each.rating > 5 || each.rating == 5 ? 'yellow' : 'black'}}  >&#9733;</span>
                                                         <button className="btn btn-outline-dark col-1">{each.rating}</button>
                                                     <div className="col">
                                                     <span className="d-flex justify-content-center" >{each.time.split('T')[0]}</span>

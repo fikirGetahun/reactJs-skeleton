@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import PutHandler from "../../service/apiHandler/putHandler";
 import PostHandler from "../../service/apiHandler/postHandler";
 import DeleteHandler from "../../service/apiHandler/deleteHandler";
+import { isArray } from "lodash";
  
 
 
@@ -26,13 +27,13 @@ const getQuestion = async ()=>{
     const data = new GetHandler();
     setIsLoading(true)
 
-  await  data.getSingleQ(qid) .then(res=>{
+  await  data.getSingleQ(qid).then(res=>{
     setIsLoading(false)
         if(res.status == 200){
             
 
-            setQuestion(res.data)
-            setNewQuestion(res.data)
+            setQuestion(res.data.data[0])
+            setNewQuestion(res.data.data)
         }else{
          
 
@@ -45,12 +46,12 @@ const getChoice = async ()=>{
     const data = new GetHandler();
     setIsLoading(true)
 
-   await data.getChoosenQuestion(question?question._id:'') .then(res=>{
+   await data.getChoosenQuestion(newQuestion[0].id) .then(res=>{
     setIsLoading(false)
         if(res.status == 200){
             
-
-             setChoiceList(res.data)
+            console.log(choiceList)
+             setChoiceList(res.data.data)
         }else{
             
             alert('errr getting questions')
@@ -156,7 +157,7 @@ const addNewChoice = async ()=>{
     }
     await sendQ.addQuestionChoose(body).then(res=>{
         setIsLoading(false)
-        if(res.status == 200){
+        if(res.status == 201){
              
             alert('Question Added!!')
             getChoice();
@@ -180,7 +181,7 @@ const deleteChoices = async (id)=>{
             if(res.status == 200){
                
                 window.alert("Deleted!")
-                window.location.reload()
+                getChoice();
             }else{
               
                 alert('error not deleted!')
@@ -203,7 +204,8 @@ const deleteChoices = async (id)=>{
                 <div className="col-6">
                 <div className="textField ">
                 <label className="textFieldLabel d-flex justify-content-start    ">Question</label>
-                     <textarea className="form-control" onChange={(e)=>setNewQuestion(e.target.value)} placeholder={question.questions} value={newQuestion.questions} > </textarea>
+                     <input className="form-control" onChange={(e)=>setNewQuestion(e.target.value)}
+                       placeholder ={question.questions} value={newQuestion.questions} /> 
                      
                     <label></label>
                     <button type="button" onClick={()=>updateQuestion()}  class="btn btn-outline-info">Edit</button>
@@ -240,22 +242,23 @@ const deleteChoices = async (id)=>{
                             : <div></div>
                            }
                   {
-                    choiceList.map(sel=>{
+                    
+                   isArray(choiceList) ?   choiceList.map(sel=>{
                         return (
                             <div className="row ">
                               
                                 <span className="text text-dark container col">{sel.chooseContent}</span>
                                  <div className="col">
-                                 <button type="button" onClick={()=>handleEdit(sel.chooseContent, sel._id)}  class="btn btn-outline-info">Edit</button>
+                                 <button type="button" onClick={()=>handleEdit(sel.chooseContent, sel.id)}  class="btn btn-outline-info">Edit</button>
                                 
 
-                                |<button type="button" onClick={()=>deleteChoices(sel._id)} class="btn btn-outline-danger">Delete</button>
+                                |<button type="button" onClick={()=>deleteChoices(sel.id)} class="btn btn-outline-danger">Delete</button>
                                  </div>
 
                             </div>
                         )
-                    })
-                  }
+                    }): <div>{choiceList}</div>
+                  } 
                     |<button type="button" onClick={()=>handleNewChoice()} class="btn btn-outline-success">Add New Choice</button>
               
                 </div>

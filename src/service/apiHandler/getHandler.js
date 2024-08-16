@@ -48,9 +48,12 @@ class GetHandler {
   getRatingGre = async (gte, skip) => {
     var result;
     try {
-      await axios
-        .get(api.joinUrl(api.endPoints.ratingGte) + gte + "/" + skip)
-        .then((res) => {
+      await axios({
+        url: api.joinUrl(api.endPoints.getRattingCompareGte) + gte + "/" + skip,
+        method: "get",
+        headers:api.headers
+      })
+         .then((res) => {
           result = res;
         });
     } catch (err) {
@@ -69,8 +72,12 @@ class GetHandler {
   getRatingLs = async (gte, skip) => {
     var result;
     try {
-      await axios
-        .get(api.joinUrl(api.endPoints.ratingLs) + gte + "/" + skip)
+      await  axios({
+        url: api.joinUrl(api.endPoints.getRattingCompareLes) + gte + "/" + skip,
+        method: "get",
+        headers:api.headers
+      })
+        
         .then((res) => {
           result = res;
         });
@@ -109,7 +116,7 @@ class GetHandler {
   getFoodCountTotal = async () => {
     var result;
     try {
-      await axios.get(api.joinUrl(api.endPoints.foodCount)).then((res) => {
+      await axios.get(api.joinUrl(api.endPoints.getProductCount)).then((res) => {
         result = res;
       });
     } catch (err) {
@@ -435,7 +442,7 @@ class GetHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.addRating) + foodId,
+        url: api.joinUrl(api.endPoints.getRattingCount) +"/"+ foodId,
         method: "get",
       }).then((res) => {
         result = res;
@@ -496,7 +503,7 @@ class GetHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.getRattingAvg) + "/" + foodId,
+        url: api.joinUrl(api.endPoints.getRattingAvg)   + foodId,
         method: "get",
       }).then((res) => {
         result = res;
@@ -539,7 +546,7 @@ class GetHandler {
     try {
       await axios({
         url:
-          api.joinUrl(api.endPoints.ratingAvgDate) +
+          api.joinUrl(api.endPoints.getratingLimitDate) +
           foodId +
           "/" +
           startingId +
@@ -571,9 +578,9 @@ class GetHandler {
     try {
       await axios({
         url:
-          api.joinUrl(api.endPoints.addAnswer) + qid + "/" + foodId + "/" + cid,
+          api.joinUrl(api.endPoints.getAnswerWithChiceByProduct) + qid + "/" + foodId + "/" + cid,
         method: "get",
-        headers: headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -593,7 +600,7 @@ class GetHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.getsingleQ) + id,
+        url: api.joinUrl(api.endPoints.getOneFeedBackQuestion) + id,
         method: "get",
       }).then((res) => {
         result = res;

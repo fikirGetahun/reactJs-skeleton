@@ -41,7 +41,7 @@ const getChooen = async()=>{
     const data = new GetHandler();
     await data.getChoosen().then(res=>{
         if(res.status == 200){
-            setAllChoices(res.data)
+            setAllChoices(res.data.data)
         }else{
             alert('no questions')
         }
@@ -93,7 +93,7 @@ const getQuestionWithChoice = async ()=>{
     const data = new GetHandler()
      await data.getQuestionWithChoice().then(res=>{
         if(res.status == 200){
-            setAllq(res.data)
+            setAllq(res.data.data)
         }else{
             alert('no q')
         }
@@ -191,7 +191,7 @@ const handleSubmit = async (aa)=>{
         return
     }
     await data.addRating(body).then(res=>{
-        if(res.status == 200){
+        if(res.status == 201){
             alert('submited')
         }else{
             console.log('bad')

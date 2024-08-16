@@ -64,7 +64,7 @@ class PutHandler {
         url: api.joinUrl(api.endPoints.userUpdate),
         method: "patch",
         data: body,
-        headers: this.headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -139,7 +139,7 @@ class PutHandler {
         url: api.joinUrl(api.endPoints.updateFeedBackQuestions) + id,
         method: "patch",
         data: body,
-        headers: this.headers,
+        headers: api.headers,
       }).then((res) => {
         result = res;
       });
@@ -161,7 +161,7 @@ class PutHandler {
     var result;
     try {
       await axios({
-        url: api.joinUrl(api.endPoints.updateQuestionsChoose) + "choice/" + id,
+        url: api.joinUrl(api.endPoints.updateQuestionsChoose)  + id,
         method: "patch",
         data: body,
         headers: this.headers,

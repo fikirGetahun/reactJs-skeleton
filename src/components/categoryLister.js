@@ -3,6 +3,7 @@ import akkoFood from "../file/img/akko.food.PNG";
 import "../css/allCss.css";
 import GetHandler from "../service/apiHandler/getHandler.js";
 import { Link, useNavigate } from "react-router-dom";
+import { isArray, isEmpty } from "lodash";
 
 const CategoryLister = () => {
   const [categoryData, setCatagoryData] = useState([]);
@@ -34,7 +35,7 @@ const CategoryLister = () => {
         <div className="">
           {/* {console.log(categoryData)} */}
           {!isLoadidng ? (
-            categoryData.map((data) => {
+           isArray(categoryData) ? categoryData.map((data) => {
               // alert(data.catagoryName)
               return (
                 <Link
@@ -58,7 +59,7 @@ const CategoryLister = () => {
                   </div>
                 </Link>
               );
-            })
+            }): <div>no category</div>
           ) : (
             // <img    className="m-0 p-1  " src={require('../file/img/loading.gif')}  />
 
